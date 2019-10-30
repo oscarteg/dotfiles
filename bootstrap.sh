@@ -12,6 +12,8 @@ function doIt() {
 		--exclude "README.md" \
 		--exclude "vs-code" \
 		--exclude "LICENSE-MIT.txt" \
+		--exclude "Brewfile" \
+		--exclude "install.sh" \
 		-avh --no-perms . ~;
 	source ~/.zshrc;
 }
