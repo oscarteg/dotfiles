@@ -13,6 +13,9 @@
   editor = interactive-rebase-tool
 [alias]
 
+  # Git push to all remotes
+  pushall = !git remote | xargs -L1 git push --all
+
   # View abbreviated SHA, description, and history graph of the latest 20 commits
   l = log --pretty=oneline -n 20 --graph --abbrev-commit
 
@@ -92,6 +95,9 @@
       git commit --amend -m \"$(git log -1 --pretty=%B)\n\nCloses #$1.\"; \
     fi \
   }; f"
+
+	pushall = !git remote | xargs -L1 git push --all
+
 
 [apply]
 
