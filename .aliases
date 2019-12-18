@@ -124,3 +124,13 @@ alias path='echo -e ${PATH//:/\\n}'
 
 # Add README template
 alias readme='curl https://gist.githubusercontent.com/Oscarteg/a80487b23f697cd3089cd8022e273fea/raw/8254b53ab8dcb18afc64287aaddd9e5b6059f880/README-Template.md > README.md'
+
+# Update repositories recursively
+alias update_repositories='find . -type d -depth 2 -exec git --git-dir={}/.git --work-tree=$PWD/{} pull origin master \;'
+
+# Lazygit  
+alias lg='lazygit'
+
+# Lazydocker
+alias lzd='lazydocker'
+

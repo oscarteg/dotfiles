@@ -11,3 +11,6 @@ export PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # Add yarn to path
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# Rustup
+export PATH="$HOME/.cargo/bin:$PATH"
