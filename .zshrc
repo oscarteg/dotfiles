@@ -9,10 +9,10 @@ done;
 unset file;
 
 # Zsh theme
-ZSH_THEME="cloud"
+ZSH_THEME="minimal"
 
 # Zsh plugins
-plugins=(git)
+plugins=(docker terraform git kubectl docker-compose vagrant zsh-autosuggestions autojump)
 
 # Source oh my zsh
 source $ZSH/oh-my-zsh.sh
@@ -24,3 +24,17 @@ export NVM_DIR="$HOME/.nvm"
 
 # Add the fuck to shell
 eval $(thefuck --alias)
+
+# tabtab source for packages
+# uninstall by removing these lines
+[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+
+export DENO_INSTALL="/Users/oscar/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/terraform terraform
