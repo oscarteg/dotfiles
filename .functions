@@ -2,7 +2,7 @@
 
 # Add to gitignore
 function gi() {
-  result=$(curl "http://www.gitignore.io/api/$1" 2>/dev/null)
+  result=$(curl "https://www.toptal.com/developers/gitignore/api/$1" 2>/dev/null)
 
   if [[ $result =~ ERROR ]]; then
     echo "Query '$1' has no match. See a list of possible queries with 'gi list'"
@@ -235,3 +235,9 @@ function ssl-check() {
         fi
     fi
 }
+
+# Laravel homestead
+function homestead() {
+    ( cd ~/Homestead && vagrant $* )
+}
+
