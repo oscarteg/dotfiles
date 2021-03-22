@@ -53,6 +53,8 @@ set list
 set hlsearch
 " Ignore case of searches
 set ignorecase
+" Search for case when search has case
+set smartcase
 " Highlight dynamically as pattern is typed
 set incsearch
 " Always show status line
@@ -128,6 +130,15 @@ set statusline+=\ %p%%
 set statusline+=\ %l:%c
 set statusline+=\ 
 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 " Install vim-plug
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -139,15 +150,27 @@ endif
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
+" call plug#begin(stdpath('data') . '/plugged')
 call plug#begin('~/.vim/plugged')
 " Add plugins
 Plug 'scrooloose/nerdtree'
 Plug 'morhetz/gruvbox'
 Plug 'vim-syntastic/syntastic'
+Plug 'udalov/kotlin-vim'
+Plug 'ollykel/v-vim'
+Plug 'dense-analysis/ale'
+Plug 'itchyny/lightline.vim'
+Plug 'wincent/command-t'
+
+
 call plug#end()
 
+" Enable statusline with lightline
+set laststatus=2
 
-autocmd vimenter * ++nested colorscheme gruvbox
+
+" Disable gruvbox
+" autocmd vimenter * ++nested colorscheme gruvbox
 
 " Nerdtree configuration
 " Shortcut to open and close NERDTree
@@ -179,3 +202,5 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 
+" Macros
+let @q="A,<esc>O"
