@@ -1,0 +1,21 @@
+
+homebrew_installed_packages:
+  - git
+  - go
+
+dotfiles_repo_accept_hostkey: false
+dotfiles_repo_local_destination: ~/Projects/Personal/dotfiles
+dotfiles_repo_version: master
+dotfiles_repo: git@github.com:oscarteg/dotfiles.git
+dotfiles_files:
+  - .aliases
+  - .editorconfig
+  - .exports
+  - .functions
+  - .gitconfig
+  - .gitignore
+  - .gvimrc
+  - .path
+  - .tmux.conf
+  - .vimrc
+  - .zshrc

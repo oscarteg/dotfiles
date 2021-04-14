@@ -18,4 +18,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 # Homebrew
 export PATH="/usr/local/sbin:$PATH"
 
-
+# Dart 
+export PATH="$PATH":"$HOME/.pub-cache/bin"
