@@ -1,7 +1,63 @@
-
 homebrew_installed_packages:
   - git
   - go
+  - ansible
+  - curl 
+  - kind
+  - httpie
+  - macvim
+  - vim
+  - nvm 
+  - youtube-dl
+  - watch
+  - annie
+  - lazygit
+  - lazydocker
+  - minikube 
+  - pandoc
+  - neovim
+  - pandoc
+
+homebrew_cask_apps:
+  - alfred
+  - calibre
+  - firefox
+  - gpg-suite
+  - macvim
+  - openoffice
+  - tableplus
+  - tweetbot
+  - anki
+  - dash
+  - focus
+  - intellij-idea
+  - microsoft-teams
+  - paw
+  - telegram-desktop
+  - visual-studio-code
+  - appcleaner
+  - discord
+  - google-chrome
+  - istat-menus
+  - ngrok
+  - slack
+  - tower
+  - whatsapp
+  - bettertouchtool
+  - docker
+  - google-cloud-sdk
+  - iterm2
+  - nordvpn
+  - spectacle
+  - transmission
+  - zoom
+  - brave-browser
+  - figma
+  - google-drive
+  - mactex
+  - notion
+  - spotify
+  - tunnelblick
 
 dotfiles_repo_accept_hostkey: false
 dotfiles_repo_local_destination: ~/Projects/Personal/dotfiles
@@ -15,7 +71,15 @@ dotfiles_files:
   - .gitconfig
   - .gitignore
   - .gvimrc
+  - .hushlogin
   - .path
   - .tmux.conf
   - .vimrc
   - .zshrc
+
+
+npm_packages:
+  - typescript
+  - eslint
+  - esy
+  - prettier
