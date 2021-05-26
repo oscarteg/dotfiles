@@ -139,3 +139,7 @@ alias cat='bat'
 
 # Laravel sail https://laravel.com/docs/8.x/sail
 alias sail='bash vendor/bin/sail'
+
+# Open vim with Gruvbox light
+alias lvim="vim +'colorscheme gruvbox' +'set bg=light'"
+alias lmvim="mvim +'colorscheme gruvbox' +'set bg=light'"

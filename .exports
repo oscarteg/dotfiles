@@ -4,4 +4,8 @@
 export EDITOR='vim';
 
 # Show hidden files ignore node_modules
-export FZF_DEFAULT_COMMAND='ag -g ""'
+export FZF_DEFAULT_COMMAND='ag -l --path-to-ignore ~/.gitignore --nocolor --hidden -g ""'
+
+
+# Location Deno installation
+export DENO_INSTALL="/Users/oscar/.deno"

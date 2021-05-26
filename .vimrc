@@ -2,7 +2,7 @@
 let g:ale_sign_column_always = 1
 let g:ale_disable_lsp = 1
 " Set current directory to current file 
-set autochdir
+" set autochdir
 
 " Auto reload when file on disk changes
 set autoread
@@ -151,6 +151,11 @@ Plug 'cespare/vim-toml'
 Plug 'ayu-theme/ayu-vim'
 Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'morhetz/gruvbox'
+Plug 'raphamorim/lucario'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'rainglow/vim'
 
 
 call plug#end()
@@ -166,12 +171,12 @@ map <C-n> :NERDTreeToggle<CR>
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Open NERDTree when vim is opening a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
 
 " Open NERDTree when no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Change Dir and Root dir
 let g:NERDTreeChDirMode = 2
@@ -187,7 +192,7 @@ let NERDTreeNaturalSort = 1
 
  let ayucolor = "dark"
 
-colorscheme ayu
+colorscheme gruvbox
 
 " ALE
 "
@@ -199,7 +204,7 @@ colorscheme ayu
 let g:ale_completion_enabled = 1
 let g:ale_fixers = { 
                    \ 'javascript': ['prettier', 'eslint'], 
-                   \ 'typescript': ['prettier','eslint'], 
+                   \ 'typescript': ['prettier','eslint', 'deno'], 
                    \ 'javascriptreact' : ['prettier', 'eslint'],
                    \ 'typescriptreact' : ['prettier', 'eslint'],
                    \ 'go': ['gofmt'],
@@ -208,6 +213,8 @@ let g:ale_fixers = {
                    \ 'css': ['stylelint', 'prettier'],
                    \ 'less': ['stylelint', 'prettier'],
                    \ 'scss': ['stylelint', 'prettier'],
+                   \ 'python': ['yapf'],
+                   \ 'svelte': ['prettier'],
                    \ }
 
 let g:ale_linters = { 
@@ -215,11 +222,14 @@ let g:ale_linters = {
                 \ 'typescriptreact' : ['prettier', 'eslint', 'tsserver'],
                 \ 'javascriptreact' : ['prettier', 'eslint'],
                 \ 'javascript': ['eslint'] ,
+                \ 'typescript': ['deno'] ,
                 \ 'rust': ['cargo'],
-                \ 'go': ['gofmt'],
+                \ 'go': ['gopls'],
                 \ 'css': ['stylelint'],
                 \ 'scss': ['stylelint'],
                 \ 'less': ['stylelint'],
+                \ 'svelte': ['svelteserver'],
+                \ 'python': ['pylint', 'flake8'],
                 \ }
 
 
@@ -459,6 +469,7 @@ let g:NERDToggleCheckAllLines = 1
 
 " map FZF to ctrl + f
 nnoremap <silent> <C-f> :Files<CR>
+" nnoremap <silent> <C-p> :Files<CR>
 
 
 
@@ -651,3 +662,42 @@ set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*
 
 " Nerdtree config for wildignore
 let NERDTreeRespectWildIgnore=1
+
+
+
+" NerdCommenter for Svelte
+" NERDCommenter settings
+
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDCustomDelimiters = { 'html': { 'left': '' } }
+
+" Align comment delimiters to the left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+fu! NERDCommenter_before()
+  if (&ft == 'html') || (&ft == 'svelte')
+    let g:ft = &ft
+    let cfts = context_filetype#get_filetypes()
+    if len(cfts) > 0
+      if cfts[0] == 'svelte'
+        let cft = 'html'
+      elseif cfts[0] == 'scss'
+        let cft = 'css'
+      else
+        let cft = cfts[0]
+      endif
+      exe 'setf ' . cft
+    endif
+  endif
+endfu
+
+fu! NERDCommenter_after()
+  if (g:ft == 'html') || (g:ft == 'svelte')
+    exec 'setf ' . g:ft
+    let g:ft = ''
+  endif
+endfu
+
+" Coc installed extensions
+let g:coc_global_extensions = [ 'coc-deno', 'coc-flutter', 'coc-go', 'coc-html', 'coc-json', 'coc-pyright', 'coc-rls', 'coc-rust-analyzer', 'coc-stylelint', 'coc-svelte', 'coc-tsserver', 'coc-vetur' ]

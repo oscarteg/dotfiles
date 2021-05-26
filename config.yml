@@ -76,6 +76,7 @@ dotfiles_files:
   - .tmux.conf
   - .vimrc
   - .zshrc
+  - .config/nvim/init.vim
 
 
 npm_packages:

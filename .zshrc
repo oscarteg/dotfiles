@@ -3,7 +3,7 @@ export ZSH="/Users/oscar/.oh-my-zsh"
 
 # Load the shell dotfiles, and then some:
 # * ~/.path can be used to extend `$PATH`.
-for file in ~/.{path,exports,aliases,functions}; do
+for file in ~/.{exports,path,aliases,functions}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;
@@ -12,7 +12,7 @@ unset file;
 ZSH_THEME="minimal"
 
 # Zsh plugins
-plugins=(docker terraform git kubectl docker-compose vagrant zsh-autosuggestions autojump)
+plugins=(docker terraform git kubectl docker-compose vagrant zsh-autosuggestions autojump rust cargo)
 
 # Source oh my zsh
 source $ZSH/oh-my-zsh.sh
@@ -32,8 +32,6 @@ eval $(thefuck --alias)
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 
-export DENO_INSTALL="/Users/oscar/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
 
 
 autoload -U +X bashcompinit && bashcompinit
