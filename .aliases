@@ -144,3 +144,6 @@ alias sail='bash vendor/bin/sail'
 alias lvim="vim +'colorscheme gruvbox' +'set bg=light'"
 alias lmvim="mvim +'colorscheme gruvbox' +'set bg=light'"
 alias lnvim="nvim +'colorscheme gruvbox' +'set bg=light'"
+
+# Exa show hidden files in long table
+alias ela="exa -la"
