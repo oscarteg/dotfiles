@@ -143,3 +143,4 @@ alias sail='bash vendor/bin/sail'
 # Open vim with Gruvbox light
 alias lvim="vim +'colorscheme gruvbox' +'set bg=light'"
 alias lmvim="mvim +'colorscheme gruvbox' +'set bg=light'"
+alias lnvim="nvim +'colorscheme gruvbox' +'set bg=light'"

@@ -7,15 +7,13 @@ let g:ale_disable_lsp = 1
 " Auto reload when file on disk changes
 set autoread
 
-set guifont=Apercu\ Mono\ Pro:16
+set guifont=Operator\ Mono\ Pro:16
 " Make Vim more useful
 set nocompatible
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
 set clipboard=unnamed
 " Enhance command-line completion
 set wildmenu
-" Allow cursor keys in insert mode
-set esckeys
 " Allow backspace in insert mode
 set backspace=indent,eol,start
 " Optimize for fast terminal connections
@@ -156,6 +154,8 @@ Plug 'morhetz/gruvbox'
 Plug 'raphamorim/lucario'
 Plug 'rafi/awesome-vim-colorschemes'
 Plug 'rainglow/vim'
+Plug 'sheerun/vim-polyglot'
+
 
 
 call plug#end()
