@@ -77,7 +77,7 @@ dotfiles_files:
   - .vimrc
   - .zshrc
   - .config/nvim/init.vim
-  - .agignore
+  - .ignore
 
 
 npm_packages:

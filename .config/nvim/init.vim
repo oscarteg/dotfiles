@@ -4,6 +4,7 @@ let g:ale_disable_lsp = 1
 " Set current directory to current file 
 " set autochdir
 
+
 " Auto reload when file on disk changes
 set autoread
 
@@ -215,6 +216,7 @@ let g:ale_fixers = {
                    \ 'scss': ['stylelint', 'prettier'],
                    \ 'python': ['yapf'],
                    \ 'svelte': ['prettier'],
+                   \ 'vue': ['prettier'],
                    \ }
 
 let g:ale_linters = { 
@@ -230,6 +232,7 @@ let g:ale_linters = {
                 \ 'less': ['stylelint'],
                 \ 'svelte': ['svelteserver'],
                 \ 'python': ['pylint', 'flake8'],
+                \ 'vue': ['vls'],
                 \ }
 
 
@@ -312,8 +315,10 @@ endfunction
 " Use <c-space> to trigger completion.
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
+  nnoremap <silent><expr> <c-space> coc#refresh()
 else
   inoremap <silent><expr> <c-@> coc#refresh()
+  nnoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
@@ -666,17 +671,30 @@ let NERDTreeRespectWildIgnore=1
 
 
 " NerdCommenter for Svelte
-" NERDCommenter settings
+" " -------------------------------------
+" Context filetypes for NERDCommenter and more
+" -------------------------------------
+if !exists('g:context_filetype#same_filetypes')
+  let g:context_filetype#filetypes = {}
+endif
+let g:context_filetype#filetypes.svelte =
+\ [
+\   {'filetype' : 'javascript', 'start' : '<script>', 'end' : '</script>'},
+\   {
+\     'filetype': 'typescript',
+\     'start': '<script\%( [^>]*\)\? \%(ts\|lang="\%(ts\|typescript\)"\)\%( [^>]*\)\?>',
+\     'end': '</script>',
+\   },
+\   {'filetype' : 'css', 'start' : '<style \?.*>', 'end' : '</style>'},
+\ ]
 
-let g:NERDSpaceDelims = 1
-let g:NERDCompactSexyComs = 1
-let g:NERDCustomDelimiters = { 'html': { 'left': '' } }
 
-" Align comment delimiters to the left instead of following code indentation
-let g:NERDDefaultAlign = 'left'
-
+" -------------------------------------
+" NERDCommenter
+" -------------------------------------
+let g:ft = ''
 fu! NERDCommenter_before()
-  if (&ft == 'html') || (&ft == 'svelte')
+  if (&ft == 'html') || (&ft == 'svelte') || (&ft == 'vue')
     let g:ft = &ft
     let cfts = context_filetype#get_filetypes()
     if len(cfts) > 0
@@ -691,13 +709,17 @@ fu! NERDCommenter_before()
     endif
   endif
 endfu
-
 fu! NERDCommenter_after()
-  if (g:ft == 'html') || (g:ft == 'svelte')
+  if (g:ft == 'html') || (g:ft == 'svelte') || (g:ft == 'vue')
     exec 'setf ' . g:ft
     let g:ft = ''
   endif
 endfu
+
+
+
+" Align comment delimiters to the left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
 
 " Coc installed extensions
 let g:coc_global_extensions = [ 'coc-deno', 'coc-flutter', 'coc-go', 'coc-html', 'coc-json', 'coc-pyright', 'coc-rls', 'coc-rust-analyzer', 'coc-stylelint', 'coc-svelte', 'coc-tsserver', 'coc-vetur' ]
