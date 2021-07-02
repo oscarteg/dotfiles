@@ -236,8 +236,3 @@ function ssl-check() {
     fi
 }
 
-# Laravel homestead
-function homestead() {
-    ( cd ~/Homestead && vagrant $* )
-}
-

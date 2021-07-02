@@ -8,3 +8,6 @@ export FZF_DEFAULT_COMMAND='ag -l --path-to-ignore ~/.ignore --nocolor --hidden 
 
 # Location Deno installation
 export DENO_INSTALL="/Users/oscar/.deno"
+
+# Dont open browser when using create react app 
+export BROWSER=none
