@@ -139,11 +139,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-surround'
 Plug 'mattn/emmet-vim'
 Plug 'preservim/nerdcommenter'
+Plug 'yaegassy/coc-intelephense', {'do': 'yarn install --frozen-lockfile'}
 " Integrations
 Plug 'rizzatti/dash.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 " Styling
 Plug 'mhartington/oceanic-next'
 Plug 'vim-airline/vim-airline'
@@ -151,7 +153,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'raphamorim/lucario'
 Plug 'rafi/awesome-vim-colorschemes'
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
 Plug 'cseelus/vim-colors-lucid'
 Plug 'ayu-theme/ayu-vim'
 " Syntax
@@ -182,7 +184,6 @@ map <C-n> :NERDTreeToggle<CR>
 " Close vim if the only window is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
-
 " Change Dir and Root dir
 let g:NERDTreeChDirMode = 2
 
@@ -212,6 +213,7 @@ let g:airline_theme='oceanicnext'
 " source for other completion plugins, like Deoplete.
 let g:ale_fixers = {
                    \ 'javascript': ['prettier', 'eslint'],
+                   \ 'json': ['prettier'],
                    \ 'mdx': ['prettier'],
                    \ 'md': ['prettier'],
                    \ 'typescript': ['prettier','eslint'],
@@ -260,13 +262,10 @@ autocmd FileType html,css,typescriptreact,javascriptreact EmmetInstall
 let g:user_emmet_leader_key=','
 let g:user_emmet_mode='n'
 
+
 """"""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""" NERD COMMENTER """"""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""
-
-let g:NERDTreeChDirMode = 2
-let NERDTreeShowHidden=1
-
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
 
@@ -374,10 +373,10 @@ set shortmess+=c
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
 if has("patch-8.1.1564")
--  set signcolumn=number
--else
--  set signcolumn=yes
--endif
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -493,4 +492,21 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 
 " Coc installed extensions
-let g:coc_global_extensions = [ 'coc-deno', 'coc-flutter', 'coc-go', 'coc-html', 'coc-json', 'coc-pyright', 'coc-rls', 'coc-rust-analyzer', 'coc-stylelint', 'coc-svelte', 'coc-tsserver', 'coc-vetur' ]
+let g:coc_global_extensions = [
+			\ '@yaegassy/coc-intelephense',
+			\ 'coc-html',
+			\ 'coc-tailwindcss',
+			\ 'coc-prisma',
+			\ 'coc-deno',
+			\ 'coc-flutter',
+			\ 'coc-go',
+			\ 'coc-html',
+			\ 'coc-json',
+			\ 'coc-pyright',
+			\ 'coc-rls',
+			\ 'coc-rust-analyzer',
+			\ 'coc-stylelint',
+			\ 'coc-svelte',
+			\ 'coc-tsserver',
+			\ 'coc-vetur'
+			\]

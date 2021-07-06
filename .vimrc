@@ -503,4 +503,20 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 
 " Coc installed extensions
-let g:coc_global_extensions = [ 'coc-deno', 'coc-flutter', 'coc-go', 'coc-html', 'coc-json', 'coc-pyright', 'coc-rls', 'coc-rust-analyzer', 'coc-stylelint', 'coc-svelte', 'coc-tsserver', 'coc-vetur' ]
+let g:coc_global_extensions = [
+			\ 'coc-html',
+			\ 'coc-tailwindcss',
+			\ 'coc-prisma',
+			\ 'coc-deno',
+			\ 'coc-flutter',
+			\ 'coc-go',
+			\ 'coc-html',
+			\ 'coc-json',
+			\ 'coc-pyright',
+			\ 'coc-rls',
+			\ 'coc-rust-analyzer',
+			\ 'coc-stylelint',
+			\ 'coc-svelte',
+			\ 'coc-tsserver',
+			\ 'coc-vetur'
+			\]
