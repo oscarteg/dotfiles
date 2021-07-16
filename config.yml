@@ -76,11 +76,20 @@ dotfiles_files:
   - .tmux.conf
   - .vimrc
   - .zshrc
-  - .config/nvim/init.vim
   - .config/nvim/init.lua
+  - .config/nvim/lua/ale.lua
+  - .config/nvim/lua/coc.lua
+  - .config/nvim/lua/emmet.lua
+  - .config/nvim/lua/helpers.lua
+  - .config/nvim/lua/lsp.lua
+  - .config/nvim/lua/mappings.lua
+  - .config/nvim/lua/nerdcommenter.lua
+  - .config/nvim/lua/nerdtree.lua
+  - .config/nvim/lua/options.lua
+  - .config/nvim/lua/theming.lua
+  - .config/nvim/lua/treesitter.lua
   - .config/nvim/coc-settings.json
   - .ignore
-
 
 npm_packages:
   - typescript

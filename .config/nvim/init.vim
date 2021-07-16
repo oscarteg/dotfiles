@@ -25,9 +25,7 @@ set noeol
 " Centralize backups, swapfiles and undo history
 set backupdir=~/.vim/backups
 set directory=~/.vim/swaps
-if exists("&undodir")
-	set undodir=~/.vim/undo
-endif
+set undodir=~/.vim/undo
 
 " Don’t create backups when editing files in certain directories
 set backupskip=/tmp/*,/private/tmp/*
@@ -112,8 +110,6 @@ if has ('autocmd') " Remain compatible with earlier versions
     autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
   augroup END
 endif " has autocmd
-
-
 " Set wildignore
 set wildignore+=*.pyc,*.o,*.obj,*.svn,*.swp,*.class,*.hg,*.DS_Store,*.min.*
 
@@ -153,7 +149,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'raphamorim/lucario'
 Plug 'rafi/awesome-vim-colorschemes'
-" Plug 'sheerun/vim-polyglot'
+Plug 'yashguptaz/calvera-dark.nvim'
+Plug 'sheerun/vim-polyglot'
 Plug 'cseelus/vim-colors-lucid'
 Plug 'ayu-theme/ayu-vim'
 " Syntax
@@ -167,6 +164,8 @@ Plug 'jordwalke/vim-reasonml'
 " Other
 Plug 'vimwiki/vimwiki'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-dispatch'
+
 
 call plug#end()
 
@@ -198,10 +197,16 @@ if (has("termguicolors"))
 set termguicolors
 endif
 
-colorscheme OceanicNext
-let ayucolor = "dark"
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
+" colorscheme OceanicNext
+" let ayucolor = "dark"
+" let g:oceanic_next_terminal_bold = 1
+" let g:oceanic_next_terminal_italic = 1
+let g:calvera_italic_comments = 1
+let g:calvera_italic_keywords = 1
+let g:calvera_italic_functions = 1
+let g:calvera_contrast = 1
+
+colorscheme calvera
 
 " Airline
 let g:airline_theme='oceanicnext'
@@ -214,6 +219,7 @@ let g:airline_theme='oceanicnext'
 let g:ale_fixers = {
                    \ 'javascript': ['prettier', 'eslint'],
                    \ 'json': ['prettier'],
+                   \ 'lua': ['luafmt'],
                    \ 'mdx': ['prettier'],
                    \ 'md': ['prettier'],
                    \ 'typescript': ['prettier','eslint'],
@@ -232,6 +238,7 @@ let g:ale_fixers = {
 
 let g:ale_linters = {
                 \ 'php': ['php', 'langserver', 'phan'],
+                \ 'json': ['prettier'],
                 \ 'typescriptreact' : ['prettier', 'eslint', 'tsserver'],
                 \ 'javascriptreact' : ['prettier', 'eslint'],
                 \ 'javascript': ['eslint'] ,
