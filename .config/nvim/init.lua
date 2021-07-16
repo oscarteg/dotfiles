@@ -9,7 +9,6 @@ require("nerdtree")
 require("options")
 require("treesitter")
 require("theming")
-require("treesitter")
 
 if has("termguicolors") then
     vim.o.termguicolors = true
