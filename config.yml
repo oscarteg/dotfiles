@@ -1,3 +1,4 @@
+dotfiles_repo_version: main
 homebrew_installed_packages:
   - git
   - go
