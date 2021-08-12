@@ -76,7 +76,8 @@ dotfiles_files:
   - .tmux.conf
   - .vimrc
   - .zshrc
-  - .config/nvim/init.lua
+  - .config/nvim/init.vim
+  # - .config/nvim/init.lua
   - .config/nvim/lua/ale.lua
   - .config/nvim/lua/coc.lua
   - .config/nvim/lua/emmet.lua
