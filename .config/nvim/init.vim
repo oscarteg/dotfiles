@@ -82,7 +82,7 @@ endif
 set scrolloff=3
 
 " Strip trailing whitespace (,ss)
-function! StripWhitespace()
+function! Striphitespace()
 	let save_cursor = getpos(".")
 	let old_query = getreg('/')
 	:%s/\s\+$//e
@@ -143,16 +143,11 @@ Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 " Styling
-Plug 'mhartington/oceanic-next'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
 Plug 'raphamorim/lucario'
-Plug 'rafi/awesome-vim-colorschemes'
 Plug 'yashguptaz/calvera-dark.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'cseelus/vim-colors-lucid'
-Plug 'ayu-theme/ayu-vim'
 " Syntax
 Plug 'styled-components/vim-styled-components'
 Plug 'fatih/vim-go'
@@ -161,6 +156,7 @@ Plug 'jparise/vim-graphql'
 Plug 'evanleck/vim-svelte'
 Plug 'cespare/vim-toml'
 Plug 'jordwalke/vim-reasonml'
+Plug 'rizzatti/dash.vim'
 " Other
 Plug 'vimwiki/vimwiki'
 Plug 'editorconfig/editorconfig-vim'
@@ -214,8 +210,6 @@ let g:airline_theme='oceanicnext'
 """"""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""" ALE """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""
-" You should not turn this setting on if you wish to use ALE as a completion
-" source for other completion plugins, like Deoplete.
 let g:ale_fixers = {
                    \ 'javascript': ['prettier', 'eslint'],
                    \ 'json': ['prettier'],
@@ -348,6 +342,7 @@ let g:NERDDefaultAlign = 'left'
 
 " Nerdtree config for wildignore
 let NERDTreeRespectWildIgnore=1
+let NERDTreeShowHidden=1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""
@@ -359,6 +354,9 @@ inoremap <silent> <C-p> :Files<CR>
 """"""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""" COC """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""
+" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+" unicode characters in the file autoload/float.vim
+set encoding=utf-8
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -379,7 +377,8 @@ set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
-if has("patch-8.1.1564")
+if has("nvim-0.5.0") || has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
 else
   set signcolumn=yes
@@ -400,7 +399,11 @@ function! s:check_back_space() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-.> coc#refresh()
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
@@ -471,12 +474,14 @@ xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
 " Remap <C-f> and <C-b> for scroll float windows/popups.
-nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
 
 " Use CTRL-S for selections ranges.
 " Requires 'textDocument/selectionRange' support of language server.
@@ -492,11 +497,18 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " Mappings for CoCList
+" Show all diagnostics.
 " Do default action for next item.
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
 
 " Coc installed extensions
 let g:coc_global_extensions = [
