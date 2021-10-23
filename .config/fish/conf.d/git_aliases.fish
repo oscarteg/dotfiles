@@ -1,4 +1,3 @@
-
 # Aliases
 alias g='git'
 #compdef g=git
