@@ -55,8 +55,8 @@ set ignorecase
 set smartcase
 " Highlight dynamically as pattern is typed
 set incsearch
-" Always show status line
-set laststatus=2
+" Never show status line
+set laststatus=0
 " Enable mouse in all modes
 set mouse=a
 " Disable error bells
@@ -66,7 +66,7 @@ set nostartofline
 " Show the cursor position
 set ruler
 " Don’t show the intro message when starting Vim
-set shortmess=atI
+set shortmess=atIF
 " Show the current mode
 set showmode
 " Show the filename in the window titlebar
@@ -143,14 +143,15 @@ Plug 'scrooloose/nerdtree'
 Plug 'airblade/vim-gitgutter'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 " Styling
-Plug 'vim-airline/vim-airline'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'ayu-theme/ayu-vim' 
+Plug 'kyazdani42/nvim-web-devicons'
 Plug 'raphamorim/lucario'
-Plug 'yashguptaz/calvera-dark.nvim'
 Plug 'sheerun/vim-polyglot'
 Plug 'cseelus/vim-colors-lucid'
 " Syntax
 Plug 'styled-components/vim-styled-components'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'rust-lang/rust.vim'
 Plug 'jparise/vim-graphql'
 Plug 'evanleck/vim-svelte'
@@ -164,9 +165,6 @@ Plug 'tpope/vim-dispatch'
 
 
 call plug#end()
-
-" Enable statusline with lightline
-set laststatus=2
 
 """"""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""" NERD TREE """""""""""""""""""
@@ -188,10 +186,7 @@ let NERDTreeNaturalSort = 1
 """"""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""" THEMING """""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""
-" for vim 8
-if (has("termguicolors"))
 set termguicolors
-endif
 
 " colorscheme OceanicNext
 " let ayucolor = "dark"
@@ -201,11 +196,20 @@ let g:calvera_italic_comments = 1
 let g:calvera_italic_keywords = 1
 let g:calvera_italic_functions = 1
 let g:calvera_contrast = 1
+let ayucolor="dark"   " for dark version of theme
+colorscheme ayu
 
-colorscheme calvera
-
-" Airline
-let g:airline_theme='oceanicnext'
+" LuaLine - Statusbar
+lua << END
+require'lualine'.setup {
+  options = { 
+    theme  = ayu_dark,
+    sections = {
+      lualine_a = { 'g:coc_status', 'bo:filetype' }
+  }
+ },
+}
+END
 
 """"""""""""""""""""""""""""""""""""""""""""""
 """""""""""""""" ALE """""""""""""""""""""
@@ -417,6 +421,10 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 " GoTo code navigation.
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> ge <Plug>(coc-definition)
+nmap <silent> gs :split<CR><Plug>(coc-definition)
+nmap <silent> gv :vsplit<CR><Plug>(coc-definition)
+nmap <silent> gt :tabnew<CR><Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
@@ -497,12 +505,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings for CoCList
+" Add " Mappings for CoCList
 " Show all diagnostics.
 " Do default action for next item.
 nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
