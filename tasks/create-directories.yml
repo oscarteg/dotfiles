@@ -1,9 +1,0 @@
-- name: Creates Projects
-  file:
-    path: "{{ item }}"
-    state: directory
-    recurse: yes
-  loop:
-    - ~/Projects/Personal
-    - ~/Projects/Experiments
-

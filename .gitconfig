@@ -128,7 +128,7 @@
   # Speed up commands involving untracked files such as `git status`.
   # https://git-scm.com/docs/git-update-index#_untracked_cache
   untrackedCache = true
-	editor = /usr/local/bin/vim
+	editor = nvim
 
 [color]
 
@@ -223,3 +223,5 @@
 	rebase = true
 [init]
 	defaultBranch = main
+[rebase]
+	autoStash = true

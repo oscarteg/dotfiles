@@ -1,5 +1,6 @@
-jorgebucaran/fisher
-ilancosman/tide
 jethrokuan/z
-edc/bass
-jorgebucaran/nvm.fish
+jorgebucaran/fisher
+oh-my-fish/plugin-thefuck
+blackjid/plugin-kubectl
+IlanCosman/tide@v5
+jhillyerd/plugin-git

@@ -1,11 +1,6 @@
 # Dotfiles
 
-Requirements (ansible)
-```
-ansible-galaxy install -r requirements.yml
-```
+Neovim requirements
 
-Install 
-```
-ansible-playbook main.yml -i inventory --ask-become-pass
-```
+- Rust analyser - put inside in ~/.local/bin
+- ZLS Zig LSP - put inside in ~/.local/bin
