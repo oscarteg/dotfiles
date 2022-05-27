@@ -1,5 +1,23 @@
 require("nvim-treesitter.configs").setup({
-	ensure_installed= { "rust", "typescript", "go", "zig"},
+	ensure_installed= { 
+    "rust", 
+    "typescript", 
+    "go", 
+    "zig", 
+    "graphql", 
+    "kotlin", 
+    "html", 
+    "css", 
+    "php", 
+    "tsx", 
+    "javascript", 
+    "typescript", 
+    "svelte", 
+    "vue", 
+    "scss",
+    "css",
+    "v"
+ },
 	highlight = {
 		enable = true,
 	},

@@ -38,3 +38,7 @@ vim.o.grepformat = "%f:%l:%c:%m"
 
 -- vim.opt.runtimepath:append("~/code/mosel.nvim")
 cmd("colorscheme mosel")
+
+-- Set updatetime for CursorHold
+-- 300ms of no cursor movement to trigger CursorHold
+opt.updatetime=300
