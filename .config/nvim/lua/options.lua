@@ -10,6 +10,8 @@ opt.clipboard = "unnamedplus"
 opt.termguicolors = true
 opt.cursorline = true
 opt.hidden = true
+-- Set updatetime for CursorHold
+-- 300ms of no cursor movement to trigger CursorHold
 opt.updatetime = 300
 opt.splitright = true
 opt.nrformats:remove("octal")
@@ -38,7 +40,3 @@ vim.o.grepformat = "%f:%l:%c:%m"
 
 -- vim.opt.runtimepath:append("~/code/mosel.nvim")
 cmd("colorscheme mosel")
-
--- Set updatetime for CursorHold
--- 300ms of no cursor movement to trigger CursorHold
-opt.updatetime=300

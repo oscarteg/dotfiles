@@ -24,6 +24,7 @@ local on_attach = function(client, bufnr)
 
   local opts = { noremap = true, silent = true }
 
+  buf_set_keymap("n", "gD", [[<cmd>lua require('telescope.builtin').lsp_declaration()<CR>]], opts)
   buf_set_keymap("n", "gd", [[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]], opts)
   buf_set_keymap("n", "gi", [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
   buf_set_keymap("n", "gr", [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], opts)
@@ -33,7 +34,9 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>ee", [[<cmd>lua require('telescope.builtin').diagnostics()<CR>]], opts)
   buf_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   buf_set_keymap("n", "<leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+  buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>", opts)
+  buf_set_keymap('n', '[g', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 
   -- formatting via efm
   if (client.name == "tsserver") or (client.name == "sumneko_lua") then
@@ -46,7 +49,7 @@ local on_attach = function(client, bufnr)
     vim.cmd([[
   augroup Format
   au! * <buffer>
-  au BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)
+  au BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync(nil, 1000)
   augroup END
   ]])
   end
@@ -245,3 +248,4 @@ nvim_lsp.gopls.setup({
 
 -- Zig
 nvim_lsp.zls.setup{}
+

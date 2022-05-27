@@ -16,6 +16,7 @@ require("nvim-treesitter.configs").setup({
     "vue", 
     "scss",
     "css",
+    "fish",
     "v"
  },
 	highlight = {

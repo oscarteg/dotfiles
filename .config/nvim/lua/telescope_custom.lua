@@ -9,9 +9,6 @@ require("telescope").setup({
 		},
 		path_display = { "tail" },
 		dynamic_preview_title = true,
-		preview = {
-			treesitter = false,
-		},
 	},
 
 	extensions = {

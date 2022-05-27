@@ -2,9 +2,6 @@ local cmp = require("cmp")
 local lspkind = require("lspkind")
 
 cmp.setup({
-	completion = {
-		-- autocomplete = false,
-	},
 	snippet = {
 		expand = function(args)
 			vim.fn["vsnip#anonymous"](args.body)
@@ -33,24 +30,24 @@ cmp.setup({
 			behavior = cmp.ConfirmBehavior.Insert,
 			select = true 
 		}),
-		-- ["<Tab>"] = cmp.mapping(function(fallback)
-		-- 	if vim.fn.pumvisible() == 1 then
-		-- 		map.select_next_item()
-		-- 	elseif vim.fn["vsnip#available"]() == 1 then
-		-- 		vim.fn.feedkeys(keymap.t("<Plug>(vsnip-expand-or-jump)"), "")
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end, { 'i', 's' }),
-		-- ["<S-Tab>"] = cmp.mapping(function(fallback)
-		-- 	if vim.fn.pumvisible() == 1 then
-		-- 		map.select_prev_item()
-		-- 	elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-		-- 		vim.fn.feedkeys(keymap.t("<Plug>(vsnip-jump-prev)"), "")
-		-- 	else
-		-- 		fallback()
-		-- 	end
-		-- end, { 'i', 's' }),
+		["<Tab>"] = cmp.mapping(function(fallback)
+			if vim.fn.pumvisible() == 1 then
+				map.select_next_item()
+			elseif vim.fn["vsnip#available"]() == 1 then
+				vim.fn.feedkeys(keymap.t("<Plug>(vsnip-expand-or-jump)"), "")
+			else
+				fallback()
+			end
+		end, { 'i', 's' }),
+		["<S-Tab>"] = cmp.mapping(function(fallback)
+			if vim.fn.pumvisible() == 1 then
+				map.select_prev_item()
+			elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+				vim.fn.feedkeys(keymap.t("<Plug>(vsnip-jump-prev)"), "")
+			else
+				fallback()
+			end
+		end, { 'i', 's' }),
 	},
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
