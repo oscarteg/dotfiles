@@ -2,14 +2,14 @@ local actions = require("telescope.actions")
 
 require("telescope").setup({
 	defaults = {
-		mappings = {
-			i = {
-				["<C-l>"] = actions.close,
-			},
-		},
-		path_display = { "tail" },
 		dynamic_preview_title = true,
 	},
+
+  pickers = {
+    find_files = {
+      theme = "dropdown"
+    }
+  },
 
 	extensions = {
 		["ui-select"] = {

@@ -9,13 +9,23 @@ for type, icon in pairs(signs) do
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-  virtual_text = false,
+  virtual_text = true,
   signs = true,
   underline = true,
+  severity_sort = true,
   update_in_insert = false,
+  float = {
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  },
 })
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilitiees)
+local capabilities = require('cmp_nvim_lsp').update_capabilities(
+    vim.lsp.protocol.make_client_capabilities()
+  )
 
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...)
@@ -24,7 +34,6 @@ local on_attach = function(client, bufnr)
 
   local opts = { noremap = true, silent = true }
 
-  buf_set_keymap("n", "gD", [[<cmd>lua require('telescope.builtin').lsp_declaration()<CR>]], opts)
   buf_set_keymap("n", "gd", [[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]], opts)
   buf_set_keymap("n", "gi", [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
   buf_set_keymap("n", "gr", [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], opts)
@@ -39,7 +48,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']g', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 
   -- formatting via efm
-  if (client.name == "tsserver") or (client.name == "sumneko_lua") then
+  if (client.name == "deno") or (client.name == "sumneko_lua") then
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
   end
@@ -55,7 +64,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- TypeScript
+-- TypeScript with Deno
 nvim_lsp.denols.setup({
   capabilities = capabilities,
   on_attach = on_attach,
@@ -102,7 +111,6 @@ table.insert(runtime_path, "lua/?/init.lua")
 nvim_lsp.sumneko_lua.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  cmd = { "lua-language-server", "-E", "/usr/lib/lua-language-server/main.lua" },
   settings = {
     Lua = {
       runtime = {
@@ -193,11 +201,10 @@ nvim_lsp.tailwindcss.setup({
 })
 
 -- Rust
-
 require('rust-tools').setup({
    tools = { -- rust-tools options
-        autoSetHints = true,
-        hover_with_actions = true,
+        -- autoSetHints = true,
+        -- hover_with_actions = true,
         inlay_hints = {
             show_parameter_hints = false,
             parameter_hints_prefix = "",
@@ -209,16 +216,16 @@ require('rust-tools').setup({
         on_attach = on_attach,
         settings = {
           ["rust-analyzer"] = {
-            assist = {
-              importMergeBehavior = "last",
-              importPrefix = "by_self",
-            },
-            diagnostics = {
-              disabled = { "unresolved-import" }
-            },
-            cargo = {
-              loadOutDirsFromCheck = true
-            },
+            -- assist = {
+            --   importMergeBehavior = "last",
+            --   importPrefix = "by_self",
+            -- },
+            -- diagnostics = {
+            --   disabled = { "unresolved-import" }
+            -- },
+            -- cargo = {
+            --   loadOutDirsFromCheck = true
+            -- },
             procMacro = {
               enable = true
             },
@@ -248,4 +255,3 @@ nvim_lsp.gopls.setup({
 
 -- Zig
 nvim_lsp.zls.setup{}
-

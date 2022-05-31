@@ -1,8 +1,9 @@
-require("scratch")
 require("plugins")
+require("scratch")
 
 require("commands")
 require("lsp")
+require("snippets")
 
 require("completion")
 require("telescope_custom")

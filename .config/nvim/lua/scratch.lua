@@ -1,11 +1,15 @@
+local zk = require("zk")
+local commands = require("zk.commands")
 local api = vim.api
 local M = {}
 
+zk.setup({
+	picker = "telescope"
+})
+
 function M.makeScratch()
 	api.nvim_command("enew")
-	api.nvim_buf_set_option(0, "buftype", "nofile")
-	api.nvim_buf_set_option(0, "bufhidden", "hide")
-	api.nvim_buf_set_option(0, "swapfile", false)
+	zk.new()
 end
 
 return M

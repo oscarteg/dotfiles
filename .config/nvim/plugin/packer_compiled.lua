@@ -74,6 +74,11 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/Comment.nvim",
     url = "https://github.com/numToStr/Comment.nvim"
   },
+  LuaSnip = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
   ["bclose.vim"] = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/bclose.vim",
@@ -99,10 +104,25 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/cmp-path",
     url = "https://github.com/hrsh7th/cmp-path"
   },
-  ["cmp-vsnip"] = {
+  cmp_luasnip = {
     loaded = true,
-    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/cmp-vsnip",
-    url = "https://github.com/hrsh7th/cmp-vsnip"
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
+  },
+  ["copilot.vim"] = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/copilot.vim",
+    url = "https://github.com/github/copilot.vim"
+  },
+  ["emmet-vim"] = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/emmet-vim",
+    url = "https://github.com/mattn/emmet-vim"
+  },
+  ["friendly-snippets"] = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/friendly-snippets",
+    url = "https://github.com/rafamadriz/friendly-snippets"
   },
   ["lspkind.nvim"] = {
     loaded = true,
@@ -123,6 +143,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/mosel.nvim",
     url = "https://github.com/Domeee/mosel.nvim"
+  },
+  ["nightfox.nvim"] = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/nightfox.nvim",
+    url = "https://github.com/EdenEast/nightfox.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -164,10 +189,10 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/kyazdani42/nvim-web-devicons"
   },
-  ["paq-nvim"] = {
+  ["packer.nvim"] = {
     loaded = true,
-    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/paq-nvim",
-    url = "https://github.com/savq/paq-nvim"
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/packer.nvim",
+    url = "https://github.com/wbthomason/packer.nvim"
   },
   playground = {
     loaded = true,
@@ -209,10 +234,11 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/vim-surround",
     url = "https://github.com/tpope/vim-surround"
   },
-  ["vim-vsnip"] = {
+  vlime = {
+    config = { "\27LJ\2\n\28\0\0\1\0\2\0\3'\0\0\0007\0\1\0K\0\1\0\brtp\tvim/\0" },
     loaded = true,
-    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/vim-vsnip",
-    url = "https://github.com/hrsh7th/vim-vsnip"
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/vlime",
+    url = "https://github.com/vlime/vlime"
   },
   ["yats.vim"] = {
     loaded = true,
@@ -223,10 +249,19 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/zig.vim",
     url = "https://github.com/ziglang/zig.vim"
+  },
+  ["zk-nvim"] = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/zk-nvim",
+    url = "https://github.com/mickael-menu/zk-nvim"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: vlime
+time([[Config for vlime]], true)
+try_loadstring("\27LJ\2\n\28\0\0\1\0\2\0\3'\0\0\0007\0\1\0K\0\1\0\brtp\tvim/\0", "config", "vlime")
+time([[Config for vlime]], false)
 if should_profile then save_profiles() end
 
 end)

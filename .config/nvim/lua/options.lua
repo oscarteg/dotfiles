@@ -19,7 +19,7 @@ opt.scrolloff = 999
 opt.path:prepend("**")
 opt.swapfile = false
 opt.list = true
-opt.listchars = "tab:→ ,space:·,extends:»,precedes:«,nbsp:␣,trail:•,eol:↵"
+opt.listchars = "tab:→ ,extends:»,precedes:«,nbsp:␣,trail:•"
 
 -- code indention
 opt.tabstop = 2
@@ -39,4 +39,7 @@ vim.o.grepprg = [[rg --no-heading --smart-case --vimgrep ]]
 vim.o.grepformat = "%f:%l:%c:%m"
 
 -- vim.opt.runtimepath:append("~/code/mosel.nvim")
-cmd("colorscheme mosel")
+cmd("colorscheme duskfox")
+
+-- Ranger
+vim.api.nvim_set_var("ranger_replace_netrw", 1)
