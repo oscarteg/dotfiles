@@ -1,24 +1,12 @@
 local cmp = require("cmp")
-local lspkind = require("lspkind")
 local luasnip = require("luasnip")
 local select_opts = {behavior = cmp.SelectBehavior.Select}
-
 
 cmp.setup({
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
-  },
-  formatting = {
-    format = lspkind.cmp_format {
-      with_text = true,
-      menu = {
-        buffer   = "[buf]",
-        nvim_lsp = "[LSP]",
-        path     = "[path]",
-      },
-    },
   },
   mapping = {
     ["<C-Space>"] = cmp.mapping.complete(),
@@ -31,11 +19,11 @@ cmp.setup({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
-    ["<CR>"] = cmp.mapping.confirm({ 
+    ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
-      select = true 
+      select = true
     }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
+    ['<TAB>'] = cmp.mapping(function(fallback)
       local col = vim.fn.col('.') - 1
 
       if cmp.visible() then
@@ -46,7 +34,7 @@ cmp.setup({
         cmp.complete()
       end
     end, {'i', 's'}),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
+    ['<S-TAB>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item(select_opts)
       else
@@ -68,13 +56,4 @@ cmp.setup.cmdline("/", {
   sources = {
     { name = "buffer" },
   },
-})
-
--- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-cmp.setup.cmdline(":", {
-  sources = cmp.config.sources({
-    { name = "path" },
-  }, {
-    { name = "cmdline" },
-  }),
 })
