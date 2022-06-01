@@ -68,6 +68,7 @@ end
 nvim_lsp.denols.setup({
   capabilities = capabilities,
   on_attach = on_attach,
+  root_dir = nvim_lsp.util.root_pattern("deno.json", "package.json");
   flags = {
     debounce_text_changes = 150,
   },
@@ -173,6 +174,9 @@ nvim_lsp["efm"].setup({
       html = {
         prettier,
       },
+      svelte = {
+        prettier,
+      },
     },
   },
   filetypes = { "lua", "css", "typescriptreact", "typescript", "markdown", "javascript", "javascriptreact", "html" },
@@ -202,9 +206,7 @@ nvim_lsp.tailwindcss.setup({
 
 -- Rust
 require('rust-tools').setup({
-   tools = { -- rust-tools options
-        -- autoSetHints = true,
-        -- hover_with_actions = true,
+   tools = {
         inlay_hints = {
             show_parameter_hints = false,
             parameter_hints_prefix = "",
@@ -216,16 +218,6 @@ require('rust-tools').setup({
         on_attach = on_attach,
         settings = {
           ["rust-analyzer"] = {
-            -- assist = {
-            --   importMergeBehavior = "last",
-            --   importPrefix = "by_self",
-            -- },
-            -- diagnostics = {
-            --   disabled = { "unresolved-import" }
-            -- },
-            -- cargo = {
-            --   loadOutDirsFromCheck = true
-            -- },
             procMacro = {
               enable = true
             },
@@ -240,6 +232,8 @@ require('rust-tools').setup({
 
 -- Golang
 nvim_lsp.gopls.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
   cmd = {"gopls", "serve"},
     filetypes = {"go", "gomod"},
     root_dir = util.root_pattern("go.work", "go.mod", ".git"),
@@ -254,4 +248,26 @@ nvim_lsp.gopls.setup({
 })
 
 -- Zig
-nvim_lsp.zls.setup{}
+nvim_lsp.zls.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+
+}
+
+-- PHP
+nvim_lsp.phpactor.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+-- Python3
+nvim_lsp.pylsp.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
+
+-- Haskell
+nvim_lsp.hls.setup{
+  capabilities = capabilities,
+  on_attach = on_attach,
+}
