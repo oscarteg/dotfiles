@@ -87,6 +87,11 @@ return require('packer').startup(function(use)
     end
   }
 
+  use {
+    "ggandor/leap.nvim",
+    config = function() require('leap').set_default_keymaps() end
+  }
+
   if packer_bootstrap then
     require("packer").sync()
   end
