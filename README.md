@@ -5,6 +5,11 @@ Neovim requirements
 - Rust analyser - put inside in ~/.local/bin
 - ZLS Zig LSP - put inside in ~/.local/bin
 
+
+## Plugins
+
+- Luasnip
+
 ## Keybindings
 
 Currently I have no idea how to write for you my whole workflow of using Ecovim config in React.js projects I am working on,\
@@ -140,3 +145,7 @@ Space (SPC) is my Leader key.
 </details>
 
 
+
+## Sources
+ - [Introduction to LuaSnip](https://youtu.be/Dn800rlPIho)
+ - 

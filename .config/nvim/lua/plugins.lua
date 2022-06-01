@@ -88,6 +88,13 @@ return require('packer').startup(function(use)
   }
 
   use {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {}
+    end
+  }
+
+  use {
     "ggandor/leap.nvim",
     config = function() require('leap').set_default_keymaps() end
   }

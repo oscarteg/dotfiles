@@ -1,5 +1,6 @@
 local opt = vim.opt
 local cmd = vim.cmd
+local api = vim.api
 
 -- Enable mouse in all modes
 opt.mouse = "a"
@@ -20,6 +21,9 @@ opt.path:prepend("**")
 opt.swapfile = false
 opt.list = true
 opt.listchars = "tab:→ ,extends:»,precedes:«,nbsp:␣,trail:•"
+
+
+api.nvim_set_option("guifont", "Dank Mono:h22")
 
 -- code indention
 opt.tabstop = 2

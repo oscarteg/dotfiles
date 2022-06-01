@@ -4,6 +4,7 @@ cd "$(dirname "${BASH_SOURCE}")";
 
 git pull origin main;
 
+# TODO: Make sure to symlink instead of overwrite
 function doIt() {
 	rsync --exclude ".git/" \
 		--exclude ".DS_Store" \
