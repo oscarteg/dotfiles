@@ -47,6 +47,7 @@ map("n", "<leader>cvs", "<cmd>so $MYVIMRC<CR>")
 map("n", "<leader>ff", "<cmd>Ranger<CR>")
 map("n", "gs", "<cmd>Scratch<CR>")
 map("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+map("n", "<leader>tf", "<cmd>TodoTelescope<CR>")
 
 -- vim-fugitive
 map("n", "<leader>vs", "<cmd>G<CR>")
@@ -71,5 +72,5 @@ map("i", "}", "}<C-g>u")
 map("i", "[", "[<C-g>u")
 map("i", "]", "]<C-g>u")
 
-map("i", "<C-j>", "vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'", { expr = true })
+-- map("i", "<C-j>", "vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'", { expr = true })
 

@@ -23,6 +23,17 @@ return require('packer').startup(function(use)
   use 'nvim-telescope/telescope-ui-select.nvim'
   use "kyazdani42/nvim-web-devicons"
   use 'numToStr/Comment.nvim'
+
+
+  use {
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup{}
+    end
+  }
+
+  -- Note taking
   use "mickael-menu/zk-nvim"
   -- completion
   use "hrsh7th/cmp-nvim-lsp"
