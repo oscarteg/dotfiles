@@ -47,9 +47,9 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 
 	-- formatting via efm
-	if (client.name == "null_ls") or (client.name == "sumneko_lua") then
-		-- client.resolved_capabilities.document_formatting = false
-		-- client.resolved_capabilities.document_range_formatting = false
+	if (client.name == "tsserver") or (client.name == "sumneko_lua") then
+		client.resolved_capabilities.document_formatting = false
+		client.resolved_capabilities.document_range_formatting = false
 	end
 
 	-- format on save
