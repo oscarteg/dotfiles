@@ -47,3 +47,7 @@ cmd("colorscheme duskfox")
 
 -- Ranger
 vim.api.nvim_set_var("ranger_replace_netrw", 1)
+
+-- Neovide
+vim.o.guifont="Dank Mono:h20"
+
