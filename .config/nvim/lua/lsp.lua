@@ -23,7 +23,6 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	},
 })
 
--- local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilitiees)
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local on_attach = function(client, bufnr)
@@ -46,12 +45,6 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 	buf_set_keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
 
-	-- formatting via efm
-	if (client.name == "tsserver") or (client.name == "sumneko_lua") then
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
-	end
-
 	-- format on save
 	if client.resolved_capabilities.document_formatting then
 		vim.cmd([[
@@ -62,6 +55,20 @@ local on_attach = function(client, bufnr)
   ]])
 	end
 end
+
+-- null_ls
+null_ls.setup({
+	on_attach = on_attach,
+	debounce = 250,
+	sources = {
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.prettierd,
+		null_ls.builtins.formatting.prismaFmt,
+		null_ls.builtins.formatting.rescript,
+		null_ls.builtins.diagnostics.eslint,
+		null_ls.builtins.diagnostics.fish,
+	},
+})
 
 -- TypeScript with tsserver
 nvim_lsp.tsserver.setup({
@@ -90,16 +97,6 @@ nvim_lsp.html.setup({
 	},
 })
 
--- ESLint
--- nvim_lsp.eslint.setup({
--- 	capabilities = capabilities,
--- 	on_attach = on_attach,
--- 	cmd = { "vscode-eslint-language-server", "--stdio" },
--- 	flags = {
--- 		debounce_text_changes = 150,
--- 	},
--- })
-
 -- Lua
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
@@ -127,17 +124,6 @@ nvim_lsp.sumneko_lua.setup({
 	},
 	flags = {
 		debounce_text_changes = 150,
-	},
-})
-
-null_ls.setup({
-	sources = {
-		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.prettierd,
-		null_ls.builtins.formatting.prismaFmt,
-		null_ls.builtins.formatting.rescript,
-		null_ls.builtins.diagnostics.eslint,
-    null_ls.builtins.diagnostics.fish
 	},
 })
 
