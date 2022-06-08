@@ -1,4 +1,3 @@
-local g = vim.g
 local fn = vim.fn
 local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 
@@ -14,6 +13,7 @@ return require("packer").startup(function(use)
 	use("wbthomason/packer.nvim")
 	use("Domeee/mosel.nvim")
 	use("tpope/vim-fugitive")
+  use("airblade/vim-gitgutter")
 	use("tpope/vim-surround")
 	use("HerringtonDarkholme/yats.vim")
 	use("rbgrouleff/bclose.vim")
@@ -36,6 +36,7 @@ return require("packer").startup(function(use)
 
 	-- Note taking
 	use("mickael-menu/zk-nvim")
+
 	-- completion
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")

@@ -22,7 +22,6 @@ opt.swapfile = false
 opt.list = true
 opt.listchars = "tab:→ ,extends:»,precedes:«,nbsp:␣,trail:•"
 
-
 api.nvim_set_option("guifont", "Dank Mono:h22")
 
 -- code indention

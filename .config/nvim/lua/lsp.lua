@@ -133,8 +133,11 @@ nvim_lsp.sumneko_lua.setup({
 null_ls.setup({
 	sources = {
 		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.prettierd,
+		null_ls.builtins.formatting.prismaFmt,
+		null_ls.builtins.formatting.rescript,
 		null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.diagnostics.fish
 	},
 })
 
@@ -231,6 +234,12 @@ nvim_lsp.svelte.setup({
 
 -- Vue
 nvim_lsp.vuels.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
+-- zk Note taking
+nvim_lsp.zk.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
