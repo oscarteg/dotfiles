@@ -42,11 +42,10 @@ vim.o.grepprg = [[rg --no-heading --smart-case --vimgrep ]]
 vim.o.grepformat = "%f:%l:%c:%m"
 
 -- vim.opt.runtimepath:append("~/code/mosel.nvim")
-cmd("colorscheme duskfox")
+cmd("colorscheme mosel")
 
 -- Ranger
 vim.api.nvim_set_var("ranger_replace_netrw", 1)
 
 -- Neovide
-vim.o.guifont="Dank Mono:h20"
-
+vim.o.guifont = "Dank Mono:h20"

@@ -1,6 +1,11 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
-local select_opts = {behavior = cmp.SelectBehavior.Select}
+local select_opts = { behavior = cmp.SelectBehavior.Select }
+
+local has_words_before = function()
+  local cursor = vim.api.nvim_win_get_cursor(0)
+  return not vim.api.nvim_get_current_line():sub(1, cursor[2]):match("^%s$")
+end
 
 cmp.setup({
   snippet = {
@@ -11,8 +16,8 @@ cmp.setup({
   mapping = {
     ["<C-Space>"] = cmp.mapping.complete(),
     ["<C-y>"] = cmp.config.disable,
-    ['<Up>'] = cmp.mapping.select_prev_item(select_opts),
-    ['<Down>'] = cmp.mapping.select_next_item(select_opts),
+    ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
+    ["<Down>"] = cmp.mapping.select_next_item(select_opts),
     ["<C-j>"] = cmp.mapping.select_next_item(),
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-l>"] = cmp.mapping({
@@ -21,31 +26,34 @@ cmp.setup({
     }),
     ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
-      select = true
+      select = true,
     }),
-    ['<TAB>'] = cmp.mapping(function(fallback)
-      local col = vim.fn.col('.') - 1
-
+    ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.select_next_item(select_opts)
-      elseif col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') then
-        fallback()
-      else
+        cmp.select_next_item()
+      elseif luasnip.expand_or_jumpable() then
+        luasnip.expand_or_jump()
+      elseif has_words_before() then
         cmp.complete()
-      end
-    end, {'i', 's'}),
-    ['<S-TAB>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item(select_opts)
       else
         fallback()
       end
-    end, {'i', 's'}),
+    end, { "i", "s" }),
+
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
   },
   sources = cmp.config.sources({
-    { name = "path" },
-    { name = "nvim_lsp" },
     { name = "luasnip" },
+    { name = "nvim_lsp" },
+    { name = "path" },
   }, {
     { name = "buffer" },
   }),

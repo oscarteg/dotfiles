@@ -1,11 +1,11 @@
 local g = vim.g
 
 local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+  local options = { noremap = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
 --Remap space as leader key
@@ -39,6 +39,24 @@ map("n", "j", "gj")
 map("n", "k", "gk")
 map("n", "<leader>j", ",")
 
+-- Resize with arrows
+map("n", "<C-Up>", ":resize -2<CR>", { silent = true })
+map("n", "<C-Down>", ":resize +2<CR>", { silent = true })
+map("n", "<C-Up>", ":vertical resize -2<CR>", { silent = true })
+map("n", "<C-Up>", ":vertical resize +2<CR>", { silent = true })
+
+-- Move text up and down
+map("v", "<A-j>", ":m +1<CR>==", { silent = true })
+map("v", "<A-k>", ":m -1<CR>==", { silent = true })
+
+-- Dont put in registere when pasting over something
+map("v", "p", '"_dp', { silent = true })
+
+-- Move text up and down
+map("v", "<A-j>", ":m +1<CR>==", { silent = true })
+map("v", "<A-k>", ":m -1<CR>==", { silent = true })
+map("v", "p", '"_dp', { silent = true })
+
 -- config
 map("n", "<leader>cv", "<cmd>edit $MYVIMRC<CR>")
 map("n", "<leader>cvs", "<cmd>so $MYVIMRC<CR>")
@@ -58,7 +76,6 @@ map("n", "<leader>vj", "<cmd>diffget //3<CR>") -- merge branch
 -- vim-gitgutter
 map("n", "]h", "<cmd>GitGutterNextHunk<CR>")
 map("n", "[h", "<cmd>GitGutterPreviousHunk<CR>")
-
 
 -- Telescope
 map("n", "<leader>sf", "<cmd>Telescope find_files<cr>")
@@ -82,3 +99,8 @@ map("i", "]", "]<C-g>u")
 
 -- map("i", "<C-j>", "vsnip#expandable() ? '<Plug>(vsnip-expand)' : '<C-j>'", { expr = true })
 
+-- luasnip
+map("i", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", { silent = true })
+map("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", { silent = true })
+map("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", { silent = true })
+map("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", { silent = true })
