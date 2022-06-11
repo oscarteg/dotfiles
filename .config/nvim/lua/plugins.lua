@@ -11,17 +11,19 @@ vim.cmd([[packadd packer.nvim]])
 
 return require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
-  use("Domeee/mosel.nvim")
+
+  -- Git
   use("tpope/vim-fugitive")
   use("airblade/vim-gitgutter")
+
+  -- Change or add surrounin
   use("tpope/vim-surround")
-  use("HerringtonDarkholme/yats.vim")
-  use("rbgrouleff/bclose.vim")
   use("neovim/nvim-lspconfig")
   use("nvim-lua/plenary.nvim")
   use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-ui-select.nvim")
   use("kyazdani42/nvim-web-devicons")
+
   use("numToStr/Comment.nvim")
 
   use("jose-elias-alvarez/null-ls.nvim")
@@ -57,19 +59,10 @@ return require("packer").startup(function(use)
   use("nvim-treesitter/playground")
   use("windwp/nvim-ts-autotag")
   use("JoosepAlviste/nvim-ts-context-commentstring")
-  use({
-    "iamcco/markdown-preview.nvim",
-    run = function()
-      vim.fn["mkdp#util#install"]()
-    end,
-  })
-  use("norcalli/nvim-colorizer.lua")
+
   -- Themes
   use("EdenEast/nightfox.nvim")
   use("Domeee/mosel.nvim")
-
-  -- Github copilot -- I think this is really annoying
-  -- use("github/copilot.vim")
 
   -- Rust
   use("rust-lang/rust.vim")
@@ -89,6 +82,7 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- Zen mode
   use({
     "folke/zen-mode.nvim",
     config = function()

@@ -65,8 +65,10 @@ null_ls.setup({
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.prismaFmt,
     null_ls.builtins.formatting.rescript,
+    null_ls.builtins.formatting.eslint,
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.fish,
+    null_ls.builtins.diagnostics.php,
   },
 })
 
@@ -200,6 +202,14 @@ nvim_lsp.pylsp.setup({
 nvim_lsp.hls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
+  filetypes = { "haskell", "lhaskell" },
+  root_dir = require("lspconfig/util").root_pattern(
+    "*.cabal",
+    "stack.yaml",
+    "cabal.project",
+    "package.yaml",
+    "hie.yaml"
+  ),
 })
 
 -- Svelte
