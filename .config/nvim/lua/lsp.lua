@@ -65,8 +65,30 @@ null_ls.setup({
     null_ls.builtins.formatting.prettierd,
     null_ls.builtins.formatting.prismaFmt,
     null_ls.builtins.formatting.rescript,
-    null_ls.builtins.formatting.eslint,
-    null_ls.builtins.diagnostics.eslint,
+    null_ls.builtins.formatting.eslint.with({
+      condition = function(utils)
+        return utils.root_has_file({
+          ".eslintrc.js",
+          ".eslintrc.cjs",
+          ".eslintrc.yaml",
+          ".eslintrc.yml",
+          ".eslintrc.json",
+          "package.json",
+        })
+      end,
+    }),
+    null_ls.builtins.diagnostics.eslint.with({
+      condition = function(utils)
+        return utils.root_has_file({
+          ".eslintrc.js",
+          ".eslintrc.cjs",
+          ".eslintrc.yaml",
+          ".eslintrc.yml",
+          ".eslintrc.json",
+          "package.json",
+        })
+      end,
+    }),
     null_ls.builtins.diagnostics.fish,
     null_ls.builtins.diagnostics.php,
   },

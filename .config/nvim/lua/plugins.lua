@@ -97,6 +97,9 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- Dap debugger
+  use("mfussenegger/nvim-dap")
+
   if packer_bootstrap then
     require("packer").sync()
   end
