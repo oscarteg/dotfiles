@@ -91,6 +91,8 @@ null_ls.setup({
     }),
     null_ls.builtins.diagnostics.fish,
     null_ls.builtins.diagnostics.php,
+    null_ls.builtins.diagnostics.actionlint,
+    null_ls.builtins.diagnostics.yamllint,
   },
 })
 
