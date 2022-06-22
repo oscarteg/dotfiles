@@ -57,6 +57,8 @@ return require("packer").startup(function(use)
     run = ":TSUpdate",
   })
   use("nvim-treesitter/playground")
+  use("nvim-treesitter/nvim-treesitter-textobjects")
+
   use("windwp/nvim-ts-autotag")
   use("JoosepAlviste/nvim-ts-context-commentstring")
 
@@ -69,7 +71,7 @@ return require("packer").startup(function(use)
   use("simrat39/rust-tools.nvim")
 
   -- Go
-  use("crispgm/nvim-go")
+  -- use("crispgm/nvim-go")
 
   -- Zig
   use("ziglang/zig.vim")
@@ -82,6 +84,16 @@ return require("packer").startup(function(use)
     end,
   })
 
+  use({
+    "folke/twilight.nvim",
+    config = function()
+      require("twilight").setup({
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      })
+    end,
+  })
   -- Zen mode
   use({
     "folke/zen-mode.nvim",

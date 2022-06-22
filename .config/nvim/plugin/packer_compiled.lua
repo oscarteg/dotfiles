@@ -155,11 +155,6 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
   },
-  ["nvim-go"] = {
-    loaded = true,
-    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/nvim-go",
-    url = "https://github.com/crispgm/nvim-go"
-  },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
@@ -169,6 +164,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-treesitter-textobjects"] = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
   },
   ["nvim-ts-autotag"] = {
     loaded = true,
@@ -226,6 +226,12 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/todo-comments.nvim",
     url = "https://github.com/folke/todo-comments.nvim"
   },
+  ["twilight.nvim"] = {
+    config = { "\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rtwilight\frequire\0" },
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/twilight.nvim",
+    url = "https://github.com/folke/twilight.nvim"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/vim-fugitive",
@@ -278,6 +284,10 @@ time([[Config for todo-comments.nvim]], false)
 time([[Config for leap.nvim]], true)
 try_loadstring("\27LJ\2\n@\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\24set_default_keymaps\tleap\frequire\0", "config", "leap.nvim")
 time([[Config for leap.nvim]], false)
+-- Config for: twilight.nvim
+time([[Config for twilight.nvim]], true)
+try_loadstring("\27LJ\2\n:\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\rtwilight\frequire\0", "config", "twilight.nvim")
+time([[Config for twilight.nvim]], false)
 -- Config for: vlime
 time([[Config for vlime]], true)
 try_loadstring("\27LJ\2\n\28\0\0\1\0\2\0\3'\0\0\0007\0\1\0K\0\1\0\brtp\tvim/\0", "config", "vlime")

@@ -62,7 +62,9 @@ null_ls.setup({
   debounce = 250,
   sources = {
     null_ls.builtins.formatting.stylua,
-    null_ls.builtins.formatting.prettierd,
+    null_ls.builtins.formatting.prettierd.with({
+      filetypes = { "html", "json", "svelte", "markdown", "css", "javascript", "javascriptreact", "scss" },
+    }),
     null_ls.builtins.formatting.prismaFmt,
     null_ls.builtins.formatting.rescript,
     null_ls.builtins.formatting.eslint.with({
@@ -100,17 +102,13 @@ null_ls.setup({
 nvim_lsp.tsserver.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  root_dir = util.root_pattern("package.json"),
+  -- root_dir = util.root_pattern("package.json"),
 })
 
 -- JSON
 nvim_lsp.jsonls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  cmd = { "vscode-json-languageserver", "--stdio" },
-  flags = {
-    debounce_text_changes = 150,
-  },
 })
 
 -- Lua
@@ -226,14 +224,14 @@ nvim_lsp.pylsp.setup({
 nvim_lsp.hls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  filetypes = { "haskell", "lhaskell" },
-  root_dir = require("lspconfig/util").root_pattern(
-    "*.cabal",
-    "stack.yaml",
-    "cabal.project",
-    "package.yaml",
-    "hie.yaml"
-  ),
+  -- filetypes = { "haskell", "lhaskell" },
+  -- root_dir = require("lspconfig/util").root_pattern(
+  --   "*.cabal",
+  --   "stack.yaml",
+  --   "cabal.project",
+  --   "package.yaml",
+  --   "hie.yaml"
+  -- ),
 })
 
 -- Svelte

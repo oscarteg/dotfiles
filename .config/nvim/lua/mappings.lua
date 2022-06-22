@@ -104,3 +104,6 @@ map("i", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", { silent = true })
 map("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", { silent = true })
 map("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", { silent = true })
 map("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", { silent = true })
+
+-- Twilight
+map("n", "<leader>tt", "<cmd>Twilight<CR>", { silent = true })

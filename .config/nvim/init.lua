@@ -11,6 +11,7 @@ require("comments")
 require("treesitter")
 require("mappings")
 require("statusline")
+require("autopairs")
 
 -- override options set by plugins
 require("options")
