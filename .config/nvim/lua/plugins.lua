@@ -65,6 +65,7 @@ return require("packer").startup(function(use)
   -- Themes
   use("EdenEast/nightfox.nvim")
   use("Domeee/mosel.nvim")
+  use("Shatur/neovim-ayu")
 
   -- Rust
   use("rust-lang/rust.vim")
@@ -111,6 +112,13 @@ return require("packer").startup(function(use)
 
   -- Dap debugger
   use("mfussenegger/nvim-dap")
+
+  use({
+    "kyazdani42/nvim-tree.lua",
+    requires = {
+      "kyazdani42/nvim-web-devicons", -- optional, for file icons
+    },
+  })
 
   if packer_bootstrap then
     require("packer").sync()

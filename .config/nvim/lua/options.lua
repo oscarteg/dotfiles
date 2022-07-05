@@ -42,10 +42,18 @@ vim.o.grepprg = [[rg --no-heading --smart-case --vimgrep ]]
 vim.o.grepformat = "%f:%l:%c:%m"
 
 -- vim.opt.runtimepath:append("~/code/mosel.nvim")
-cmd("colorscheme mosel")
+-- cmd("colorscheme mosel")
+require("ayu").setup({
+  overrides = function()
+    if vim.o.background == "dark" then
+      return { NormalNC = { bg = "#0f151e", fg = "#808080" } }
+    else
+      return { NormalNC = { bg = "#f0f0f0", fg = "#808080" } }
+    end
+  end,
+})
 
--- Ranger
-vim.api.nvim_set_var("ranger_replace_netrw", 1)
+cmd("colorscheme ayu")
 
 -- Neovide
 vim.o.guifont = "Dank Mono:h20"

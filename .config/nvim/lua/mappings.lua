@@ -62,7 +62,7 @@ map("n", "<leader>cv", "<cmd>edit $MYVIMRC<CR>")
 map("n", "<leader>cvs", "<cmd>so $MYVIMRC<CR>")
 
 -- misc
-map("n", "<leader>ff", "<cmd>Ranger<CR>")
+map("n", "<leader>ff", "<cmd>NvimTreeToggle<CR>")
 map("n", "gs", "<cmd>Scratch<CR>")
 map("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 map("n", "<leader>tf", "<cmd>TodoTelescope<CR>")

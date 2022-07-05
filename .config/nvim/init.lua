@@ -12,6 +12,7 @@ require("treesitter")
 require("mappings")
 require("statusline")
 require("autopairs")
+require("explorer")
 
 -- override options set by plugins
 require("options")

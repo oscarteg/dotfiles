@@ -26,6 +26,7 @@ require("nvim-treesitter.configs").setup({
     "css",
     "fish",
     "v",
+    "prisma",
   },
   highlight = {
     enable = true,

@@ -67,6 +67,8 @@ null_ls.setup({
     }),
     null_ls.builtins.formatting.prismaFmt,
     null_ls.builtins.formatting.rescript,
+    null_ls.builtins.formatting.clang_format,
+    null_ls.builtins.formatting.deno_fmt,
     null_ls.builtins.formatting.eslint.with({
       condition = function(utils)
         return utils.root_has_file({
@@ -97,6 +99,8 @@ null_ls.setup({
     null_ls.builtins.diagnostics.yamllint,
   },
 })
+
+-- nvim_lsp.denols.setup({})
 
 -- TypeScript with tsserver
 nvim_lsp.tsserver.setup({
@@ -251,6 +255,9 @@ nvim_lsp.zk.setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
+
+nvim_lsp.sourcekit.setup({})
+nvim_lsp.clangd.setup({})
 
 nvim_lsp.emmet_ls.setup({
   capabilities = capabilities,
