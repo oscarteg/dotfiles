@@ -7,6 +7,7 @@ opt.mouse = "a"
 opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes:1"
+opt.ignorecase = true
 opt.clipboard = "unnamedplus"
 opt.termguicolors = true
 opt.cursorline = true
@@ -44,6 +45,7 @@ vim.o.grepformat = "%f:%l:%c:%m"
 -- vim.opt.runtimepath:append("~/code/mosel.nvim")
 -- cmd("colorscheme mosel")
 require("ayu").setup({
+  -- mirage = true,
   overrides = function()
     if vim.o.background == "dark" then
       return { NormalNC = { bg = "#0f151e", fg = "#808080" } }

@@ -77,7 +77,6 @@ null_ls.setup({
           ".eslintrc.yaml",
           ".eslintrc.yml",
           ".eslintrc.json",
-          "package.json",
         })
       end,
     }),
@@ -89,7 +88,6 @@ null_ls.setup({
           ".eslintrc.yaml",
           ".eslintrc.yml",
           ".eslintrc.json",
-          "package.json",
         })
       end,
     }),
@@ -159,10 +157,23 @@ nvim_lsp.lemminx.setup({
   },
 })
 
+-- rescript
+nvim_lsp.rescriptls.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  root_dir = util.root_pattern("bsconfig.json"),
+  cmd = {
+    "node",
+    "/Users/oscar/.local/share/nvim/site/pack/packer/start/vim-rescript/server/out/server.js",
+    "--stdio",
+  },
+})
+
 -- TailwindCSS
 nvim_lsp.tailwindcss.setup({
   capabilities = capabilities,
   on_attach = on_attach,
+  root_dir = util.root_pattern("tailwind.config.js"),
   flags = {
     debounce_text_changes = 150,
   },
@@ -268,3 +279,5 @@ nvim_lsp.emmet_ls.setup({
   on_attach = on_attach,
   filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
 })
+
+nvim_lsp.kotlin_language_server.setup({})

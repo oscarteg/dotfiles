@@ -18,6 +18,7 @@ return require("packer").startup(function(use)
 
   -- Change or add surrounin
   use("tpope/vim-surround")
+  use("tpope/vim-repeat")
   use("neovim/nvim-lspconfig")
   use("nvim-lua/plenary.nvim")
   use("nvim-telescope/telescope.nvim")
@@ -119,6 +120,8 @@ return require("packer").startup(function(use)
       "kyazdani42/nvim-web-devicons", -- optional, for file icons
     },
   })
+
+  use("rescript-lang/vim-rescript")
 
   if packer_bootstrap then
     require("packer").sync()
