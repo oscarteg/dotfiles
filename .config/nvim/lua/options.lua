@@ -3,6 +3,8 @@ local cmd = vim.cmd
 local api = vim.api
 
 -- Enable mouse in all modes
+
+-- opt.noshowmode = true
 opt.mouse = "a"
 opt.number = true
 opt.relativenumber = true
@@ -27,6 +29,7 @@ api.nvim_set_option("guifont", "Dank Mono:h22")
 
 -- code indention
 opt.tabstop = 2
+opt.softtabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.smartindent = true

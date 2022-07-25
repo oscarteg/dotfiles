@@ -82,9 +82,6 @@ map("n", "<leader>sf", "<cmd>Telescope find_files<cr>")
 map("n", "<leader>sg", "<cmd>Telescope live_grep<cr>")
 map("n", "<leader>sb", "<cmd>Telescope buffers<cr>")
 
--- ZenMode
-map("n", "<leader>zm", "<cmd>ZenMode<cr>")
-
 -- undo breakpoints
 map("i", ",", ",<C-g>u")
 map("i", ".", ".<C-g>u")

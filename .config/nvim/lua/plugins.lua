@@ -23,19 +23,10 @@ return require("packer").startup(function(use)
   use("nvim-lua/plenary.nvim")
   use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-ui-select.nvim")
-  use("kyazdani42/nvim-web-devicons")
 
   use("numToStr/Comment.nvim")
 
   use("jose-elias-alvarez/null-ls.nvim")
-
-  use({
-    "folke/todo-comments.nvim",
-    requires = "nvim-lua/plenary.nvim",
-    config = function()
-      require("todo-comments").setup({})
-    end,
-  })
 
   -- Note taking
   use("mickael-menu/zk-nvim")
@@ -68,6 +59,8 @@ return require("packer").startup(function(use)
   use("Domeee/mosel.nvim")
   use("Shatur/neovim-ayu")
 
+  use("folke/tokyonight.nvim")
+
   -- Rust
   use("rust-lang/rust.vim")
   use("simrat39/rust-tools.nvim")
@@ -93,14 +86,9 @@ return require("packer").startup(function(use)
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
+
+        treesitter = true,
       })
-    end,
-  })
-  -- Zen mode
-  use({
-    "folke/zen-mode.nvim",
-    config = function()
-      require("zen-mode").setup({})
     end,
   })
 
@@ -114,12 +102,7 @@ return require("packer").startup(function(use)
   -- Dap debugger
   use("mfussenegger/nvim-dap")
 
-  use({
-    "kyazdani42/nvim-tree.lua",
-    requires = {
-      "kyazdani42/nvim-web-devicons", -- optional, for file icons
-    },
-  })
+  use("kyazdani42/nvim-tree.lua")
 
   use("rescript-lang/vim-rescript")
 

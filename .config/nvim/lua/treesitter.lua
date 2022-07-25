@@ -27,6 +27,8 @@ require("nvim-treesitter.configs").setup({
     "fish",
     "v",
     "prisma",
+    "cpp",
+    "cmake",
   },
   highlight = {
     enable = true,
@@ -39,6 +41,15 @@ require("nvim-treesitter.configs").setup({
     enable_autocmd = false,
   },
   textobjects = {
+    swap = {
+      enable = true,
+      swap_next = {
+        ["<leader>a"] = "@parameter.inner",
+      },
+      swap_previous = {
+        ["<leader>A"] = "@parameter.inner",
+      },
+    },
     select = {
       enable = true,
       -- Automatically jump forward to textobj, similar to targets.vim
