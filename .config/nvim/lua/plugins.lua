@@ -58,7 +58,7 @@ return require("packer").startup(function(use)
   use("EdenEast/nightfox.nvim")
   use("Domeee/mosel.nvim")
   use("Shatur/neovim-ayu")
-
+  use({ "ellisonleao/gruvbox.nvim" })
   use("folke/tokyonight.nvim")
 
   -- Rust

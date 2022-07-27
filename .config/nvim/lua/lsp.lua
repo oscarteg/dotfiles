@@ -101,7 +101,7 @@ null_ls.setup({
 nvim_lsp.denols.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
+  -- root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
 })
 
 -- TypeScript with tsserver

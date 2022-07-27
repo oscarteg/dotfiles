@@ -58,7 +58,7 @@ require("ayu").setup({
   end,
 })
 
-cmd("colorscheme ayu")
+cmd("colorscheme gruvbox")
 
 -- Neovide
 vim.o.guifont = "Dank Mono:h20"

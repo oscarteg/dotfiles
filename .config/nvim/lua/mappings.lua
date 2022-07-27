@@ -42,8 +42,8 @@ map("n", "<leader>j", ",")
 -- Resize with arrows
 map("n", "<C-Up>", ":resize -2<CR>", { silent = true })
 map("n", "<C-Down>", ":resize +2<CR>", { silent = true })
-map("n", "<C-Up>", ":vertical resize -2<CR>", { silent = true })
-map("n", "<C-Up>", ":vertical resize +2<CR>", { silent = true })
+map("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
+map("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
 
 -- Move text up and down
 map("v", "<A-j>", ":m +1<CR>==", { silent = true })
