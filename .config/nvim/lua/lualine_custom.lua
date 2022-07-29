@@ -1,5 +1,6 @@
 require("lualine").setup({
   options = {
-    theme = "ayu",
+    icons_enabled = false,
+    theme = "gruvbox_dark",
   },
 })
