@@ -32,6 +32,7 @@ local on_attach = function(client, bufnr)
 
   local opts = { noremap = true, silent = true }
 
+  buf_set_keymap("n", "gD", [[<cmd> lua require('telescope.builtin').lsp.buf.declaration()<CR>]], opts)
   buf_set_keymap("n", "gd", [[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]], opts)
   buf_set_keymap("n", "gi", [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
   buf_set_keymap("n", "gr", [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], opts)
@@ -63,34 +64,14 @@ null_ls.setup({
   sources = {
     null_ls.builtins.formatting.stylua,
     null_ls.builtins.formatting.prettierd.with({
-      filetypes = { "html", "json", "svelte", "markdown", "css", "javascript", "javascriptreact", "scss" },
+      extra_filetypes = { "svelte" },
     }),
     null_ls.builtins.formatting.prismaFmt,
     null_ls.builtins.formatting.rescript,
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.deno_fmt,
-    null_ls.builtins.formatting.eslint.with({
-      condition = function(utils)
-        return utils.root_has_file({
-          ".eslintrc.js",
-          ".eslintrc.cjs",
-          ".eslintrc.yaml",
-          ".eslintrc.yml",
-          ".eslintrc.json",
-        })
-      end,
-    }),
-    null_ls.builtins.diagnostics.eslint.with({
-      condition = function(utils)
-        return utils.root_has_file({
-          ".eslintrc.js",
-          ".eslintrc.cjs",
-          ".eslintrc.yaml",
-          ".eslintrc.yml",
-          ".eslintrc.json",
-        })
-      end,
-    }),
+    null_ls.builtins.formatting.eslint,
+    null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.fish,
     null_ls.builtins.diagnostics.php,
     null_ls.builtins.diagnostics.actionlint,
@@ -98,17 +79,18 @@ null_ls.setup({
   },
 })
 
-nvim_lsp.denols.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  -- root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
-})
-
+-- I can't get this to work. It enables in every typescript file
+-- nvim_lsp.denols.setup({
+--   capabilities = capabilities,
+--   on_attach = on_attach,
+--   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
+-- })
+--
+--
 -- TypeScript with tsserver
 nvim_lsp.tsserver.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  root_dir = util.root_pattern("package.json"),
 })
 
 -- JSON
@@ -243,14 +225,6 @@ nvim_lsp.pylsp.setup({
 nvim_lsp.hls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  -- filetypes = { "haskell", "lhaskell" },
-  -- root_dir = require("lspconfig/util").root_pattern(
-  --   "*.cabal",
-  --   "stack.yaml",
-  --   "cabal.project",
-  --   "package.yaml",
-  --   "hie.yaml"
-  -- ),
 })
 
 -- Svelte

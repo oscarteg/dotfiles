@@ -3,8 +3,7 @@ local cmd = vim.cmd
 local api = vim.api
 
 -- Enable mouse in all modes
-
--- opt.noshowmode = true
+opt.background = "dark"
 opt.mouse = "a"
 opt.number = true
 opt.relativenumber = true
@@ -24,7 +23,6 @@ opt.path:prepend("**")
 opt.swapfile = false
 opt.list = true
 opt.listchars = "tab:→ ,extends:»,precedes:«,nbsp:␣,trail:•"
-
 api.nvim_set_option("guifont", "Dank Mono:h22")
 
 -- code indention
@@ -45,20 +43,9 @@ opt.shortmess:prepend("c")
 vim.o.grepprg = [[rg --no-heading --smart-case --vimgrep ]]
 vim.o.grepformat = "%f:%l:%c:%m"
 
--- vim.opt.runtimepath:append("~/code/mosel.nvim")
--- cmd("colorscheme mosel")
-require("ayu").setup({
-  -- mirage = true,
-  overrides = function()
-    if vim.o.background == "dark" then
-      return { NormalNC = { bg = "#0f151e", fg = "#808080" } }
-    else
-      return { NormalNC = { bg = "#f0f0f0", fg = "#808080" } }
-    end
-  end,
-})
-
-cmd("colorscheme gruvbox")
+vim.g.catppuccin_flavour = "mocha"
 
 -- Neovide
 vim.o.guifont = "Dank Mono:h20"
+
+cmd("colorscheme kanagawa")

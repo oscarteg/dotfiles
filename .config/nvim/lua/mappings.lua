@@ -25,6 +25,10 @@ map("n", "<leader>w", "<cmd>update<CR>")
 map("n", "<leader>q", "<cmd>q<CR>")
 map("n", "<leader>bD", "<cmd>%bdelete<CR>")
 
+map("n", "tn", ":tabnew<CR>")
+map("n", "tk", ":tabnext<CR>")
+map("n", "tj", ":tabprev<CR>")
+
 -- navigation
 map("n", "<C-j>", "<C-w><C-j>")
 map("n", "<C-h>", "<C-w><C-h>")
@@ -61,8 +65,10 @@ map("v", "p", '"_dp', { silent = true })
 map("n", "<leader>cv", "<cmd>edit $MYVIMRC<CR>")
 map("n", "<leader>cvs", "<cmd>so $MYVIMRC<CR>")
 
--- misc
+-- explorer
 map("n", "<leader>ff", "<cmd>NvimTreeToggle<CR>")
+
+-- misc
 map("n", "gs", "<cmd>Scratch<CR>")
 map("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 map("n", "<leader>tf", "<cmd>TodoTelescope<CR>")
@@ -77,7 +83,7 @@ map("n", "<leader>vj", "<cmd>diffget //3<CR>") -- merge branch
 map("n", "]h", "<cmd>GitGutterNextHunk<CR>")
 map("n", "[h", "<cmd>GitGutterPreviousHunk<CR>")
 
--- Telescope
+-- telescope
 map("n", "<leader>sf", "<cmd>Telescope find_files<cr>")
 map("n", "<leader>sg", "<cmd>Telescope live_grep<cr>")
 map("n", "<leader>sb", "<cmd>Telescope buffers<cr>")

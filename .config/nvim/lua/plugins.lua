@@ -16,17 +16,20 @@ return require("packer").startup(function(use)
   use("tpope/vim-fugitive")
   use("airblade/vim-gitgutter")
 
-  -- Change or add surrounin
   use("tpope/vim-surround")
   use("tpope/vim-repeat")
+
+  -- lsp
   use("neovim/nvim-lspconfig")
   use("nvim-lua/plenary.nvim")
+  use("jose-elias-alvarez/null-ls.nvim")
+
+  -- telescope
   use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-ui-select.nvim")
 
+  -- comment
   use("numToStr/Comment.nvim")
-
-  use("jose-elias-alvarez/null-ls.nvim")
 
   -- Note taking
   use("mickael-menu/zk-nvim")
@@ -37,13 +40,26 @@ return require("packer").startup(function(use)
   use("hrsh7th/cmp-path")
   use("hrsh7th/cmp-cmdline")
   use("hrsh7th/nvim-cmp")
+
+  -- snippets
   use("L3MON4D3/LuaSnip")
   use("saadparwaiz1/cmp_luasnip")
   use("rafamadriz/friendly-snippets")
-  -- completion end
+
   use("windwp/nvim-autopairs")
   use("mattn/emmet-vim")
-  use("nvim-lualine/lualine.nvim")
+  use({
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("lualine").setup({
+        options = {
+          icons_enabled = false,
+          theme = "kanagawa",
+          globalstatus = true,
+        },
+      })
+    end,
+  })
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
@@ -57,16 +73,73 @@ return require("packer").startup(function(use)
   -- Themes
   use("EdenEast/nightfox.nvim")
   use("Domeee/mosel.nvim")
-  use("Shatur/neovim-ayu")
-  use({ "ellisonleao/gruvbox.nvim" })
+  use({
+    "Shatur/neovim-ayu",
+    config = function()
+      require("ayu").setup({
+        overrides = function()
+          if vim.o.background == "dark" then
+            return { NormalNC = { bg = "#0f151e", fg = "#808080" } }
+          else
+            return { NormalNC = { bg = "#f0f0f0", fg = "#808080" } }
+          end
+        end,
+      })
+    end,
+  })
+  -- use({
+  --   "ellisonleao/gruvbox.nvim",
+  --   config = function()
+  --     require("gruvbox").setup()
+  --   end,
+  -- })
   use("folke/tokyonight.nvim")
+  use({
+    "catppuccin/nvim",
+    as = "catppuccin",
+    config = function()
+      require("catppuccin").setup({
+        integrations = {
+          barbar = true,
+        },
+      })
+    end,
+  })
 
-  -- Rust
+  use({
+    "rebelot/kanagawa.nvim",
+    config = function()
+      require("kanagawa").setup({
+        globalStatus = true,
+      })
+    end,
+  })
+
+  -- Package manager for Neovim
+  use({
+    "williamboman/mason.nvim",
+    config = function()
+      require("mason").setup({})
+    end,
+  })
+
+  use({
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup({})
+    end,
+  })
+
+  -- languages
+  -- rust
   use("rust-lang/rust.vim")
   use("simrat39/rust-tools.nvim")
 
+  -- rescript
+  use("rescript-lang/vim-rescript")
+
   -- Go
-  -- use("crispgm/nvim-go")
+  use("crispgm/nvim-go")
 
   -- Zig
   use("ziglang/zig.vim")
@@ -79,14 +152,21 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- END LANGUAGES
+
+  use({
+    "folke/todo-comments.nvim",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+      require("todo-comments").setup({})
+    end,
+  })
+
+  -- zen mode
   use({
     "folke/twilight.nvim",
     config = function()
       require("twilight").setup({
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-
         treesitter = true,
       })
     end,
@@ -102,9 +182,8 @@ return require("packer").startup(function(use)
   -- Dap debugger
   use("mfussenegger/nvim-dap")
 
+  -- Explorer
   use("kyazdani42/nvim-tree.lua")
-
-  use("rescript-lang/vim-rescript")
 
   if packer_bootstrap then
     require("packer").sync()
