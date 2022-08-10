@@ -85,12 +85,24 @@ null_ls.setup({
 --   on_attach = on_attach,
 --   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
 -- })
---
---
--- TypeScript with tsserver
+
+-- typescript
 nvim_lsp.tsserver.setup({
   capabilities = capabilities,
   on_attach = on_attach,
+  commands = {
+    OrganizeImports = {
+      function()
+        local params = {
+          command = "_typescript.organizeImports",
+          arguments = { vim.api.nvim_buf_get_name(0) },
+          title = "",
+        }
+        vim.lsp.buf.execute_command(params)
+      end,
+      description = "Organize imports",
+    },
+  },
 })
 
 -- JSON
@@ -124,16 +136,6 @@ nvim_lsp.sumneko_lua.setup({
       },
     },
   },
-  flags = {
-    debounce_text_changes = 150,
-  },
-})
-
--- XML
-nvim_lsp.lemminx.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  cmd = { "lemminx" },
   flags = {
     debounce_text_changes = 150,
   },
@@ -245,13 +247,18 @@ nvim_lsp.zk.setup({
   on_attach = on_attach,
 })
 
+-- sourcekit
 nvim_lsp.sourcekit.setup({})
+
+-- clangd
 nvim_lsp.clangd.setup({})
 
+-- emmet
 nvim_lsp.emmet_ls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
   filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
 })
 
+-- kotlin
 nvim_lsp.kotlin_language_server.setup({})
