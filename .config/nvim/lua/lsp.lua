@@ -1,3 +1,26 @@
+-- lsp package installer
+require("mason").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = {
+    "tsserver",
+    "jsonls",
+    "sumneko_lua",
+    "rescriptls",
+    "rust_analyzer",
+    "gopls",
+    "zls",
+    "pylsp",
+    "hls",
+    "svelte",
+    "vuels",
+    "gopls",
+    "zk",
+    "sourcekit",
+    "emmet_ls",
+    "kotlin_lanuage_server",
+  },
+})
+
 local nvim_lsp = require("lspconfig")
 local util = require("lspconfig/util")
 local null_ls = require("null-ls")
@@ -177,9 +200,6 @@ require("rust-tools").setup({
     on_attach = on_attach,
     settings = {
       ["rust-analyzer"] = {
-        procMacro = {
-          enable = true,
-        },
         checkOnSave = {
           command = "clippy",
         },

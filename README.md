@@ -5,7 +5,6 @@ Neovim requirements
 - Rust analyser - put inside in ~/.local/bin
 - ZLS Zig LSP - put inside in ~/.local/bin
 
-
 ## Plugins
 
 - Luasnip
@@ -23,7 +22,7 @@ Space (SPC) is my Leader key.
 ### Searching
 
 | Key Bindings | Description                 |
-|--------------|-----------------------------|
+| ------------ | --------------------------- |
 | <C - p>      | Telescope git files         |
 | <S - p>      | Telescope live grep         |
 | s            | Enables lightspeed forward  |
@@ -40,7 +39,7 @@ Space (SPC) is my Leader key.
 ### Working with LSP:
 
 | Key Bindings           | Description                                       |
-|------------------------|---------------------------------------------------|
+| ---------------------- | ------------------------------------------------- |
 | <C - Space> or SPC c a | Code action                                       |
 | <S - K>                | Show documentation under cursor                   |
 | gd                     | Go to definition                                  |
@@ -61,8 +60,8 @@ Space (SPC) is my Leader key.
 ### Working with Git:
 
 | Key Bindings | Description                                                                                                                              |
-|--------------|------------------------------------------------------------------------------------------------------------------------------------------|
-| SPC g g      | Lazygit - for committing and branch change                                                                                                |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| SPC g g      | Lazygit - for committing and branch change                                                                                               |
 | SPC g s      | Telescope status - when I want to change/search file I am working on with git changes                                                    |
 | ]c           | Go to next change hunk                                                                                                                   |
 | [c           | Go to prev change hunk                                                                                                                   |
@@ -80,7 +79,7 @@ Space (SPC) is my Leader key.
 ### Working with Project:
 
 | Key Bindings | Description                                                                                                                                                                                                                                                                             |
-|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | <C - e>      | Toggles nvim-tree file explorer                                                                                                                                                                                                                                                         |
 | SPC p w      | Find word under cursor in project - very useful to find where component is used. Just use binding and type '<'. There is a lot of alternatives like LSP references but I like it with telescope and to not find only references but whole text under cursor.                            |
 | SPC p f      | Find file under cursor in project - it finds files in project which contains text under cursor. Useful when you name directories by component name in React and wants to go quickly to file. 'gd' is better but in some projects without TS or with mixed JS/TS it cannot work properly |
@@ -96,7 +95,7 @@ Space (SPC) is my Leader key.
 ### Commenting
 
 | Key Bindings | Description                |
-|--------------|----------------------------|
+| ------------ | -------------------------- |
 | gcc          | Create/remove comment      |
 | gc (visual)  | Create/remove comment      |
 | gcO          | Create comment line before |
@@ -110,7 +109,7 @@ Space (SPC) is my Leader key.
 ### Table Mode / Alignment
 
 | Key Bindings | Description                                                                       |
-|--------------|-----------------------------------------------------------------------------------|
+| ------------ | --------------------------------------------------------------------------------- |
 | ga (visual)  | Aligns selection based on separator (comma, semi-colon, colon etc.)               |
 | SPC t m      | Enables Table Mode. Do it in markdown file with some table and you will see magic |
 | SPC t i C    | (Only when Table Mode Enabled) Insert column before                               |
@@ -126,26 +125,25 @@ Space (SPC) is my Leader key.
 
 ### Other VERY useful bindings
 
-| Key Bindings    | Description                                                                                                                                          |
-|-----------------|------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <S - q>         | Smartly closes current buffer without breaking UI                                                                                                    |
-| <C - a>         | It is not only increases number, but switches between true/false/const/let/function/arrow function/increment dates etc.                              |
-| <C - n>         | Finds next occurrence (like *) of word and puts multi-cursor there. Then you can go to Insert mode, Append, Change or Delete.                         |
-| <C - o>         | Jumps to previous cursor in jumplist. I use it very often.                                                                                           |
-| <C - i>         | Jumps to next cursor in jumplist.                                                                                                                    |
-| <C - u>         | Uppercase word under cursor.                                                                                                                         |
-| v <ENTER>       | Smartly selects next subjects of current treesitter context                                                                                          |
-| za              | Toggle folds. By treesitter they are automatically added to TS/JS files in smart way                                                                 |
-| zM              | Close all folds                                                                                                                                      |
-| zR              | Open all folds                                                                                                                                       |
-| gJ              | Smartly joins lines based on treesitter                                                                                                              |
-| gS              | Smartly splits lines based on treesitter. I do if VERY often when I want to put import element to new lines (e.g. import { A, B, C, D, E } from ...) |
-| < F12 >         | Opens/closes split terminal                                                                                                                          |
+| Key Bindings | Description                                                                                                                                          |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| <S - q>      | Smartly closes current buffer without breaking UI                                                                                                    |
+| <C - a>      | It is not only increases number, but switches between true/false/const/let/function/arrow function/increment dates etc.                              |
+| <C - n>      | Finds next occurrence (like \*) of word and puts multi-cursor there. Then you can go to Insert mode, Append, Change or Delete.                       |
+| <C - o>      | Jumps to previous cursor in jumplist. I use it very often.                                                                                           |
+| <C - i>      | Jumps to next cursor in jumplist.                                                                                                                    |
+| <C - u>      | Uppercase word under cursor.                                                                                                                         |
+| v <ENTER>    | Smartly selects next subjects of current treesitter context                                                                                          |
+| za           | Toggle folds. By treesitter they are automatically added to TS/JS files in smart way                                                                 |
+| zM           | Close all folds                                                                                                                                      |
+| zR           | Open all folds                                                                                                                                       |
+| gJ           | Smartly joins lines based on treesitter                                                                                                              |
+| gS           | Smartly splits lines based on treesitter. I do if VERY often when I want to put import element to new lines (e.g. import { A, B, C, D, E } from ...) |
+| < F12 >      | Opens/closes split terminal                                                                                                                          |
 
 </details>
 
-
-
 ## Sources
- - [Introduction to LuaSnip](https://youtu.be/Dn800rlPIho)
- - 
+
+- [Introduction to LuaSnip](https://youtu.be/Dn800rlPIho)
+-

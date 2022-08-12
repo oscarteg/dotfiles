@@ -13,7 +13,6 @@ require("mappings")
 require("statusline")
 require("autopairs")
 require("explorer")
-require("mason")
 
 -- override options set by plugins
 require("options")
