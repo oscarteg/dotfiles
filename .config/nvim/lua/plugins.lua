@@ -87,13 +87,9 @@ return require("packer").startup(function(use)
       })
     end,
   })
-  -- use({
-  --   "ellisonleao/gruvbox.nvim",
-  --   config = function()
-  --     require("gruvbox").setup()
-  --   end,
-  -- })
+
   use("folke/tokyonight.nvim")
+
   use({
     "catppuccin/nvim",
     as = "catppuccin",

@@ -83,6 +83,9 @@ map("n", "<leader>vj", "<cmd>diffget //3<CR>") -- merge branch
 map("n", "]h", "<cmd>GitGutterNextHunk<CR>")
 map("n", "[h", "<cmd>GitGutterPreviousHunk<CR>")
 
+-- zk
+map("n", "<leader>zk", "<cmd>ZkNotes <cr>")
+
 -- telescope
 map("n", "<leader>sf", "<cmd>Telescope find_files<cr>")
 map("n", "<leader>sg", "<cmd>Telescope live_grep<cr>")
