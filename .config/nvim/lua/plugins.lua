@@ -181,6 +181,15 @@ return require("packer").startup(function(use)
   -- Explorer
   use("kyazdani42/nvim-tree.lua")
 
+  -- refactoring
+  use({
+    "ThePrimeagen/refactoring.nvim",
+    requires = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-treesitter/nvim-treesitter" },
+    },
+  })
+
   if packer_bootstrap then
     require("packer").sync()
   end

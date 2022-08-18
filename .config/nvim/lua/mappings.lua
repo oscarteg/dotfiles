@@ -113,3 +113,59 @@ map("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", { silent = true })
 
 -- Twilight
 map("n", "<leader>tt", "<cmd>Twilight<CR>", { silent = true })
+
+-- refactoring
+-- Remaps for the refactoring operations currently offered by the plugin
+map(
+  "v",
+  "<leader>re",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+  { silent = true, expr = false }
+)
+
+map(
+  "v",
+  "<leader>rf",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+  { silent = true, expr = false }
+)
+
+map(
+  "v",
+  "<leader>rv",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
+  { silent = true, expr = false }
+)
+
+map(
+  "v",
+  "<leader>ri",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+  { silent = true, expr = false }
+)
+
+-- Extract block doesn't need visual mode
+map(
+  "n",
+  "<leader>rb",
+  [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]],
+  { silent = true, expr = false }
+)
+
+map(
+  "n",
+  "<leader>rbf",
+  [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]],
+  { silent = true, expr = false }
+)
+
+-- Inline variable can also pick up the identifier currently under the cursor without visual mode
+map(
+  "n",
+  "<leader>ri",
+  [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+  { silent = true, expr = false }
+)
+
+-- prompt for a refactor to apply when the remap is triggered
+map("v", "<leader>rr", ":lua require('refactoring').select_refactor()<CR>", { silent = true, expr = false })

@@ -41,22 +41,14 @@ window:
   title: "ghost@macos"
 
 font:
-  # Normal font face - Also used to draw glyphs on tmux & VIM
-  # NOTE: You may use any font you'd like but make sure the normal fonts
-  # support ligatures/glyphs. That's used by tmux & VIM to provide a better
-  # UI for powerline & tmux bottom bar.
   normal:
-    # Font name
-    family: IBM Plex Mono
-    # Font face
-    style: Regular
+    family: BlexMono Nerd Font Mono
+    style: Text
 
-  # Bold font face
   bold:
     family: IBM Plex Mono
     style: Bold
 
-  # Italic font face
   italic:
     family: IBM Plex Mono
     style: Italic
