@@ -69,7 +69,6 @@ map("n", "<leader>cvs", "<cmd>so $MYVIMRC<CR>")
 map("n", "<leader>ff", "<cmd>NvimTreeToggle<CR>")
 
 -- misc
-map("n", "gs", "<cmd>Scratch<CR>")
 map("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 map("n", "<leader>tf", "<cmd>TodoTelescope<CR>")
 
@@ -80,8 +79,8 @@ map("n", "<leader>vf", "<cmd>diffget //2<CR>") -- current branch / HEAD
 map("n", "<leader>vj", "<cmd>diffget //3<CR>") -- merge branch
 
 -- vim-gitgutter
-map("n", "]h", "<cmd>GitGutterNextHunk<CR>")
-map("n", "[h", "<cmd>GitGutterPreviousHunk<CR>")
+--[[ map("n", "]h", "<cmd>GitGutterNextHunk<CR>") ]]
+--[[ map("n", "[h", "<cmd>GitGutterPreviousHunk<CR>") ]]
 
 -- zk
 map("n", "<leader>zk", "<cmd>ZkNotes <cr>")

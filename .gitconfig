@@ -15,8 +15,6 @@
 [alias]
 
   mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
-  # Git push to all remotes
-  pushall = !git remote | xargs -L1 git push --all
 
   # View abbreviated SHA, description, and history graph of the latest 20 commits
   l = log --pretty=oneline -n 20 --graph --abbrev-commit
@@ -158,8 +156,8 @@
 [commit]
 
   # https://help.github.com/articles/signing-commits-using-gpg/
-  gpgsign = true
-	template = /Users/oscar/.stCommitMsg
+  ; gpgsign = true
+	; template = /Users/oscar/.stCommitMsg
 
 [diff]
 
@@ -187,6 +185,7 @@
   default = simple
   # Make `git push` push relevant annotated tags when pushing branches out.
   followTags = true
+  autoSetupRemote = true
 
 # URL shorthands
 
@@ -209,8 +208,6 @@
 [url "git://gist.github.com/"]
 
   insteadOf = "gist:"
-[gpg]
-	program = /usr/local/bin/gpg
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 

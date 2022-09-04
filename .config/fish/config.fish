@@ -16,8 +16,15 @@ set -x GOPATH $HOME/go
 
 fish_add_path $GOPATH/bin
 
+# ZK
+set -gx ZK_NOTEBOOK_DIR $HOME/zk
+
 
 # Change default editor to nvim
 set -Ux EDITOR nvim
 
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
+
+# bun
+set --export BUN_INSTALL "$HOME/.bun"
+set --export PATH $BUN_INSTALL/bin $PATH

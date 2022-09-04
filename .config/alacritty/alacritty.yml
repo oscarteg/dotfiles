@@ -46,19 +46,15 @@ font:
     style: Text
 
   bold:
-    family: IBM Plex Mono
+    family: BlexMono Nerd Font Mono
     style: Bold
 
   italic:
-    family: IBM Plex Mono
+    family: BlexMono Nerd Font Mono
     style: Italic
 
-  # Bold italic font face
-  # Note: Since i don't have a font italic version of this font, I just specified
-  # italic & it just works. You may specifiy the bold italic version if it exists
-  # for your font
   bold_italic:
-    family: IBM Plex Mono
+    family: BlexMono Nerd Font Mono
     style: Italic
 
   # Font size
@@ -77,4 +73,4 @@ live_config_reload: true
 #
 # Directory the shell is started in. If this is unset, or `None`, the working
 # directory of the parent process will be used.
-working_directory: None
+working_directory: $HOME/Projects/
