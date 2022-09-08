@@ -12,7 +12,6 @@ require("mason-lspconfig").setup({
     "deno",
     "dockerfile-language-server",
     "emmet_ls",
-    "eslint-ldp",
     "eslint_d",
     "go-debug-adapter",
     "goimports",
@@ -283,12 +282,14 @@ nvim_lsp.emmet_ls.setup({
 -- kotlin
 nvim_lsp.kotlin_language_server.setup({})
 
+-- null-ls
+-- https://github.com/jose-elias-alvarez/null-ls.nvim
 null_ls.setup({
   on_attach = on_attach,
   debounce = 250,
   sources = {
     -- formatting
-    null_ls.builtins.formatting.deno_fmt,
+    --[[ null_ls.builtins.formatting.deno_fmt, ]]
     null_ls.builtins.formatting.prettier.with({
       extra_filetypes = { "svelte " },
     }),

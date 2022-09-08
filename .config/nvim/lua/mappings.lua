@@ -78,12 +78,19 @@ map("n", "<leader>vg", "<cmd>diffget //1<CR>") -- working copy
 map("n", "<leader>vf", "<cmd>diffget //2<CR>") -- current branch / HEAD
 map("n", "<leader>vj", "<cmd>diffget //3<CR>") -- merge branch
 
--- vim-gitgutter
---[[ map("n", "]h", "<cmd>GitGutterNextHunk<CR>") ]]
---[[ map("n", "[h", "<cmd>GitGutterPreviousHunk<CR>") ]]
-
 -- zk
 map("n", "<leader>zk", "<cmd>ZkNotes <cr>")
+-- Create a new note after asking for its title.
+map("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title: ') }<CR>")
+-- Open notes.
+map("n", "<leader>zo", "<Cmd>ZkNotes { sort = { 'modified' } }<CR>")
+-- Open notes associated with the selected tags.
+map("n", "<leader>zt", "<Cmd>ZkTags<CR>")
+
+-- Search for the notes matching a given query.
+map("n", "<leader>zf", "<Cmd>ZkNotes { sort = { 'modified' }, match = vim.fn.input('Search: ') }<CR>")
+-- Search for the notes matching the current visual selection.
+map("v", "<leader>zf", ":'<,'>ZkMatch<CR>")
 
 -- telescope
 map("n", "<leader>sf", "<cmd>Telescope find_files<cr>")
