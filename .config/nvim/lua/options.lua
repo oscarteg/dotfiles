@@ -49,3 +49,5 @@ vim.g.catppuccin_flavour = "mocha"
 vim.o.guifont = "Dank Mono:h20"
 
 cmd("colorscheme kanagawa")
+
+api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })

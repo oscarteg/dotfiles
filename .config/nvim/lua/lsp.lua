@@ -23,7 +23,7 @@ require("mason-lspconfig").setup({
     "kotlin_lanuage_server",
     "lua-language-server",
     "markdownlint",
-    "prettierd",
+    "prettier",
     "prisma-language-server",
     "python-lsp-server",
     "rescript-lsp",
@@ -307,3 +307,6 @@ null_ls.setup({
     null_ls.builtins.code_actions.gitsigns,
   },
 })
+
+-- astro
+nvim_lsp.astro.setup({})

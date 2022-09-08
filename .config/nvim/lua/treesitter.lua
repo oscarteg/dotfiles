@@ -29,6 +29,7 @@ require("nvim-treesitter.configs").setup({
     "prisma",
     "cpp",
     "cmake",
+    "astro",
   },
   highlight = {
     enable = true,
