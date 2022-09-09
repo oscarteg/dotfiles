@@ -293,18 +293,18 @@ null_ls.setup({
     null_ls.builtins.formatting.prettier.with({
       extra_filetypes = { "svelte " },
     }),
-    null_ls.builtins.formatting.eslind_d,
     null_ls.builtins.formatting.prismaFmt,
     null_ls.builtins.formatting.rescript,
     null_ls.builtins.formatting.clang_format,
-    null_ls.builtins.formatting.eslint,
+    null_ls.builtins.formatting.eslint_d,
     -- diagnostics
     null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.php,
     null_ls.builtins.diagnostics.actionlint,
     null_ls.builtins.diagnostics.yamllint,
+    null_ls.builtins.diagnostics.eslint_d,
     -- code actions
-    null_ls.builtins.code_actions.eslint,
+    null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.code_actions.gitsigns,
   },
 })
