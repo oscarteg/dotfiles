@@ -82,7 +82,7 @@ require("nvim-treesitter.configs").setup({
         ["]d"] = "@block.inner",
         ["]e"] = "@function.inner",
         ["]a"] = "@attribute.inner",
-        -- ["]c"] = "@call.inner",
+        ["]c"] = "@call.inner",
       },
       goto_next_end = {
         ["]F"] = "@function.outer",
@@ -90,7 +90,7 @@ require("nvim-treesitter.configs").setup({
         ["]D"] = "@block.inner",
         ["]E"] = "@function.inner",
         ["]A"] = "@attribute.inner",
-        -- ["]C"] = "@call.inner",
+        ["]C"] = "@call.inner",
       },
       goto_previous_start = {
         ["[f"] = "@function.outer",
@@ -98,7 +98,7 @@ require("nvim-treesitter.configs").setup({
         ["[d"] = "@block.inner",
         ["[e"] = "@function.inner",
         ["[a"] = "@attribute.inner",
-        -- ["[c"] = "@call.inner",
+        ["[c"] = "@call.inner",
       },
       goto_previous_end = {
         ["[F"] = "@function.outer",
@@ -106,7 +106,7 @@ require("nvim-treesitter.configs").setup({
         ["[D"] = "@block.inner",
         ["[E"] = "@function.inner",
         ["[A"] = "@attribute.inner",
-        -- ["[C"] = "@call.inner",
+        ["[C"] = "@call.inner",
       },
     },
   },

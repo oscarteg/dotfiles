@@ -43,11 +43,9 @@ opt.shortmess:prepend("c")
 vim.o.grepprg = [[rg --no-heading --smart-case --vimgrep ]]
 vim.o.grepformat = "%f:%l:%c:%m"
 
-vim.g.catppuccin_flavour = "mocha"
-
 -- Neovide
 vim.o.guifont = "Dank Mono:h20"
 
-cmd("colorscheme kanagawa")
+cmd("colorscheme monochrome")
 
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })

@@ -101,16 +101,17 @@ end
 -- null_ls
 
 -- I can't get this to work. It enables in every typescript file
--- nvim_lsp.denols.setup({
---   capabilities = capabilities,
---   on_attach = on_attach,
---   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc"),
--- })
+nvim_lsp.denols.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc")
+})
 
 -- typescript
 nvim_lsp.tsserver.setup({
   capabilities = capabilities,
   on_attach = on_attach,
+  root_dir = nvim_lsp.util.root_pattern("package.json"),
   commands = {
     OrganizeImports = {
       function()

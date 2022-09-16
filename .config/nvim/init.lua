@@ -4,7 +4,7 @@ require("scratch")
 require("commands")
 require("lsp")
 require("snippets")
-
+require("git")
 require("completion")
 require("telescope_custom")
 require("comments")
