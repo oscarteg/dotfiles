@@ -12,7 +12,7 @@ require("mason-lspconfig").setup({
     "deno",
     "dockerfile-language-server",
     "emmet_ls",
-    "eslint",
+    "eslint_d",
     "go-debug-adapter",
     "goimports",
     "gopls",
@@ -299,7 +299,6 @@ null_ls.setup({
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.eslint_d,
     -- diagnostics
-    null_ls.builtins.diagnostics.eslint,
     null_ls.builtins.diagnostics.php,
     null_ls.builtins.diagnostics.actionlint,
     null_ls.builtins.diagnostics.yamllint,

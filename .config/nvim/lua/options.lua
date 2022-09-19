@@ -9,6 +9,7 @@ opt.number = true
 opt.relativenumber = true
 opt.signcolumn = "yes:1"
 opt.ignorecase = true
+opt.smartcase = true
 opt.clipboard = "unnamedplus"
 opt.termguicolors = true
 opt.cursorline = true
@@ -39,13 +40,15 @@ vim.o.completeopt = "menu,noinsert,noselect"
 -- don't show useless messages from completion
 opt.shortmess:prepend("c")
 
--- grep
+-- ripgrep
 vim.o.grepprg = [[rg --no-heading --smart-case --vimgrep ]]
 vim.o.grepformat = "%f:%l:%c:%m"
 
--- Neovide
+-- neovide
 vim.o.guifont = "Dank Mono:h20"
 
+vim.g.monochrome_style = "amplified"
 cmd("colorscheme monochrome")
 
+-- astro
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })

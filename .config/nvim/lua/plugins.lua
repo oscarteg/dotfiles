@@ -12,24 +12,30 @@ vim.cmd([[packadd packer.nvim]])
 return require("packer").startup(function(use)
   use("wbthomason/packer.nvim")
 
-  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+  -- git
+  use({ 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' })
   use("tpope/vim-fugitive")
   use("lewis6991/gitsigns.nvim")
 
+  -- text editing tools
   use({
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
     config = function()
-      require("nvim-surround").setup({
-        -- Configuration here, or leave empty to use defaults
-      })
+      require("nvim-surround").setup()
     end,
   })
+  use("mattn/emmet-vim")
 
   -- lsp
   use("neovim/nvim-lspconfig")
   use("nvim-lua/plenary.nvim")
   use("jose-elias-alvarez/null-ls.nvim")
+
+  --- lsp package manager
+  use("williamboman/mason.nvim")
+
+  use("williamboman/mason-lspconfig.nvim")
 
   -- telescope
   use("nvim-telescope/telescope.nvim")
@@ -40,6 +46,8 @@ return require("packer").startup(function(use)
 
   -- Note taking
   use("mickael-menu/zk-nvim")
+
+  use("tpope/vim-dispatch")
 
   -- completion
   use("hrsh7th/cmp-nvim-lsp")
@@ -54,19 +62,11 @@ return require("packer").startup(function(use)
   use("rafamadriz/friendly-snippets")
 
   use("windwp/nvim-autopairs")
-  use("mattn/emmet-vim")
-  use({
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("lualine").setup({
-        options = {
-          icons_enabled = false,
-          theme = "monochrome",
-          globalstatus = true,
-        },
-      })
-    end,
-  })
+
+  -- ui
+  use("nvim-lualine/lualine.nvim")
+
+  -- treesitter
   use({
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
@@ -80,31 +80,6 @@ return require("packer").startup(function(use)
   -- Themes
   use('kdheepak/monochrome.nvim')
 
-  use({
-    "rebelot/kanagawa.nvim",
-    config = function()
-      require("kanagawa").setup({
-        globalStatus = true,
-      })
-    end,
-  })
-
-  -- Package manager for Neovim
-  use({
-    "williamboman/mason.nvim",
-    config = function()
-      require("mason").setup({})
-    end,
-  })
-
-  use({
-    "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason-lspconfig").setup({})
-    end,
-  })
-
-  -- languages
   -- rust
   use("rust-lang/rust.vim")
   use("simrat39/rust-tools.nvim")
@@ -117,15 +92,6 @@ return require("packer").startup(function(use)
 
   -- Zig
   use("ziglang/zig.vim")
-
-  -- Lisp
-  use({
-    "vlime/vlime",
-    config = function()
-      rtp = "vim/"
-    end,
-  })
-
 
   use({
     "folke/todo-comments.nvim",
@@ -145,6 +111,7 @@ return require("packer").startup(function(use)
     end,
   })
 
+  -- motion
   use({
     "ggandor/leap.nvim",
     config = function()

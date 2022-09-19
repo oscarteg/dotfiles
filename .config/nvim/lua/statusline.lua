@@ -22,6 +22,8 @@ end
 
 require("lualine").setup({
   options = {
+    icons_enabled = false,
+    theme = "monochrome",
     globalstatus = true,
   },
   sections = {
