@@ -88,7 +88,7 @@ return require("packer").startup(function(use)
   use("rescript-lang/vim-rescript")
 
   -- Go
-  use("crispgm/nvim-go")
+  use("ray-x/go.nvim")
 
   -- Zig
   use("ziglang/zig.vim")

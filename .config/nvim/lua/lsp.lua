@@ -77,15 +77,15 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "gd", [[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]], opts)
   buf_set_keymap("n", "gi", [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
   buf_set_keymap("n", "gr", [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], opts)
-  buf_set_keymap("n", "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+  buf_set_keymap("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]], opts)
   buf_set_keymap("n", "<leader>ca", [[<cmd>lua require('telescope.builtin').lsp_code_actions()<CR>]], opts)
   buf_set_keymap("n", "<leader>d", [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   buf_set_keymap("n", "<leader>ee", [[<cmd>lua require('telescope.builtin').diagnostics()<CR>]], opts)
-  buf_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  buf_set_keymap("n", "<leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  buf_set_keymap("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>", opts)
-  buf_set_keymap("n", "[g", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-  buf_set_keymap("n", "]g", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+  buf_set_keymap("n", "<leader>e", [[<cmd>lua vim.diagnostic.open_float()<CR>]], opts)
+  buf_set_keymap("n", "<leader>h", [[<cmd>lua vim.lsp.buf.hover()<CR>]], opts)
+  buf_set_keymap("n", "<leader>f", [[<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>]], opts)
+  buf_set_keymap("n", "[g", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]], opts)
+  buf_set_keymap("n", "]g", [[<cmd>lua vim.diagnostic.goto_next()<CR>]], opts)
 
   -- format on save
   if client.resolved_capabilities.document_formatting then
@@ -98,9 +98,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- null_ls
-
--- I can't get this to work. It enables in every typescript file
+-- deno
 nvim_lsp.denols.setup({
   capabilities = capabilities,
   on_attach = on_attach,
@@ -163,18 +161,6 @@ nvim_lsp.sumneko_lua.setup({
   },
 })
 
--- rescript
-nvim_lsp.rescriptls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  root_dir = util.root_pattern("bsconfig.json"),
-  cmd = {
-    "node",
-    "/Users/oscar/.local/share/nvim/site/pack/packer/start/vim-rescript/server/out/server.js",
-    "--stdio",
-  },
-})
-
 -- TailwindCSS
 nvim_lsp.tailwindcss.setup({
   capabilities = capabilities,
@@ -208,31 +194,11 @@ require("rust-tools").setup({
   },
 })
 
--- Golang
-nvim_lsp.gopls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  cmd = { "gopls", "serve" },
-  filetypes = { "go", "gomod" },
-  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-  settings = {
-    gopls = {
-      analyses = {
-        unusedparams = true,
-      },
-      staticcheck = true,
-    },
-  },
-})
+-- golang
+require("go").setup({})
 
 -- Zig
 nvim_lsp.zls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
--- PHP
-nvim_lsp.phpactor.setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
@@ -261,14 +227,11 @@ nvim_lsp.vuels.setup({
   on_attach = on_attach,
 })
 
--- zk Note taking
+-- zk note taking
 nvim_lsp.zk.setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
-
--- sourcekit
-nvim_lsp.sourcekit.setup({})
 
 -- clangd
 nvim_lsp.clangd.setup({})
@@ -277,11 +240,14 @@ nvim_lsp.clangd.setup({})
 nvim_lsp.emmet_ls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
-  filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less" },
+  filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "astro", "svelte", "vue" },
 })
 
 -- kotlin
 nvim_lsp.kotlin_language_server.setup({})
+
+-- astro
+nvim_lsp.astro.setup({})
 
 -- null-ls
 -- https://github.com/jose-elias-alvarez/null-ls.nvim
@@ -290,14 +256,13 @@ null_ls.setup({
   debounce = 250,
   sources = {
     -- formatting
-    --[[ null_ls.builtins.formatting.deno_fmt, ]]
     null_ls.builtins.formatting.prettier.with({
-      extra_filetypes = { "svelte " },
+      extra_filetypes = { "svelte" },
     }),
     null_ls.builtins.formatting.prismaFmt,
-    null_ls.builtins.formatting.rescript,
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.eslint_d,
+
     -- diagnostics
     null_ls.builtins.diagnostics.php,
     null_ls.builtins.diagnostics.actionlint,
@@ -308,6 +273,3 @@ null_ls.setup({
     null_ls.builtins.code_actions.gitsigns,
   },
 })
-
--- astro
-nvim_lsp.astro.setup({})
