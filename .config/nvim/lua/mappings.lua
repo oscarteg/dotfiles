@@ -175,3 +175,7 @@ map(
 
 -- prompt for a refactor to apply when the remap is triggered
 map("v", "<leader>rr", ":lua require('refactoring').select_refactor()<CR>", { silent = true, expr = false })
+
+
+-- resource file
+map("v", "<leader>sv", ":luafile $MYVIMRC", { silent = true })

@@ -17,7 +17,7 @@ set cpo&vim
 
 " CompilerSet makeprg=bun
 
-CompilerSet makeprg=bun
+CompilerSet makeprg=bun\ %
 CompilerSet errorformat=%f\ %#(%l\\,%c):\ %trror\ TS%n:\ %m,
 		       \%trror\ TS%n:\ %m,
 		       \%-G%.%#

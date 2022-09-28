@@ -54,3 +54,6 @@ cmd("colorscheme monochrome")
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })
 
 api.nvim_create_autocmd("BufEnter", { pattern = "*.ts", command = [[let b:dispatch = 'bun %']] })
+
+-- set compiler to bun when typescript file
+api.nvim_create_autocmd("Filetype", { pattern = "typescript", command = [[compiler bun]] })

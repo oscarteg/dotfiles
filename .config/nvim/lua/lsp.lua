@@ -256,9 +256,7 @@ null_ls.setup({
   debounce = 250,
   sources = {
     -- formatting
-    null_ls.builtins.formatting.prettier.with({
-      extra_filetypes = { "svelte" },
-    }),
+    null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.prismaFmt,
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.eslint_d,
