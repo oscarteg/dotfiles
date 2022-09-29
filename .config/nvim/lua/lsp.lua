@@ -66,6 +66,18 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+local lsp_formatting = function(bufnr)
+  vim.lsp.buf.format({
+    filter = function(client)
+      -- apply whatever logic you want (in this example, we'll only use null-ls)
+      return client.name == "null-ls"
+    end,
+    bufnr = bufnr,
+  })
+end
+-- if you want to set up formatting on save, you can use this as a callback
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...)
     vim.api.nvim_buf_set_keymap(bufnr, ...)
@@ -88,13 +100,15 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "]g", [[<cmd>lua vim.diagnostic.goto_next()<CR>]], opts)
 
   -- format on save
-  if client.resolved_capabilities.document_formatting then
-    vim.cmd([[
-  augroup Format
-  au! * <buffer>
-  au BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync(nil, 1000)
-  augroup END
-  ]] )
+  if client.supports_method("textDocument/formatting") then
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        lsp_formatting(bufnr)
+      end,
+    })
   end
 end
 
@@ -105,7 +119,7 @@ nvim_lsp.denols.setup({
   root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc")
 })
 
--- typescript
+--[[ typescript ]]
 nvim_lsp.tsserver.setup({
   capabilities = capabilities,
   on_attach = on_attach,
@@ -256,10 +270,10 @@ null_ls.setup({
   debounce = 250,
   sources = {
     -- formatting
-    null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.prismaFmt,
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.prettier,
 
     -- diagnostics
     null_ls.builtins.diagnostics.php,
