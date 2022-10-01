@@ -1,6 +1,12 @@
 local opt = vim.opt
 local cmd = vim.cmd
 local api = vim.api
+local o = vim.o
+local g = vim.g
+
+o.ls = 0
+o.ch = 0
+
 
 -- Enable mouse in all modes
 opt.background = "dark"
@@ -47,7 +53,7 @@ vim.o.grepformat = "%f:%l:%c:%m"
 -- neovide
 vim.o.guifont = "Dank Mono:h20"
 
-vim.g.monochrome_style = "amplified"
+g.monochrome_style = "amplified"
 cmd("colorscheme monochrome")
 
 -- astro
