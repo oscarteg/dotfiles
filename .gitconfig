@@ -11,7 +11,7 @@
   support = support-
   versiontag = v
 [sequence]
-  editor = /usr/local/bin/vim
+  editor = /opt/homebrew/bin/nvim
 [alias]
 
   mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
@@ -126,7 +126,8 @@
   # Speed up commands involving untracked files such as `git status`.
   # https://git-scm.com/docs/git-update-index#_untracked_cache
   untrackedCache = true
-	editor = nvim
+	editor = /opt/homebrew/bin/nvim
+	editor = /opt/homebrew/bin/nvim
 
 [color]
 
