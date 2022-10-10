@@ -88,16 +88,22 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "gD", [[<cmd> lua require('telescope.builtin').lsp.buf.declaration()<CR>]], opts)
   buf_set_keymap("n", "gd", [[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]], opts)
   buf_set_keymap("n", "gi", [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
-  buf_set_keymap("n", "gr", [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], opts)
+  buf_set_keymap("n", "gr", [[<cmd>lua require('telescope.builtin').lsp_references(end,iend,i)<CR>]], opts)
   buf_set_keymap("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]], opts)
   buf_set_keymap("n", "<leader>ca", [[<cmd>lua require('telescope.builtin').lsp_code_actions()<CR>]], opts)
   buf_set_keymap("n", "<leader>d", [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   buf_set_keymap("n", "<leader>ee", [[<cmd>lua require('telescope.builtin').diagnostics()<CR>]], opts)
   buf_set_keymap("n", "<leader>e", [[<cmd>lua vim.diagnostic.open_float()<CR>]], opts)
   buf_set_keymap("n", "<leader>h", [[<cmd>lua vim.lsp.buf.hover()<CR>]], opts)
-  buf_set_keymap("n", "<leader>f", [[<cmd>lua vim.lsp.buf.formatting_seq_sync()<CR>]], opts)
+  buf_set_keymap("n", "<leader>f", [[<cmd>lua vim.lsp.buf.format()<CR>]], opts)
+  buf_set_keymap("n", '<C-k>', [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], opts)
   buf_set_keymap("n", "[g", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]], opts)
   buf_set_keymap("n", "]g", [[<cmd>lua vim.diagnostic.goto_next()<CR>]], opts)
+
+  buf_set_keymap('n', '<space>D', [[<cmd>lua vim.lsp.buf.type_definition<CR>]], opts)
+  buf_set_keymap('n', '<space>wa', [[<cmd>lua vim.lsp.buf.add_workspace_folder<CR>]], opts)
+  buf_set_keymap('n', '<space>wr', [[<cmd>lua vim.lsp.buf.remove_workspace_folder<CR>]], opts)
+  buf_set_keymap('n', '<space>wl', [[ print(vim.inspect(vim.lsp.buf.list_workspace_folders()))]], opts)
 
   -- format on save
   if client.supports_method("textDocument/formatting") then
@@ -170,9 +176,6 @@ nvim_lsp.sumneko_lua.setup({
       },
     },
   },
-  flags = {
-    debounce_text_changes = 150,
-  },
 })
 
 -- TailwindCSS
@@ -180,9 +183,6 @@ nvim_lsp.tailwindcss.setup({
   capabilities = capabilities,
   on_attach = on_attach,
   root_dir = util.root_pattern("tailwind.config.js"),
-  flags = {
-    debounce_text_changes = 150,
-  },
 })
 
 -- Rust
@@ -190,8 +190,6 @@ require("rust-tools").setup({
   tools = {
     inlay_hints = {
       show_parameter_hints = false,
-      parameter_hints_prefix = "",
-      other_hints_prefix = "",
     },
   },
 
@@ -273,7 +271,9 @@ null_ls.setup({
     null_ls.builtins.formatting.prismaFmt,
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.eslint_d,
-    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.prettier.with({
+      extra_filetypes = { "mdx" },
+    }),
 
     -- diagnostics
     null_ls.builtins.diagnostics.php,

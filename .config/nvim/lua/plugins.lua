@@ -81,7 +81,7 @@ return require("packer").startup(function(use)
   use('kdheepak/monochrome.nvim')
 
   -- rust
-  use("rust-lang/rust.vim")
+  --[[ use("rust-lang/rust.vim") ]]
   use("simrat39/rust-tools.nvim")
 
   -- rescript
@@ -111,6 +111,20 @@ return require("packer").startup(function(use)
     end,
   })
 
+  use({
+    "nvim-neorg/neorg",
+    config = function()
+      require('neorg').setup {
+        load = {
+          ["core.defaults"] = {}, -- Load all the defaults
+          ["core.integrations.telescope"] = {}, -- Enable the telescope module
+        },
+      }
+    end,
+    requires = {
+      "nvim-neorg/neorg-telescope",
+    }
+  })
   -- motion
   use({
     "ggandor/leap.nvim",

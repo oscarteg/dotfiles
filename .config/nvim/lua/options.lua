@@ -4,10 +4,6 @@ local api = vim.api
 local o = vim.o
 local g = vim.g
 
-o.ls = 0
-o.ch = 0
-
-
 -- Enable mouse in all modes
 opt.background = "dark"
 opt.mouse = "a"
@@ -56,9 +52,11 @@ vim.o.guifont = "Dank Mono:h20"
 g.monochrome_style = "amplified"
 cmd("colorscheme monochrome")
 
+-- mdx
+api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set filetype=mdx]] })
+
 -- astro
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })
-
 api.nvim_create_autocmd("BufEnter", { pattern = "*.ts", command = [[let b:dispatch = 'bun %']] })
 
 -- set compiler to bun when typescript file

@@ -2,148 +2,78 @@
 
 Neovim requirements
 
-- Rust analyser - put inside in ~/.local/bin
-- ZLS Zig LSP - put inside in ~/.local/bin
-
 ## Plugins
 
 - Luasnip
 
 ## Keybindings
 
-Currently I have no idea how to write for you my whole workflow of using Ecovim config in React.js projects I am working on,\
-but I can write you the most useful custom key bindings by the frequency I use them.
+- Space (SPC) is my Leader key.
 
-Space (SPC) is my Leader key.
+### Nvim-Surround
 
-<details>
-<summary>Searching</summary>
+```help
+    Old text                    Command         New text
+--------------------------------------------------------------------------------
+    surr*ound_words             ysiw)           (surround_words)
+    *make strings               ys$"            "make strings"
+    [delete ar*ound me!]        ds]             delete around me!
+    remove <b>HTML t*ags</b>    dst             remove HTML tags
+    'change quot*es'            cs'"            "change quotes"
+    <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+    delete(functi*on calls)     dsf             function calls
+```
 
-### Searching
+### Comment.nvim
 
-| Key Bindings | Description                 |
-| ------------ | --------------------------- |
-| <C - p>      | Telescope git files         |
-| <S - p>      | Telescope live grep         |
-| s            | Enables lightspeed forward  |
-| S            | Enables lightspeed backward |
-| SPC s d      | Search dotfiles             |
-| SPC s h      | Search file history         |
-| SPC s s      | Search history              |
+- NORMAL mode
 
-</details>
+```help
+`gcc` - Toggles the current line using linewise comment
+`gbc` - Toggles the current line using blockwise comment
+`[count]gcc` - Toggles the number of line given as a prefix-count using linewise
+`[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
+`gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
+`gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
+```
 
-<details>
-<summary>Working with LSP</summary>
+- VISUAL mode
 
-### Working with LSP:
+```help
+`gc` - Toggles the region using linewise comment
+`gb` - Toggles the region using blockwise comment
+```
 
-| Key Bindings           | Description                                       |
-| ---------------------- | ------------------------------------------------- |
-| <C - Space> or SPC c a | Code action                                       |
-| <S - K>                | Show documentation under cursor                   |
-| gd                     | Go to definition                                  |
-| gr                     | Go to references                                  |
-| ]g                     | Go to next diagnostic                             |
-| [g                     | Go to prev diagnostic                             |
-| SPC c f                | Format document (usually ESLint/Prettier)         |
-| SPC c r                | Rename                                            |
-| SPC c q                | Quick fix - when I exactly know if it will fix it |
-| SPC c d                | Local diagnostics list                            |
-| SPC c o                | Organize imports                                  |
+<a id="extra-mappings"></a>
 
-</details>
+#### Extra mappings
 
-<details>
-<summary>Working with Git</summary>
+These mappings are enabled by default. (config: `mappings.extra`)
 
-### Working with Git:
+- NORMAL mode
 
-| Key Bindings | Description                                                                                                                              |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| SPC g g      | Lazygit - for committing and branch change                                                                                               |
-| SPC g s      | Telescope status - when I want to change/search file I am working on with git changes                                                    |
-| ]c           | Go to next change hunk                                                                                                                   |
-| [c           | Go to prev change hunk                                                                                                                   |
-| SPC g d      | Advanced powerful diff view with many filters for debugging code, checking previous changes etc.                                         |
-| SPC g m      | View hunk diff of a line under cursor                                                                                                    |
-| SPC g h r    | Reset changed hunk under cursor - I like to check quickly what I have changed in that line and then just type 'u' to go back             |
-| SPC g h s    | Stage hunk under cursor - Sometimes it's faster than selecting lines in Lazygit, so I can stage specific lines and then just do a commit |
-| SPC g l c    | Quick check of previous commit in current buffer, <C-s> inside to switch preview                                                         |
+```help
+`gco` - Insert comment to the next line and enters INSERT mode
+`gcO` - Insert comment to the previous line and enters INSERT mode
+`gcA` - Insert comment to end of the current line and enters INSERT mode
+```
 
-</details>
+##### Examples
 
-<details>
-<summary>Working with Project</summary>
+```help
+# Linewise
 
-### Working with Project:
+`gcw` - Toggle from the current cursor position to the next word
+`gc$` - Toggle from the current cursor position to the end of line
+`gc}` - Toggle until the next blank line
+`gc5j` - Toggle 5 lines after the current cursor position
+`gc8k` - Toggle 8 lines before the current cursor position
+`gcip` - Toggle inside of paragraph
+`gca}` - Toggle around curly brackets
 
-| Key Bindings | Description                                                                                                                                                                                                                                                                             |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <C - e>      | Toggles nvim-tree file explorer                                                                                                                                                                                                                                                         |
-| SPC p w      | Find word under cursor in project - very useful to find where component is used. Just use binding and type '<'. There is a lot of alternatives like LSP references but I like it with telescope and to not find only references but whole text under cursor.                            |
-| SPC p f      | Find file under cursor in project - it finds files in project which contains text under cursor. Useful when you name directories by component name in React and wants to go quickly to file. 'gd' is better but in some projects without TS or with mixed JS/TS it cannot work properly |
-| SPC p t      | Finds TODOs/NOTES in project                                                                                                                                                                                                                                                            |
-| SPC p l      | Switch between projects                                                                                                                                                                                                                                                                 |
-| SPC p s      | Save session to load it later from Dashboard                                                                                                                                                                                                                                            |
+# Blockwise
 
-</details>
-
-<details>
-<summary>Commenting</summary>
-
-### Commenting
-
-| Key Bindings | Description                |
-| ------------ | -------------------------- |
-| gcc          | Create/remove comment      |
-| gc (visual)  | Create/remove comment      |
-| gcO          | Create comment line before |
-| gco          | Create comment line after  |
-
-</details>
-
-<details>
-<summary>Table Mode / Alignment</summary>
-
-### Table Mode / Alignment
-
-| Key Bindings | Description                                                                       |
-| ------------ | --------------------------------------------------------------------------------- |
-| ga (visual)  | Aligns selection based on separator (comma, semi-colon, colon etc.)               |
-| SPC t m      | Enables Table Mode. Do it in markdown file with some table and you will see magic |
-| SPC t i C    | (Only when Table Mode Enabled) Insert column before                               |
-| SPC t i c    | (Only when Table Mode Enabled) Insert column after                                |
-| SPC t d c    | (Only when Table Mode Enabled) Delete column                                      |
-| SPC t d r    | (Only when Table Mode Enabled) Delete row                                         |
-| SPC t s      | (Only when Table Mode Enabled) Sort table alphabetically                          |
-
-</details>
-
-<details>
-<summary>Other</summary>
-
-### Other VERY useful bindings
-
-| Key Bindings | Description                                                                                                                                          |
-| ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| <S - q>      | Smartly closes current buffer without breaking UI                                                                                                    |
-| <C - a>      | It is not only increases number, but switches between true/false/const/let/function/arrow function/increment dates etc.                              |
-| <C - n>      | Finds next occurrence (like \*) of word and puts multi-cursor there. Then you can go to Insert mode, Append, Change or Delete.                       |
-| <C - o>      | Jumps to previous cursor in jumplist. I use it very often.                                                                                           |
-| <C - i>      | Jumps to next cursor in jumplist.                                                                                                                    |
-| <C - u>      | Uppercase word under cursor.                                                                                                                         |
-| v <ENTER>    | Smartly selects next subjects of current treesitter context                                                                                          |
-| za           | Toggle folds. By treesitter they are automatically added to TS/JS files in smart way                                                                 |
-| zM           | Close all folds                                                                                                                                      |
-| zR           | Open all folds                                                                                                                                       |
-| gJ           | Smartly joins lines based on treesitter                                                                                                              |
-| gS           | Smartly splits lines based on treesitter. I do if VERY often when I want to put import element to new lines (e.g. import { A, B, C, D, E } from ...) |
-| < F12 >      | Opens/closes split terminal                                                                                                                          |
-
-</details>
-
-## Sources
-
-- [Introduction to LuaSnip](https://youtu.be/Dn800rlPIho)
--
+`gb2}` - Toggle until the 2 next blank line
+`gbaf` - Toggle comment around a function (w/ LSP/treesitter support)
+`gbac` - Toggle comment around a class (w/ LSP/treesitter support)
+```
