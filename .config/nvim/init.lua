@@ -2,6 +2,7 @@ require("plugins")
 require("scratch")
 
 require("commands")
+require("neorg-conf")
 require("lsp")
 require("git")
 require("snippets")

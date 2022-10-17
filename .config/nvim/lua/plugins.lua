@@ -113,14 +113,6 @@ return require("packer").startup(function(use)
 
   use({
     "nvim-neorg/neorg",
-    config = function()
-      require('neorg').setup {
-        load = {
-          ["core.defaults"] = {}, -- Load all the defaults
-          ["core.integrations.telescope"] = {}, -- Enable the telescope module
-        },
-      }
-    end,
     requires = {
       "nvim-neorg/neorg-telescope",
     }
