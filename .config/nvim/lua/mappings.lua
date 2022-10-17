@@ -93,9 +93,10 @@ map("n", "<leader>zf", "<Cmd>ZkNotes { sort = { 'modified' }, match = vim.fn.inp
 map("v", "<leader>zf", ":'<,'>ZkMatch<CR>")
 
 -- telescope
-map("n", "<leader>sf", "<cmd>Telescope find_files<cr>")
-map("n", "<leader>sg", "<cmd>Telescope live_grep<cr>")
+map("n", "<leader>sf", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files <cr>")
+map("n", "<leader>sg", "<cmd>Telescope live_grep find_command=rg,--ignore,--hidden<cr>")
 map("n", "<leader>sb", "<cmd>Telescope buffers<cr>")
+map("n", "<leader>st", "<cmd>Telescope help_tags<cr>")
 
 -- undo breakpoints
 map("i", ",", ",<C-g>u")

@@ -32,3 +32,8 @@ source /opt/homebrew/opt/asdf/libexec/asdf.fish
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
+
+# pnpm
+set -gx PNPM_HOME "/Users/oscar/Library/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end

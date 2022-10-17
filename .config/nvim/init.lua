@@ -3,6 +3,7 @@ require("scratch")
 
 require("commands")
 require("lsp")
+require("git")
 require("snippets")
 require("git")
 require("completion")
