@@ -14,6 +14,9 @@
   editor = /opt/homebrew/bin/nvim
 [alias]
 
+  # Push force with appropiate behaviour
+  pushf = push --force-with-lease --force-if-includes
+
   mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
 
   # View abbreviated SHA, description, and history graph of the latest 20 commits

@@ -1,6 +1,6 @@
 require("plugins")
-require("scratch")
 
+require("themes")
 require("commands")
 require("neorg-conf")
 require("lsp")

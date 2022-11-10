@@ -1,43 +1,6 @@
 -- lsp package installer
 require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = {
-    "ansible-language-server",
-    "arduino-language-server",
-    "clang-format",
-    "clangd",
-    "cmake-language-server",
-    "cpptools",
-    "cssmodules-language-server",
-    "deno",
-    "dockerfile-language-server",
-    "emmet_ls",
-    "eslint_d",
-    "go-debug-adapter",
-    "goimports",
-    "gopls",
-    "haskell-language-server",
-    "jq",
-    "json-lsp",
-    "kotlin_lanuage_server",
-    "lua-language-server",
-    "markdownlint",
-    "prettier",
-    "prisma-language-server",
-    "python-lsp-server",
-    "rescript-lsp",
-    "rust_analyzer",
-    "stylua",
-    "svelte-language-server",
-    "tailwindcss-language-server",
-    "typescript-language-server",
-    "vetur-vls",
-    "vls",
-    "yaml-language-server",
-    "zk",
-    "zls",
-  },
-})
+require("mason-lspconfig").setup()
 
 local nvim_lsp = require("lspconfig")
 local util = require("lspconfig/util")
@@ -52,30 +15,31 @@ end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    severity_sort = true,
-    update_in_insert = false,
-    float = {
-      border = "rounded",
-      source = "always",
-      header = "",
-      prefix = "",
-    },
+  virtual_text = true,
+  signs = true,
+  underline = true,
+  severity_sort = true,
+  update_in_insert = false,
+  float = {
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
 })
 
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
+    async = true,
     filter = function(client)
-      -- apply whatever logic you want (in this example, we'll only use null-ls)
       return client.name == "null-ls"
     end,
     bufnr = bufnr,
   })
 end
+
 -- if you want to set up formatting on save, you can use this as a callback
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
@@ -98,7 +62,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]], opts)
   buf_set_keymap("n", "<leader>e", [[<cmd>lua vim.diagnostic.open_float()<CR>]], opts)
   buf_set_keymap("n", "<leader>h", [[<cmd>lua vim.lsp.buf.hover()<CR>]], opts)
-  buf_set_keymap("n", "<leader>f", [[<cmd>lua vim.lsp.buf.format()<CR>]], opts)
+  buf_set_keymap("n", "<leader>f", [[<cmd>lua vim.lsp.buf.format({async = true})<CR>]], opts)
   buf_set_keymap("n", '<leader>k', [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], opts)
   buf_set_keymap("n", "[g", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]], opts)
   buf_set_keymap("n", "]g", [[<cmd>lua vim.diagnostic.goto_next()<CR>]], opts)
@@ -224,10 +188,10 @@ nvim_lsp.pylsp.setup({
 })
 
 -- Haskell
-nvim_lsp.hls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
+--[[ nvim_lsp.hls.setup({ ]]
+--[[   capabilities = capabilities, ]]
+--[[   on_attach = on_attach, ]]
+--[[ }) ]]
 
 -- Svelte
 nvim_lsp.svelte.setup({
@@ -236,16 +200,10 @@ nvim_lsp.svelte.setup({
 })
 
 -- Vue
-nvim_lsp.vuels.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
--- zk note taking
-nvim_lsp.zk.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
+--[[ nvim_lsp.vuels.setup({ ]]
+--[[   capabilities = capabilities, ]]
+--[[   on_attach = on_attach, ]]
+--[[ }) ]]
 
 -- clangd
 nvim_lsp.clangd.setup({})

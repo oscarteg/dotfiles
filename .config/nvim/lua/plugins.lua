@@ -44,9 +44,6 @@ return require("packer").startup(function(use)
   -- comment
   use("numToStr/Comment.nvim")
 
-  -- Note taking
-  use("mickael-menu/zk-nvim")
-
   use("tpope/vim-dispatch")
 
   -- completion
@@ -79,6 +76,12 @@ return require("packer").startup(function(use)
 
   -- Themes
   use('kdheepak/monochrome.nvim')
+  use({
+    "catppuccin/nvim",
+    as = "catppuccin",
+  })
+
+  use('Yazeed1s/oh-lucy.nvim')
 
   -- rust
   --[[ use("rust-lang/rust.vim") ]]

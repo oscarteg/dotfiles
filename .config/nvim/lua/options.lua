@@ -50,7 +50,6 @@ vim.o.grepformat = "%f:%l:%c:%m"
 vim.o.guifont = "Dank Mono:h20"
 
 g.monochrome_style = "amplified"
-cmd("colorscheme monochrome")
 
 -- mdx
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set filetype=mdx]] })
