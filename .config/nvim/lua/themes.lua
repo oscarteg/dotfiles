@@ -56,4 +56,4 @@ catppuccin.setup {
   },
 }
 
-vim.api.nvim_command "colorscheme monochrome"
+vim.api.nvim_command "colorscheme gruber"
