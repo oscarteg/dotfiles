@@ -35,19 +35,20 @@ opt.shiftwidth = 2
 opt.expandtab = true
 opt.smartindent = true
 
+o.splitright = true
 -- omnifunc completion
-vim.o.completeopt = "menu,noinsert,noselect"
+o.completeopt = "menu,noinsert,noselect"
 
 -- statusline
 -- don't show useless messages from completion
 opt.shortmess:prepend("c")
 
 -- ripgrep
-vim.o.grepprg = [[rg --no-heading --smart-case --vimgrep ]]
-vim.o.grepformat = "%f:%l:%c:%m"
+o.grepprg = [[rg --no-heading --smart-case --vimgrep ]]
+o.grepformat = "%f:%l:%c:%m"
 
 -- neovide
-vim.o.guifont = "Dank Mono:h20"
+o.guifont = "Dank Mono:h20"
 
 g.monochrome_style = "amplified"
 

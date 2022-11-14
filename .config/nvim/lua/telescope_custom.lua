@@ -6,11 +6,20 @@ require("telescope").setup({
     file_ignore_patterns = { "node_modules", ".git", "build", "dist" },
     dynamic_preview_title = true,
   },
-
   pickers = {
     find_files = {
       theme = "ivy",
       hidden = true,
+        find_command = {
+          'fd',
+          '--type',
+          'file',
+          '--type',
+          'symlink',
+          '--hidden',
+          '--exclude',
+          '.git',
+        }
     },
     live_grep = {
       theme = "ivy",

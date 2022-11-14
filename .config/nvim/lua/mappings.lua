@@ -75,10 +75,9 @@ map("n", "<leader>vf", "<cmd>diffget //2<CR>") -- current branch / HEAD
 map("n", "<leader>vj", "<cmd>diffget //3<CR>") -- merge branch
 
 -- telescope
-map("n", "<leader>sf", "<cmd>Telescope find_files find_command=rg,--ignore,--hidden,--files <cr>")
-map("n", "<leader>sg", "<cmd>Telescope live_grep find_command=rg,--ignore,--hidden<cr>")
-map("n", "<leader>sb", "<cmd>Telescope buffers<cr>")
-map("n", "<leader>st", "<cmd>Telescope help_tags<cr>")
+map("n", "<leader>sf", [[<cmd>lua require('telescope.builtin').find_files() <CR>]])
+map("n", "<leader>sg", [[<cmd>lua require('telescope.builtin').live_grep() <CR>]])
+map("n", "<leader>sb", [[<cmd>lua require('telescope.builtin').buffers() <CR>]])
 
 -- undo breakpoints
 map("i", ",", ",<C-g>u")
