@@ -52,7 +52,7 @@ local on_attach = function(client, bufnr)
 
   local opts = { noremap = true, silent = true }
 
-  buf_set_keymap("n", "gD", [[<cmd>lua require('telescope.builtin').lsp.buf.declaration <CR>]], opts)
+  -- Telescope
   buf_set_keymap("n", "gd", [[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]], opts)
   buf_set_keymap('n', '<space>D', [[<cmd>lua require('telescope.builtint').lsp_type_definitions()<CR>]], opts)
   buf_set_keymap("n", "gi", [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
@@ -60,6 +60,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>d", [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   buf_set_keymap("n", "<leader>ee", [[<cmd>lua require('telescope.builtin').diagnostics()<CR>]], opts)
 
+  buf_set_keymap("n", "gD", [[<cmd>lua vim.lsp.buf.declaration<CR>]], opts)
   buf_set_keymap("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]], opts)
   buf_set_keymap("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]], opts)
   buf_set_keymap("n", "<leader>e", [[<cmd>lua vim.diagnostic.open_float()<CR>]], opts)
