@@ -1,12 +1,13 @@
+local api = vim.api
+local nvim_lsp = require("lspconfig")
+local util = require("lspconfig/util")
+local null_ls = require("null-ls")
+
 -- lsp package installer
 require("mason").setup()
 require("mason-lspconfig").setup({
   automatic_installation = true
 })
-
-local nvim_lsp = require("lspconfig")
-local util = require("lspconfig/util")
-local null_ls = require("null-ls")
 
 -- diagnostics signs
 local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
@@ -36,7 +37,7 @@ local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
     async = true,
     filter = function(client)
-      return client.name == "null-ls"
+      return client.name ~= "tsserver"
     end,
     bufnr = bufnr,
   })
@@ -46,34 +47,35 @@ end
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
-  end
+  -- Enable completion triggered by <c-x><c-o>
+  api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local opts = { noremap = true, silent = true }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
   -- Telescope
-  buf_set_keymap("n", "gd", [[<cmd>lua require('telescope.builtin').lsp_definitions()<CR>]], opts)
-  buf_set_keymap('n', '<space>D', [[<cmd>lua require('telescope.builtint').lsp_type_definitions()<CR>]], opts)
-  buf_set_keymap("n", "gi", [[<cmd>lua require('telescope.builtin').lsp_implementations()<CR>]], opts)
-  buf_set_keymap("n", "gr", [[<cmd>lua require('telescope.builtin').lsp_references()<CR>]], opts)
-  buf_set_keymap("n", "<leader>d", [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-  buf_set_keymap("n", "<leader>ee", [[<cmd>lua require('telescope.builtin').diagnostics()<CR>]], opts)
+  vim.keymap.set("n", "gd", require('telescope.builtin').lsp_definitions, bufopts)
+  vim.keymap.set('n', '<space>D', require('telescope.builtin').lsp_type_definitions, bufopts)
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set("n", "gi", require('telescope.builtin').lsp_implementations, bufopts)
+  vim.keymap.set("n", "gr", require('telescope.builtin').lsp_references, bufopts)
+  vim.keymap.set("n", "<leader>d", require('telescope.builtin').lsp_document_symbols, bufopts)
+  vim.keymap.set("n", "<leader>ee", require('telescope.builtin').diagnostics, bufopts)
 
-  buf_set_keymap("n", "gD", [[<cmd>lua vim.lsp.buf.declaration() <CR>]], opts)
-  buf_set_keymap("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename() <CR>]], opts)
-  buf_set_keymap("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action() <CR>]], opts)
-  buf_set_keymap("n", "<leader>e", [[<cmd>lua vim.diagnostic.open_float() <CR>]], opts)
-  buf_set_keymap("n", "<leader>h", [[<cmd>lua vim.lsp.buf.hover()<CR>]], opts)
-  buf_set_keymap("n", "<leader>f", [[<cmd>lua vim.lsp.buf.format({async = true})<CR>]], opts)
-  buf_set_keymap("n", '<leader>k', [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], opts)
-  buf_set_keymap("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
-  buf_set_keymap("n", "[g", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]], opts)
-  buf_set_keymap("n", "]g", [[<cmd>lua vim.diagnostic.goto_next()<CR>]], opts)
+  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
+  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, bufopts)
+  vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, bufopts)
+  vim.keymap.set("n", "<leader>f", function() lsp_formatting(bufnr) end, bufopts)
+  vim.keymap.set("n", '<leader>k', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set("n", "[g", vim.diagnostic.goto_prev, bufopts)
+  vim.keymap.set("n", "]g", vim.diagnostic.goto_next, bufopts)
 
-  buf_set_keymap('n', '<space>wa', [[<cmd>lua vim.lsp.buf.add_workspace_folder<CR>]], opts)
-  buf_set_keymap('n', '<space>wr', [[<cmd>lua vim.lsp.buf.remove_workspace_folder<CR>]], opts)
-  buf_set_keymap('n', '<space>wl', [[ print(vim.inspect(vim.lsp.buf.list_workspace_folders()))]], opts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
 
   -- format on save
   if client.supports_method("textDocument/formatting") then
@@ -88,7 +90,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
--- deno
+--[[ deno ]]
 nvim_lsp.denols.setup({
   capabilities = capabilities,
   on_attach = on_attach,
@@ -115,13 +117,13 @@ nvim_lsp.tsserver.setup({
   },
 })
 
--- JSON
+--[[ JSON ]]
 nvim_lsp.jsonls.setup({
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
--- Lua
+--[[ Lua ]]
 local runtime_path = vim.split(package.path, ";")
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
@@ -148,7 +150,7 @@ nvim_lsp.sumneko_lua.setup({
   },
 })
 
--- TailwindCSS
+--[[ TailwindCSS ]]
 nvim_lsp.tailwindcss.setup({
   capabilities = capabilities,
   on_attach = on_attach,
@@ -204,10 +206,10 @@ nvim_lsp.svelte.setup({
 })
 
 -- Vue
-nvim_lsp.vuels.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
+--[[ nvim_lsp.vuels.setup({ ]]
+--[[   capabilities = capabilities, ]]
+--[[   on_attach = on_attach, ]]
+--[[ }) ]]
 
 -- clangd
 nvim_lsp.clangd.setup({})
@@ -225,6 +227,9 @@ nvim_lsp.kotlin_language_server.setup({})
 -- astro
 nvim_lsp.astro.setup({})
 
+--[[Elm]]
+nvim_lsp.elmls.setup({})
+
 -- null-ls
 -- https://github.com/jose-elias-alvarez/null-ls.nvim
 null_ls.setup({
@@ -239,6 +244,7 @@ null_ls.setup({
     null_ls.builtins.formatting.prettier.with({
       extra_filetypes = { "mdx" },
     }),
+    null_ls.builtins.formatting.elm_format,
 
     -- diagnostics
     null_ls.builtins.diagnostics.php,
