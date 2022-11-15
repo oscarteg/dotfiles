@@ -44,8 +44,6 @@ Neovim requirements
 `gb` - Toggles the region using blockwise comment
 ```
 
-<a id="extra-mappings"></a>
-
 #### Extra mappings
 
 These mappings are enabled by default. (config: `mappings.extra`)

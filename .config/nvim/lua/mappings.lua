@@ -23,6 +23,7 @@ map("i", "<C-l>", "pumvisible() ? '<C-e>' : '<esc>'", { expr = true })
 map("n", "<leader>/", "<cmd>noh<CR>")
 map("n", "<leader>w", "<cmd>update<CR>")
 map("n", "<leader>q", "<cmd>q<CR>")
+map("n", "<leader>r", "<cmd>make<CR>")
 map("n", "<leader>bD", "<cmd>%bdelete<CR>")
 
 map("n", "tn", ":tabnew<CR>")
@@ -65,7 +66,6 @@ map("n", "<leader>cvs", "<cmd>so $MYVIMRC<CR>")
 map("n", "<leader>ff", "<cmd>NvimTreeFindFileToggle<CR>")
 
 -- misc
-map("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 map("n", "<leader>tf", "<cmd>TodoTelescope<CR>")
 
 -- vim-fugitive
@@ -78,6 +78,7 @@ map("n", "<leader>vj", "<cmd>diffget //3<CR>") -- merge branch
 map("n", "<leader>sf", [[<cmd>lua require('telescope.builtin').find_files() <CR>]])
 map("n", "<leader>sg", [[<cmd>lua require('telescope.builtin').live_grep() <CR>]])
 map("n", "<leader>sb", [[<cmd>lua require('telescope.builtin').buffers() <CR>]])
+map("n", "<leader>fb", [[<cmd>:Telescope file_browser <CR>]])
 
 -- undo breakpoints
 map("i", ",", ",<C-g>u")

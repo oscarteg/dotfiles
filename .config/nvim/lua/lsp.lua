@@ -60,13 +60,14 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<leader>d", [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   buf_set_keymap("n", "<leader>ee", [[<cmd>lua require('telescope.builtin').diagnostics()<CR>]], opts)
 
-  buf_set_keymap("n", "gD", [[<cmd>lua vim.lsp.buf.declaration<CR>]], opts)
-  buf_set_keymap("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename()<CR>]], opts)
-  buf_set_keymap("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action()<CR>]], opts)
-  buf_set_keymap("n", "<leader>e", [[<cmd>lua vim.diagnostic.open_float()<CR>]], opts)
+  buf_set_keymap("n", "gD", [[<cmd>lua vim.lsp.buf.declaration() <CR>]], opts)
+  buf_set_keymap("n", "<leader>rn", [[<cmd>lua vim.lsp.buf.rename() <CR>]], opts)
+  buf_set_keymap("n", "<leader>ca", [[<cmd>lua vim.lsp.buf.code_action() <CR>]], opts)
+  buf_set_keymap("n", "<leader>e", [[<cmd>lua vim.diagnostic.open_float() <CR>]], opts)
   buf_set_keymap("n", "<leader>h", [[<cmd>lua vim.lsp.buf.hover()<CR>]], opts)
   buf_set_keymap("n", "<leader>f", [[<cmd>lua vim.lsp.buf.format({async = true})<CR>]], opts)
   buf_set_keymap("n", '<leader>k', [[<cmd>lua vim.lsp.buf.signature_help()<CR>]], opts)
+  buf_set_keymap("i", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)
   buf_set_keymap("n", "[g", [[<cmd>lua vim.diagnostic.goto_prev()<CR>]], opts)
   buf_set_keymap("n", "]g", [[<cmd>lua vim.diagnostic.goto_next()<CR>]], opts)
 
@@ -203,10 +204,10 @@ nvim_lsp.svelte.setup({
 })
 
 -- Vue
---[[ nvim_lsp.vuels.setup({ ]]
---[[   capabilities = capabilities, ]]
---[[   on_attach = on_attach, ]]
---[[ }) ]]
+nvim_lsp.vuels.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
 
 -- clangd
 nvim_lsp.clangd.setup({})
@@ -232,6 +233,7 @@ null_ls.setup({
   sources = {
     -- formatting
     null_ls.builtins.formatting.prismaFmt,
+    null_ls.builtins.formatting.zigfmt,
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.eslint_d,
     null_ls.builtins.formatting.prettier.with({

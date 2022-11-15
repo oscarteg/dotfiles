@@ -40,6 +40,7 @@ return require("packer").startup(function(use)
   -- telescope
   use("nvim-telescope/telescope.nvim")
   use("nvim-telescope/telescope-ui-select.nvim")
+  use({ "nvim-telescope/telescope-file-browser.nvim" })
 
   -- comment
   use("numToStr/Comment.nvim")
