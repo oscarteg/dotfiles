@@ -52,6 +52,8 @@ o.guifont = "Dank Mono:h20"
 
 g.monochrome_style = "amplified"
 
+api.nvim_command "colorscheme gruber"
+
 -- mdx
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set filetype=mdx]] })
 
@@ -60,5 +62,14 @@ api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[s
 api.nvim_create_autocmd("BufEnter", { pattern = "*.ts", command = [[let b:dispatch = 'bun %']] })
 
 -- set compiler to bun when typescript file
-api.nvim_create_autocmd("Filetype", { pattern = {"*.ts", "*.js"}, command = [[compiler bun]] })
+api.nvim_create_autocmd("Filetype", { pattern = { "*.ts", "*.js" }, command = [[compiler bun]] })
 
+-- highlight text on yank
+api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('highlight_yank', {}),
+  desc = 'Hightlight selection on yank',
+  pattern = '*',
+  callback = function()
+    vim.highlight.on_yank { higroup = 'IncSearch', timeout = 500 }
+  end,
+})
