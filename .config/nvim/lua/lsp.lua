@@ -245,6 +245,7 @@ null_ls.setup({
       extra_filetypes = { "mdx" },
     }),
     null_ls.builtins.formatting.elm_format,
+    null_ls.builtins.formatting.rescript,
 
     -- diagnostics
     null_ls.builtins.diagnostics.php,
