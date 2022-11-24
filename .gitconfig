@@ -131,6 +131,7 @@
   untrackedCache = true
 	editor = /opt/homebrew/bin/nvim
 	editor = /opt/homebrew/bin/nvim
+	autocrlf = input
 
 [color]
 

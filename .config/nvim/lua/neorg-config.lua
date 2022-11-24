@@ -6,7 +6,8 @@ require("neorg").setup({
     ["core.norg.dirman"] = { -- Manage your directories with Neorg
       config = {
         workspaces = {
-          gtd = "~/gtd",
+          gtd = "~/notes/gtd",
+          work = "~/notes/work"
         },
       },
     },
