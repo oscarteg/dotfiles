@@ -50,8 +50,6 @@ o.grepformat = "%f:%l:%c:%m"
 -- neovide
 o.guifont = "Dank Mono:h20"
 
-g.monochrome_style = "amplified"
-
 api.nvim_command "colorscheme gruber"
 
 -- mdx

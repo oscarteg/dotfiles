@@ -36,7 +36,7 @@ local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
     async = true,
     filter = function(client)
-      return client.name ~= "tsserver"
+      return client.name ~= "tsserver" and client.name ~= "jsonls"
     end,
     bufnr = bufnr,
   })

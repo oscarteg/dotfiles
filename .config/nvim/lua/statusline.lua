@@ -20,15 +20,20 @@ local function lsp_name()
   return msg
 end
 
+local custom_base16 = require('lualine.themes.base16')
+
+custom_base16.normal.a.bg = "#ffd700"
+
 require("lualine").setup({
   options = {
     icons_enabled = false,
-    theme = "monochrome",
+    theme = custom_base16,
     globalstatus = true,
   },
   sections = {
     lualine_a = { "mode" },
     lualine_b = {
+      "branch",
       { "diagnostics", sources = { "nvim_lsp" } },
       "diff",
     },
