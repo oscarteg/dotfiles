@@ -40,12 +40,17 @@ return require("packer").startup(function(use)
   -- comment
   use("numToStr/Comment.nvim")
 
+  -- copilot
+  use("github/copilot.vim")
+
+
   -- completion
   use("hrsh7th/cmp-nvim-lsp")
   use("hrsh7th/cmp-buffer")
   use("hrsh7th/cmp-path")
   use("hrsh7th/cmp-cmdline")
   use("hrsh7th/nvim-cmp")
+  use("hrsh7th/cmp-copilot")
   use("windwp/nvim-autopairs")
 
   -- snippets
@@ -114,24 +119,6 @@ return require("packer").startup(function(use)
     },
   })
 
-  -- copilot
-
-  use({
-    "zbirenbaum/copilot.lua",
-    event = "VimEnter",
-    config = function()
-      vim.defer_fn(function()
-        require("copilot").setup()
-      end, 100)
-    end,
-  })
-  use({
-    "zbirenbaum/copilot-cmp",
-    after = { "copilot.lua" },
-    config = function()
-      require("copilot_cmp").setup()
-    end
-  })
 
   if packer_bootstrap then
     require("packer").sync()

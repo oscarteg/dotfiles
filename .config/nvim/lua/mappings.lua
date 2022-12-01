@@ -1,4 +1,5 @@
 local g = vim.g
+local ls = require("luasnip")
 
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true }
@@ -78,6 +79,7 @@ map("n", "<leader>vj", "<cmd>diffget //3<CR>") -- merge branch
 map("n", "<leader>sf", [[<cmd>lua require('telescope.builtin').find_files() <CR>]])
 map("n", "<leader>sg", [[<cmd>lua require('telescope.builtin').live_grep() <CR>]])
 map("n", "<leader>sb", [[<cmd>lua require('telescope.builtin').buffers() <CR>]])
+map("n", "<leader>gs", [[<cmd>lua require('telescope.builtin').git_status() <CR>]])
 map("n", "<leader>fb", [[<cmd>:Telescope file_browser <CR>]])
 
 -- undo breakpoints
@@ -100,8 +102,22 @@ map("s", "<c-j>", "<cmd>lua require'luasnip'.jump(1)<CR>", { silent = true })
 map("i", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", { silent = true })
 map("s", "<c-k>", "<cmd>lua require'luasnip'.jump(-1)<CR>", { silent = true })
 
+
+vim.keymap.set({ "i", "s" }, "<C-l>", function()
+  if ls.choice_active() then
+    ls.change_choice(1)
+  end
+end)
+vim.keymap.set({ "i", "s" }, "<C-h>", function()
+  if ls.choice_active() then
+    ls.change_choice(-1)
+  end
+end)
+
 -- Twilight
-map("n", "<leader>tt", "<cmd>Twilight<CR>", { silent = true })
+map("n", "<leader>tt", [[<cmd>Twilight<CR>]], { silent = true })
+
+map("n", "<leader>td", [[<cmd>TodoQuickFix<CR>]], { silent = true })
 
 -- refactoring
 -- Remaps for the refactoring operations currently offered by the plugin
