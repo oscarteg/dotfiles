@@ -50,7 +50,6 @@ return require("packer").startup(function(use)
   use("hrsh7th/cmp-path")
   use("hrsh7th/cmp-cmdline")
   use("hrsh7th/nvim-cmp")
-  use("hrsh7th/cmp-copilot")
   use("windwp/nvim-autopairs")
 
   -- snippets
@@ -118,6 +117,9 @@ return require("packer").startup(function(use)
       { "nvim-treesitter/nvim-treesitter" },
     },
   })
+
+  use("vim-test/vim-test")
+  use("tpope/vim-dispatch")
 
 
   if packer_bootstrap then

@@ -8,12 +8,5 @@ require("nvim-tree").setup({
         folder_arrow = false,
       },
     },
-  },
-  view = {
-    mappings = {
-      list = {
-        -- { key = "<CR>", action = "edit_in_place" },
-      },
-    },
-  },
+  }
 })

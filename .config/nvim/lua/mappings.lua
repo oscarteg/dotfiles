@@ -47,6 +47,9 @@ map("n", "<C-Down>", ":resize +2<CR>", { silent = true })
 map("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
 map("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
 
+-- run tests in current file
+map("n", "<leader>T", [[<cmd>:TestFile -strategy=dispatch<CR>]], { silent = true })
+
 -- Move text up and down
 map("v", "<A-j>", ":m +1<CR>==", { silent = true })
 map("v", "<A-k>", ":m -1<CR>==", { silent = true })

@@ -26,6 +26,8 @@ opt.path:prepend("**")
 opt.swapfile = false
 opt.list = true
 opt.listchars = "tab:→ ,extends:»,precedes:«,nbsp:␣,trail:•"
+opt.undofile = true
+
 api.nvim_set_option("guifont", "Dank Mono:h22")
 
 -- code indention
@@ -34,7 +36,6 @@ opt.softtabstop = 2
 opt.shiftwidth = 2
 opt.expandtab = true
 opt.smartindent = true
-
 o.splitright = true
 -- omnifunc completion
 o.completeopt = "menu,noinsert,noselect"
@@ -57,10 +58,10 @@ api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set
 
 -- astro
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })
-api.nvim_create_autocmd("BufEnter", { pattern = "*.ts", command = [[let b:dispatch = 'bun %']] })
 
 -- set compiler to bun when typescript file
 api.nvim_create_autocmd("Filetype", { pattern = { "*.ts", "*.js" }, command = [[compiler bun]] })
+api.nvim_create_autocmd("BufEnter", { pattern = "*.ts", command = [[let b:dispatch = 'bun %']] })
 
 -- highlight text on yank
 api.nvim_create_autocmd('TextYankPost', {

@@ -94,11 +94,6 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/cmp-cmdline",
     url = "https://github.com/hrsh7th/cmp-cmdline"
   },
-  ["cmp-copilot"] = {
-    loaded = true,
-    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/cmp-copilot",
-    url = "https://github.com/hrsh7th/cmp-copilot"
-  },
   ["cmp-nvim-lsp"] = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
@@ -279,6 +274,11 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/twilight.nvim",
     url = "https://github.com/folke/twilight.nvim"
   },
+  ["vim-dispatch"] = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/vim-dispatch",
+    url = "https://github.com/tpope/vim-dispatch"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/vim-fugitive",
@@ -288,6 +288,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/vim-rescript",
     url = "https://github.com/rescript-lang/vim-rescript"
+  },
+  ["vim-test"] = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/vim-test",
+    url = "https://github.com/vim-test/vim-test"
   },
   ["zig.vim"] = {
     loaded = true,
