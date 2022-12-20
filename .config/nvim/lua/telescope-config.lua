@@ -1,5 +1,3 @@
-local actions = require("telescope.actions")
-
 require("telescope").setup({
   defaults = {
     color_devicons = false,
@@ -21,6 +19,9 @@ require("telescope").setup({
         '.git',
       }
     },
+    git_status = {
+      theme = "ivy"
+    },
     live_grep = {
       theme = "ivy",
       hidden = true,
@@ -37,12 +38,12 @@ require("telescope").setup({
     },
     file_browser = {
       hidden = true
-
     }
   },
 })
 
 require("telescope").load_extension("ui-select")
--- To get telescope-file-browser loaded and working with telescope,
--- you need to call load_extension, somewhere after setup function:
+-- File browsing
 require("telescope").load_extension("file_browser")
+-- Extension for ThePrimeagen/refactoring
+require("telescope").load_extension("refactoring")

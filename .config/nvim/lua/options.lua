@@ -1,61 +1,47 @@
 local opt = vim.opt
-local cmd = vim.cmd
 local api = vim.api
 local o = vim.o
-local g = vim.g
 
--- Enable mouse in all modes
-opt.background = "dark"
-opt.mouse = "a"
-opt.number = true
-opt.relativenumber = true
-opt.signcolumn = "yes:1"
-opt.ignorecase = true
-opt.smartcase = true
-opt.clipboard = "unnamedplus"
-opt.termguicolors = true
-opt.cursorline = true
-opt.hidden = true
--- Set updatetime for CursorHold
--- 300ms of no cursor movement to trigger CursorHold
-opt.updatetime = 300
-opt.splitright = true
-opt.nrformats:remove("octal")
-opt.scrolloff = 999
+o.background = "dark"
+o.mouse = "a"
+o.number = true
+o.relativenumber = true
+o.signcolumn = "yes:1"
+o.ignorecase = true
+o.smartcase = true
+o.clipboard = "unnamedplus"
+o.termguicolors = true
+o.cursorline = true
+o.hidden = true
+o.ignorecase = true
+o.incsearch = true
+o.magic = true
+o.splitright = true
+o.scrolloff = 999
 opt.path:prepend("**")
-opt.swapfile = false
-opt.list = true
-opt.listchars = "tab:→ ,extends:»,precedes:«,nbsp:␣,trail:•"
-opt.undofile = true
-
-api.nvim_set_option("guifont", "Dank Mono:h22")
+o.swapfile = false
+o.list = true
+o.listchars = "tab:→ ,extends:»,precedes:«,nbsp:␣,trail:•"
+o.undofile = true
+o.undodir = os.getenv("HOME") .. "/.vim/undodir"
+o.updatetime = 250
+o.writebackup = false
+o.wildmenu = true
+o.wildmode = 'full'
 
 -- code indention
-opt.tabstop = 2
-opt.softtabstop = 2
-opt.shiftwidth = 2
-opt.expandtab = true
-opt.smartindent = true
+o.tabstop = 2
+o.softtabstop = 2
+o.shiftwidth = 2
+o.expandtab = true
+o.smartindent = true
 o.splitright = true
--- omnifunc completion
-o.completeopt = "menu,noinsert,noselect"
 
--- statusline
--- don't show useless messages from completion
-opt.shortmess:prepend("c")
-
--- ripgrep
-o.grepprg = [[rg --no-heading --smart-case --vimgrep ]]
-o.grepformat = "%f:%l:%c:%m"
-
--- neovide
-o.guifont = "Dank Mono:h20"
-
-api.nvim_command "colorscheme gruber"
+-- Set colrscheme
+api.nvim_command("colorscheme gruber")
 
 -- mdx
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set filetype=mdx]] })
-
 -- astro
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })
 

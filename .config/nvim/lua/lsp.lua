@@ -1,20 +1,59 @@
-local api = vim.api
-local nvim_lsp = require("lspconfig")
-local util = require("lspconfig/util")
-
--- lsp package installer
-require("mason").setup()
-require("mason-lspconfig").setup({
-  automatic_installation = true
-})
-
--- diagnostics signs
-local signs = { Error = "E", Warn = "W", Hint = "H", Info = "I" }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+local present, lsp = pcall(require, 'lsp-zero')
+if not present then
+  return
 end
 
+local present, null_ls = pcall(require, "null-ls")
+if not present then
+  return
+end
+
+-- Utils
+local lsp_formatting = function(bufnr)
+  vim.lsp.buf.format({
+    async = true,
+    filter = function(client)
+      return client.name ~= "tsserver" and client.name ~= "jsonls"
+    end,
+    bufnr = bufnr,
+  })
+end
+
+local on_attach = function(client, bufnr)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition', remap = false, buffer = bufnr} )
+  vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references, { desc = '[G]oto [R]eferences', remap = false, buffer = bufnr})
+  vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, { desc = '[G]oto [I]mplementation', remap = false, buffer = bufnr})
+  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, { desc =  'Type [D]efinition' , remap = false, buffer = bufnr})
+  vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols, { desc =  '[D]ocument [S]ymbols' , remap = false, buffer = bufnr})
+  vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, { desc =  '[W]orkspace [S]ymbols' , remap = false, buffer = bufnr})
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame' , remap = false, buffer = bufnr})
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction', remap = false, buffer = bufnr})
+  vim.keymap.set('n', "<leader>f", vim.lsp.buf.format, { desc = "[F]ormat current buffer" , remap = false, buffer = bufnr})
+
+  -- format on save
+  if client.server_capabilities.documentRangeFormattingProvider then
+     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        lsp_formatting(bufnr)
+      end,
+    })
+  end
+
+  -- Create a command `:Format` local to the LSP buffer
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    if vim.lsp.buf.format then
+      vim.lsp.buf.format()
+    elseif vim.lsp.buf.formatting then
+      vim.lsp.buf.formatting()
+    end
+  end, { desc = 'Format current buffer with LSP' })
+end
+
+-- Inline Hints
+--end https://github.com/VonHeikemen/lsp-zero.nvim/issues/65
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
@@ -30,77 +69,39 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   },
 })
 
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+-- LSP settings
+lsp.preset('recommended')
 
-local lsp_formatting = function(bufnr)
-  vim.lsp.buf.format({
-    async = true,
-    filter = function(client)
-      return client.name ~= "tsserver" and client.name ~= "jsonls"
-    end,
-    bufnr = bufnr,
-  })
-end
-
--- if you want to set up formatting on save, you can use this as a callback
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-
-local on_attach = function(client, bufnr)
-  -- Enable completion triggered by <c-x><c-o>
-  api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-  local opts = { noremap = true, silent = true }
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-
-  -- Telescope
-  vim.keymap.set("n", "gd", require('telescope.builtin').lsp_definitions, bufopts)
-  vim.keymap.set('n', '<space>D', require('telescope.builtin').lsp_type_definitions, bufopts)
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "gi", require('telescope.builtin').lsp_implementations, bufopts)
-  vim.keymap.set("n", "gr", require('telescope.builtin').lsp_references, bufopts)
-  vim.keymap.set("n", "<leader>d", require('telescope.builtin').lsp_document_symbols, bufopts)
-  vim.keymap.set("n", "<leader>ee", require('telescope.builtin').diagnostics, bufopts)
-
-  vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
-  vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, bufopts)
-  vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover, bufopts)
-  vim.keymap.set("n", "<leader>f", function() lsp_formatting(bufnr) end, bufopts)
-  vim.keymap.set("n", '<leader>k', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set("i", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set("n", "[g", vim.diagnostic.goto_prev, bufopts)
-  vim.keymap.set("n", "]g", vim.diagnostic.goto_next, bufopts)
-
-  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<space>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, bufopts)
-
-  -- format on save
-  if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
-      buffer = bufnr,
-      callback = function()
-        lsp_formatting(bufnr)
-      end,
-    })
-  end
-end
-
---[[ deno ]]
-nvim_lsp.denols.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern("deno.json", "deno.jsonc")
+lsp.ensure_installed({
+  'astro',
+  'elmls',
+  'kotlin_language_server',
+  'emmet_ls',
+  'clangd',
+  'svelte',
+  'vuels',
+  'pylsp',
+  'zls',
+  'tailwindcss',
+  'sumneko_lua',
+  'jsonls',
+  'denols',
+  'tsserver'
 })
 
---[[ typescript ]]
-nvim_lsp.tsserver.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  root_dir = nvim_lsp.util.root_pattern("package.json"),
+-- Configure servers
+--- Fix Undefined global 'vim'
+lsp.configure('sumneko_lua', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { 'vim' }
+            }
+        }
+    }
+})
+
+lsp.configure("tsserver", {
   commands = {
     OrganizeImports = {
       function()
@@ -116,115 +117,95 @@ nvim_lsp.tsserver.setup({
   },
 })
 
---[[ JSON ]]
-nvim_lsp.jsonls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
+
+-- Completion
+local cmp = require('cmp')
+local select_opts = { behavior = cmp.SelectBehavior.Select }
+local cmp_mappings = lsp.defaults.cmp_mappings({
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-y>"] = cmp.config.disable,
+    ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
+    ["<Down>"] = cmp.mapping.select_next_item(select_opts),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
+    ["<C-l>"] = cmp.mapping({
+      i = cmp.mapping.abort(),
+      c = cmp.mapping.close(),
+    }),
+    ["<CR>"] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Insert,
+      select = true,
+    }),
 })
 
---[[ Lua ]]
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
+-- disable completion with tab
+cmp_mappings['<Tab>'] = nil
+cmp_mappings['<S-Tab>'] = nil
 
-nvim_lsp.sumneko_lua.setup({
-  capabilities = capabilities,
+lsp.setup_nvim_cmp({
+  mapping = cmp_mappings
+})
+
+lsp.set_preferences({
+    suggest_lsp_servers = false,
+    sign_icons = {
+        error = 'E',
+        warn = 'W',
+        hint = 'H',
+        info = 'I'
+    }
+})
+
+-- Null LS
+null_ls.setup({
   on_attach = on_attach,
-  settings = {
-    Lua = {
-      runtime = {
-        version = "LuaJIT",
-        path = runtime_path,
-      },
-      diagnostics = {
-        globals = { "vim" },
-      },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      telemetry = {
-        enable = false,
-      },
-    },
+  sources = {
+    -- formatting
+    null_ls.builtins.formatting.prismaFmt,
+    null_ls.builtins.formatting.zigfmt,
+    null_ls.builtins.formatting.clang_format,
+    null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.prettier.with({
+      extra_filetypes = { "mdx" },
+    }),
+    null_ls.builtins.formatting.elm_format,
+    null_ls.builtins.formatting.rescript,
+
+    -- diagnostics
+    null_ls.builtins.diagnostics.php,
+    null_ls.builtins.diagnostics.actionlint,
+    null_ls.builtins.diagnostics.yamllint,
+    null_ls.builtins.diagnostics.eslint_d,
+    -- code actions
+    null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.code_actions.gitsigns,
   },
 })
 
---[[ TailwindCSS ]]
-nvim_lsp.tailwindcss.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  root_dir = util.root_pattern("tailwind.config.js"),
-})
+lsp.nvim_workspace()
+
+lsp.on_attach(on_attach)
+
+lsp.setup()
 
 -- Rust
+local rust_lsp = lsp.build_options('rust_analyzer', {
+  checkOnSave = {
+    command = "clippy",
+  },
+})
+
 require("rust-tools").setup({
   tools = {
     inlay_hints = {
       show_parameter_hints = false,
     },
   },
-
-  server = {
-    on_attach = on_attach,
-    capabilities = capabilities,
-    settings = {
-      ["rust-analyzer"] = {
-        checkOnSave = {
-          command = "clippy",
-        },
-      },
-    },
-  },
+  server = rust_lsp
 })
 
 -- golang
-require("go").setup({})
-
--- Zig
-nvim_lsp.zls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
+local go_lsp = lsp.build_options("go")
+require("go").setup({
+  server = go_lsp
 })
-
--- Python3
-nvim_lsp.pylsp.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
--- Haskell
---[[ nvim_lsp.hls.setup({ ]]
---[[   capabilities = capabilities, ]]
---[[   on_attach = on_attach, ]]
---[[ }) ]]
-
--- Svelte
-nvim_lsp.svelte.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-})
-
--- Vue
---[[ nvim_lsp.vuels.setup({ ]]
---[[   capabilities = capabilities, ]]
---[[   on_attach = on_attach, ]]
---[[ }) ]]
-
--- clangd
-nvim_lsp.clangd.setup({})
-
--- emmet
-nvim_lsp.emmet_ls.setup({
-  capabilities = capabilities,
-  on_attach = on_attach,
-  filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "astro", "svelte", "vue" },
-})
-
--- kotlin
-nvim_lsp.kotlin_language_server.setup({})
-
--- astro
-nvim_lsp.astro.setup({})
-
---[[Elm]]
-nvim_lsp.elmls.setup({})

@@ -52,27 +52,46 @@ require("nvim-treesitter.configs").setup({
         ["<leader>A"] = "@parameter.inner",
       },
     },
+    keymaps = {
+      ["iL"] = {
+        -- you can define your own textobjects directly here
+        go = "(function_definition) @function",
+      },
+      -- or you use the queries from supported languages with textobjects.scm
+      ["af"] = "@function.outer",
+      ["if"] = "@function.inner",
+      ["aC"] = "@class.outer",
+      ["iC"] = "@class.inner",
+      ["ac"] = "@conditional.outer",
+      ["ic"] = "@conditional.inner",
+      ["ae"] = "@block.outer",
+      ["ie"] = "@block.inner",
+      ["al"] = "@loop.outer",
+      ["il"] = "@loop.inner",
+      ["is"] = "@statement.inner",
+      ["as"] = "@statement.outer",
+      ["ad"] = "@comment.outer",
+      ["am"] = "@call.outer",
+      ["im"] = "@call.inner"
+    },
     select = {
       enable = true,
       lookahead = true,
       keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
-        ["ac"] = "@call.outer",
-        ["ic"] = "@call.inner",
-        ["aC"] = "@class.outer",
-        ["iC"] = "@class.inner",
-        ["ib"] = "@parameter.inner",
-        ["ab"] = "@parameter.outer",
-        ["iB"] = "@block.inner",
-        ["aB"] = "@block.outer",
-        ["id"] = "@block.inner",
-        ["ad"] = "@block.outer",
-        ["il"] = "@loop.inner",
-        ["al"] = "@loop.outer",
-        ["ia"] = "@attribute.inner",
-        ["aa"] = "@attribute.outer",
-      },
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        -- Or you can define your own textobjects like this
+        ["iF"] = {
+          python = "(function_definition) @function",
+          cpp = "(function_definition) @function",
+          c = "(function_definition) @function",
+          java = "(method_declaration) @function",
+          go = "(method_declaration) @function"
+        }
+      }
     },
     move = {
       enable = true,
