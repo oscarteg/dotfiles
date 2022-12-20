@@ -76,6 +76,7 @@ return require("packer").startup(function(use)
 
   -- UI
   use("nvim-lualine/lualine.nvim")
+  use('nyoom-engineering/oxocarbon.nvim')
 
   -- Treesitter
   use({
