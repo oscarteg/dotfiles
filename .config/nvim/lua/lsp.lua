@@ -1,3 +1,5 @@
+local root_pattern = require('lspconfig.util').root_pattern
+
 local present, lsp = pcall(require, 'lsp-zero')
 if not present then
   return
@@ -95,8 +97,8 @@ lsp.ensure_installed({
   'tailwindcss',
   'sumneko_lua',
   'jsonls',
-  'denols',
-  'tsserver'
+  'tsserver',
+  'denols'
 })
 
 -- Configure servers
@@ -111,7 +113,13 @@ lsp.configure('sumneko_lua', {
   }
 })
 
+
+lsp.configure("denols", {
+  root_dir = root_pattern("deno.json", "deno.jsonc"),
+})
+
 lsp.configure("tsserver", {
+  root_dir = root_pattern("package.json"),
   commands = {
     OrganizeImports = {
       function()
