@@ -53,11 +53,6 @@ require("nvim-treesitter.configs").setup({
       },
     },
     keymaps = {
-      ["iL"] = {
-        -- you can define your own textobjects directly here
-        go = "(function_definition) @function",
-      },
-      -- or you use the queries from supported languages with textobjects.scm
       ["af"] = "@function.outer",
       ["if"] = "@function.inner",
       ["aC"] = "@class.outer",

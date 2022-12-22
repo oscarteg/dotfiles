@@ -21,22 +21,16 @@ end
                       local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local on_attach = function(client, bufnr)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition', remap = false, buffer = bufnr })
   vim.keymap.set('n', 'gr', require('telescope.builtin').lsp_references,
     { desc = '[G]oto [R]eferences', remap = false, buffer = bufnr })
-  vim.keymap.set('n', 'gI', vim.lsp.buf.implementation,
-    { desc = '[G]oto [I]mplementation', remap = false, buffer = bufnr })
-  vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition,
-    { desc = 'Type [D]efinition', remap = false, buffer = bufnr })
   vim.keymap.set('n', '<leader>ds', require('telescope.builtin').lsp_document_symbols,
     { desc = '[D]ocument [S]ymbols', remap = false, buffer = bufnr })
   vim.keymap.set('n', '<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols,
     { desc = '[W]orkspace [S]ymbols', remap = false, buffer = bufnr })
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = '[R]e[n]ame', remap = false, buffer = bufnr })
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[C]ode [A]ction', remap = false, buffer = bufnr })
-  vim.keymap.set('n', "<leader>f", vim.lsp.buf.format,
-    { desc = "[F]ormat current buffer", remap = false, buffer = bufnr })
-
+  vim.keymap.set('n', "<leader>f", function () lsp_formatting(bufnr) end, { desc = '[F]ormat', remap = false, buffer = bufnr })
+    
   -- format on save
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })

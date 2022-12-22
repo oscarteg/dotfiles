@@ -29,6 +29,9 @@ o.writebackup = false
 o.wildmenu = true
 o.wildmode = 'full'
 
+-- Split vertical below 
+o.splitbelow = true
+
 -- code indention
 o.tabstop = 2
 o.softtabstop = 2
@@ -58,3 +61,6 @@ api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { higroup = 'IncSearch', timeout = 500 }
   end,
 })
+
+-- make test commands execute using dispatch.vim
+vim.g["test#strategy"] = "dispatch"

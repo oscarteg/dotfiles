@@ -73,20 +73,12 @@ map("n", "<C-Down>", ":resize +2<CR>", { silent = true })
 map("n", "<C-Left>", ":vertical resize -2<CR>", { silent = true })
 map("n", "<C-Right>", ":vertical resize +2<CR>", { silent = true })
 
--- run tests in current file
-map("n", "<leader>T", [[<cmd>:TestFile -strategy=dispatch<CR>]], { silent = true })
-
--- Move text up and down
-map("v", "<A-j>", ":m +1<CR>==", { silent = true })
-map("v", "<A-k>", ":m -1<CR>==", { silent = true })
-
 -- Dont put in registere when pasting over something
 map("v", "p", '"_dp', { silent = true })
 
 -- Move text up and down
 map("v", "<A-j>", ":m +1<CR>==", { silent = true })
 map("v", "<A-k>", ":m -1<CR>==", { silent = true })
-map("v", "p", '"_dp', { silent = true })
 
 -- explorer
 map("n", "<C-b>", [[<cmd>NvimTreeFindFileToggle<CR>]], {silent = true})
@@ -103,9 +95,9 @@ map("n", "<leader>tf", "<CMD>TestFile<cr>", { silent = true })
 map("n", "<leader>ts", "<CMD>TestSuite<cr>", { silent = true })
 map("n", "<leader>tl", "<CMD>TestLast<cr>", { silent = true })
 map("n", "<leader>tv", "<CMD>TestVisit<cr>", { silent = true })
+
 -- TodoTelescope
-map("n", "<leader>tf", [[<cmd>TodoTelescope<CR>]], {silent = true})
-map("n", "<leader>td", [[<cmd>TodoQuickFix<CR>]], { silent = true })
+map("n", "<leader>tq", [[<cmd>TodoQuickFix<CR>]], { silent = true })
 -- Twilight
 map("n", "<leader>tt", "<CMD>Twilight<CR>", { silent = true })
 
