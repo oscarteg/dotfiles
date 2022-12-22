@@ -289,6 +289,11 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/twilight.nvim",
     url = "https://github.com/folke/twilight.nvim"
   },
+  undotree = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/undotree",
+    url = "https://github.com/mbbill/undotree"
+  },
   ["vim-dispatch"] = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/vim-dispatch",

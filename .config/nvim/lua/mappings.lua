@@ -20,13 +20,29 @@ map("c", "<C-l>", "<C-c>")
 map("i", "<C-l>", "pumvisible() ? '<C-e>' : '<esc>'", { expr = true })
 
 map("n", "<leader>w", ":w<cr>")
-map("n", "<leader>n", ":Note<cr>")
-map("n", "<leader>y", ":Cppath<cr>")
 map("n", "<C-space>", "/")
-map("n", "<leader>-", ":Explore<cr>")
 map('n', '<leader>d', vim.diagnostic.open_float)
 map('n', '[d', vim.diagnostic.goto_prev)
 map('n', ']d', vim.diagnostic.goto_next)
+
+-- Moving lines up/down in V mode
+map("v", "J", ":m '>+1<CR>gv=gv")
+map("v", "K", ":m '<-2<CR>gv=gv")
+
+-- Combine next line and cursor place holds
+map("n", "J", "mzJ`z")
+
+-- Stay in the middle
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
+
+-- Paste without adding to register
+map("x", "<leader>p", [["_dP]])
+
+-- Replace word that you are on
+map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 
 -- Buffer
 map("n", "<leader>/", "<cmd>noh<CR>")
@@ -35,6 +51,7 @@ map("n", "<leader>q", "<cmd>q<CR>")
 map("n", "<leader>r", "<cmd>make<CR>")
 map("n", "<leader>bD", "<cmd>%bdelete<CR>")
 
+-- Tabs
 map("n", "tn", ":tabnew<CR>")
 map("n", "tk", ":tabnext<CR>")
 map("n", "tj", ":tabprev<CR>")
@@ -44,6 +61,7 @@ map("n", "<C-j>", "<C-w><C-j>")
 map("n", "<C-h>", "<C-w><C-h>")
 map("n", "<C-k>", "<C-w><C-k>")
 map("n", "<C-l>", "<C-w><C-l>")
+
 -- Have j and k navigate visual lines rather than logical ones
 map("n", "j", "gj")
 map("n", "k", "gk")
@@ -71,7 +89,7 @@ map("v", "<A-k>", ":m -1<CR>==", { silent = true })
 map("v", "p", '"_dp', { silent = true })
 
 -- explorer
-map("n", "<leader>b", ":NvimTreeFindFileToggle", {silent = true})
+map("n", "<C-b>", [[<cmd>NvimTreeFindFileToggle<CR>]], {silent = true})
 
 -- vim-fugitive (<leader>v mappings)
 map("n", "<leader>vs", "<cmd>G<CR>")
@@ -80,16 +98,16 @@ map("n", "<leader>vf", "<cmd>diffget //2<CR>") -- current branch / HEAD
 map("n", "<leader>vj", "<cmd>diffget //3<CR>") -- merge branch
 
 -- Vim test (<leader>t mappings)
-map("n", "<leader>tn", ":TestNearest<cr>", { silent = true })
-map("n", "<leader>tf", ":TestFile<cr>", { silent = true })
-map("n", "<leader>ts", ":TestSuite<cr>", { silent = true })
-map("n", "<leader>tl", ":TestLast<cr>", { silent = true })
-map("n", "<leader>tv", ":TestVisit<cr>", { silent = true })
+map("n", "<leader>tn", "<CMD>TestNearest<cr>", { silent = true })
+map("n", "<leader>tf", "<CMD>TestFile<cr>", { silent = true })
+map("n", "<leader>ts", "<CMD>TestSuite<cr>", { silent = true })
+map("n", "<leader>tl", "<CMD>TestLast<cr>", { silent = true })
+map("n", "<leader>tv", "<CMD>TestVisit<cr>", { silent = true })
 -- TodoTelescope
 map("n", "<leader>tf", [[<cmd>TodoTelescope<CR>]], {silent = true})
 map("n", "<leader>td", [[<cmd>TodoQuickFix<CR>]], { silent = true })
 -- Twilight
-map("n", "<leader>tt", ":Twilight", { silent = true })
+map("n", "<leader>tt", "<CMD>Twilight<CR>", { silent = true })
 
 -- Telescope (<leader>f mappings)
 map('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
@@ -100,9 +118,12 @@ map('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B
 map('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind current [W]ord' })
 map('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
 
+-- UndotreeToggle
+map("n", "<leader>u", vim.cmd.UndotreeToggle)
+
 -- Harpoon
 map("n", "<leader>m", require("harpoon.mark").add_file)
-map("n", "<leader>fm", ":Telescope harpoon marks<cr>")
+map("n", "<leader>fm", "<CMD>Telescope harpoon marks<cr>")
 
 -- ThePrimeagen/refactoring
 map("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})

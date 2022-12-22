@@ -1,29 +1,24 @@
 local root_pattern = require('lspconfig.util').root_pattern
 
 local present, lsp = pcall(require, 'lsp-zero')
-if not present then
-  return
-end
+if not present then return end
 
 local present, null_ls = pcall(require, "null-ls")
-if not present then
-  return
-end
+if not present then return end
 
 -- Utils
 local lsp_formatting = function(bufnr)
   vim.lsp.buf.format({
-    async = true,
     filter = function(client)
       -- return client.name ~= "tsserver" and client.name ~= "jsonls"
-      return client.name == "null_ls"
+      return client.name == "null-ls"
     end,
     bufnr = bufnr,
   })
 end
 
 -- if you want to set up formatting on save, you can use this as a callback
-local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+                      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = '[G]oto [D]efinition', remap = false, buffer = bufnr })
@@ -43,29 +38,22 @@ local on_attach = function(client, bufnr)
     { desc = "[F]ormat current buffer", remap = false, buffer = bufnr })
 
   -- format on save
-  if client.server_capabilities.documentRangeFormattingProvider then
+  if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
       buffer = bufnr,
-      callback = function()
-        lsp_formatting(bufnr)
-      end,
+      callback = function () lsp_formatting(bufnr) end
     })
   end
-
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    if vim.lsp.buf.format then
-      vim.lsp.buf.format()
-    elseif vim.lsp.buf.formatting then
-      vim.lsp.buf.formatting()
-    end
+  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function()
+    lsp_formatting(bufnr)
   end, { desc = 'Format current buffer with LSP' })
 end
 
 -- Inline Hints
---end https://github.com/VonHeikemen/lsp-zero.nvim/issues/65
+-- https://github.com/VonHeikemen/lsp-zero.nvim/issues/65
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
   virtual_text = true,
@@ -91,7 +79,6 @@ lsp.ensure_installed({
   'emmet_ls',
   'clangd',
   'svelte',
-  'vuels',
   'pylsp',
   'zls',
   'tailwindcss',
@@ -181,6 +168,7 @@ null_ls.setup({
     -- formatting
     null_ls.builtins.formatting.zigfmt,
     null_ls.builtins.formatting.clang_format,
+    null_ls.builtins.formatting.yamlfmt,
     null_ls.builtins.formatting.eslint_d,
     null_ls.builtins.formatting.prettier.with({
       extra_filetypes = { "mdx" },
@@ -219,7 +207,7 @@ require("rust-tools").setup({
   server = rust_lsp
 })
 
--- golang
+-- Golang
 local go_lsp = lsp.build_options("go")
 require("go").setup({
   server = go_lsp

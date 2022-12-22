@@ -18,6 +18,7 @@ return require("packer").startup(function(use)
   use("tpope/vim-dispatch") -- Execution
   use("github/copilot.vim") -- AI Code Completion
   use("mfussenegger/nvim-dap") -- Debugger
+  use("numToStr/Comment.nvim") -- Comment Code
 
   -- Git
   use("tpope/vim-fugitive")
@@ -40,14 +41,11 @@ return require("packer").startup(function(use)
     }
   })
   use("ggandor/leap.nvim") -- Motion
+  use("mbbill/undotree")
 
   --- lsp package manager
   use("williamboman/mason.nvim")
   use("williamboman/mason-lspconfig.nvim")
-
-
-  -- comment
-  use("numToStr/Comment.nvim") -- Comment Code
 
   -- LSP
   use {
@@ -95,7 +93,6 @@ return require("packer").startup(function(use)
   use("rescript-lang/vim-rescript") -- Rescript
   use("ray-x/go.nvim") -- Go
   use("ziglang/zig.vim") -- Zig
-
 
   -- Explorer
   use("nvim-telescope/telescope.nvim") -- Fuzzy finder
