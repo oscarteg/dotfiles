@@ -2,14 +2,14 @@ local g = vim.g
 local ls = require("luasnip")
 
 local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
-  end
-  vim.keymap.set(mode, lhs, rhs, options)
+	local options = { noremap = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.keymap.set(mode, lhs, rhs, options)
 end
 
---Remap space as leader key
+-- Remap space as leader key
 map("n", "<space>", "", { silent = true })
 g.mapleader = " "
 g.maplocalleader = " "
@@ -21,9 +21,9 @@ map("i", "<C-l>", "pumvisible() ? '<C-e>' : '<esc>'", { expr = true })
 
 map("n", "<leader>w", ":w<cr>")
 map("n", "<C-space>", "/")
-map('n', '<leader>d', vim.diagnostic.open_float)
-map('n', '[d', vim.diagnostic.goto_prev)
-map('n', ']d', vim.diagnostic.goto_next)
+map("n", "<leader>d", vim.diagnostic.open_float)
+map("n", "[d", vim.diagnostic.goto_prev)
+map("n", "]d", vim.diagnostic.goto_next)
 
 -- Moving lines up/down in V mode
 map("v", "J", ":m '>+1<CR>gv=gv")
@@ -56,12 +56,6 @@ map("n", "tn", ":tabnew<CR>")
 map("n", "tk", ":tabnext<CR>")
 map("n", "tj", ":tabprev<CR>")
 
--- navigation
-map("n", "<C-j>", "<C-w><C-j>")
-map("n", "<C-h>", "<C-w><C-h>")
-map("n", "<C-k>", "<C-w><C-k>")
-map("n", "<C-l>", "<C-w><C-l>")
-
 -- Have j and k navigate visual lines rather than logical ones
 map("n", "j", "gj")
 map("n", "k", "gk")
@@ -81,7 +75,7 @@ map("v", "<A-j>", ":m +1<CR>==", { silent = true })
 map("v", "<A-k>", ":m -1<CR>==", { silent = true })
 
 -- explorer
-map("n", "<C-b>", [[<cmd>NvimTreeFindFileToggle<CR>]], {silent = true})
+map("n", "<C-b>", [[<cmd>NvimTreeFindFileToggle<CR>]], { silent = true })
 
 -- vim-fugitive (<leader>v mappings)
 map("n", "<leader>vs", "<cmd>G<CR>")
@@ -102,13 +96,13 @@ map("n", "<leader>tq", [[<cmd>TodoQuickFix<CR>]], { silent = true })
 map("n", "<leader>tt", "<CMD>Twilight<CR>", { silent = true })
 
 -- Telescope (<leader>f mappings)
-map('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]iles' })
-map('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = '[F]ind [G]rep' })
-map('n', '<leader>fs', require('telescope.builtin').git_status, { desc = '[F]ind [G]it status' })
-map('n', '<leader>fh', require('telescope.builtin').oldfiles, { desc = '[F]ind [H]istory' })
-map('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffers' })
-map('n', '<leader>fw', require('telescope.builtin').grep_string, { desc = '[F]ind current [W]ord' })
-map('n', '<leader>fd', require('telescope.builtin').diagnostics, { desc = '[F]ind [D]iagnostics' })
+map("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "[F]ind [F]iles" })
+map("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind [G]rep" })
+map("n", "<leader>fs", require("telescope.builtin").git_status, { desc = "[F]ind [G]it status" })
+map("n", "<leader>fh", require("telescope.builtin").oldfiles, { desc = "[F]ind [H]istory" })
+map("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "[F]ind [B]uffers" })
+map("n", "<leader>fw", require("telescope.builtin").grep_string, { desc = "[F]ind current [W]ord" })
+map("n", "<leader>fd", require("telescope.builtin").diagnostics, { desc = "[F]ind [D]iagnostics" })
 
 -- UndotreeToggle
 map("n", "<leader>u", vim.cmd.UndotreeToggle)
@@ -118,14 +112,49 @@ map("n", "<leader>m", require("harpoon.mark").add_file)
 map("n", "<leader>fm", "<CMD>Telescope harpoon marks<cr>")
 
 -- ThePrimeagen/refactoring
-map("v", "<leader>re", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]], {noremap = true, silent = true, expr = false})
-map("v", "<leader>rf", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]], {noremap = true, silent = true, expr = false})
-map("v", "<leader>rv", [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]], {noremap = true, silent = true, expr = false})
-map("v", "<leader>ri", [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+map(
+	"v",
+	"<leader>re",
+	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+	{ noremap = true, silent = true, expr = false }
+)
+map(
+	"v",
+	"<leader>rf",
+	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+	{ noremap = true, silent = true, expr = false }
+)
+map(
+	"v",
+	"<leader>rv",
+	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
+	{ noremap = true, silent = true, expr = false }
+)
+map(
+	"v",
+	"<leader>ri",
+	[[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+	{ noremap = true, silent = true, expr = false }
+)
 
 -- Extract block doesn't need visual mode
-map("n", "<leader>rb", [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]], {noremap = true, silent = true, expr = false})
-map("n", "<leader>rbf", [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]], {noremap = true, silent = true, expr = false})
+map(
+	"n",
+	"<leader>rb",
+	[[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]],
+	{ noremap = true, silent = true, expr = false }
+)
+map(
+	"n",
+	"<leader>rbf",
+	[[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]],
+	{ noremap = true, silent = true, expr = false }
+)
 
 -- Inline variable can also pick up the identifier currently under the cursor without visual mode
-map("n", "<leader>ri", [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]], {noremap = true, silent = true, expr = false})
+map(
+	"n",
+	"<leader>ri",
+	[[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+	{ noremap = true, silent = true, expr = false }
+)
