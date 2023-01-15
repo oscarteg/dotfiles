@@ -149,6 +149,11 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/leap.nvim",
     url = "https://github.com/ggandor/leap.nvim"
   },
+  ["lsp-format.nvim"] = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/lsp-format.nvim",
+    url = "https://github.com/lukas-reineke/lsp-format.nvim"
+  },
   ["lsp-zero.nvim"] = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/lsp-zero.nvim",
@@ -164,25 +169,10 @@ _G.packer_plugins = {
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
     url = "https://github.com/williamboman/mason-lspconfig.nvim"
   },
-  ["mason-null-ls.nvim"] = {
-    loaded = true,
-    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/mason-null-ls.nvim",
-    url = "https://github.com/jay-babu/mason-null-ls.nvim"
-  },
   ["mason.nvim"] = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
-  },
-  neorg = {
-    loaded = true,
-    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/neorg",
-    url = "https://github.com/nvim-neorg/neorg"
-  },
-  ["neorg-telescope"] = {
-    loaded = true,
-    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/neorg-telescope",
-    url = "https://github.com/nvim-neorg/neorg-telescope"
   },
   ["null-ls.nvim"] = {
     loaded = true,
@@ -203,6 +193,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/nvim-dap",
     url = "https://github.com/mfussenegger/nvim-dap"
+  },
+  ["nvim-dap-ui"] = {
+    loaded = true,
+    path = "/Users/oscar/.local/share/nvim/site/pack/packer/start/nvim-dap-ui",
+    url = "https://github.com/rcarriga/nvim-dap-ui"
   },
   ["nvim-lspconfig"] = {
     loaded = true,

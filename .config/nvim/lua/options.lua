@@ -29,7 +29,7 @@ o.writebackup = false
 o.wildmenu = true
 o.wildmode = 'full'
 
--- Split vertical below 
+-- Split vertical below
 o.splitbelow = true
 
 -- code indention
@@ -50,7 +50,6 @@ api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[s
 
 -- set compiler to bun when typescript file
 api.nvim_create_autocmd("Filetype", { pattern = { "*.ts", "*.js" }, command = [[compiler bun]] })
-api.nvim_create_autocmd("BufEnter", { pattern = "*.ts", command = [[let b:dispatch = 'bun %']] })
 
 -- highlight text on yank
 api.nvim_create_autocmd('TextYankPost', {
@@ -64,3 +63,8 @@ api.nvim_create_autocmd('TextYankPost', {
 
 -- make test commands execute using dispatch.vim
 vim.g["test#strategy"] = "dispatch"
+
+
+-- Sync format when saving and exiting the buffer
+-- https://github.com/lukas-reineke/lsp-format.nvim#wq-will-not-format-when-not-using-sync
+vim.cmd("cabbrev wq execute \"Format sync\" <bar> wq")

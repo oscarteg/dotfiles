@@ -2,11 +2,11 @@ local g = vim.g
 local ls = require("luasnip")
 
 local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	vim.keymap.set(mode, lhs, rhs, options)
+  local options = { noremap = true }
+  if opts then
+    options = vim.tbl_extend("force", options, opts)
+  end
+  vim.keymap.set(mode, lhs, rhs, options)
 end
 
 -- Remap space as leader key
@@ -113,48 +113,56 @@ map("n", "<leader>fm", "<CMD>Telescope harpoon marks<cr>")
 
 -- ThePrimeagen/refactoring
 map(
-	"v",
-	"<leader>re",
-	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
-	{ noremap = true, silent = true, expr = false }
+  "v",
+  "<leader>re",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
+  { noremap = true, silent = true, expr = false }
 )
 map(
-	"v",
-	"<leader>rf",
-	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
-	{ noremap = true, silent = true, expr = false }
+  "v",
+  "<leader>rf",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
+  { noremap = true, silent = true, expr = false }
 )
 map(
-	"v",
-	"<leader>rv",
-	[[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
-	{ noremap = true, silent = true, expr = false }
+  "v",
+  "<leader>rv",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
+  { noremap = true, silent = true, expr = false }
 )
 map(
-	"v",
-	"<leader>ri",
-	[[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
-	{ noremap = true, silent = true, expr = false }
+  "v",
+  "<leader>ri",
+  [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+  { noremap = true, silent = true, expr = false }
 )
 
 -- Extract block doesn't need visual mode
 map(
-	"n",
-	"<leader>rb",
-	[[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]],
-	{ noremap = true, silent = true, expr = false }
+  "n",
+  "<leader>rb",
+  [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]],
+  { noremap = true, silent = true, expr = false }
 )
 map(
-	"n",
-	"<leader>rbf",
-	[[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]],
-	{ noremap = true, silent = true, expr = false }
+  "n",
+  "<leader>rbf",
+  [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]],
+  { noremap = true, silent = true, expr = false }
 )
 
 -- Inline variable can also pick up the identifier currently under the cursor without visual mode
 map(
-	"n",
-	"<leader>ri",
-	[[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
-	{ noremap = true, silent = true, expr = false }
+  "n",
+  "<leader>ri",
+  [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
+  { noremap = true, silent = true, expr = false }
 )
+
+-- Dap mappings
+map('n', '<F5>', [[<cmd>lua require('dap').continue()<cr>]], { noremap = true, silent = true })
+map('n', '<F6>', [[<cmd>lua require('dap').step_over()<cr>]], { noremap = true, silent = true })
+map('n', '<F7>', [[<cmd>lua require('dap').step_into()<cr>]], { noremap = true, silent = true })
+map('n', '<F8>', [[<cmd>lua require('dap').step_out()<cr>]], { noremap = true, silent = true })
+map('n', '<leader>b', [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], { noremap = true, silent = true })
+map('n', '<M-b>', [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], { noremap = true, silent = true })

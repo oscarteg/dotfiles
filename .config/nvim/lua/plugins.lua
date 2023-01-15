@@ -18,7 +18,9 @@ return require("packer").startup(function(use)
   use("tpope/vim-dispatch") -- Execution
   use("github/copilot.vim") -- AI Code Completion
   use("mfussenegger/nvim-dap") -- Debugger
+  use("rcarriga/nvim-dap-ui") -- Dap ui
   use("numToStr/Comment.nvim") -- Comment Code
+  use("lukas-reineke/lsp-format.nvim") -- Format Code
 
   -- Git
   use("tpope/vim-fugitive")
@@ -34,18 +36,8 @@ return require("packer").startup(function(use)
   use("ThePrimeagen/refactoring.nvim") -- Refactoring
   use("folke/twilight.nvim") -- Zen mode
   use("folke/todo-comments.nvim")
-  use({
-    "nvim-neorg/neorg",
-    requires = {
-      "nvim-neorg/neorg-telescope",
-    },
-  })
   use("ggandor/leap.nvim") -- Motion
   use("mbbill/undotree")
-
-  --- lsp package manager
-  use("williamboman/mason.nvim")
-  use("williamboman/mason-lspconfig.nvim")
 
   -- LSP
   use({
@@ -56,7 +48,6 @@ return require("packer").startup(function(use)
       { "williamboman/mason.nvim" },
       { "williamboman/mason-lspconfig.nvim" },
       { "jose-elias-alvarez/null-ls.nvim" },
-      { "jay-babu/mason-null-ls.nvim" },
 
       -- Autocompletion
       { "hrsh7th/nvim-cmp" },
