@@ -1,3 +1,4 @@
+require("utils")
 require("plugins")
 require("autopairs")
 require("comments")
@@ -8,7 +9,6 @@ require("snippets")
 require("statusline")
 require("telescope-config")
 require("treesitter")
-require("utils")
 require("mappings")
 
 -- override options set by plugins

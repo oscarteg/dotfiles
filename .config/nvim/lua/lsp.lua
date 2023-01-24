@@ -12,7 +12,6 @@ end
 
 lsp_format.setup({
   exclude = { "tsserver", "denols" },
-  sync = true,
 })
 
 local on_attach = function(client, bufnr)
@@ -124,7 +123,14 @@ end
 
 rust_tools.setup({
   tools = { inlay_hints = { show_parameter_hints = false } },
-  server = rust_lsp,
+  server = {
+    on_attach = function(client, bufnr)
+      rust_lsp.on_attach(client, bufnr)
+
+      -- Use hover actions of rust-tools to add the actions
+      vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
+    end,
+  },
 })
 
 -- Go
@@ -155,6 +161,7 @@ null_ls.setup({
     null_ls.builtins.diagnostics.yamllint,
     null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.diagnostics.luacheck,
+    null_ls.builtins.diagnostics.cmake_lint,
     null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.code_actions.gitsigns,
     null_ls.builtins.code_actions.refactoring,
@@ -162,5 +169,6 @@ null_ls.setup({
     null_ls.builtins.formatting.clang_format,
     null_ls.builtins.formatting.prettier,
     null_ls.builtins.formatting.eslint_d,
+    null_ls.builtins.formatting.cmake_format,
   },
 })

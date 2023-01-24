@@ -301,3 +301,6 @@ Cargo.lock
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,intellij,macos,node,go,rustesy
 
 _esy/
+
+# Hack to fix for M1
+/Users/oscar/Projects/Work/polariks/polariks-v2.0/Backend/Dockerfile

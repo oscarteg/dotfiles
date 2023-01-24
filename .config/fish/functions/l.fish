@@ -1,4 +1,4 @@
 # This is equivalent to entering the following function:
-function ela --wraps exa --description 'alias ela=exa -la'
+function l --wraps exa --description 'alias l=exa -la'
     exa -la $argv
 end

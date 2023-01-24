@@ -182,6 +182,7 @@
 
   # Include summaries of merged commits in newly created merge commit messages
   log = true
+	tool = nvimdiff
 
 [push]
 
@@ -212,12 +213,6 @@
 [url "git://gist.github.com/"]
 
   insteadOf = "gist:"
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [diff "sopsdiffer"]
 	textconv = sops -d
 [pull]
@@ -226,3 +221,6 @@
 	defaultBranch = main
 [rebase]
 	autoStash = true
+
+[mergetool "nvimdiff"]
+	layout = LOCAL,BASE,REMOTE / MERGED + BASE,LOCAL + BASE,REMOTE
