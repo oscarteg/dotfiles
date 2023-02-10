@@ -1,5 +1,23 @@
-require("gitsigns").setup({
+-- Do not load up plugin when in diff mode.
+if vim.opt.diff:get() then
+  return
+end
+
+local present, gitsigns = pcall(require, "gitsigns")
+if not present then
+  return
+end
+
+gitsigns.setup({
   current_line_blame = true,
+  signs = {
+    add = { hl = "GitSignsAdd", text = "┃" },
+    change = { hl = "GitSignsChange", text = "┃" },
+    delete = { hl = "GitSignsDelete", text = "▁" },
+    topdelete = { hl = "GitSignsDelete", text = "▔" },
+    changedelete = { hl = "GitSignsChangeDelete", text = "┃" },
+    untracked = { hl = "GitSignsUntracked", text = "┃" },
+  },
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
@@ -49,6 +67,7 @@ require("gitsigns").setup({
     map("n", "<leader>hD", function()
       gs.diffthis("~")
     end)
+    map("n", "'r", gs.refresh)
 
     map("n", "<leader>td", gs.toggle_deleted)
 

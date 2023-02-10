@@ -38,6 +38,14 @@ return require("packer").startup(function(use)
   use("folke/todo-comments.nvim")
   use("ggandor/leap.nvim") -- Motion
   use("mbbill/undotree")
+  use({
+    'phaazon/mind.nvim',
+    branch = 'v2.2',
+    requires = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require 'mind'.setup()
+    end
+  })
 
   -- LSP
   use({

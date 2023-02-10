@@ -9,7 +9,5 @@ require("twilight").setup({
 require("leap").set_default_keymaps()
 
 require('refactoring').setup({})
-
 -- Harpoon (bookmarks manager)
 require("harpoon").setup()
-require("telescope").load_extension('harpoon')

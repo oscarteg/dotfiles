@@ -28,6 +28,7 @@ o.updatetime = 250
 o.writebackup = false
 o.wildmenu = true
 o.wildmode = 'full'
+-- opt.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
 
 -- Split vertical below
 o.splitbelow = true
@@ -49,7 +50,7 @@ api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })
 
 -- set compiler to bun when typescript file
-api.nvim_create_autocmd("Filetype", { pattern = { "*.ts", "*.js" }, command = [[compiler bun]] })
+api.nvim_create_autocmd("BufRead,BufEnter", { pattern = { "*.ts", "*.js" }, command = [[compiler bun]] })
 
 -- highlight text on yank
 api.nvim_create_autocmd('TextYankPost', {
@@ -61,8 +62,8 @@ api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- make test commands execute using dispatch.vim
-vim.g["test#strategy"] = "dispatch"
+-- make test commands execute using neovim terminal
+vim.g["test#strategy"] = "neovim"
 
 
 -- Sync format when saving and exiting the buffer

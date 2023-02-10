@@ -30,7 +30,8 @@ require("nvim-treesitter.configs").setup({
     "cpp",
     "cmake",
     "astro",
-    "elm"
+    "elm",
+    "toml"
   },
   highlight = {
     enable = true,

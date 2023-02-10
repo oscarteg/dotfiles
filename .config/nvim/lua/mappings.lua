@@ -48,7 +48,7 @@ map("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 map("n", "<leader>/", "<cmd>noh<CR>")
 map("n", "<leader>w", "<cmd>update<CR>")
 map("n", "<leader>q", "<cmd>q<CR>")
-map("n", "<leader>r", "<cmd>make<CR>")
+map("n", "<leader>mp", "<cmd>make<CR>")
 map("n", "<leader>bD", "<cmd>%bdelete<CR>")
 
 -- Tabs
@@ -91,7 +91,7 @@ map("n", "<leader>tl", "<CMD>TestLast<cr>", { silent = true })
 map("n", "<leader>tv", "<CMD>TestVisit<cr>", { silent = true })
 
 -- TodoTelescope
-map("n", "<leader>tq", [[<cmd>TodoQuickFix<CR>]], { silent = true })
+map("n", "<leader>tq", [[<cmd>TodoQuickFix theme=ivy<CR>]], { silent = true })
 -- Twilight
 map("n", "<leader>tt", "<CMD>Twilight<CR>", { silent = true })
 
@@ -109,7 +109,7 @@ map("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 -- Harpoon
 map("n", "<leader>m", require("harpoon.mark").add_file)
-map("n", "<leader>fm", "<CMD>Telescope harpoon marks<cr>")
+map("n", "<leader>fm", "<CMD>Telescope harpoon marks theme=ivy<cr>")
 
 -- ThePrimeagen/refactoring
 map(

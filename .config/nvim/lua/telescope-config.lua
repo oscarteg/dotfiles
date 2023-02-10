@@ -3,6 +3,10 @@ require("telescope").setup({
     color_devicons = false,
     file_ignore_patterns = { "node_modules", ".git", "build", "dist" },
     dynamic_preview_title = true,
+    theme = "ivy",
+    path_display = {
+      truncate = 3,
+    }
   },
   pickers = {
     find_files = {
@@ -30,6 +34,9 @@ require("telescope").setup({
         return { "--hidden" }
       end
     },
+    buffers = {
+      theme = "ivy"
+    },
   },
 
   extensions = {
@@ -47,3 +54,5 @@ require("telescope").load_extension("ui-select")
 require("telescope").load_extension("file_browser")
 -- Extension for ThePrimeagen/refactoring
 require("telescope").load_extension("refactoring")
+-- Extension for ThePrimeagen/harpoon
+require("telescope").load_extension("harpoon")
