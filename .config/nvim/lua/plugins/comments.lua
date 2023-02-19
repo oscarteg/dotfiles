@@ -10,6 +10,7 @@ return {
     { 'gb', desc = 'Toggle comment block' },
     { 'gc', desc = 'Toggle comment line' },
     { 'gc', desc = 'Toggle comment line', mode = 'v' },
+    { 'gb', desc = 'Toggle comment line', mode = 'v' },
   },
   dependencies = 'JoosepAlviste/nvim-ts-context-commentstring', -- context-commentstring module for treesitter
   config = config,

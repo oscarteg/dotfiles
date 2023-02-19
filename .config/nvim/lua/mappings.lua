@@ -163,13 +163,3 @@ map(
   [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
   { noremap = true, silent = true, expr = false }
 )
-
-vim.cmd [[cabbrev wq execute "Format sync" <bar> wq]]
-
--- Dap mappings
-map('n', '<F5>', [[<cmd>lua require('dap').continue()<cr>]], { noremap = true, silent = true })
-map('n', '<F6>', [[<cmd>lua require('dap').step_over()<cr>]], { noremap = true, silent = true })
-map('n', '<F7>', [[<cmd>lua require('dap').step_into()<cr>]], { noremap = true, silent = true })
-map('n', '<F8>', [[<cmd>lua require('dap').step_out()<cr>]], { noremap = true, silent = true })
-map('n', '<leader>b', [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], { noremap = true, silent = true })
-map('n', '<M-b>', [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], { noremap = true, silent = true })

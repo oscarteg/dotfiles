@@ -136,5 +136,5 @@ return {
     config = config
   },
   { 'windwp/nvim-ts-autotag', ft = { 'markdown', 'vue', 'html', 'jsx', 'tsx' } }, -- auto complete HTML tags
-  { "nvim-treesitter/playground", }
+  { "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" }
 }

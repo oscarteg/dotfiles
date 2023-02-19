@@ -1,4 +1,10 @@
 return {
-    "folke/todo-comments.nvim",
-    config = true,
+  "folke/todo-comments.nvim",
+  cmd = {
+    "TodoTrouble",
+    "TodoTelescope",
+    "TodoLocList",
+    "TodoQuickFix"
+  },
+  config = true,
 }

@@ -63,7 +63,6 @@ api.nvim_create_autocmd('TextYankPost', {
 })
 
 -- make test commands execute using neovim terminal
-vim.g["test#strategy"] = "neovim"
 
 
 -- Sync format when saving and exiting the buffer

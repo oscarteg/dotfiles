@@ -23,6 +23,8 @@ local on_attach = function(client, bufnr)
     { desc = "[C]ode [A]ction", remap = false, buffer = bufnr }
   )
 
+  vim.cmd [[cabbrev wq execute "Format sync" <bar> wq]]
+
   lsp_format.on_attach(client, bufnr)
 end
 

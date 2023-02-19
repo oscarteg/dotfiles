@@ -2,7 +2,7 @@ return {
   "nvim-lua/plenary.nvim", -- Required by most
 
   -- Coding
-  "tpope/vim-dispatch", -- Execution
+  { "tpope/vim-dispatch", event = "BufReadPre" },
   { "github/copilot.vim",
     event = 'VeryLazy'
   }, -- AI Code Completion
