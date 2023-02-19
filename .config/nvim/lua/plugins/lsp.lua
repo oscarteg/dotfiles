@@ -52,10 +52,10 @@ local config = function()
   lsp.configure("denols", { root_dir = root_pattern("deno.json", "deno.jsonc") })
 
   lsp.configure("tsserver", {
-    -- on_attach = function(client, bufnr)
-    --   require("twoslash-queries").attach(client, bufnr)
-    --   on_attach(client, bufnr)
-    -- end,
+    on_attach = function(client, bufnr)
+      require("twoslash-queries").attach(client, bufnr)
+      on_attach(client, bufnr)
+    end,
     root_dir = root_pattern("package.json"),
     commands = {
       OrganizeImports = {
