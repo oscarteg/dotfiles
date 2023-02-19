@@ -1,5 +1,4 @@
 local g = vim.g
-local ls = require("luasnip")
 
 local function map(mode, lhs, rhs, opts)
   local options = { noremap = true }
@@ -19,11 +18,17 @@ map("v", "<C-l>", "<esc>")
 map("c", "<C-l>", "<C-c>")
 map("i", "<C-l>", "pumvisible() ? '<C-e>' : '<esc>'", { expr = true })
 
-map("n", "<leader>w", ":w<cr>")
+-- save without formatting
+map("n", "<leader>w", ":noa w<cr>")
 map("n", "<C-space>", "/")
 map("n", "<leader>d", vim.diagnostic.open_float)
 map("n", "[d", vim.diagnostic.goto_prev)
 map("n", "]d", vim.diagnostic.goto_next)
+
+
+-- buffers
+map("n", "<leader>bo", "<cmd>%bd|e#<cr>", { desc = "Close all buffers but the current one" })
+
 
 -- Moving lines up/down in V mode
 map("v", "J", ":m '>+1<CR>gv=gv")
@@ -75,7 +80,7 @@ map("v", "<A-j>", ":m +1<CR>==", { silent = true })
 map("v", "<A-k>", ":m -1<CR>==", { silent = true })
 
 -- explorer
-map("n", "<C-b>", [[<cmd>NvimTreeFindFileToggle<CR>]], { silent = true })
+-- map("n", "<C-b>", [[<cmd>NvimTreeFindFileToggle<CR>]], { silent = true })
 
 -- vim-fugitive (<leader>v mappings)
 map("n", "<leader>vs", "<cmd>G<CR>")
@@ -158,6 +163,8 @@ map(
   [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
   { noremap = true, silent = true, expr = false }
 )
+
+vim.cmd [[cabbrev wq execute "Format sync" <bar> wq]]
 
 -- Dap mappings
 map('n', '<F5>', [[<cmd>lua require('dap').continue()<cr>]], { noremap = true, silent = true })

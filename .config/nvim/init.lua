@@ -1,15 +1,3 @@
-require("utils")
-require("plugins")
-require("autopairs")
-require("comments")
-require("explorer")
-require("git")
-require("lsp")
-require("snippets")
-require("statusline")
-require("telescope-config")
-require("treesitter")
-require("mappings")
-
--- override options set by plugins
 require("options")
+require("lazy-config")
+require("mappings")
