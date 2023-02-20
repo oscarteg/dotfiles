@@ -11,12 +11,13 @@ if not vim.loop.fs_stat(lazypath) then
     lazypath,
   })
 end
+
 vim.opt.runtimepath:prepend(lazypath)
 
 -- load lazy
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { "habamax" } },
+  install = { colorscheme = { "gruber" } },
   checker = {
     concurrency = 5,
     enabled = true,
@@ -43,6 +44,4 @@ require("lazy").setup("plugins", {
     },
   },
   diff = { cmd = 'diffview.nvim' },
-  ui = { border = 'rounded' },
-  debug = false,
 })

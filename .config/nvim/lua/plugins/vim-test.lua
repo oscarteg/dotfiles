@@ -2,11 +2,11 @@ return {
   {
     "vim-test/vim-test",
     keys = {
-      "<leader>tn", -- Run nearest test
-      "<leader>tf", -- Run test files
-      "<leader>ts", -- Run test suite
-      "<leader>tl", -- Run last test
-      "<leader>tv", -- Run all tests
+      { "<leader>tn", "<CMD>TestNearest<cr>" },
+      { "<leader>t",  "<CMD>TestFile<cr>" },
+      { "<leader>tk", "<CMD>TestSuite<cr>" },
+      { "<leader>tl", "<CMD>TestLast<cr>" },
+      { "<leader>tv", "<CMD>TestVisit<cr>" },
     },
     config = function()
       vim.g["test#strategy"] = "neovim"

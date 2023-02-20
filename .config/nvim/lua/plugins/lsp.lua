@@ -1,21 +1,26 @@
 local on_attach = function(client, bufnr)
   local lsp_format = require("lsp-format")
+
   vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {
     desc = "[G]oto [R]eferences",
     remap = false,
     buffer = bufnr,
   })
+
   vim.keymap.set("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, {
     desc = "[D]ocument [S]ymbols",
     remap = false,
     buffer = bufnr,
   })
+
   vim.keymap.set("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, {
     desc = "[W]orkspace [S]ymbols",
     remap = false,
     buffer = bufnr,
   })
+
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame", remap = false, buffer = bufnr })
+
   vim.keymap.set(
     "n",
     "<leader>ca",
@@ -87,11 +92,10 @@ local config = function()
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     }),
+    -- disable completion with tab
+    ["<Tab>"] = vim.NIL,
+    ["<S-Tab>"] = vim.NIL
   })
-
-  -- disable completion with tab
-  cmp_mappings["<Tab>"] = nil
-  cmp_mappings["<S-Tab>"] = nil
 
   lsp.setup_nvim_cmp({ mapping = cmp_mappings })
 
@@ -168,7 +172,7 @@ end
 
 return {
   "VonHeikemen/lsp-zero.nvim",
-  event = "VeryLazy", -- lazy-load lsp-zero.nvim itself
+  event = "BufReadPre", -- lazy-load lsp-zero.nvim itself
   dependencies = {
     {
       "neovim/nvim-lspconfig", -- load nvim-lspconfig on BufReadPre (before loading Treesitter on BufReadPost)
@@ -178,7 +182,7 @@ return {
       "williamboman/mason.nvim",
       dependencies = {
         { "williamboman/mason-lspconfig.nvim" },
-        { "jose-elias-alvarez/null-ls.nvim", config = config_null_ls },
+        { "jose-elias-alvarez/null-ls.nvim",  config = config_null_ls },
       },
     },
     {

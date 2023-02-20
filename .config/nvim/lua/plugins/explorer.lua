@@ -1,12 +1,22 @@
 return {
-  "nvim-neo-tree/neo-tree.nvim",
+  'nvim-tree/nvim-tree.lua',
   dependencies = {
-    "nvim-lua/plenary.nvim",
-    "kyazdani42/nvim-web-devicons",
-    "MunifTanjim/nui.nvim"
+    "nvim-tree/nvim-web-devicons",
   },
   keys = {
-    { "<C-b>", "<CMD>Neotree toggle<CR>", mode = { "n", "i", "v" } }
+    { "<C-b>", "<CMD>NvimTreeToggle<CR>", mode = { "n", "i", "v" } }
   },
   config = true,
+  opts = {
+    renderer = {
+      icons = {
+        show = {
+          -- git = false,
+          -- folder = false,
+          file = false,
+          folder_arrow = false,
+        },
+      },
+    }
+  }
 }
