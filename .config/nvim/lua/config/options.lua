@@ -1,6 +1,7 @@
 local opt = vim.opt
 local api = vim.api
 local o = vim.o
+local cmd = vim.cmd
 
 o.background = "dark"
 o.mouse = "a"
@@ -67,4 +68,11 @@ api.nvim_create_autocmd('TextYankPost', {
 
 -- Sync format when saving and exiting the buffer
 -- https://github.com/lukas-reineke/lsp-format.nvim#wq-will-not-format-when-not-using-sync
-vim.cmd("cabbrev wq execute \"Format sync\" <bar> wq")
+cmd("cabbrev wq execute \"Format sync\" <bar> wq")
+-- close quickfix menu after selecting choice
+--
+api.nvim_create_autocmd(
+  "FileType", {
+  pattern = { "qf" },
+  command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
+})

@@ -20,14 +20,6 @@ local config = function()
   dap.listeners.before.event_exited['dapui_config'] = function() dapui.close({}) end
 end
 
-
--- map('n', '<F5>', [[<cmd>lua require('dap').continue()<cr>]], { noremap = true, silent = true })
--- map('n', '<F6>', [[<cmd>lua require('dap').step_over()<cr>]], { noremap = true, silent = true })
--- map('n', '<F7>', [[<cmd>lua require('dap').step_into()<cr>]], { noremap = true, silent = true })
--- map('n', '<F8>', [[<cmd>lua require('dap').step_out()<cr>]], { noremap = true, silent = true })
--- map('n', '<leader>b', [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], { noremap = true, silent = true })
--- map('n', '<M-b>', [[<cmd>lua require('dap').toggle_breakpoint()<cr>]], { noremap = true, silent = true })
-
 local init = function()
   vim.keymap.set('n', '<leader>ddb', function() require('dap').toggle_breakpoint() end, { desc = 'Toggle Breakpoint' })
   vim.keymap.set('n', '<leader>ddc', function() require('dap').continue() end, { desc = 'Continue' })

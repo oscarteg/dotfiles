@@ -2,7 +2,6 @@ local config = function(_, opts)
   require("nvim-treesitter.configs").setup(opts)
 end
 
-
 return {
   {
     "nvim-treesitter/nvim-treesitter",
@@ -52,10 +51,13 @@ return {
         "cmake",
         "astro",
         "elm",
-        "toml"
+        "toml",
+        "markdown",
+        "markdown_inline"
       },
       highlight = {
         enable = true,
+        additional_vim_regex_highlighting = true
       },
       autotag = {
         enable = true,

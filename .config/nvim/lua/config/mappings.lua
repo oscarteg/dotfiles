@@ -104,9 +104,6 @@ map("n", "<leader>fd", require("telescope.builtin").diagnostics, { desc = "[F]in
 -- UndotreeToggle
 map("n", "<leader>u", vim.cmd.UndotreeToggle)
 
--- Harpoon
-map("n", "<leader>m", require("harpoon.mark").add_file)
-map("n", "<leader>fm", "<CMD>Telescope harpoon marks theme=ivy<cr>")
 
 -- ThePrimeagen/refactoring
 map(

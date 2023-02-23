@@ -31,6 +31,9 @@ local config = function()
       lsp_document_symbols = {
         theme = "ivy"
       },
+      lsp_definitions = {
+        theme = "ivy"
+      },
       live_grep = {
         theme = "ivy",
         hidden = true,
@@ -57,8 +60,6 @@ local config = function()
     },
   })
   require("telescope").load_extension("ui-select")
-  -- To get telescope-file-browser loaded and working with telescope,
-  -- you need to call load_extension, somewhere after setup function:
   require("telescope").load_extension("file_browser")
 end
 

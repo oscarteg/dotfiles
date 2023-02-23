@@ -1,4 +1,5 @@
 set -gx EDITOR "nvim"
+set -gx BROWSER "none"
 set -gx INITIAL_QUERY ""
 set -gx RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case "
 set -gx FZF_DEFAULT_COMMAND "$RG_PREFIX '$INITIAL_QUERY'" \
