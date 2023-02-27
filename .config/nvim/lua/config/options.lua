@@ -51,7 +51,7 @@ api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })
 
 -- set compiler to bun when typescript file
-api.nvim_create_autocmd("BufRead,BufEnter", { pattern = { "*.ts", "*.js" }, command = [[compiler bun]] })
+api.nvim_create_autocmd({ "BufEnter" }, { pattern = { "*ts", "js" }, command = [[:compiler bun]] })
 
 -- highlight text on yank
 api.nvim_create_autocmd('TextYankPost', {
@@ -63,14 +63,11 @@ api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
--- make test commands execute using neovim terminal
-
-
 -- Sync format when saving and exiting the buffer
 -- https://github.com/lukas-reineke/lsp-format.nvim#wq-will-not-format-when-not-using-sync
 cmd("cabbrev wq execute \"Format sync\" <bar> wq")
+
 -- close quickfix menu after selecting choice
---
 api.nvim_create_autocmd(
   "FileType", {
   pattern = { "qf" },

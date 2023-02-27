@@ -34,6 +34,15 @@ local config = function()
       lsp_definitions = {
         theme = "ivy"
       },
+      lsp_references = {
+        theme = "ivy"
+      },
+      lsp_type_definitions = {
+        theme = "ivy"
+      },
+      lsp_workspace_symbols = {
+        theme = "ivy"
+      },
       live_grep = {
         theme = "ivy",
         hidden = true,
