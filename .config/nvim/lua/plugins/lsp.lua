@@ -197,6 +197,7 @@ local config_null_ls = function()
       null_ls.builtins.formatting.prettier,
       null_ls.builtins.formatting.eslint_d,
       null_ls.builtins.formatting.cmake_format,
+      null_ls.builtins.formatting.terraform_fmt
     },
   })
 end
