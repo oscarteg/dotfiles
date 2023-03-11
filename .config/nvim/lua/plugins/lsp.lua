@@ -13,12 +13,6 @@ local on_attach = function(client, bufnr)
     buffer = bufnr,
   })
 
-  -- vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, {
-  --   desc = "[G]oto [D]efinition",
-  --   remap = false,
-  --   buffer = bufnr,
-  -- })
-  --
   vim.keymap.set("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, {
     desc = "[D]ocument [S]ymbols",
     remap = false,
@@ -114,23 +108,25 @@ local config = function()
   local cmp = require("cmp")
   local select_opts = { behavior = cmp.SelectBehavior.Select }
   local cmp_mappings = lsp.defaults.cmp_mappings({
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-y>"] = cmp.config.disable,
-    ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
-    ["<Down>"] = cmp.mapping.select_next_item(select_opts),
-    ["<C-j>"] = cmp.mapping.select_next_item(),
-    ["<C-k>"] = cmp.mapping.select_prev_item(),
-    ["<C-l>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
-    ["<CR>"] = cmp.mapping.confirm({
+        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-y>"] = cmp.config.disable,
+        ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
+        ["<Down>"] = cmp.mapping.select_next_item(select_opts),
+        ["<C-j>"] = cmp.mapping.select_next_item(),
+        ["<C-k>"] = cmp.mapping.select_prev_item(),
+        ["<C-l>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
+        ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     }),
     -- disable completion with tab
-    ["<Tab>"] = vim.NIL,
-    ["<S-Tab>"] = vim.NIL
+        ["<Tab>"] = vim.NIL,
+        ["<S-Tab>"] = vim.NIL
   })
 
-  lsp.setup_nvim_cmp({ mapping = cmp_mappings })
+  lsp.setup_nvim_cmp({
+    mapping = cmp_mappings,
+  })
 
   lsp.set_preferences({
     suggest_lsp_servers = true,
@@ -207,6 +203,7 @@ return {
   "VonHeikemen/lsp-zero.nvim",
   event = "BufReadPre", -- lazy-load lsp-zero.nvim itself
   dependencies = {
+
     {
       "neovim/nvim-lspconfig", -- load nvim-lspconfig on BufReadPre (before loading Treesitter on BufReadPost)
       event = "BufReadPre",
@@ -237,7 +234,7 @@ return {
       opts = {
         exclude = { "tsserver", "denols" },
       }
-    }
+    },
   },
   config = config
 }

@@ -29,7 +29,6 @@ map("n", "]d", vim.diagnostic.goto_next)
 -- buffers
 map("n", "<leader>bo", "<cmd>%bd|e#<cr>", { desc = "Close all buffers but the current one" })
 
-
 -- Moving lines up/down in V mode
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
@@ -103,7 +102,6 @@ map("n", "<leader>fd", require("telescope.builtin").diagnostics, { desc = "[F]in
 
 -- UndotreeToggle
 map("n", "<leader>u", vim.cmd.UndotreeToggle)
-
 
 -- ThePrimeagen/refactoring
 map(

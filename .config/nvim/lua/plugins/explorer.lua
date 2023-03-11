@@ -4,13 +4,13 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   keys = {
-    { "<C-b>", "<CMD>NvimTreeFindFile<CR>", mode = { "n", "i", "v" } }
+    { "<C-b>", "<CMD>NvimTreeFindFileToggle<CR>", mode = { "n", "i", "v" } }
   },
   opts = {
     renderer = {
       icons = {
         show = {
-          -- git = false,
+          git = false,
           folder = false,
           file = false,
           folder_arrow = false,
