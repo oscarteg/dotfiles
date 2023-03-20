@@ -1,5 +1,7 @@
 local config = function()
   local telescope = require('telescope')
+  local lga_actions = require('telescope-live-grep-args.actions')
+
   telescope.setup({
     defaults = {
       color_devicons = false,
@@ -14,16 +16,16 @@ local config = function()
       find_files = {
         theme = "ivy",
         hidden = true,
-        find_command = {
-          'fd',
-          '--type',
-          'file',
-          '--type',
-          'symlink',
-          '--hidden',
-          '--exclude',
-          '.git',
-        }
+        -- find_command = {
+        --   'fd',
+        --   '--type',
+        --   'file',
+        --   '--type',
+        --   'symlink',
+        --   '--hidden',
+        --   '--exclude',
+        --   '.git',
+        -- }
       },
       git_status = {
         theme = "ivy"
@@ -43,18 +45,9 @@ local config = function()
       lsp_workspace_symbols = {
         theme = "ivy"
       },
-      live_grep = {
-        theme = "ivy",
-        hidden = true,
-        additional_args = function()
-          -- Grep in hidden folders
-          return { "--hidden" }
-        end
-      },
       buffers = {
         theme = "ivy"
       },
-
       diagnostics = {
         theme = "ivy"
       }
@@ -65,7 +58,22 @@ local config = function()
       },
       file_browser = {
         hidden = true
-      }
+      },
+      live_grep_args = {
+        auto_quoting = true,
+        theme = "ivy",
+        hidden = true,
+        additional_args = function()
+          return { "--hidden" }
+        end,
+        mappings = {
+          -- extend mappings
+          i = {
+            ["<C-k>"] = lga_actions.quote_prompt(),
+            ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+          },
+        },
+      },
     },
   })
   require("telescope").load_extension("ui-select")
@@ -80,6 +88,10 @@ return {
         'nvim-telescope/telescope-fzf-native.nvim',
         config = function() require('telescope').load_extension('fzf') end,
         build = 'make',
+      },
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        config = function() require('telescope').load_extension('live_grep_args') end,
       },
 
       { "nvim-telescope/telescope-ui-select.nvim" },

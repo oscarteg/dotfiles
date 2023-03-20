@@ -1,11 +1,9 @@
 return {
-
-    "kylechui/nvim-surround",
-    lazy = true,
-    keys = { 
-      "ys",
-      "ds",
-      "cs",
-    },
-    config = true
+  "kylechui/nvim-surround",
+  keys = {
+    "ys",
+    "ds",
+    "cs",
+  },
+  config = true
 }

@@ -63,7 +63,6 @@ map("n", "tj", ":tabprev<CR>")
 -- Have j and k navigate visual lines rather than logical ones
 map("n", "j", "gj")
 map("n", "k", "gk")
-map("n", "<leader>j", ",")
 
 -- Resize with arrows
 map("n", "<C-Up>", ":resize -2<CR>", { silent = true })
@@ -93,7 +92,7 @@ map("n", "<leader>tt", "<CMD>Twilight<CR>", { silent = true })
 
 -- Telescope (<leader>f mappings)
 map("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "[F]ind [F]iles" })
-map("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "[F]ind [G]rep" })
+map("n", "<leader>fg", require("telescope").extensions.live_grep_args.live_grep_args, { desc = "[F]ind [G]rep" })
 map("n", "<leader>fs", require("telescope.builtin").git_status, { desc = "[F]ind [G]it status" })
 map("n", "<leader>fh", require("telescope.builtin").oldfiles, { desc = "[F]ind [H]istory" })
 map("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "[F]ind [B]uffers" })
@@ -150,3 +149,5 @@ map(
   [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
   { noremap = true, silent = true, expr = false }
 )
+
+-- vim.api.nvim_set_keymap('o', 'da', '<Plug>(textobj-treesitter-jsx_attribute-i)', {})

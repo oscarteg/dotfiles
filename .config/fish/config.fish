@@ -21,13 +21,6 @@ set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 
 fish_add_path $GOPATH/bin
 
-# ZK
-set -gx ZK_NOTEBOOK_DIR $HOME/zk
-
-
-# Change default editor to nvim
-set -Ux EDITOR nvim
-
 source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 # bun
@@ -38,4 +31,5 @@ set --export PATH $BUN_INSTALL/bin $PATH
 set -gx PNPM_HOME "/Users/oscar/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
+
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /Users/oscar/.ghcup/bin # ghcup-env

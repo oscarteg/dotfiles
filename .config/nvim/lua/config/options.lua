@@ -70,6 +70,6 @@ cmd("cabbrev wq execute \"Format sync\" <bar> wq")
 -- close quickfix menu after selecting choice
 api.nvim_create_autocmd(
   "FileType", {
-  pattern = { "qf" },
-  command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
-})
+    pattern = { "qf" },
+    command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
+  })

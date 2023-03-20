@@ -57,6 +57,12 @@ local config = function()
   -- LSP settings
   lsp.preset("recommended")
 
+
+  -- Don't attach clangd to proto buf
+  lsp.configure("clangd", {
+    filetypes = { "c", "cpp", "objc", "objcpp", 'cuda' },
+  })
+
   --- Fix Undefined global 'vim'
   lsp.configure("lua_ls", {
     settings = {
@@ -108,20 +114,20 @@ local config = function()
   local cmp = require("cmp")
   local select_opts = { behavior = cmp.SelectBehavior.Select }
   local cmp_mappings = lsp.defaults.cmp_mappings({
-        ["<C-Space>"] = cmp.mapping.complete(),
-        ["<C-y>"] = cmp.config.disable,
-        ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
-        ["<Down>"] = cmp.mapping.select_next_item(select_opts),
-        ["<C-j>"] = cmp.mapping.select_next_item(),
-        ["<C-k>"] = cmp.mapping.select_prev_item(),
-        ["<C-l>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
-        ["<CR>"] = cmp.mapping.confirm({
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-y>"] = cmp.config.disable,
+    ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
+    ["<Down>"] = cmp.mapping.select_next_item(select_opts),
+    ["<C-j>"] = cmp.mapping.select_next_item(),
+    ["<C-k>"] = cmp.mapping.select_prev_item(),
+    ["<C-l>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
+    ["<CR>"] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     }),
     -- disable completion with tab
-        ["<Tab>"] = vim.NIL,
-        ["<S-Tab>"] = vim.NIL
+    ["<Tab>"] = vim.NIL,
+    ["<S-Tab>"] = vim.NIL
   })
 
   lsp.setup_nvim_cmp({
@@ -185,6 +191,7 @@ local config_null_ls = function()
       null_ls.builtins.diagnostics.yamllint,
       null_ls.builtins.diagnostics.eslint_d,
       null_ls.builtins.diagnostics.cmake_lint,
+      null_ls.builtins.diagnostics.buf,
       null_ls.builtins.code_actions.eslint_d,
       null_ls.builtins.code_actions.gitsigns,
       null_ls.builtins.code_actions.refactoring,
