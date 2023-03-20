@@ -1,5 +1,6 @@
 local on_attach = function(client, bufnr)
   local lsp_format = require("lsp-format")
+  lsp_format.setup({ sync = true })
 
   vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {
     desc = "[G]oto [R]eferences",
@@ -34,7 +35,7 @@ local on_attach = function(client, bufnr)
     { desc = "[C]ode [A]ction", remap = false, buffer = bufnr }
   )
 
-  vim.cmd [[cabbrev wq execute "Format sync" <bar> wq]]
+  -- vim.cmd [[cabbrev wq execute "Format sync" <bar> wq]]
 
   lsp_format.on_attach(client, bufnr)
 end

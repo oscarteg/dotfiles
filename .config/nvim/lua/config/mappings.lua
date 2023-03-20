@@ -149,5 +149,3 @@ map(
   [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
   { noremap = true, silent = true, expr = false }
 )
-
--- vim.api.nvim_set_keymap('o', 'da', '<Plug>(textobj-treesitter-jsx_attribute-i)', {})
