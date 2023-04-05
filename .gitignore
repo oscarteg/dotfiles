@@ -302,5 +302,6 @@ Cargo.lock
 
 _esy/
 
-# Hack to fix for M1
-/Users/oscar/Projects/Work/polariks/polariks-v2.0/Backend/Dockerfile
+/Users/oscar/Projects/Work/polariks/Backend/.idea/
+
+

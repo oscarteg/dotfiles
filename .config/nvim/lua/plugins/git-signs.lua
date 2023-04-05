@@ -29,9 +29,9 @@ local config = function()
       end
 
       -- Navigation
-      map("n", "]c", function()
+      map("n", "]v", function()
         if vim.wo.diff then
-          return "]c"
+          return "]v"
         end
         vim.schedule(function()
           gs.next_hunk()
@@ -39,9 +39,9 @@ local config = function()
         return "<Ignore>"
       end, { expr = true })
 
-      map("n", "[c", function()
+      map("n", "[v", function()
         if vim.wo.diff then
-          return "[c"
+          return "[v"
         end
         vim.schedule(function()
           gs.prev_hunk()
@@ -82,7 +82,7 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     requires = { "nvim-lua/plenary.nvim" },
-    event = 'VeryLazy',
+    event = { "BufReadPre", "BufNewFile" },
     config = config
   },
   {

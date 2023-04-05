@@ -14,6 +14,7 @@ fish_add_path $HOME/.cargo/composer/bin
 fish_add_path $HOME/Projects/libraries/flutter/bin
 fish_add_path /opt/homebrew/opt/llvm/bin
 fish_add_path $HOME/go/bin
+fish_add_path $HOME/.config/emacs/bin
 set -x GOPATH $HOME/go
 
 set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"

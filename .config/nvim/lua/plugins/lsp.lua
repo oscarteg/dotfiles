@@ -194,6 +194,7 @@ local config_null_ls = function()
       null_ls.builtins.diagnostics.cmake_lint,
       null_ls.builtins.diagnostics.buf,
       null_ls.builtins.code_actions.eslint_d,
+      null_ls.builtins.code_actions.gitrebase,
       null_ls.builtins.code_actions.gitsigns,
       null_ls.builtins.code_actions.refactoring,
       null_ls.builtins.formatting.prismaFmt,
@@ -218,6 +219,7 @@ return {
     },
     {
       "williamboman/mason.nvim",
+      cmd = "Mason",
       dependencies = {
         { "williamboman/mason-lspconfig.nvim" },
         { "jose-elias-alvarez/null-ls.nvim",  config = config_null_ls },

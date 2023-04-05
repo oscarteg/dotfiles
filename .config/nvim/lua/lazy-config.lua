@@ -14,34 +14,14 @@ end
 
 vim.opt.runtimepath:prepend(lazypath)
 
+
 -- load lazy
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
   install = { colorscheme = { "gruber" } },
-  checker = {
-    concurrency = 5,
-    enabled = true,
-    frequency = 7200, -- 2 hours
-    notify = false,
-  },
   change_detection = {
-    enabled = true,
-    notify = true,
-  },
-  performance = {
-    cache = { enabled = true },
-    rtp = {
-      disabled_plugins = {
-        "gzip",
-        "matchit",
-        "matchparen",
-        "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-      },
-    },
+    enabled = false,
+    notify = false,
   },
   diff = { cmd = 'diffview.nvim' },
 })
