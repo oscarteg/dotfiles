@@ -86,7 +86,6 @@ return {
     keys = {
 
       { "<leader>,",  "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
-      { "<leader>/",  utils.telescope("live_grep"),                       desc = "Find in Files (Grep)" },
       { "<leader>:",  "<cmd>Telescope command_history<cr>",               desc = "Command History" },
       { "<leader>ff", utils.telescope("find_files"),                      desc = "Find Files (root dir)" },
       { "<leader>fF", utils.telescope("find_files", { cwd = false }),     desc = "Find Files (cwd)" },
@@ -108,12 +107,12 @@ return {
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>",     desc = "Buffer" },
       { "<leader>sc", "<cmd>Telescope command_history<cr>",               desc = "Command History" },
       { "<leader>sm", "<cmd>Telescope marks<cr>",                         desc = "Jump to Mark" },
-      { "n", "<leader>fd", utils.telescope("diagnostics"),
+      { "<leader>fd", utils.telescope("diagnostics"),
         {
           desc =
           "[F]ind [D]iagnostics"
         } },
-      { "n", "<leader>fw", utils.telescope("grep_string"),
+      { "<leader>fw", utils.telescope("grep_string"),
         {
           desc =
           "[F]ind current [W]ord"

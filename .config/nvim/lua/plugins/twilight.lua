@@ -1,5 +1,3 @@
-local opts = {
-}
 return {
   'folke/twilight.nvim',
   cmd = 'Twilight',
@@ -9,6 +7,6 @@ return {
     })
   end,
   keys = {
-    { "n", "<leader>tt", "<CMD>Twilight<CR>", { silent = true } }
+    { "<leader>tt", "<CMD>Twilight<CR>", { silent = true } }
   }
 }
