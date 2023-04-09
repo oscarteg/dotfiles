@@ -22,7 +22,7 @@ local config = function()
       live_grep = {
         theme           = "ivy",
         hidden          = true,
-        additional_args = function(opts)
+        additional_args = function()
           return { "--hidden" }
         end
       },
@@ -107,16 +107,17 @@ return {
       { "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>",     desc = "Buffer" },
       { "<leader>sc", "<cmd>Telescope command_history<cr>",               desc = "Command History" },
       { "<leader>sm", "<cmd>Telescope marks<cr>",                         desc = "Jump to Mark" },
-      { "<leader>fd", utils.telescope("diagnostics"),
-        {
-          desc =
-          "[F]ind [D]iagnostics"
-        } },
-      { "<leader>fw", utils.telescope("grep_string"),
-        {
-          desc =
-          "[F]ind current [W]ord"
-        } },
+      {
+        "<leader>fd",
+        utils.telescope("diagnostics"),
+        desc = "[F]ind [D]iagnostics"
+      },
+      {
+        "<leader>fw",
+        utils.telescope("grep_string"),
+        desc =
+        "[F]ind current [W]ord"
+      },
       {
         "<leader>ss",
         utils.telescope("lsp_document_symbols", {

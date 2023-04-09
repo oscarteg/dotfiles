@@ -73,3 +73,7 @@ api.nvim_create_autocmd(
     pattern = { "qf" },
     command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
   })
+
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
