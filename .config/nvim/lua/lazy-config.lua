@@ -18,7 +18,9 @@ vim.opt.runtimepath:prepend(lazypath)
 -- load lazy
 require("lazy").setup("plugins", {
   defaults = { lazy = true },
-  install = { colorscheme = { "gruber" } },
+  install = {
+    missing = true,
+  },
   change_detection = {
     enabled = false,
     notify = false,

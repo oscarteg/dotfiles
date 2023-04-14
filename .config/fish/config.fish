@@ -22,7 +22,6 @@ set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 
 fish_add_path $GOPATH/bin
 
-source /opt/homebrew/opt/asdf/libexec/asdf.fish
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
@@ -34,3 +33,5 @@ set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /Users/oscar/.ghcup/bin # ghcup-env
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH
