@@ -21,7 +21,6 @@ local config = function()
       },
       live_grep = {
         theme           = "ivy",
-        hidden          = true,
         additional_args = function()
           return { "--hidden" }
         end
@@ -87,8 +86,8 @@ return {
 
       { "<leader>,",  "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Switch Buffer" },
       { "<leader>:",  "<cmd>Telescope command_history<cr>",               desc = "Command History" },
-      { "<leader>ff", utils.telescope("find_files"),                      desc = "Find Files (root dir)" },
-      { "<leader>fF", utils.telescope("find_files", { cwd = true }),      desc = "Find Files (cwd)" },
+      { "<leader>ff", utils.telescope("find_files", { cwd = false }),     desc = "Find Files (root dir)" },
+      { "<leader>fF", utils.telescope("find_files"),                      desc = "Find Files (cwd)" },
       { "<leader>fG", utils.telescope("live_grep", { cwd = true }),       desc = "Grep (cwd)" },
       { "<leader>fb", "<cmd>Telescope buffers<cr>",                       desc = "Buffers" },
       { "<leader>fg", utils.telescope("live_grep"),                       desc = "Grep (root dir)" },
