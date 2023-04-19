@@ -3,6 +3,7 @@ local api = vim.api
 local o = vim.o
 local cmd = vim.cmd
 
+o.autochdir = true
 o.background = "dark"
 o.mouse = "a"
 o.number = true
@@ -68,11 +69,11 @@ api.nvim_create_autocmd('TextYankPost', {
 cmd("cabbrev wq execute \"Format sync\" <bar> wq")
 
 -- close quickfix menu after selecting choice
-api.nvim_create_autocmd(
-  "FileType", {
-    pattern = { "qf" },
-    command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
-  })
+-- api.nvim_create_autocmd(
+--   "FileType", {
+--     pattern = { "qf" },
+--     command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
+--   })
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1

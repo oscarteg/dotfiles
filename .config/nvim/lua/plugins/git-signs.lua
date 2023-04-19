@@ -81,7 +81,7 @@ end
 return {
   {
     "lewis6991/gitsigns.nvim",
-    requires = { "nvim-lua/plenary.nvim" },
+    dependencies = { "nvim-lua/plenary.nvim" },
     event = { "BufReadPre", "BufNewFile" },
     config = config
   },

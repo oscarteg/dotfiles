@@ -6,5 +6,7 @@ return {
     "TodoLocList",
     "TodoQuickFix"
   },
-  config = true,
+  keys = {
+    { "<leader>tq", [[<cmd>TodoQuickFix theme=ivy<CR>]], { silent = true } }
+  }
 }

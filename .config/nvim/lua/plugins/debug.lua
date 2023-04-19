@@ -40,6 +40,7 @@ return {
     config = config,
     dependencies = {
       { 'mfussenegger/nvim-dap' },
+      { 'theHamsta/nvim-dap-virtual-text' },
       { 'jbyuki/one-small-step-for-vimkind', ft = 'lua' }, -- lua debugger
     },
   },

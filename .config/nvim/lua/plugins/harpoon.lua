@@ -4,7 +4,7 @@ return {
     { "<leader>l",  [[<cmd> lua require('harpoon.mark').add_file()<cr> ]],       desc = "Add file to harpoon" },
     { "<leader>fl", [[<cmd> lua require('harpoon.ui').toggle_quick_menu()<cr>]], desc = "Toggle quick menu" },
   },
-  depdendencies = {
+  dependencies = {
     "nvim-lua/plenary.nvim",
     "nvim-telescope/telescope.nvim",
   },
