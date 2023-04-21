@@ -26,6 +26,12 @@ local on_attach = function(client, bufnr)
     buffer = bufnr,
   })
 
+  vim.keymap.set("n", "gv", ":vsplit | lua vim.lsp.buf.definition()<CR>", {
+    desc = "[G]oto definition [V]ertical",
+    remap = false,
+    buffer = bufnr,
+  })
+
   vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame", remap = false, buffer = bufnr })
 
   vim.keymap.set(
@@ -34,8 +40,6 @@ local on_attach = function(client, bufnr)
     vim.lsp.buf.code_action,
     { desc = "[C]ode [A]ction", remap = false, buffer = bufnr }
   )
-
-  -- vim.cmd [[cabbrev wq execute "Format sync" <bar> wq]]
 
   lsp_format.on_attach(client, bufnr)
 end
@@ -69,18 +73,14 @@ local config = function()
     settings = {
       Lua = {
         runtime = {
-          -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
           version = 'LuaJIT',
         },
         diagnostics = {
-          -- Get the language server to recognize the `vim` global
           globals = { 'vim' },
         },
         workspace = {
-          -- Make the server aware of Neovim runtime files
           library = vim.api.nvim_get_runtime_file("", true),
         },
-        -- Do not send telemetry data containing a randomized but unique identifier
         telemetry = {
           enable = false,
         },
@@ -89,6 +89,20 @@ local config = function()
   })
 
   lsp.configure("denols", { root_dir = root_pattern("deno.json", "deno.jsonc") })
+
+  lsp.configure("gopls", {
+    on_attach = function(client, bufnr)
+      local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        pattern = "*.go",
+        callback = function()
+          require('go.format').goimport()
+        end,
+        group = format_sync_grp,
+      })
+      on_attach(client, bufnr)
+    end,
+  })
 
   lsp.configure("tsserver", {
     on_attach = function(client, bufnr)
@@ -126,7 +140,6 @@ local config = function()
       behavior = cmp.ConfirmBehavior.Insert,
       select = true,
     }),
-    -- disable completion with tab
     ["<Tab>"] = vim.NIL,
     ["<S-Tab>"] = vim.NIL
   })
@@ -158,7 +171,6 @@ local config = function()
       on_attach = function(client, bufnr)
         rust_lsp.on_attach(client, bufnr)
 
-        -- Use hover actions of rust-tools to add the actions
         vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
       end,
     },
@@ -172,7 +184,10 @@ local config = function()
 
   local go_lsp = lsp.build_options("go")
 
-  go_lang.setup({ server = go_lsp })
+  go_lang.setup({
+    server = go_lsp,
+    luasnip = true,
+  })
 end
 
 local config_null_ls = function()
@@ -210,11 +225,10 @@ end
 
 return {
   "VonHeikemen/lsp-zero.nvim",
-  event = "BufReadPre", -- lazy-load lsp-zero.nvim itself
+  event = "BufReadPre",
   dependencies = {
-
     {
-      "neovim/nvim-lspconfig", -- load nvim-lspconfig on BufReadPre (before loading Treesitter on BufReadPost)
+      "neovim/nvim-lspconfig",
       event = "BufReadPre",
     },
     {
@@ -227,7 +241,7 @@ return {
     },
     {
       "hrsh7th/nvim-cmp",
-      event = "InsertEnter", -- load nvim-cmp on InsertEnter; this is ignored(?), as nvim-cmp is loaded with lsp-zero.nvim
+      event = "InsertEnter",
       dependencies = {
         { "hrsh7th/cmp-buffer" },
         { "hrsh7th/cmp-cmdline" },

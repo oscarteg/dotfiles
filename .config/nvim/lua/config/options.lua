@@ -3,7 +3,6 @@ local api = vim.api
 local o = vim.o
 local cmd = vim.cmd
 
-o.autochdir = true
 o.background = "dark"
 o.mouse = "a"
 o.number = true
@@ -63,10 +62,6 @@ api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { higroup = 'IncSearch', timeout = 500 }
   end,
 })
-
--- Sync format when saving and exiting the buffer
--- https://github.com/lukas-reineke/lsp-format.nvim#wq-will-not-format-when-not-using-sync
-cmd("cabbrev wq execute \"Format sync\" <bar> wq")
 
 -- close quickfix menu after selecting choice
 -- api.nvim_create_autocmd(

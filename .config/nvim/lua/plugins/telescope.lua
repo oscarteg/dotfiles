@@ -25,6 +25,9 @@ local config = function()
           return { "--hidden" }
         end
       },
+      old_files = {
+        theme = "ivy"
+      },
       git_status = {
         theme = "ivy"
       },
@@ -89,7 +92,6 @@ return {
       { "<leader>ff", utils.telescope("find_files", { cwd = false }),     desc = "Find Files (root dir)" },
       { "<leader>fF", utils.telescope("find_files"),                      desc = "Find Files (cwd)" },
       { "<leader>fG", utils.telescope("live_grep", { cwd = true }),       desc = "Grep (cwd)" },
-      { "<leader>fb", "<cmd>Telescope buffers<cr>",                       desc = "Buffers" },
       { "<leader>fg", utils.telescope("live_grep"),                       desc = "Grep (root dir)" },
       { "<leader>fr", "<cmd>Telescope oldfiles<cr>",                      desc = "Recent" },
       { "<leader>fs", "<cmd>Telescope git_status<CR>",                    desc = "status" },
