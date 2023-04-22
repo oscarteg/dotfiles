@@ -89,6 +89,10 @@ return {
     "tpope/vim-fugitive",
     cmd = { "Git", "G", "Gdiffsplit", "Gread", "Gwrite", "Ggrep", "GMove", "GDelete", "GBrowse", "GRemove", "GRename",
       "Glgrep", "Gedit", "Gsplit", "Gvsplit", "Gtabedit" },
+  },
+  {
+    "sindrets/diffview.nvim",
+    cmd = { "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles", "DiffviewFocusFiles" }
   }
 
 }

@@ -158,7 +158,6 @@ return {
     dependencies = {
       'nvim-treesitter/nvim-treesitter-refactor',                   -- Refactor module for treesitter
       'nvim-treesitter/nvim-treesitter-textobjects',                -- Syntax aware text-objects, select, move, swap
-      { "nvim-treesitter/playground",              cmd = "TSPlaygroundToggle" },
       { 'windwp/nvim-ts-autotag' },                                 -- auto complete HTML tags
       { 'nvim-treesitter/nvim-treesitter-context', config = true }, -- Show code context
 
