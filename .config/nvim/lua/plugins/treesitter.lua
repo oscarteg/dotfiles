@@ -22,6 +22,7 @@ local config = function(_, opts)
       "astro",
       "arduino",
       "c",
+      "clojure",
       "cmake",
       "cpp",
       "css",

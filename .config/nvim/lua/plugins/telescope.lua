@@ -25,7 +25,7 @@ local config = function()
           return { "--hidden" }
         end
       },
-      old_files = {
+      oldfiles = {
         theme = "ivy"
       },
       git_status = {

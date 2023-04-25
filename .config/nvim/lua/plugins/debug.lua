@@ -46,21 +46,27 @@ return {
   },
   {
     'michaelb/sniprun', -- Run line/block in multiple language
+    dependencies = {
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-lua/popup.nvim' },
+      { 'nvim-telescope/telescope.nvim' },
+      { 'nvim-treesitter/nvim-treesitter' },
+    },
     build = 'bash ./install.sh',
     init = function()
-      -- F14 = S-F2, F26 = C-F2
       vim.keymap.set('n', '<F14>',
         function()
           local pos = vim.fn.winsaveview()
           require('sniprun').run('w')
           vim.fn.winrestview(pos)
-        end, { desc = 'SnipRun the whole file' })
+        end, { desc = 'SnipRun current line and keep cursor position' })
       vim.keymap.set('v', '<F2>', function() require('sniprun').run('v') end,
         { desc = 'SnipRun highlighted region' })
       vim.keymap.set('n', '<F2>', function() require('sniprun').run() end, { desc = 'SnipRun current line' })
       vim.keymap.set('n', '<F26>', function() require('sniprun.display').close_all() end,
         { desc = 'SnipRun close all' })
     end,
+    cmd = { 'SnipRun', 'SnipInfo' },
     opts = {
       selected_interpreters = {
         'Python3_original',
