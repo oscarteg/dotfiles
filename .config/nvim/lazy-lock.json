@@ -54,6 +54,7 @@
   "treesj": { "branch": "main", "commit": "cba4aca075e4a9687cfd34b40328cac06126bc07" },
   "twilight.nvim": { "branch": "main", "commit": "2e13bd1886562b737f38c418ed542677b41ef5cb" },
   "twoslash-queries.nvim": { "branch": "main", "commit": "f2122d8fa34cf8316783d0828f6aa69f1c5ba87f" },
+  "typescript.nvim": { "branch": "main", "commit": "f66d4472606cb24615dfb7dbc6557e779d177624" },
   "undotree": { "branch": "master", "commit": "485f01efde4e22cb1ce547b9e8c9238f36566f21" },
   "vim-dispatch": { "branch": "master", "commit": "6cc2691576f97d43f8751664d1a1a908b99927e5" },
   "vim-fugitive": { "branch": "master", "commit": "e6651a79facf5cc2b7c554fdc19eb8a9fe89602c" },

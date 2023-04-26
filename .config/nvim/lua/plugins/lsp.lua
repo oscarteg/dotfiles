@@ -102,6 +102,7 @@ return {
       { 'williamboman/mason-lspconfig.nvim' },
       { 'simrat39/rust-tools.nvim' },
       { 'ray-x/go.nvim' },
+      { 'jose-elias-alvarez/typescript.nvim' },
       { 'jose-elias-alvarez/null-ls.nvim' },
       {
         'williamboman/mason.nvim',
@@ -129,30 +130,24 @@ return {
 
       lspconfig.denols.setup({ root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc") })
 
-      lspconfig.tsserver.setup({
-        on_attach = function(client, bufnr)
-          require("twoslash-queries").attach(client, bufnr)
-          on_attach(client, bufnr)
-
-          vim.keymap.set('n', '<leader>ci', '<cmd>TypescriptAddMissingImports<cr>', { buffer = bufnr })
-        end,
-        root_dir = lspconfig.util.root_pattern("package.json"),
-        commands = {
-          OrganizeImports = {
-            function()
-              local params = {
-                command = "_typescript.organizeImports",
-                arguments = { vim.api.nvim_buf_get_name(0) },
-                title = "",
-              }
-              vim.lsp.buf.execute_command(params)
-            end,
-            description = "Organize imports",
-          },
-        },
-      })
-
       lsp.setup()
+
+      require('typescript').setup({
+        server = {
+          settings = {
+            completions = {
+              completeFunctionCalls = true
+            }
+          },
+          on_attach = function(client, bufnr)
+            require("twoslash-queries").attach(client, bufnr)
+            on_attach(client, bufnr)
+
+            vim.keymap.set('n', '<leader>ci', '<cmd>TypescriptAddMissingImports<cr>', { buffer = bufnr })
+            vim.keymap.set('n', '<leader>co', '<cmd>TypescriptOrganizeImports<cr>', { buffer = bufnr })
+          end
+        }
+      })
 
       require('rust-tools').setup({
         tools = { inlay_hints = { show_parameter_hints = false } },
@@ -175,7 +170,7 @@ return {
       })
 
       require('go').setup({
-        on_attach = function(client, bufnr)
+        lsp_on_attach = function(client, bufnr)
           local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
           vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = "*.go",
@@ -184,6 +179,10 @@ return {
             end,
             group = format_sync_grp,
           })
+
+          print("Go LSP attached")
+
+          on_attach(client, bufnr)
 
           vim.keymap.set("n", "K", require('go').hover_actions, { buffer = bufnr })
         end,
@@ -213,7 +212,9 @@ return {
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.eslint_d,
           null_ls.builtins.formatting.cmake_format,
-          null_ls.builtins.formatting.terraform_fmt
+          null_ls.builtins.formatting.terraform_fmt,
+
+          require("typescript.extensions.null-ls.code-actions"),
         },
       })
     end
