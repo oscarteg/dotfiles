@@ -113,7 +113,6 @@ return {
           ["<C-j>"] = cmp.mapping.select_next_item(),
           ["<C-k>"] = cmp.mapping.select_prev_item(),
 
-
           -- Trigger completion menu
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<Tab>'] = cmp_action.luasnip_supertab(),
@@ -121,7 +120,6 @@ return {
 
           ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
-
             select = true,
           }),
           -- Navigate between placeholder
@@ -139,11 +137,14 @@ return {
         })
       })
 
+
+
       -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
       cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
           { name = 'buffer' }
+
         }
       })
 
@@ -153,7 +154,7 @@ return {
         sources = cmp.config.sources({
           { name = 'path' }
         }, {
-          { name = 'cmdline' }
+          { name = 'cmdline', max_item_count = 5 }
         })
       })
     end
