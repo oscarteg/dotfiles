@@ -5,42 +5,46 @@ local on_attach = function(client, bufnr)
 
   vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {
     desc = "[G]oto [R]eferences",
-    remap = false,
     buffer = bufnr,
   })
 
   vim.keymap.set("n", "<leader>gt", require("telescope.builtin").lsp_type_definitions, {
     desc = "[G]oto [T]ype definition",
-    remap = false,
     buffer = bufnr,
   })
 
   vim.keymap.set("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, {
     desc = "[D]ocument [S]ymbols",
-    remap = false,
     buffer = bufnr,
   })
 
   vim.keymap.set("n", "<leader>ws", require("telescope.builtin").lsp_dynamic_workspace_symbols, {
     desc = "[W]orkspace [S]ymbols",
-    remap = false,
     buffer = bufnr,
   })
 
   vim.keymap.set("n", "gv", ":vsplit | lua vim.lsp.buf.definition()<CR>", {
     desc = "[G]oto definition [V]ertical",
-    remap = false,
     buffer = bufnr,
   })
 
-  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame", remap = false, buffer = bufnr })
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame", buffer = bufnr })
+
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, { desc = "Show function signature", buffer = bufnr })
 
   vim.keymap.set(
-    "n",
-    "<leader>ca",
+    "n", "ca",
     vim.lsp.buf.code_action,
     { desc = "[C]ode [A]ction", remap = false, buffer = bufnr }
   )
+
+  vim.keymap.set({ 'n', 'x' }, 'gq', function()
+    vim.lsp.buf.format({
+      async =
+          false,
+      timeout_ms = 10000
+    })
+  end)
 end
 
 return {
@@ -49,8 +53,6 @@ return {
     branch = 'v2.x',
     lazy = true,
     config = function()
-      -- This is where you modify the settings for lsp-zero
-      -- Note: autocompletion settings will not take effect
       require('lsp-zero.settings').preset({})
     end
   },
@@ -59,36 +61,100 @@ return {
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
     dependencies = {
-      { 'L3MON4D3/LuaSnip' },
+      {
+        'L3MON4D3/LuaSnip',
+
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+          config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+          end,
+        },
+      },
+      { "hrsh7th/cmp-buffer" },
+      { "hrsh7th/cmp-cmdline" },
+      { "hrsh7th/cmp-path" },
+      { "petertriho/cmp-git" },
+      { "hrsh7th/cmp-nvim-lua" },
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "L3MON4D3/LuaSnip" },
+      { "saadparwaiz1/cmp_luasnip" },
+      { "rafamadriz/friendly-snippets" },
     },
     config = function()
       -- Here is where you configure the autocompletion settings.
       -- The arguments for .extend() have the same shape as `manage_nvim_cmp`:
       -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#manage_nvim_cmp
-      require('lsp-zero.cmp').extend()
+
+      require('lsp-zero.cmp').extend({
+        -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/autocomplete.md#extra-mappings
+        set_extra_mappings = true
+      })
+
       local cmp = require("cmp")
-      local select_opts = { behavior = cmp.SelectBehavior.Select }
+      local cmp_action = require('lsp-zero.cmp').action()
 
       cmp.setup({
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
         },
-        mapping = {
-          ["<C-Space>"] = cmp.mapping.complete(),
-          ["<C-y>"] = cmp.config.disable,
-          ["<Up>"] = cmp.mapping.select_prev_item(select_opts),
-          ["<Down>"] = cmp.mapping.select_next_item(select_opts),
+        sources = cmp.config.sources({
+          { name = 'path' },
+          { name = 'nvim_lsp' },
+          { name = 'buffer',  keyword_length = 3 },
+          { name = 'luasnip', keyword_length = 2 },
+          { name = "nvim_lua" },
+        }, {
+          name = 'buffer'
+        }),
+        mapping = cmp.mapping.preset.insert({
+          -- Navigate between completion items
           ["<C-j>"] = cmp.mapping.select_next_item(),
           ["<C-k>"] = cmp.mapping.select_prev_item(),
-          ["<C-l>"] = cmp.mapping({ i = cmp.mapping.abort(), c = cmp.mapping.close() }),
+
+
+          -- Trigger completion menu
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<Tab>'] = cmp_action.luasnip_supertab(),
+          ['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+
           ["<CR>"] = cmp.mapping.confirm({
             behavior = cmp.ConfirmBehavior.Insert,
+
             select = true,
           }),
-          ["<Tab>"] = vim.NIL,
-          ["<S-Tab>"] = vim.NIL
+          -- Navigate between placeholder
+          ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+          ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+        })
+      })
+
+      -- Set configuration for specific filetype.
+      cmp.setup.filetype('gitcommit', {
+        sources = cmp.config.sources({
+          { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+        }, {
+          { name = 'buffer' },
+        })
+      })
+
+      -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
         }
+      })
+
+      -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          { name = 'cmdline' }
+        })
       })
     end
   },
@@ -98,12 +164,30 @@ return {
     cmd = 'LspInfo',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
-      { 'hrsh7th/cmp-nvim-lsp' },
+      {
+        'hrsh7th/cmp-nvim-lsp',
+        dependencies = {
+          "rafamadriz/friendly-snippets",
+          config = function()
+            require("luasnip.loaders.from_vscode").lazy_load()
+          end,
+        },
+      },
       { 'williamboman/mason-lspconfig.nvim' },
       { 'simrat39/rust-tools.nvim' },
-      { 'ray-x/go.nvim' },
       { 'jose-elias-alvarez/typescript.nvim' },
       { 'jose-elias-alvarez/null-ls.nvim' },
+      {
+        "ray-x/go.nvim",
+        dependencies = {
+          "ray-x/guihua.lua",
+          "neovim/nvim-lspconfig",
+          "nvim-treesitter/nvim-treesitter",
+        },
+        event = { "CmdlineEnter" },
+        ft = { "go", 'gomod' },
+        build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+      },
       {
         'williamboman/mason.nvim',
         build = function()
@@ -112,8 +196,6 @@ return {
       },
     },
     config = function()
-      -- This is where all the LSP shenanigans will live
-
       local lsp = require("lsp-zero").preset("recommended")
       local lspconfig = require('lspconfig')
 
@@ -145,6 +227,17 @@ return {
 
             vim.keymap.set('n', '<leader>ci', '<cmd>TypescriptAddMissingImports<cr>', { buffer = bufnr })
             vim.keymap.set('n', '<leader>co', '<cmd>TypescriptOrganizeImports<cr>', { buffer = bufnr })
+            vim.keymap.set('n', '<leader>cf', '<cmd>TypescriptFixAll<cr>', { buffer = bufnr })
+
+            vim.keymap.set("n", "gD", "<cmd>TypescriptGoToSourceDefinition<CR>", {
+              desc = "[G]oto [D]efinition",
+              buffer = bufnr,
+            })
+
+            vim.keymap.set("n", "gV", ":vsplit | :TypescriptGoToSourceDefinition<CR>", {
+              desc = "[G]oto definition [V]ertical",
+              buffer = bufnr,
+            })
           end
         }
       })
@@ -165,6 +258,7 @@ return {
             on_attach(client, bufnr)
 
             vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
+            vim.keymap.set("n", "J", rust_tools.join_lines.join_lines(), { buffer = bufnr })
           end,
         },
       })
@@ -179,8 +273,6 @@ return {
             end,
             group = format_sync_grp,
           })
-
-          print("Go LSP attached")
 
           on_attach(client, bufnr)
 
