@@ -46,7 +46,7 @@ local config = function()
       } },
       lualine_x = { lsp_name },
       lualine_y = { "filetype" },
-      lualine_z = { "progress" },
+      lualine_z = { "progress", "location" },
 
     },
     extensions = {

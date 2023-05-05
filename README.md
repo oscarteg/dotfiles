@@ -37,6 +37,35 @@ Neovim requirements
 `gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
 ```
 
+### nvim-cmp
+
+<Ctrl-y>: Confirms selection.
+
+<Ctrl-e>: Cancel the completion.
+
+<Down>: Navigate to the next item on the list.
+
+<Up>: Navigate to previous item on the list.
+
+<Ctrl-n>: If the completion menu is visible, go to the next item. Else, trigger completion menu.
+
+<Ctrl-p>: If the completion menu is visible, go to the previous item. Else, trigger completion menu.
+
+<Ctrl-d>: Scroll down in the item's documentation.
+
+<Ctrl-u>: Scroll up in the item's documentation.
+
+Extra mappings
+These are the keybindings you get when you enable manage_nvim_cmp.set_extra_mappings. These enable tab completion and navigation between snippet placeholders.
+
+<Ctrl-f>: Go to the next placeholder in the snippet.
+
+<Ctrl-b>: Go to the previous placeholder in the snippet.
+
+<Tab>: Enables completion when the cursor is inside a word. If the completion menu is visible it will navigate to the next item in the list.
+
+<Shift-Tab>: When the completion menu is visible navigate to the previous item in the list.
+
 - VISUAL mode
 
 ```help

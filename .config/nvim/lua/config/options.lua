@@ -29,7 +29,12 @@ o.updatetime = 250
 o.writebackup = false
 o.wildmenu = true
 o.wildmode = 'full'
--- opt.statuscolumn = "%=%{v:virtnum < 1 ? (v:relnum ? v:relnum : v:lnum < 10 ? v:lnum . '  ' : v:lnum) : ''}%=%s"
+
+-- Folding with Treesitter
+vim.o.foldcolumn = '1' -- '0' is not bad
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 
 -- Split vertical below
 o.splitbelow = true
@@ -50,9 +55,6 @@ api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set
 -- astro
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })
 
--- set compiler to bun when typescript file
-api.nvim_create_autocmd({ "BufEnter" }, { pattern = { "*ts", "js" }, command = [[:compiler bun]] })
-
 -- highlight text on yank
 api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('highlight_yank', {}),
@@ -62,13 +64,6 @@ api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank { higroup = 'IncSearch', timeout = 500 }
   end,
 })
-
--- close quickfix menu after selecting choice
--- api.nvim_create_autocmd(
---   "FileType", {
---     pattern = { "qf" },
---     command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
---   })
 
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1

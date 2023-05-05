@@ -219,7 +219,8 @@ return {
         server = {
           settings = {
             completions = {
-              completeFunctionCalls = true
+              completeFunctionCalls = true,
+              noInferredTypeTruncation = true
             }
           },
           on_attach = function(client, bufnr)
@@ -265,6 +266,7 @@ return {
       })
 
       require('go').setup({
+        lsp_cfg = true,
         lsp_on_attach = function(client, bufnr)
           local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
           vim.api.nvim_create_autocmd("BufWritePre", {
