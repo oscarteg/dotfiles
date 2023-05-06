@@ -23,12 +23,13 @@ map("n", "]d", vim.diagnostic.goto_next)
 map("n", "<leader>bo", "<cmd>%bd|e#<cr>", { desc = "Close all buffers but the current one" })
 
 -- Moving lines up/down in V mode
-map("v", "J", ":m '>+1<CR>gv=gv")
-map("v", "K", ":m '<-2<CR>gv=gv")
 
--- Move text up and down
-map("v", "<A-k>", ":m -1<CR>==", { silent = true })
-map("v", "<A-j>", ":m +1<CR>==", { silent = true })
+map("n", "<A-j>", ":m .+1<CR>==")
+map("n", "<A-k>", ":m .-2<CR>==")
+
+map("v", "<A-j>", ":m '>+1<CR>gv=gv")
+map("v", "<A-k>", ":m '<-2<CR>gv=gv")
+
 
 -- Windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
