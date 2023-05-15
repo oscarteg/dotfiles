@@ -72,4 +72,8 @@ map("n", "<leader>vg", "<cmd>diffget //1<CR>") -- working copy
 map("n", "<leader>vf", "<cmd>diffget //2<CR>") -- current branch / HEAD
 map("n", "<leader>vj", "<cmd>diffget //3<CR>") -- merge branch
 
--- TodoTelescope
+map("t", "<Esc>", "<C-\\><C-n>")
+
+-- Quickfix
+map("n", "<leader>Q", ":cclose<cr>")
+map("n", "<leader>q", ":botright copen<cr>")

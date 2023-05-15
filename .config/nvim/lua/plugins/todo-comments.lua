@@ -7,6 +7,7 @@ return {
     "TodoQuickFix"
   },
   keys = {
-    { "<leader>tq", [[<cmd>TodoQuickFix theme=ivy<CR>]], { silent = true } }
-  }
+    { "<leader>tq", [[<cmd>TodoQuickFix theme=ivy<CR>]], { silent = true, desc = "Todo Quick Fix" } }
+  },
+  config = true,
 }

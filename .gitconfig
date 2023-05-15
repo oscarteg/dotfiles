@@ -215,10 +215,10 @@
   insteadOf = "gist:"
 [diff "sopsdiffer"]
 	textconv = sops -d
-[pull]
-	rebase = true
 [init]
 	defaultBranch = main
+[pull]
+  rebase = true
 [rebase]
 	autoStash = true
 

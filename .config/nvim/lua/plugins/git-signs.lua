@@ -59,10 +59,10 @@ local config = function()
 
       map("n", "<leader>hu", gs.undo_stage_hunk, { desc = "Undo stage hunk" })
       map("n", "<leader>hb", function()
-        map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
         gs.blame_line({ full = true })
       end, { desc = "Blame line" })
-      map("n", "<leader>tb", gs.toggle_current_line_blame, { desc = "Toggle current line blame" })
+      map("n", "<leader>hB", gs.toggle_current_line_blame, { desc = "Toggle current line blame" })
+      map("n", "<leader>hp", gs.preview_hunk, { desc = "Preview hunk" })
       map("n", "<leader>hd", gs.diffthis, { desc = "Diff this" })
       -- Diff
       map("n", "<leader>hD", function()

@@ -1,6 +1,6 @@
-local on_attach = function(client, bufnr)
-  local lsp = require("lsp-zero").preset("recommended")
-  lsp.default_keymaps({ buffer = bufnr })
+local on_attach = function(client, bufnr, lsp)
+  lsp.default_keymaps({ buffer = bufnr, })
+
   lsp.buffer_autoformat()
 
   vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, {
@@ -39,11 +39,7 @@ local on_attach = function(client, bufnr)
   )
 
   vim.keymap.set({ 'n', 'x' }, 'gq', function()
-    vim.lsp.buf.format({
-      async =
-          false,
-      timeout_ms = 10000
-    })
+    vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
   end)
 end
 
@@ -53,7 +49,7 @@ return {
     branch = 'v2.x',
     lazy = true,
     config = function()
-      require('lsp-zero.settings').preset({})
+      require('lsp-zero.settings').preset("recommended")
     end
   },
   -- Autocompletion
@@ -82,12 +78,7 @@ return {
       { "rafamadriz/friendly-snippets" },
     },
     config = function()
-      -- Here is where you configure the autocompletion settings.
-      -- The arguments for .extend() have the same shape as `manage_nvim_cmp`:
-      -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/api-reference.md#manage_nvim_cmp
-
       require('lsp-zero.cmp').extend({
-        -- https://github.com/VonHeikemen/lsp-zero.nvim/blob/v2.x/doc/md/autocomplete.md#extra-mappings
         set_extra_mappings = true
       })
 
@@ -181,8 +172,8 @@ return {
       {
         "ray-x/go.nvim",
         dependencies = {
-          "ray-x/guihua.lua",
           "neovim/nvim-lspconfig",
+          "ray-x/guihua.lua",
           "nvim-treesitter/nvim-treesitter",
         },
         event = { "CmdlineEnter" },
@@ -200,7 +191,9 @@ return {
       local lsp = require("lsp-zero").preset("recommended")
       local lspconfig = require('lspconfig')
 
-      lsp.on_attach(on_attach)
+      lsp.on_attach(function(client, bufnr)
+        on_attach(client, bufnr, lsp)
+      end)
 
       lsp.skip_server_setup({
         "rust_analyzer",
@@ -215,21 +208,25 @@ return {
 
       lsp.setup()
 
-      require('typescript').setup({
+      local ts = require("typescript")
+
+      ts.setup({
         server = {
           settings = {
             completions = {
               completeFunctionCalls = true,
-              noInferredTypeTruncation = true
-            }
+            },
+            noInferredTypeTruncation = true
           },
           on_attach = function(client, bufnr)
             require("twoslash-queries").attach(client, bufnr)
-            on_attach(client, bufnr)
+
+            on_attach(client, bufnr, lsp)
 
             vim.keymap.set('n', '<leader>ci', '<cmd>TypescriptAddMissingImports<cr>', { buffer = bufnr })
             vim.keymap.set('n', '<leader>co', '<cmd>TypescriptOrganizeImports<cr>', { buffer = bufnr })
             vim.keymap.set('n', '<leader>cf', '<cmd>TypescriptFixAll<cr>', { buffer = bufnr })
+            vim.keymap.set('n', '<leader>cu', '<cmd>TypescriptRemoveUnused<cr>', { buffer = bufnr })
 
             vim.keymap.set("n", "gD", "<cmd>TypescriptGoToSourceDefinition<CR>", {
               desc = "[G]oto [D]efinition",
@@ -244,30 +241,36 @@ return {
         }
       })
 
-      require('rust-tools').setup({
+      local rust_tools = require('rust-tools')
+
+      rust_tools.setup({
         tools = { inlay_hints = { show_parameter_hints = false } },
         server = {
           settings = {
             ["rust-analyzer"] = {
-              checkOnSave = {
-                enable = true,
+              check = {
+                extraArgs = { "--all", "--", "-W", "clippy::all" },
                 command = "clippy"
               }
             }
           },
-          on_attach = function(client, bufnr)
-            local rust_tools = require('rust_tools')
-            on_attach(client, bufnr)
 
-            vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
-            vim.keymap.set("n", "J", rust_tools.join_lines.join_lines(), { buffer = bufnr })
+          on_attach = function(client, bufnr)
+            on_attach(client, bufnr, lsp)
+
+            vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions,
+              { buffer = bufnr, desc = "Show hover actions" })
+            vim.keymap.set("n", "J", rust_tools.join_lines.join_lines, { buffer = bufnr, desc = "Join lines" })
           end,
         },
       })
 
-      require('go').setup({
+      local go_lang = require("go")
+
+      go_lang.setup({
         lsp_cfg = true,
         lsp_on_attach = function(client, bufnr)
+          on_attach(client, bufnr, lsp)
           local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
           vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = "*.go",
@@ -276,10 +279,6 @@ return {
             end,
             group = format_sync_grp,
           })
-
-          on_attach(client, bufnr)
-
-          vim.keymap.set("n", "K", require('go').hover_actions, { buffer = bufnr })
         end,
       })
 
