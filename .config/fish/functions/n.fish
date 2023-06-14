@@ -1,4 +1,4 @@
-function n -d "Opening Neovim with current dir" 
+function n -d "Opening Neovim with current dir"  --wraps "nvim"
 
   if not set -q argv[1]
     nvim 

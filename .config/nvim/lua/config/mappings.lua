@@ -8,6 +8,8 @@ local function map(mode, lhs, rhs, opts)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
+
+vim.keymap.set("n", "mm", "<cmd>make<cr>", { silent = true })
 -- Remap space as leader key
 map("n", "<space>", "", { silent = true })
 g.mapleader = " "
@@ -23,13 +25,10 @@ map("n", "]d", vim.diagnostic.goto_next)
 map("n", "<leader>bo", "<cmd>%bd|e#<cr>", { desc = "Close all buffers but the current one" })
 
 -- Moving lines up/down in V mode
-
 map("n", "<A-j>", ":m .+1<CR>==")
 map("n", "<A-k>", ":m .-2<CR>==")
-
 map("v", "<A-j>", ":m '>+1<CR>gv=gv")
 map("v", "<A-k>", ":m '<-2<CR>gv=gv")
-
 
 -- Windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })

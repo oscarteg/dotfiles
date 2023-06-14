@@ -161,6 +161,7 @@ return {
         dependencies = {
           "rafamadriz/friendly-snippets",
           config = function()
+            -- require("snippets.typescript")
             require("luasnip.loaders.from_vscode").lazy_load()
           end,
         },
@@ -195,10 +196,16 @@ return {
         on_attach(client, bufnr, lsp)
       end)
 
+      lsp.set_sign_icons({
+        error = '✘',
+        warn = '▲',
+        hint = '⚑',
+        info = '»'
+      })
+
       lsp.skip_server_setup({
         "rust_analyzer",
         "tsserver",
-        "go_lsp"
       })
 
       -- (Optional) Configure lua language server for neovim
@@ -207,6 +214,12 @@ return {
       lspconfig.denols.setup({ root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc") })
 
       lsp.setup()
+
+      vim.diagnostic.config({
+        virtual_text = {
+          prefix = "",
+        }
+      })
 
       local ts = require("typescript")
 
@@ -223,13 +236,15 @@ return {
 
             on_attach(client, bufnr, lsp)
 
-            vim.keymap.set('n', '<leader>ci', '<cmd>TypescriptAddMissingImports<cr>', { buffer = bufnr })
-            vim.keymap.set('n', '<leader>co', '<cmd>TypescriptOrganizeImports<cr>', { buffer = bufnr })
-            vim.keymap.set('n', '<leader>cf', '<cmd>TypescriptFixAll<cr>', { buffer = bufnr })
-            vim.keymap.set('n', '<leader>cu', '<cmd>TypescriptRemoveUnused<cr>', { buffer = bufnr })
+            vim.keymap.set('n', '<leader>ci', ts.actions.addMissingImports,
+              { buffer = bufnr, description = "Add missing imports" })
+            vim.keymap.set('n', '<leader>co', ts.actions.organizeImports,
+              { buffer = bufnr, description = "Organize imports" })
+            vim.keymap.set('n', '<leader>cf', ts.actions.fixAll, { buffer = bufnr, description = "Fix all" })
+            vim.keymap.set('n', '<leader>cu', ts.actions.removeUnused, { buffer = bufnr, description = "Remove unused" })
 
-            vim.keymap.set("n", "gD", "<cmd>TypescriptGoToSourceDefinition<CR>", {
-              desc = "[G]oto [D]efinition",
+            vim.keymap.set("n", "<leader>gD", "<cmd>TypescriptGoToSourceDefinition<CR>", {
+              desc = "[G]oto [D]efinition with tsserver",
               buffer = bufnr,
             })
 
@@ -260,6 +275,9 @@ return {
 
             vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions,
               { buffer = bufnr, desc = "Show hover actions" })
+
+            vim.keymap.set("n", "<C-space>", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
+
             vim.keymap.set("n", "J", rust_tools.join_lines.join_lines, { buffer = bufnr, desc = "Join lines" })
           end,
         },
@@ -307,7 +325,7 @@ return {
           null_ls.builtins.formatting.eslint_d,
           null_ls.builtins.formatting.cmake_format,
           null_ls.builtins.formatting.terraform_fmt,
-
+          null_ls.builtins.formatting.elm_format,
           require("typescript.extensions.null-ls.code-actions"),
         },
       })

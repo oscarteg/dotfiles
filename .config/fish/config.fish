@@ -7,21 +7,33 @@ set -gx FZF_DEFAULT_COMMAND "$RG_PREFIX '$INITIAL_QUERY'" \
       --ansi --disabled --query "$INITIAL_QUERY" \
       --height=50% --layout=reverse
 
+# Homebrew
 fish_add_path /opt/homebrew/bin
 fish_add_path /opt/homebrew/sbin
+fish_add_path /opt/homebrew/opt/llvm/bin
+
+# Cargo
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.cargo/composer/bin
+
 fish_add_path $HOME/Projects/libraries/flutter/bin
-fish_add_path /opt/homebrew/opt/llvm/bin
-fish_add_path $HOME/go/bin
+
+# Emacs
 fish_add_path $HOME/.config/emacs/bin
+
+# Golang
 set -x GOPATH $HOME/go
-
-set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
-set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
-
 fish_add_path $GOPATH/bin
 
+# Default clang
+set -gx CC clang
+set -gx CFLAGS -std=c17 -Wall -Wextra
+
+# Default clang++
+set -gx CXX clang++
+set -gx CXXFLAGS -std=c++20 -stdlib=libc++ -Wall -Wextra
+# set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
+# set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"

@@ -1,8 +1,9 @@
 local opt = vim.opt
 local api = vim.api
 local o = vim.o
-local cmd = vim.cmd
 
+
+opt.filetype = "on"
 o.background = "dark"
 o.mouse = "a"
 o.number = true
@@ -54,6 +55,7 @@ api.nvim_command("colorscheme gruber")
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set filetype=mdx]] })
 -- astro
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })
+api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.flux", command = [[set filetype=flux]] })
 
 -- highlight text on yank
 api.nvim_create_autocmd('TextYankPost', {
@@ -89,4 +91,27 @@ local links = {
 }
 for newgroup, oldgroup in pairs(links) do
   vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
+end
+
+-- Add MDX filtype
+vim.filetype.add({
+  extension = {
+    mdx = "markdown.mdx",
+  },
+  filename = {},
+  pattern = {},
+})
+
+
+local signs = {
+  Error = '✘',
+  Warn = '▲',
+  Hint = '⚑',
+  Info = '»'
+}
+
+-- DiagnosticSigns
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
