@@ -1,4 +1,5 @@
 local config = function(_, opts)
+  require("nvim-treesitter.install").compiler = { "clang" }
   require("nvim-treesitter.configs").setup({
     playground = {
       enable = true,

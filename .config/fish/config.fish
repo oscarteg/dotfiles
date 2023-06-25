@@ -32,8 +32,9 @@ set -gx CFLAGS -std=c17 -Wall -Wextra
 # Default clang++
 set -gx CXX clang++
 set -gx CXXFLAGS -std=c++20 -stdlib=libc++ -Wall -Wextra
-# set -gx LDFLAGS "-L/opt/homebrew/opt/llvm/lib"
-# set -gx CPPFLAGS "-I/opt/homebrew/opt/llvm/include"
+
+set -gx LDFLAGS "-L /opt/homebrew/lib"
+set -gx CPPFLAGS "-I /opt/homebrew/include"
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"

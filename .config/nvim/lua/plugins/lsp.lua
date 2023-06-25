@@ -91,10 +91,10 @@ return {
           documentation = cmp.config.window.bordered(),
         },
         sources = cmp.config.sources({
+          { name = 'luasnip', keyword_length = 2 },
           { name = 'path' },
           { name = 'nvim_lsp' },
           { name = 'buffer',  keyword_length = 3 },
-          { name = 'luasnip', keyword_length = 2 },
           { name = "nvim_lua" },
         }, {
           name = 'buffer'
@@ -208,7 +208,6 @@ return {
         "tsserver",
       })
 
-      -- (Optional) Configure lua language server for neovim
       lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
       lspconfig.denols.setup({ root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc") })
@@ -233,15 +232,13 @@ return {
           },
           on_attach = function(client, bufnr)
             require("twoslash-queries").attach(client, bufnr)
-
-            on_attach(client, bufnr, lsp)
-
-            vim.keymap.set('n', '<leader>ci', ts.actions.addMissingImports,
-              { buffer = bufnr, description = "Add missing imports" })
-            vim.keymap.set('n', '<leader>co', ts.actions.organizeImports,
-              { buffer = bufnr, description = "Organize imports" })
-            vim.keymap.set('n', '<leader>cf', ts.actions.fixAll, { buffer = bufnr, description = "Fix all" })
-            vim.keymap.set('n', '<leader>cu', ts.actions.removeUnused, { buffer = bufnr, description = "Remove unused" })
+            vim.keymap.set('n', '<leader>ci', '<cmd>TypescriptAddMissingImports<cr>',
+              { buffer = bufnr, desc = "Add missing imports", silent = true })
+            vim.keymap.set('n', '<leader>co', '<cmd>TypescriptOrganizeImports<cr>',
+              { buffer = bufnr, desc = "Organize imports" })
+            vim.keymap.set('n', '<leader>cf', '<cmd>TypescriptFixAll<cr>', { buffer = bufnr, desc = "Fix all" })
+            vim.keymap.set('n', '<leader>cu', '<cmd>TypescriptRemoveUnused<cr>',
+              { buffer = bufnr, desc = "Remove unused" })
 
             vim.keymap.set("n", "<leader>gD", "<cmd>TypescriptGoToSourceDefinition<CR>", {
               desc = "[G]oto [D]efinition with tsserver",

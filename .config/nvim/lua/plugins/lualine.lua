@@ -53,7 +53,6 @@ local config = function()
       "nvim-tree",
       "fugitive",
       "quickfix",
-      "nvim-dap-ui"
     }
   })
 end
