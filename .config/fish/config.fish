@@ -18,6 +18,9 @@ fish_add_path $HOME/.cargo/composer/bin
 
 fish_add_path $HOME/Projects/libraries/flutter/bin
 
+# Java
+fish_add_path /opt/homebrew/opt/openjdk/bin
+
 # Emacs
 fish_add_path $HOME/.config/emacs/bin
 

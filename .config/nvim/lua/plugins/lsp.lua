@@ -210,7 +210,12 @@ return {
 
       lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
-      lspconfig.denols.setup({ root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc") })
+
+      lspconfig.denols.setup {
+        on_attach = on_attach,
+        root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+      }
+
 
       lsp.setup()
 
@@ -222,6 +227,9 @@ return {
 
       local ts = require("typescript")
 
+
+      lspconfig.tsserver.setup {
+      }
       ts.setup({
         server = {
           settings = {
@@ -230,6 +238,8 @@ return {
             },
             noInferredTypeTruncation = true
           },
+          root_dir = lspconfig.util.root_pattern("package.json"),
+          single_file_support = false,
           on_attach = function(client, bufnr)
             require("twoslash-queries").attach(client, bufnr)
             vim.keymap.set('n', '<leader>ci', '<cmd>TypescriptAddMissingImports<cr>',

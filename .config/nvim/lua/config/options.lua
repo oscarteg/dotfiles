@@ -2,6 +2,7 @@ local opt = vim.opt
 local api = vim.api
 local o = vim.o
 
+opt.rtp:append('/opt/homebrew/opt/fzf')
 
 opt.filetype = "on"
 o.background = "dark"
