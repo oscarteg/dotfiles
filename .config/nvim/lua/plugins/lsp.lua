@@ -210,12 +210,10 @@ return {
 
       lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
 
-
       lspconfig.denols.setup {
         on_attach = on_attach,
         root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
       }
-
 
       lsp.setup()
 
@@ -227,9 +225,6 @@ return {
 
       local ts = require("typescript")
 
-
-      lspconfig.tsserver.setup {
-      }
       ts.setup({
         server = {
           settings = {
@@ -266,26 +261,42 @@ return {
       local rust_tools = require('rust-tools')
 
       rust_tools.setup({
-        tools = { inlay_hints = { show_parameter_hints = false } },
-        server = {
-          settings = {
-            ["rust-analyzer"] = {
-              check = {
-                extraArgs = { "--all", "--", "-W", "clippy::all" },
-                command = "clippy"
-              }
+        -- tools = {
+        --   inlay_hints = {
+        --     show_parameter_hints = false,
+        --   },
+        -- },
+        settings = {
+          ["rust-analyzer"] = {
+            server = {
+              path = "~/.cargo/bin/rust-analyzer"
+            },
+            cargo = {
+              allFeatures = true
             }
           },
+          -- settings = {
+          --   ["rust-analyzer"] = {
+          --     diagnostic = {
+          --       enable = true,
+          --     },
+          --     checkOnSave = {
+          --       command = "clippy",
+          --       allFeatures = true,
+          --     },
+          --   }
+          -- },
+
 
           on_attach = function(client, bufnr)
-            on_attach(client, bufnr, lsp)
-
             vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions,
-              { buffer = bufnr, desc = "Show hover actions" })
+              { buffer = bufnr, desc = "Show hover actions", remap = true })
 
-            vim.keymap.set("n", "<C-space>", rust_tools.hover_actions.hover_actions, { buffer = bufnr })
+            vim.keymap.set("n", "<C-space>", rust_tools.hover_actions.hover_actions,
+              { buffer = bufnr, desc = "Show hover actions", remap = true })
 
-            vim.keymap.set("n", "J", rust_tools.join_lines.join_lines, { buffer = bufnr, desc = "Join lines" })
+            vim.keymap.set("n", "J", rust_tools.join_lines.join_lines,
+              { buffer = bufnr, desc = "Join lines", remap = true })
           end,
         },
       })
