@@ -1,4 +1,5 @@
 local config = function(_, opts)
+  vim.treesitter.language.register('markdown', 'mdx')
   require("nvim-treesitter.install").compiler = { "clang" }
   require("nvim-treesitter.configs").setup({
     playground = {

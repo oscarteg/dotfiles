@@ -179,6 +179,10 @@ return {
         },
         event = { "CmdlineEnter" },
         ft = { "go", 'gomod' },
+        init = function()
+          -- Use gofumpt instead of gofmt
+          vim.g.go_gopls_gofumpt = 1
+        end,
         build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
       },
       {
@@ -206,6 +210,7 @@ return {
       lsp.skip_server_setup({
         "rust_analyzer",
         "tsserver",
+        "gopls"
       })
 
       lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
@@ -215,12 +220,45 @@ return {
         root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
       }
 
+      lspconfig.eslint.setup {
+        on_attach = function(client, bufnr)
+          -- vim.api.nvim_create_autocmd("BufWritePre", {
+          --   buffer = bufnr,
+          --   command = "EslintFixAll",
+          -- })
+          on_attach(client, bufnr)
+        end,
+
+      }
+
+      -- Fix for difference int utf set
+      lspconfig.clangd.setup {
+        on_attach = on_attach,
+        cmd = {
+          "clangd",
+          "--offset-encoding=utf-16",
+        },
+      }
+
+      lspconfig.hls.setup {
+        on_attach = on_attach,
+        filetypes = { 'haskell', 'lhaskell', 'cabal' },
+      }
+
+      lsp.format_on_save({
+        format_opts = {
+          async = false,
+          timeout_ms = 10000,
+        },
+        servers = {
+          ['null-ls'] = { 'javascript', 'typescript', 'lua' },
+        }
+      })
+
       lsp.setup()
 
       vim.diagnostic.config({
-        virtual_text = {
-          prefix = "",
-        }
+        virtual_text = true
       })
 
       local ts = require("typescript")
@@ -261,38 +299,39 @@ return {
       local rust_tools = require('rust-tools')
 
       rust_tools.setup({
-        -- tools = {
-        --   inlay_hints = {
-        --     show_parameter_hints = false,
-        --   },
-        -- },
-        settings = {
-          ["rust-analyzer"] = {
-            server = {
-              path = "~/.cargo/bin/rust-analyzer"
-            },
-            cargo = {
-              allFeatures = true
+        runnables = {
+          use_telescope = true,
+        },
+        debuggables = {
+          use_telescope = true,
+        },
+        server = {
+          settings = {
+            ["rust-analyzer"] = {
+              check = {
+                command = "clippy"
+              },
+              -- check = { command = "clippy" },
+              -- cargo = { features = "all" },
+              -- imports = { prefix = "self", granularity = { group = "module", enforce = true } },
+              -- assist = { emitMustUse = true },
+              -- lens = { location = "above_whole_item" },
+              semanticHighlighting = {
+                operator = { specialization = { enable = true } },
+                puncutation = {
+                  enable = true,
+                  specialization = { enable = true },
+                  separate = { macro = { bang = true } }
+                }
+              },
             }
           },
-          -- settings = {
-          --   ["rust-analyzer"] = {
-          --     diagnostic = {
-          --       enable = true,
-          --     },
-          --     checkOnSave = {
-          --       command = "clippy",
-          --       allFeatures = true,
-          --     },
-          --   }
-          -- },
 
-
-          on_attach = function(client, bufnr)
+          on_attach = function(_, bufnr)
             vim.keymap.set("n", "K", rust_tools.hover_actions.hover_actions,
               { buffer = bufnr, desc = "Show hover actions", remap = true })
 
-            vim.keymap.set("n", "<C-space>", rust_tools.hover_actions.hover_actions,
+            vim.keymap.set("n", "<leader>ca", rust_tools.hover_actions.hover_actions,
               { buffer = bufnr, desc = "Show hover actions", remap = true })
 
             vim.keymap.set("n", "J", rust_tools.join_lines.join_lines,
@@ -330,18 +369,18 @@ return {
           null_ls.builtins.diagnostics.php,
           null_ls.builtins.diagnostics.actionlint,
           null_ls.builtins.diagnostics.yamllint,
-          null_ls.builtins.diagnostics.eslint_d,
           null_ls.builtins.diagnostics.cmake_lint,
           null_ls.builtins.diagnostics.buf,
-          null_ls.builtins.code_actions.eslint_d,
+          null_ls.builtins.code_actions.eslint,
           null_ls.builtins.code_actions.gitrebase,
           null_ls.builtins.code_actions.gitsigns,
           null_ls.builtins.code_actions.refactoring,
           null_ls.builtins.formatting.prismaFmt,
           null_ls.builtins.formatting.clang_format,
+          null_ls.builtins.formatting.eslint,
           null_ls.builtins.formatting.prettier,
-          null_ls.builtins.formatting.eslint_d,
           null_ls.builtins.formatting.cmake_format,
+          null_ls.builtins.formatting.mix,
           null_ls.builtins.formatting.terraform_fmt,
           null_ls.builtins.formatting.elm_format,
           require("typescript.extensions.null-ls.code-actions"),

@@ -12,6 +12,9 @@ fish_add_path /opt/homebrew/bin
 fish_add_path /opt/homebrew/sbin
 fish_add_path /opt/homebrew/opt/llvm/bin
 
+# Elixer
+fish_add_path /opt/homebrew/bin/elixir
+
 # Cargo
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.cargo/composer/bin
@@ -39,6 +42,9 @@ set -gx CXXFLAGS -std=c++20 -stdlib=libc++ -Wall -Wextra
 set -gx LDFLAGS "-L /opt/homebrew/lib"
 set -gx CPPFLAGS "-I /opt/homebrew/include"
 
+set -gx CPATH "/opt/homebrew/include"
+set -gx LIBRARY_PATH "/opt/homebrew/lib"
+
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
 set --export PATH $BUN_INSTALL/bin $PATH
@@ -58,3 +64,7 @@ set -gx PATH "$VOLTA_HOME/bin" $PATH
 
 # Added by zoxide installer
 zoxide init fish | source
+
+# >>> coursier install directory >>>
+set -gx PATH "$PATH:/Users/oscar/Library/Application Support/Coursier/bin"
+# <<< coursier install directory <<<
