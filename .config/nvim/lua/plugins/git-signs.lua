@@ -11,6 +11,7 @@ local config = function()
 
   gitsigns.setup({
     current_line_blame = true,
+    _signs_staged_enable = true,
     signs = {
       add = { hl = "GitSignsAdd", text = "┃" },
       change = { hl = "GitSignsChange", text = "┃" },

@@ -51,9 +51,6 @@ o.expandtab = true
 o.smartindent = true
 o.splitright = true
 
--- Set colrscheme
-api.nvim_command("colorscheme gruber")
-
 -- mdx
 api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set filetype=mdx]] })
 -- astro

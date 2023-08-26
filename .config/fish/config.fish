@@ -49,7 +49,14 @@ set -gx KERL_CONFIGURE_OPTIONS "--without-javac --without-jinterface --without-o
 
 # bun
 set --export BUN_INSTALL "$HOME/.bun"
-set --export PATH $BUN_INSTALL/bin $PATH
+
+fish_add_path $BUN_INSTALL/bin
+
+# tmux
+# ~/.tmux/plugins
+fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
+# ~/.config/tmux/plugins
+fish_add_path $HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin
 
 # pnpm
 set -gx PNPM_HOME "/Users/oscar/Library/pnpm"
@@ -57,8 +64,11 @@ set -gx PATH "$PNPM_HOME" $PATH
 # pnpm end
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /Users/oscar/.ghcup/bin # ghcup-env
+
+# Volta
 set -gx VOLTA_HOME "$HOME/.volta"
-set -gx PATH "$VOLTA_HOME/bin" $PATH
+fish_add_path $VOLTA_HOME/bin
+set -gx VOLTA_FEATURE_PNPM 1
 
 # tabtab source for packages
 # uninstall by removing these lines

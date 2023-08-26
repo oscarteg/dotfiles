@@ -1,4 +1,10 @@
 {
 	"optOut": false,
-	"lastUpdateCheck": 1692187660124
+	"lastUpdateCheck": 1692953679438,
+	"update": {
+		"latest": "3.0.1",
+		"current": "2.0.7",
+		"type": "major",
+		"name": "nodemon"
+	}
 }

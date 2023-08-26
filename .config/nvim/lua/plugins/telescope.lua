@@ -25,6 +25,12 @@ local config = function()
           return { "--hidden" }
         end
       },
+      git_files = {
+        theme = "ivy"
+      },
+      grep_string = {
+        theme = "ivy"
+      },
       oldfiles = {
         theme = "ivy"
       },
@@ -115,7 +121,7 @@ return {
       },
       {
         "<leader>fw",
-        utils.telescope("grep_string"),
+        utils.telescope("grep_string", { theme = "ivy" }),
         desc =
         "[F]ind current [W]ord"
       },
