@@ -11,13 +11,15 @@ let g:colors_name = "gruber"
 let s:black      = ["#000000", "234"]
 let s:lightblack = ["#262626", "235"]
 let s:darkgray   = ["#444444", "238"]
-let s:gray       = ["#626262", "241"]
+let s:gray       = ["#7A7E85", "241"]
 let s:white      = ["#e4e4e4", "254"]
 
 let s:red     = ["#ff5f5f", "203"]
-let s:green   = ["#87d75f", "113"]
-let s:yellow  = ["#ffd700", "220"]
-let s:blue    = ["#87afd7", "110"]
+let s:green   = ["#72a44f", "113"]
+let s:yellow  = ["#DFC846", "220"]
+let s:softyellow = ["#ffc66d", "1"]
+let s:blue    = ["#95A1B9", "180"]
+let s:lightblue    = ["#4EADE5", "280"]
 let s:magenta = ["#afafd7", "146"]
 let s:cyan    = ["#afd7af", "151"]
 let s:brown   = ["#af875f", "137"]
@@ -63,9 +65,10 @@ endfunction
 " and `:help group-name`
 
 let s:fg       = { "fg": s:white }
-let s:comment  = { "fg": s:brown }
+let s:comment  = { "fg": s:gray }
 let s:preproc  = { "fg": s:cyan }
 let s:keyword  = { "fg": s:yellow, "style": "bold" }
+let s:method  = { "fg": s:blue }
 let s:type     = { "fg": s:yellow }
 let s:function = { "fg": s:blue }
 let s:literal  = { "fg": s:magenta }
@@ -83,26 +86,29 @@ call s:hl("Visual",         { "bg": s:gray })
 highlight! link VisualNOS   Visual
 
 " Syntax
-call s:hl("Comment",        s:comment)
-call s:hl("Constant",       s:fg)
-call s:hl("String",         s:string)
-call s:hl("Character",      s:char)
-call s:hl("Number",         s:literal)
 call s:hl("Boolean",        s:literal)
+call s:hl("Character",      s:char)
+call s:hl("Comment",        s:comment)
+call s:hl("Constant",       s:keyword)
+call s:hl("Error",          { "fg": s:red })
 call s:hl("Float",          s:literal)
-call s:hl("Identifier",     s:fg)
 call s:hl("Function",       s:function)
-call s:hl("Statement",      s:keyword)
+call s:hl("Identifier",     s:fg)
+call s:hl("Ignore",         { "fg": s:black })
+call s:hl("Keyword",        s:keyword)
+call s:hl("Macro",          { "fg": s:lightblue })
+call s:hl("Method",         s:method)
+call s:hl("Number",         s:literal)
 call s:hl("Operator",       s:fg)
 call s:hl("PreProc",        s:preproc)
-call s:hl("Type",           s:type)
 call s:hl("Special",        s:fg)
 call s:hl("SpecialChar",    s:char)
 call s:hl("SpecialComment", s:merge(s:comment, s:info))
-call s:hl("Underlined",     { "style": "underline" })
-call s:hl("Ignore",         { "fg": s:black })
-call s:hl("Error",          { "fg": s:red })
+call s:hl("Statement",      s:keyword)
+call s:hl("String",         s:string)
 call s:hl("Todo",           s:merge(s:comment, s:info))
+call s:hl("Type",           s:type)
+call s:hl("Underlined",     { "style": "underline" })
 
 " Cursor
 call s:hl("Cursor",         { "fg": s:black, "bg": s:white })
@@ -164,8 +170,8 @@ call s:hl("SpellLocal",     { "style": "undercurl" })
 call s:hl("SpellRare",      { "style": "underdotted" })
 
 " Folding
-call s:hl("Folded",         { "fg": s:brown, "bg": s:lightblack , "style": "italic" })
-call s:hl("FoldColumn",     { "fg": s:brown })
+call s:hl("Folded",         { "fg": s:gray, "bg": s:lightblack , "style": "italic" })
+call s:hl("FoldColumn",     { "fg": s:gray })
 
 " Diagnostic
 call s:hl("DiagnosticError",{ "fg": s:red })
@@ -194,3 +200,9 @@ call s:hl("Directory",      { "fg": s:blue })
 call s:hl("EndOfBuffer",    { "fg": s:black })
 
 call s:hl("NvimInternalError", { "fg": s:black, "bg": s:red })
+
+
+" Treesitter
+call s:hl("@function.call", { "fg": s:softyellow })
+call s:hl("@method.call", { "fg": s:softyellow })
+call s:hl("@function.macro", { "fg": s:lightblue })

@@ -37,7 +37,7 @@ set -gx CFLAGS -std=c17 -Wall -Wextra
 
 # Default clang++
 set -gx CXX clang++
-set -gx CXXFLAGS -std=c++20 -stdlib=libc++ -Wall -Wextra
+set -gx CXXFLAGS -std=c++17 -stdlib=libc++ -Wall -Wextra
 
 set -gx LDFLAGS "-L /opt/homebrew/lib"
 set -gx CPPFLAGS "-I /opt/homebrew/include"
@@ -46,11 +46,6 @@ set -gx CPATH "/opt/homebrew/include"
 set -gx LIBRARY_PATH "/opt/homebrew/lib"
 
 set -gx KERL_CONFIGURE_OPTIONS "--without-javac --without-jinterface --without-odbc --without-hipe"
-
-# bun
-set --export BUN_INSTALL "$HOME/.bun"
-
-fish_add_path $BUN_INSTALL/bin
 
 # tmux
 # ~/.tmux/plugins

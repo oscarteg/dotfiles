@@ -33,10 +33,10 @@ o.wildmenu = true
 o.wildmode = 'full'
 
 -- Folding with Treesitter
-vim.o.foldcolumn = '1' -- '0' is not bad
-vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
+o.foldcolumn = '1' -- '0' is not bad
+o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+o.foldlevelstart = 99
+o.foldenable = true
 
 opt.cmdheight = 0
 
@@ -71,7 +71,7 @@ api.nvim_create_autocmd('TextYankPost', {
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-vim.cmd("colorscheme gruber")
+vim.cmd.colorscheme("gruber")
 
 local links = {
   ['@lsp.type.namespace'] = '@namespace',
@@ -92,6 +92,8 @@ local links = {
 for newgroup, oldgroup in pairs(links) do
   vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
 end
+
+
 
 -- Add MDX filtype
 vim.filetype.add({

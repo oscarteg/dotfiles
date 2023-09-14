@@ -190,6 +190,43 @@ return {
         build = function()
           pcall(vim.cmd, 'MasonUpdate')
         end,
+        opts = {
+          ensure_installed = {
+            "clangd",
+            "clojure_lsp",
+            "cmakelint",
+            "cpptools",
+            "deno",
+            "dockerfile-language-server",
+            "elixir-ls",
+            "elm-format",
+            "elm-language-server",
+            "emmet-ls",
+            "eslint_d",
+            "go-debug-adapter",
+            "java-debug-adapter",
+            "java-language-server",
+            "jq",
+            "js-debug-adapter",
+            "kotlin-debug-adapter",
+            "kotlin-language-server",
+            "lua-language-server",
+            "prettier",
+            "prettierd",
+            "prisma-language-server",
+            "rescript-lsp",
+            "stylua",
+            "svelte-language-server",
+            "tailwindcss-language-server",
+            "terraform-ls",
+            "typescript-language-server",
+            "vetur-vls",
+            "yamlfmt",
+            "yamllint",
+            "zls",
+          }
+
+        }
       },
     },
     config = function()
