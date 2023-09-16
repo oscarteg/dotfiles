@@ -37,10 +37,6 @@ local on_attach = function(client, bufnr, lsp)
     vim.lsp.buf.code_action,
     { desc = "[C]ode [A]ction", remap = false, buffer = bufnr }
   )
-
-  vim.keymap.set({ 'n', 'x' }, 'gq', function()
-    vim.lsp.buf.format({ async = false, timeout_ms = 10000 })
-  end)
 end
 
 return {
@@ -86,6 +82,7 @@ return {
       local cmp_action = require('lsp-zero.cmp').action()
 
       cmp.setup({
+        preselect = cmp.PreselectMode.None,
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
@@ -148,6 +145,13 @@ return {
           { name = 'cmdline', max_item_count = 5 }
         })
       })
+      -- If you want insert `(` after select function or method item
+      local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+
+      cmp.event:on(
+        'confirm_done',
+        cmp_autopairs.on_confirm_done()
+      )
     end
   },
   -- LSP
@@ -190,43 +194,6 @@ return {
         build = function()
           pcall(vim.cmd, 'MasonUpdate')
         end,
-        opts = {
-          ensure_installed = {
-            "clangd",
-            "clojure_lsp",
-            "cmakelint",
-            "cpptools",
-            "deno",
-            "dockerfile-language-server",
-            "elixir-ls",
-            "elm-format",
-            "elm-language-server",
-            "emmet-ls",
-            "eslint_d",
-            "go-debug-adapter",
-            "java-debug-adapter",
-            "java-language-server",
-            "jq",
-            "js-debug-adapter",
-            "kotlin-debug-adapter",
-            "kotlin-language-server",
-            "lua-language-server",
-            "prettier",
-            "prettierd",
-            "prisma-language-server",
-            "rescript-lsp",
-            "stylua",
-            "svelte-language-server",
-            "tailwindcss-language-server",
-            "terraform-ls",
-            "typescript-language-server",
-            "vetur-vls",
-            "yamlfmt",
-            "yamllint",
-            "zls",
-          }
-
-        }
       },
     },
     config = function()

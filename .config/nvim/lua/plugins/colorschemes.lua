@@ -3,9 +3,9 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
-    -- require("gruber-darker").setup()
-    -- vim.cmd("colorscheme gruber-darker")
-    --
+    require("gruber-darker").setup()
+    vim.cmd("colorscheme gruber-darker")
+
     -- local c = require('gruber-darker.palette')
     -- vim.api.nvim_set_hl(0, 'Normal', { bg = c.black:to_string() })
     -- vim.api.nvim_set_hl(0, "Normal", { ctermfg = c.black, ctermbg = c.black })
