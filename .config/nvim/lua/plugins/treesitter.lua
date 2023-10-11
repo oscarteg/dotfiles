@@ -75,10 +75,12 @@ local config = function(_, opts)
       swap = {
         enable = true,
         swap_next = {
-          ["<leader>a"] = "@parameter.inner",
+          ["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
+          ["<leader>nm"] = "@function.outer",  -- swap function with next
         },
         swap_previous = {
-          ["<leader>A"] = "@parameter.inner",
+          ["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
+          ["<leader>pm"] = "@function.outer",  -- swap function with previous
         },
       },
       select = {
@@ -106,6 +108,12 @@ local config = function(_, opts)
           ["im"] = "@call.inner",
           ["as"] = "@statement.outer",
           ["is"] = "@statement.inner",
+          ["a="] = { query = "@assignment.outer", desc = "Select outer part of an assignment" },
+          ["i="] = { query = "@assignment.inner", desc = "Select inner part of an assignment" },
+          ["l="] = { query = "@assignment.lhs", desc = "Select left hand side of an assignment" },
+          ["r="] = { query = "@assignment.rhs", desc = "Select right hand side of an assignment" },
+
+
         }
       },
       move = {

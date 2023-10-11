@@ -76,3 +76,5 @@ map("t", "<Esc>", "<C-\\><C-n>")
 -- Quickfix
 map("n", "<leader>Q", ":cclose<cr>")
 map("n", "<leader>q", ":botright copen<cr>")
+map("n", "<C-H>", ":cp<cr>")
+map("n", "<C-L>", ":cn<cr>")

@@ -82,7 +82,7 @@ return {
       local cmp_action = require('lsp-zero.cmp').action()
 
       cmp.setup({
-        preselect = cmp.PreselectMode.None,
+        -- preselect = cmp.PreselectMode.None,
         window = {
           completion = cmp.config.window.bordered(),
           documentation = cmp.config.window.bordered(),
@@ -173,7 +173,8 @@ return {
       { 'williamboman/mason-lspconfig.nvim' },
       { 'simrat39/rust-tools.nvim' },
       { 'jose-elias-alvarez/typescript.nvim' },
-      { 'jose-elias-alvarez/null-ls.nvim' },
+
+      { 'nvimtools/none-ls.nvim' },
       {
         "ray-x/go.nvim",
         dependencies = {
@@ -364,13 +365,13 @@ return {
           null_ls.builtins.diagnostics.yamllint,
           null_ls.builtins.diagnostics.cmake_lint,
           null_ls.builtins.diagnostics.buf,
-          null_ls.builtins.code_actions.eslint_d,
+          null_ls.builtins.code_actions.eslint,
           null_ls.builtins.code_actions.gitrebase,
           null_ls.builtins.code_actions.gitsigns,
           null_ls.builtins.code_actions.refactoring,
           null_ls.builtins.formatting.prismaFmt,
           null_ls.builtins.formatting.clang_format,
-          null_ls.builtins.formatting.eslint_d,
+          null_ls.builtins.formatting.eslint,
           null_ls.builtins.formatting.prettier,
           null_ls.builtins.formatting.cmake_format,
           null_ls.builtins.formatting.mix,

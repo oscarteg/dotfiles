@@ -12,15 +12,10 @@ return {
   },
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = "BufReadPre",
-    init = function()
-      vim.opt.list = true
-      vim.opt.listchars:append "space:⋅"
-    end,
-    config = function()
-      require("indent_blankline").setup({
-        space_char_blankline = " ",
-      })
-    end
+    main = "ibl",
+    opts = {},
+    -- config = function()
+    --   require("ibl").setup()
+    -- end
   },
 }
