@@ -67,10 +67,6 @@ local config = function(_, opts)
     autotag = {
       enable = true,
     },
-    context_commentstring = {
-      enable = true,
-      enable_autocmd = false,
-    },
     textobjects = {
       swap = {
         enable = true,

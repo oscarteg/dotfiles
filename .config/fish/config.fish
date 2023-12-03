@@ -55,7 +55,7 @@ fish_add_path $HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin
 
 # pnpm
 set -gx PNPM_HOME "/Users/oscar/Library/pnpm"
-set -gx PATH "$PNPM_HOME" $PATH
+fish_add_path $PNPM_HOME
 # pnpm end
 
 set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /Users/oscar/.ghcup/bin # ghcup-env
@@ -75,3 +75,8 @@ zoxide init fish | source
 # >>> coursier install directory >>>
 set -gx PATH "$PATH:/Users/oscar/Library/Application Support/Coursier/bin"
 # <<< coursier install directory <<<
+
+# Onyx config
+set -gx ONYX_PATH "/Users/oscar/.onyx"
+fish_add_path $ONYX_PATH/bin
+

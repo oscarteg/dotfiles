@@ -31,6 +31,7 @@ o.updatetime = 250
 o.writebackup = false
 o.wildmenu = true
 o.wildmode = 'full'
+opt.cmdheight = 0
 
 -- Folding with Treesitter
 o.foldcolumn = '1' -- '0' is not bad
@@ -38,7 +39,10 @@ o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrea
 o.foldlevelstart = 99
 o.foldenable = true
 
-opt.cmdheight = 0
+-- Treesitter commentstring
+-- https://github.com/JoosepAlviste/nvim-ts-context-commentstring
+vim.g.skip_ts_context_commentstring_module = true
+
 
 -- Split vertical below
 o.splitbelow = true
@@ -52,10 +56,10 @@ o.smartindent = true
 o.splitright = true
 
 -- mdx
-api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.mdx", command = [[set filetype=mdx]] })
+api.nvim_create_autocmd({ "BufRead", "BufEnter" }, { pattern = "*.mdx", command = [[set filetype=mdx]] })
 -- astro
-api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.astro", command = [[set filetype=astro]] })
-api.nvim_create_autocmd("BufRead,BufEnter", { pattern = "*.flux", command = [[set filetype=flux]] })
+api.nvim_create_autocmd({ "BufRead", "BufEnter" }, { pattern = "*.astro", command = [[set filetype=astro]] })
+api.nvim_create_autocmd({ "BufRead", "BufEnter" }, { pattern = "*.flux", command = [[set filetype=flux]] })
 
 -- highlight text on yank
 api.nvim_create_autocmd('TextYankPost', {
@@ -70,8 +74,6 @@ api.nvim_create_autocmd('TextYankPost', {
 -- disable netrw at the very start of your init.lua (strongly advised)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
-vim.cmd.colorscheme("gruber")
 
 local links = {
   ['@lsp.type.namespace'] = '@namespace',
@@ -92,18 +94,6 @@ local links = {
 for newgroup, oldgroup in pairs(links) do
   vim.api.nvim_set_hl(0, newgroup, { link = oldgroup, default = true })
 end
-
-
-
--- Add MDX filtype
-vim.filetype.add({
-  extension = {
-    mdx = "markdown.mdx",
-  },
-  filename = {},
-  pattern = {},
-})
-
 
 local signs = {
   Error = '✘',

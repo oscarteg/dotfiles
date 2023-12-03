@@ -28,7 +28,7 @@ local config = function()
   require("lualine").setup({
     options = {
       icons_enabled = false,
-      theme = custom_base16,
+      theme = "kanagawa",
       globalstatus = true,
       component_separators = '|',
       section_separators = '',
