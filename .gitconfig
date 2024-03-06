@@ -100,6 +100,7 @@
   }; f"
 
 	pushall = !git remote | xargs -L1 git push --all
+	staash = stash
 
 
 [apply]
@@ -222,3 +223,9 @@
 [rebase]
 	autoStash = true
 
+[rerere]
+	enabled = true
+[branch]
+	sort = -committerdate
+[column]
+	ui = auto
