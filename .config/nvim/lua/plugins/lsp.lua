@@ -50,9 +50,7 @@ return {
 					{
 						-- Customize or remove this keymap to your liking
 						"<leader>k",
-						function()
-							require("conform").format({ async = true, lsp_fallback = true })
-						end,
+						[[<cmd>Format<CR>]],
 						mode = "",
 						desc = "Format buffer",
 					},
@@ -62,10 +60,10 @@ return {
 					-- Define your formatters
 					formatters_by_ft = {
 						lua = { "stylua" },
-						javascript = { { "prettierd", "pretter" }, { "eslint_d", "eslint" } },
-						typescript = { { "prettierd", "pretter" }, { "eslint_d", "eslint" } },
-						typescriptreact = { { "prettierd", "pretter" }, { "eslint_d", "eslint" } },
-						javascriptreact = { { "prettierd", "pretter" }, { "eslint_d", "eslint" } },
+						javascript = { { "prettierd", "prettier" }, { "eslint_d", "eslint" } },
+						typescript = { { "prettierd", "prettier" }, { "eslint_d", "eslint" } },
+						typescriptreact = { { "prettierd", "prettier" }, { "eslint_d", "eslint" } },
+						javascriptreact = { { "prettierd", "prettier" }, { "eslint_d", "eslint" } },
 					},
 					-- Set up format-on-save
 					format_on_save = { timeout_ms = 500, lsp_fallback = true },

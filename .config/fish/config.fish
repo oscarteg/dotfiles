@@ -27,6 +27,9 @@ fish_add_path /opt/homebrew/opt/openjdk/bin
 # Emacs
 fish_add_path $HOME/.config/emacs/bin
 
+# Remove greeting
+set -e fish_greeting
+
 # Golang
 set -x GOPATH $HOME/go
 fish_add_path $GOPATH/bin
@@ -80,3 +83,10 @@ set -gx PATH "$PATH:/Users/oscar/Library/Application Support/Coursier/bin"
 set -gx ONYX_PATH "/Users/oscar/.onyx"
 fish_add_path $ONYX_PATH/bin
 
+
+######
+# DPG - Entertainment
+###### 
+# Direnv
+direnv hook fish | source
+fish_add_path $HOME/.mix/escripts
