@@ -28,9 +28,10 @@ local on_attach = function(client, bufnr, lsp)
 
 	vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "[R]e[n]ame", buffer = bufnr })
 
-	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "Show function signature", buffer = bufnr })
+	vim.keymap.set("n", "<leader>k", vim.lsp.buf.signature_help, { desc = "Show function signature", buffer = bufnr })
 
-	vim.keymap.set("n", "ca", vim.lsp.buf.code_action, { desc = "[C]ode [A]ction", remap = false, buffer = bufnr })
+	vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action,
+		{ desc = "[C]ode [A]ction", remap = false, buffer = bufnr })
 end
 
 return {
@@ -130,7 +131,7 @@ return {
 					{ name = "luasnip", keyword_length = 2 },
 					{ name = "path" },
 					{ name = "nvim_lsp" },
-					{ name = "buffer", keyword_length = 3 },
+					{ name = "buffer",  keyword_length = 3 },
 					{ name = "nvim_lua" },
 				}, {
 					name = "buffer",

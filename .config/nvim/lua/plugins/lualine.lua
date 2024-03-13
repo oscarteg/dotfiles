@@ -21,13 +21,9 @@ local function lsp_name()
 end
 
 local config = function()
-	local custom_base16 = require("lualine.themes.base16")
-
-	custom_base16.normal.a.bg = "#ffd700"
 	require("lualine").setup({
 		options = {
 			icons_enabled = true,
-			theme = "moonfly",
 			globalstatus = true,
 			component_separators = "|",
 			section_separators = "",

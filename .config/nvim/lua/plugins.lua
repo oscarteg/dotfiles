@@ -3,8 +3,6 @@ return {
   -- Coding
   { "tpope/vim-dispatch", event = "BufReadPre" },
   -- latex
-  { "lervag/vimtex",      ft = "tex" }, -- Latex"
-  -- Text manipulation
   {
     "mattn/emmet-vim",
     ft = { 'html', 'css', 'scss', 'javascript', 'javascriptreact',

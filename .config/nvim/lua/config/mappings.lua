@@ -1,34 +1,26 @@
 local g = vim.g
 
 local function map(mode, lhs, rhs, opts)
-  local options = { noremap = true }
-  if opts then
-    options = vim.tbl_extend("force", options, opts)
-  end
-  vim.keymap.set(mode, lhs, rhs, options)
+	local options = { noremap = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.keymap.set(mode, lhs, rhs, options)
 end
-
 
 vim.keymap.set("n", "mm", "<cmd>make<cr>", { silent = true })
 -- Remap space as leader key
 map("n", "<space>", "", { silent = true })
-g.mapleader = " "
-g.maplocalleader = " "
 
 -- save without formatting
 map("n", "<leader>w", ":noa w<cr>")
-map("n", "<leader>d", vim.diagnostic.open_float)
-map("n", "[d", vim.diagnostic.goto_prev)
-map("n", "]d", vim.diagnostic.goto_next)
+map("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+map("n", "<leader>q", vim.diagnostic.open_float, { desc = "Show diagnostic [Q]uickfix list" })
+map("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic" })
+map("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next diagnostic" })
 
 -- buffers
 map("n", "<leader>bo", "<cmd>%bd|e#<cr>", { desc = "Close all buffers but the current one" })
-
--- Moving lines up/down in V mode
--- map("n", "<A-j>", ":m .+1<CR>==")
--- map("n", "<A-k>", ":m .-2<CR>==")
--- map("v", "<A-j>", ":m '>+1<CR>gv=gv")
--- map("v", "<A-k>", ":m '<-2<CR>gv=gv")
 
 -- Windows
 map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
@@ -37,9 +29,6 @@ map("n", "<leader>w-", "<C-W>s", { desc = "Split window below" })
 map("n", "<leader>w|", "<C-W>v", { desc = "Split window right" })
 map("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
 map("n", "<leader>|", "<C-W>v", { desc = "Split window right" })
-
--- Combine next line and cursor place holds
-map("n", "J", "mzJ`z")
 
 -- Paste without adding to register
 map("x", "<leader>p", [["_dP]])

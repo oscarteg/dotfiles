@@ -71,7 +71,7 @@ local config = function()
         map("n", "'r", gs.refresh)
       end, { desc = "Diff this (cached)" })
 
-      map("n", "<leader>td", gs.toggle_deleted, { desc = "Toggle deleted" })
+      map("n", "<leader>hd", gs.toggle_deleted, { desc = "Toggle deleted" })
 
       -- Text object
       map({ "o", "x" }, "<leader>hi", ":<C-U>Gitsigns select_hunk<CR>", { desc = "Select hunk" })
