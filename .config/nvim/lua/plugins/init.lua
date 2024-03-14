@@ -23,13 +23,28 @@ return {
 
   {
     "nvim-telescope/telescope.nvim",
-    opts = {
-      pickers = {
-        find_files = {
-          hidden = true,
+    opts = function(_, opts)
+      local trouble = require("trouble.providers.telescope")
+      return {
+        defaults = {
+          mappings = {
+            n = {
+              ["<M-q>"] = trouble.open_selected_with_trouble,
+              ["<M-Q>"] = trouble.open_with_trouble,
+            },
+            i = {
+              ["<M-q>"] = trouble.open_selected_with_trouble,
+              ["<M-Q>"] = trouble.open_with_trouble,
+            },
+          },
         },
-      },
-    },
+        pickers = {
+          find_files = {
+            hidden = true,
+          },
+        },
+      }
+    end,
   },
 
   -- add telescope-fzf-native
@@ -48,6 +63,8 @@ return {
   -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
   { import = "lazyvim.plugins.extras.lang.typescript" },
   { import = "lazyvim.plugins.extras.lang.elixir" },
+  { import = "lazyvim.plugins.extras.coding.yanky" },
+  { import = "lazyvim.plugins.extras.test.core" },
   { import = "lazyvim.plugins.extras.lang.go" },
   { import = "lazyvim.plugins.extras.lang.rust" },
   { import = "lazyvim.plugins.extras.lang.haskell" },
@@ -67,11 +84,18 @@ return {
   {
     "zbirenbaum/copilot.lua",
     opts = {
+      -- panel = { enabled = true },
       suggestion = {
+        -- enabled = true,
         auto_trigger = true,
       },
     },
   },
+
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   enabled = false,
+  -- },
 
   -- add more treesitter parsers
   {
@@ -95,22 +119,10 @@ return {
         "typescript",
         "vim",
         "yaml",
-      },
-    },
-  },
-
-  -- since `vim.tbl_deep_extend`, can only merge tables and not lists, the code above
-  -- would overwrite `ensure_installed` with the new value.
-  -- If you'd rather extend the default config, use the code below instead:
-  {
-    "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      -- add tsx and treesitter
-      vim.list_extend(opts.ensure_installed, {
         "tsx",
         "typescript",
-      })
-    end,
+      },
+    },
   },
 
   -- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
