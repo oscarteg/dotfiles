@@ -1,11 +1,11 @@
-set -gx EDITOR "nvim"
-set -gx BROWSER "none"
+set -gx EDITOR nvim
+set -gx BROWSER none
 set -gx INITIAL_QUERY ""
 set -gx RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case "
 set -gx FZF_DEFAULT_COMMAND "$RG_PREFIX '$INITIAL_QUERY'" \
-  fzf --bind "change:reload:$RG_PREFIX {q} || true" \
-      --ansi --disabled --query "$INITIAL_QUERY" \
-      --height=50% --layout=reverse
+    fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+    --ansi --disabled --query "$INITIAL_QUERY" \
+    --height=50% --layout=reverse
 
 # Homebrew
 fish_add_path /opt/homebrew/bin
@@ -18,14 +18,16 @@ fish_add_path /opt/homebrew/bin/elixir
 # Cargo
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.cargo/composer/bin
+# source $HOME/.cargo/env
 
+# Flutter
 fish_add_path $HOME/Projects/libraries/flutter/bin
 
 # Java
 fish_add_path /opt/homebrew/opt/openjdk/bin
 
 # Emacs
-fish_add_path $HOME/.config/emacs/bin
+fish_add_path $HOME/.emacs.d/bin
 
 # Remove greeting
 set -e fish_greeting
@@ -45,10 +47,15 @@ set -gx CXXFLAGS -std=c++17 -stdlib=libc++ -Wall -Wextra
 set -gx LDFLAGS "-L /opt/homebrew/lib"
 set -gx CPPFLAGS "-I /opt/homebrew/include"
 
-set -gx CPATH "/opt/homebrew/include"
-set -gx LIBRARY_PATH "/opt/homebrew/lib"
+set -gx CPATH /opt/homebrew/include
+set -gx LIBRARY_PATH /opt/homebrew/lib
+
 
 set -gx KERL_CONFIGURE_OPTIONS "--without-javac --without-jinterface --without-odbc --without-hipe"
+
+
+# Odin
+fish_add_path $HOME/Projects/libraries/Odin
 
 # tmux
 # ~/.tmux/plugins
@@ -57,11 +64,12 @@ fish_add_path $HOME/.tmux/plugins/t-smart-tmux-session-manager/bin
 fish_add_path $HOME/.config/tmux/plugins/t-smart-tmux-session-manager/bin
 
 # pnpm
-set -gx PNPM_HOME "/Users/oscar/Library/pnpm"
+set -gx PNPM_HOME /Users/oscar/Library/pnpm
 fish_add_path $PNPM_HOME
 # pnpm end
 
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME ; set -gx PATH $HOME/.cabal/bin $PATH /Users/oscar/.ghcup/bin # ghcup-env
+set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
+set -gx PATH $HOME/.cabal/bin $PATH /Users/oscar/.ghcup/bin # ghcup-env
 
 # Volta
 set -gx VOLTA_HOME "$HOME/.volta"

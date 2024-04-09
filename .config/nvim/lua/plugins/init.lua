@@ -351,4 +351,38 @@ return {
       "Gtabedit",
     },
   },
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      current_line_blame = true,
+    },
+  },
+  {
+    "nvim-neotest/neotest",
+    dependencies = { "nvim-neotest/nvim-nio" },
+  },
+  { "ellisonleao/gruvbox.nvim" },
+  {
+    "akinsho/toggleterm.nvim",
+    keymaps = {
+      { "n", "<C-/>", "<cmd>ToggleTerm<cr>" },
+      { "i", "<C-/>", "<cmd>ToggleTerm<cr>" },
+    },
+
+    opts = {
+      direction = "horizontal",
+      highlights = {
+        Normal = {
+          guibg = "#0f0f0f",
+        },
+      },
+    },
+  },
+  {
+    "stevearc/oil.nvim",
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+  { "catppuccin/nvim", enabled = false },
 }
