@@ -7,6 +7,9 @@ set -gx FZF_DEFAULT_COMMAND "$RG_PREFIX '$INITIAL_QUERY'" \
     --ansi --disabled --query "$INITIAL_QUERY" \
     --height=50% --layout=reverse
 
+
+fish_add_path /opt/homebrew/opt/pnpm@8/bin
+
 # Homebrew
 fish_add_path /opt/homebrew/bin
 fish_add_path /opt/homebrew/sbin

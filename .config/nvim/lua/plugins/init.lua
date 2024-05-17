@@ -7,11 +7,13 @@
 return {
   -- add colorscheme
   { "nyoom-engineering/oxocarbon.nvim" },
+  { "kepano/flexoki-neovim", name = "flexoki" },
+  { "rebelot/kanagawa.nvim" },
   -- Load oxocarbon as the colorscheme for LazyVim
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "oxocarbon",
+      colorscheme = "flexoki-dark",
     },
   },
 
@@ -364,25 +366,41 @@ return {
   { "ellisonleao/gruvbox.nvim" },
   {
     "akinsho/toggleterm.nvim",
-    keymaps = {
-      { "n", "<C-/>", "<cmd>ToggleTerm<cr>" },
-      { "i", "<C-/>", "<cmd>ToggleTerm<cr>" },
-    },
-
-    opts = {
-      direction = "horizontal",
-      highlights = {
-        Normal = {
-          guibg = "#0f0f0f",
-        },
+    config = function()
+      require("toggleterm").setup({
+        open_mapping = [[<c-\>]],
+        shade_terminals = false,
+      })
+    end,
+    keys = {
+      { [[<C-\>]] },
+      { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
+      {
+        "<leader>td",
+        "<cmd>ToggleTerm size=40 dir=~/Desktop direction=horizontal<cr>",
+        desc = "Open a horizontal terminal at the Desktop directory",
       },
     },
   },
   {
     "stevearc/oil.nvim",
-    opts = {},
-    -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
+    keys = {
+
+      { "<leader>o", "<CMD>Oil<CR>", { desc = "Open parent directory in Oil" } },
+    },
+    config = function()
+      require("oil").setup({
+        columns = { "icon" },
+        keymaps = {
+          ["<C-h>"] = false,
+          ["<M-h>"] = "actions.select_split",
+        },
+        view_options = {
+          show_hidden = true,
+        },
+      })
+    end,
   },
   { "catppuccin/nvim", enabled = false },
 }

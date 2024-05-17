@@ -3,3 +3,16 @@
 -- Add any additional options here
 
 vim.opt.conceallevel = 0
+
+-- Register the language
+vim.filetype.add({
+  extension = {
+    templ = "templ",
+  },
+})
+
+vim.filetype.add({
+  extension = {
+    mdx = "markdown",
+  },
+})
