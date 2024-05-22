@@ -13,7 +13,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "flexoki-dark",
+      colorscheme = "monokai-pro",
     },
   },
 
@@ -81,8 +81,8 @@ return {
   { import = "lazyvim.plugins.extras.coding.copilot" },
   { import = "lazyvim.plugins.extras.dap.core" },
   { import = "lazyvim.plugins.extras.test.core" },
-  { import = "lazyvim.plugins.extras.linting.eslint" },
   { import = "lazyvim.plugins.extras.formatting.prettier" },
+  { import = "lazyvim.plugins.extras.linting.eslint" },
   {
     "zbirenbaum/copilot.lua",
     opts = {
@@ -403,4 +403,12 @@ return {
     end,
   },
   { "catppuccin/nvim", enabled = false },
+  {
+    "loctvl842/monokai-pro.nvim",
+    config = function()
+      require("monokai-pro").setup({
+        filter = "spectrum",
+      })
+    end,
+  },
 }
