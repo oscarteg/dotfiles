@@ -101,3 +101,6 @@ fish_add_path $ONYX_PATH/bin
 # Direnv
 direnv hook fish | source
 fish_add_path $HOME/.mix/escripts
+
+## Postgres App
+fish_add_path /Applications/Postgres.app/Contents/Versions/latest/bin

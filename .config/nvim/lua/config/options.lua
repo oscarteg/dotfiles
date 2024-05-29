@@ -16,3 +16,9 @@ vim.filetype.add({
     mdx = "markdown",
   },
 })
+
+-- To configure LazyVim to always use the current working directory as the root_dir,
+-- set vim.g.root_spec = { "cwd" } in your lua/config/options.lua file,
+-- overriding the default behavior of using the LSP server's root_dir.
+-- https://github.com/LazyVim/LazyVim/discussions/2150#discussioncomment-7787591
+vim.g.root_spec = { "cwd" }

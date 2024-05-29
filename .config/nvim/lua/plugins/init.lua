@@ -83,7 +83,9 @@ return {
   { import = "lazyvim.plugins.extras.test.core" },
   { import = "lazyvim.plugins.extras.formatting.prettier" },
   { import = "lazyvim.plugins.extras.linting.eslint" },
+  { import = "lazyvim.plugins.extras.coding.mini-surround" },
   {
+
     "zbirenbaum/copilot.lua",
     opts = {
       -- panel = { enabled = true },
@@ -410,5 +412,47 @@ return {
         filter = "spectrum",
       })
     end,
+  },
+  {
+    "neovim/nvim-lspconfig",
+    init = function()
+      require("lspconfig").gleam.setup({})
+    end,
+
+    opts = {
+      servers = {
+        gopls = {
+          settings = {
+            gopls = {
+              hints = {
+                parameterNames = false,
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+
+  { import = "lazyvim.plugins.extras.coding.luasnip" },
+  -- Disable copilot in cmp and use the default cmp completion
+  -- NOTE: The copilot was to slow and would appear after the LSP completion
+  {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    opts = {
+      suggestion = {
+        enabled = true,
+        auto_trigger = true,
+        keymap = {
+          accept = "<A-l>",
+        },
+      },
+      panel = { enabled = false },
+    },
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    enabled = false,
   },
 }
