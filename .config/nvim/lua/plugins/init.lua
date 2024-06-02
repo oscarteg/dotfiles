@@ -5,15 +5,42 @@
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-  -- add colorscheme
+  -- colorschemes
   { "nyoom-engineering/oxocarbon.nvim" },
   { "kepano/flexoki-neovim", name = "flexoki" },
+  { "ellisonleao/gruvbox.nvim" },
+  { "catppuccin/nvim", enabled = false },
+  {
+    "loctvl842/monokai-pro.nvim",
+    config = function()
+      require("monokai-pro").setup({
+        filter = "spectrum",
+      })
+    end,
+  },
+  {
+    "marko-cerovac/material.nvim",
+    init = function()
+      vim.g.material_style = "deep ocean"
+    end,
+    opts = {
+      plugins = {
+        "gitsigns",
+        "nvim-tree",
+        "telescope",
+        "which-key",
+        "nvim-notify",
+        "mini",
+        "flash",
+        "dap",
+      },
+    },
+  },
   { "rebelot/kanagawa.nvim" },
-  -- Load oxocarbon as the colorscheme for LazyVim
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "monokai-pro",
+      colorscheme = "material",
     },
   },
 
@@ -63,6 +90,7 @@ return {
 
   -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
   -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
+  --
   { import = "lazyvim.plugins.extras.lang.typescript" },
   { import = "lazyvim.plugins.extras.lang.elixir" },
   { import = "lazyvim.plugins.extras.coding.yanky" },
@@ -71,6 +99,15 @@ return {
   { import = "lazyvim.plugins.extras.lang.rust" },
   { import = "lazyvim.plugins.extras.lang.haskell" },
   { import = "lazyvim.plugins.extras.lang.docker" },
+  { import = "lazyvim.plugins.extras.lang.astro" },
+  { import = "lazyvim.plugins.extras.lang.kotlin" },
+  { import = "lazyvim.plugins.extras.lang.vue" },
+  { import = "lazyvim.plugins.extras.lang.markdown" },
+  { import = "lazyvim.plugins.extras.lang.svelte" },
+  { import = "lazyvim.plugins.extras.lang.java" },
+
+  { import = "lazyvim.plugins.extras.ui.mini-starter" },
+  { import = "lazyvim.plugins.extras.lang.toml" },
   { import = "lazyvim.plugins.extras.lang.json" },
   { import = "lazyvim.plugins.extras.lang.tailwind" },
   { import = "lazyvim.plugins.extras.lang.yaml" },
@@ -78,30 +115,17 @@ return {
   { import = "lazyvim.plugins.extras.lang.scala" },
   { import = "lazyvim.plugins.extras.lang.clangd" },
   { import = "lazyvim.plugins.extras.editor.harpoon2" },
+  { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
   { import = "lazyvim.plugins.extras.coding.copilot" },
   { import = "lazyvim.plugins.extras.dap.core" },
   { import = "lazyvim.plugins.extras.test.core" },
+  { import = "lazyvim.plugins.extras.editor.dial" },
+  { import = "lazyvim.plugins.extras.lsp.neoconf" },
   { import = "lazyvim.plugins.extras.formatting.prettier" },
   { import = "lazyvim.plugins.extras.linting.eslint" },
   { import = "lazyvim.plugins.extras.coding.mini-surround" },
-  {
-
-    "zbirenbaum/copilot.lua",
-    opts = {
-      -- panel = { enabled = true },
-      suggestion = {
-        -- enabled = true,
-        auto_trigger = true,
-      },
-    },
-  },
-
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   enabled = false,
-  -- },
-
-  -- add more treesitter parsers
+  { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "lazyvim.plugins.extras.coding.luasnip" },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -128,9 +152,6 @@ return {
       },
     },
   },
-
-  -- add jsonls and schemastore packages, and setup treesitter for json, json5 and jsonc
-  { import = "lazyvim.plugins.extras.lang.json" },
 
   -- add any tools you want to have installed below
   {
@@ -202,18 +223,8 @@ return {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
     keys = {
-      { "<leader>uu", "<cmd>UndotreeToggle<cr>" },
+      { "<leader>uu", "<cmd>UndotreeToggle<cr>", { desc = "Toggle Undo Tree" } },
     },
-    config = function()
-      -- vim.g.undotree_WindowLayout = 2
-      -- vim.g.undotree_HelpLine = 0
-      -- vim.g.undotree_ShortIndicators = 1
-      -- vim.g.undotree_TreeNodeShape = "⧂"
-      -- vim.g.undotree_TreeVertShape = "│"
-      -- vim.g.undotree_TreeSplitShape = "╱"
-      -- vim.g.undotree_TreeReturnShape = "╲"
-      -- vim.g.undotree_SetFocusWhenToggle = 1
-    end,
   },
 
   {
@@ -365,7 +376,6 @@ return {
     "nvim-neotest/neotest",
     dependencies = { "nvim-neotest/nvim-nio" },
   },
-  { "ellisonleao/gruvbox.nvim" },
   {
     "akinsho/toggleterm.nvim",
     config = function()
@@ -404,15 +414,6 @@ return {
       })
     end,
   },
-  { "catppuccin/nvim", enabled = false },
-  {
-    "loctvl842/monokai-pro.nvim",
-    config = function()
-      require("monokai-pro").setup({
-        filter = "spectrum",
-      })
-    end,
-  },
   {
     "neovim/nvim-lspconfig",
     init = function()
@@ -434,7 +435,6 @@ return {
     },
   },
 
-  { import = "lazyvim.plugins.extras.coding.luasnip" },
   -- Disable copilot in cmp and use the default cmp completion
   -- NOTE: The copilot was to slow and would appear after the LSP completion
   {
@@ -454,5 +454,11 @@ return {
   {
     "zbirenbaum/copilot-cmp",
     enabled = false,
+  },
+  {
+    "echasnovski/mini.starter",
+    opts = {
+      header = "",
+    },
   },
 }
