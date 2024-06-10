@@ -9,7 +9,6 @@ return {
   { "nyoom-engineering/oxocarbon.nvim" },
   { "kepano/flexoki-neovim", name = "flexoki" },
   { "ellisonleao/gruvbox.nvim" },
-  { "catppuccin/nvim", enabled = false },
   {
     "loctvl842/monokai-pro.nvim",
     config = function()
@@ -34,9 +33,9 @@ return {
         "flash",
         "dap",
       },
+      lualine_style = "stealth",
     },
   },
-  { "rebelot/kanagawa.nvim" },
   {
     "LazyVim/LazyVim",
     opts = {
@@ -44,7 +43,7 @@ return {
     },
   },
 
-  -- change trouble config
+  -- change trouble configinit
   {
     "folke/trouble.nvim",
     opts = { use_diagnostic_signs = true },
@@ -52,6 +51,7 @@ return {
 
   {
     "nvim-telescope/telescope.nvim",
+
     opts = function(_, opts)
       local trouble = require("trouble.providers.telescope")
       return {
@@ -71,61 +71,51 @@ return {
           find_files = {
             hidden = true,
           },
+          live_grep = {
+            additional_args = { "--hidden" },
+          },
         },
       }
     end,
   },
 
-  -- add telescope-fzf-native
-  {
-    "telescope.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build",
-      config = function()
-        require("telescope").load_extension("fzf")
-      end,
-    },
-  },
-
-  -- for typescript, LazyVim also includes extra specs to properly setup lspconfig,
-  -- treesitter, mason and typescript.nvim. So instead of the above, you can use:
-  --
-  { import = "lazyvim.plugins.extras.lang.typescript" },
-  { import = "lazyvim.plugins.extras.lang.elixir" },
-  { import = "lazyvim.plugins.extras.coding.yanky" },
-  { import = "lazyvim.plugins.extras.test.core" },
-  { import = "lazyvim.plugins.extras.lang.go" },
-  { import = "lazyvim.plugins.extras.lang.rust" },
-  { import = "lazyvim.plugins.extras.lang.haskell" },
-  { import = "lazyvim.plugins.extras.lang.docker" },
-  { import = "lazyvim.plugins.extras.lang.astro" },
-  { import = "lazyvim.plugins.extras.lang.kotlin" },
-  { import = "lazyvim.plugins.extras.lang.vue" },
-  { import = "lazyvim.plugins.extras.lang.markdown" },
-  { import = "lazyvim.plugins.extras.lang.svelte" },
-  { import = "lazyvim.plugins.extras.lang.java" },
-
-  { import = "lazyvim.plugins.extras.ui.mini-starter" },
-  { import = "lazyvim.plugins.extras.lang.toml" },
-  { import = "lazyvim.plugins.extras.lang.json" },
-  { import = "lazyvim.plugins.extras.lang.tailwind" },
-  { import = "lazyvim.plugins.extras.lang.yaml" },
-  { import = "lazyvim.plugins.extras.lang.terraform" },
-  { import = "lazyvim.plugins.extras.lang.scala" },
-  { import = "lazyvim.plugins.extras.lang.clangd" },
-  { import = "lazyvim.plugins.extras.editor.harpoon2" },
-  { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
   { import = "lazyvim.plugins.extras.coding.copilot" },
-  { import = "lazyvim.plugins.extras.dap.core" },
-  { import = "lazyvim.plugins.extras.test.core" },
-  { import = "lazyvim.plugins.extras.editor.dial" },
-  { import = "lazyvim.plugins.extras.lsp.neoconf" },
-  { import = "lazyvim.plugins.extras.formatting.prettier" },
-  { import = "lazyvim.plugins.extras.linting.eslint" },
-  { import = "lazyvim.plugins.extras.coding.mini-surround" },
-  { import = "lazyvim.plugins.extras.lang.json" },
   { import = "lazyvim.plugins.extras.coding.luasnip" },
+  { import = "lazyvim.plugins.extras.coding.mini-surround" },
+  { import = "lazyvim.plugins.extras.coding.neogen" },
+  { import = "lazyvim.plugins.extras.coding.yanky" },
+  { import = "lazyvim.plugins.extras.dap.core" },
+  { import = "lazyvim.plugins.extras.editor.dial" },
+  { import = "lazyvim.plugins.extras.editor.harpoon2" },
+  { import = "lazyvim.plugins.extras.editor.inc-rename" },
+  { import = "lazyvim.plugins.extras.formatting.prettier" },
+  { import = "lazyvim.plugins.extras.lang.astro" },
+  { import = "lazyvim.plugins.extras.lang.clangd" },
+  { import = "lazyvim.plugins.extras.lang.cmake" },
+  { import = "lazyvim.plugins.extras.lang.docker" },
+  { import = "lazyvim.plugins.extras.lang.elixir" },
+  { import = "lazyvim.plugins.extras.lang.gleam" },
+  { import = "lazyvim.plugins.extras.lang.go" },
+  { import = "lazyvim.plugins.extras.lang.haskell" },
+  { import = "lazyvim.plugins.extras.lang.java" },
+  { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "lazyvim.plugins.extras.lang.kotlin" },
+  { import = "lazyvim.plugins.extras.lang.markdown" },
+  { import = "lazyvim.plugins.extras.lang.nix" },
+  { import = "lazyvim.plugins.extras.lang.rust" },
+  { import = "lazyvim.plugins.extras.lang.scala" },
+  { import = "lazyvim.plugins.extras.lang.svelte" },
+  { import = "lazyvim.plugins.extras.lang.tailwind" },
+  { import = "lazyvim.plugins.extras.lang.terraform" },
+  { import = "lazyvim.plugins.extras.lang.toml" },
+  { import = "lazyvim.plugins.extras.lang.typescript" },
+  { import = "lazyvim.plugins.extras.lang.vue" },
+  { import = "lazyvim.plugins.extras.lang.yaml" },
+  { import = "lazyvim.plugins.extras.linting.eslint" },
+  { import = "lazyvim.plugins.extras.lsp.neoconf" },
+  { import = "lazyvim.plugins.extras.test.core" },
+  { import = "lazyvim.plugins.extras.ui.mini-starter" },
+  { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {

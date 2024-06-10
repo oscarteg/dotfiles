@@ -300,8 +300,9 @@ Cargo.lock
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,intellij,macos,node,go,rustesy
 
-_esy/
+# Ignore all project settings from neoconf
+# https://github.com/folke/neoconf.nvim
+neoconf.json
 
-/Users/oscar/Projects/Work/polariks/Backend/.idea/
 
 
