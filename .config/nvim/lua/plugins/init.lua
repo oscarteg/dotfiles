@@ -51,19 +51,16 @@ return {
 
   {
     "nvim-telescope/telescope.nvim",
-
-    opts = function(_, opts)
-      local trouble = require("trouble.providers.telescope")
+    opts = function()
+      local trouble = require("trouble.sources.telescope")
       return {
         defaults = {
           mappings = {
             n = {
-              ["<M-q>"] = trouble.open_selected_with_trouble,
-              ["<M-Q>"] = trouble.open_with_trouble,
+              ["<M-q>"] = trouble.open(),
             },
             i = {
-              ["<M-q>"] = trouble.open_selected_with_trouble,
-              ["<M-Q>"] = trouble.open_with_trouble,
+              ["<M-q>"] = trouble.open(),
             },
           },
         },
@@ -120,25 +117,40 @@ return {
     "nvim-treesitter/nvim-treesitter",
     opts = {
       ensure_installed = {
+        "astro",
         "bash",
+        "c",
+        "cmake",
+        "css",
+        "cpp",
+        "clojure",
+        "gleam",
+        "heex",
+        "scss",
+        "ron",
+        "swift",
+        "yaml",
+        "svelte",
+        "templ",
+        "scala",
+        "go",
         "html",
         "javascript",
         "json",
         "lua",
-        "go",
-        "gleam",
-        "rust",
         "markdown",
         "markdown_inline",
+        "nix",
         "python",
         "query",
         "regex",
+        "rust",
+        "tsx",
         "tsx",
         "typescript",
         "vim",
         "yaml",
-        "tsx",
-        "typescript",
+        "zig",
       },
     },
   },
@@ -364,14 +376,31 @@ return {
   },
   {
     "nvim-neotest/neotest",
-    dependencies = { "nvim-neotest/nvim-nio" },
+    dependencies = {
+      "marilari88/neotest-vitest",
+    },
+    opts = {
+      adapters = {
+        "neotest-vitest",
+      },
+    },
   },
   {
     "akinsho/toggleterm.nvim",
     config = function()
       require("toggleterm").setup({
+        size = function(term)
+          if term.direction == "horizontal" then
+            return 15
+          elseif term.direction == "vertical" then
+            return vim.o.columns * 0.4
+          end
+        end,
         open_mapping = [[<c-\>]],
+        direction = "vertical",
         shade_terminals = false,
+
+        width = 300,
       })
     end,
     keys = {
@@ -460,8 +489,7 @@ return {
           new_section("Find file", "Telescope git_files", "Telescope"),
           new_section("Recent files", "Telescope oldfiles", "Telescope"),
           new_section("Grep text", "Telescope live_grep", "Telescope"),
-          new_section("Config", "lua require('lazyvim.util').telescope.config_files()()", "Config"),
-          new_section("Extras", "LazyExtras", "Config"),
+          new_section("Config", LazyVim.pick.config_files(), "Config"),
           new_section("Lazy", "Lazy", "Config"),
           new_section("New file", "ene | startinsert", "Built-in"),
           new_section("Quit", "qa", "Built-in"),

@@ -1,8 +1,9 @@
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
+local opt = vim.opt
 
-vim.opt.conceallevel = 0
+opt.conceallevel = 0
 
 -- Register the language
 vim.filetype.add({
@@ -22,3 +23,7 @@ vim.filetype.add({
 -- overriding the default behavior of using the LSP server's root_dir.
 -- https://github.com/LazyVim/LazyVim/discussions/2150#discussioncomment-7787591
 vim.g.root_spec = { "cwd" }
+
+-- Disable swap files
+opt.swapfile = false
+opt.wrap = true

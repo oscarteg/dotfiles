@@ -17,7 +17,7 @@ function nf --description 'fuzzy finds file and opens in neovim'
         nvim $files[1]
     else
 
-        fd -t f $argv | fzf --header "Select the file you want to open" --preview="bat --style=numbers --color=always --line-range=:500 {}" | xargs -r nvim
+        fd --hidden -t f $argv | fzf --header "Select the file you want to open" --preview="bat --style=numbers --color=always --line-range=:500 {}" | xargs -r nvim
     end
 
 end
