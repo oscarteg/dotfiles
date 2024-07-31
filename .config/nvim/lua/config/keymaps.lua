@@ -17,3 +17,14 @@ vim.api.nvim_set_keymap("v", "<A-k>", "<Nop>", { desc = "Nothing" })
 
 vim.api.nvim_set_keymap("n", "<C-/>", "<Nop>", { desc = "Nothing" })
 vim.api.nvim_set_keymap("i", "<C-/>", "<Nop>", { desc = "Nothing" })
+
+--  Search and replace the current word under the cursor
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>rw",
+  [[:%s/\<<C-r><C-w>\>//g<Left><Left>]],
+  { noremap = true, silent = true, desc = "Search and replace current word in buffer" }
+)
+
+-- Run the current typescript file with bun
+vim.api.nvim_set_keymap("n", "<leader>xf", ":compiler bun<CR>:make<CR>", { noremap = true, silent = true })

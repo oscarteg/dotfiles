@@ -7,7 +7,6 @@
 return {
   -- colorschemes
   { "nyoom-engineering/oxocarbon.nvim" },
-  { "kepano/flexoki-neovim", name = "flexoki" },
   { "ellisonleao/gruvbox.nvim" },
   {
     "loctvl842/monokai-pro.nvim",
@@ -18,20 +17,28 @@ return {
     end,
   },
   {
+    "folke/tokyonight.nvim",
+    enabled = false,
+  },
+  { "catppuccin/nvim", enabled = false },
+  {
     "marko-cerovac/material.nvim",
     init = function()
       vim.g.material_style = "deep ocean"
     end,
     opts = {
       plugins = {
+        "dap",
+        "flash",
         "gitsigns",
+        "mini",
+        "neo-tree",
+        "nvim-notify",
         "nvim-tree",
+        "neotest",
+        "trouble",
         "telescope",
         "which-key",
-        "nvim-notify",
-        "mini",
-        "flash",
-        "dap",
       },
       lualine_style = "stealth",
     },
@@ -50,17 +57,37 @@ return {
   },
 
   {
+    "nvim-lualine/lualine.nvim",
+    opts = function(_, opts)
+      local trouble = require("trouble")
+      local symbols = trouble.statusline({
+        mode = "lsp_document_symbols",
+        groups = {},
+        title = false,
+        filter = { range = true },
+        format = "{kind_icon}{symbol.name:Normal}",
+        -- The following line is needed to fix the background color
+        -- Set it to the lualine section you want to use
+        hl_group = "lualine_c_normal",
+      })
+      table.insert(opts.sections.lualine_c, {
+        symbols.get,
+        cond = symbols.has,
+      })
+    end,
+  },
+  {
     "nvim-telescope/telescope.nvim",
     opts = function()
-      local trouble = require("trouble.sources.telescope")
+      local open_with_trouble = require("trouble.sources.telescope").open
       return {
         defaults = {
           mappings = {
             n = {
-              ["<M-q>"] = trouble.open(),
+              ["<M-q>"] = open_with_trouble,
             },
             i = {
-              ["<M-q>"] = trouble.open(),
+              ["<M-q>"] = open_with_trouble,
             },
           },
         },
@@ -76,7 +103,6 @@ return {
     end,
   },
 
-  { import = "lazyvim.plugins.extras.coding.copilot" },
   { import = "lazyvim.plugins.extras.coding.luasnip" },
   { import = "lazyvim.plugins.extras.coding.mini-surround" },
   { import = "lazyvim.plugins.extras.coding.neogen" },
@@ -93,7 +119,7 @@ return {
   { import = "lazyvim.plugins.extras.lang.elixir" },
   { import = "lazyvim.plugins.extras.lang.gleam" },
   { import = "lazyvim.plugins.extras.lang.go" },
-  { import = "lazyvim.plugins.extras.lang.haskell" },
+  -- { import = "lazyvim.plugins.extras.lang.haskell" },
   { import = "lazyvim.plugins.extras.lang.java" },
   { import = "lazyvim.plugins.extras.lang.json" },
   { import = "lazyvim.plugins.extras.lang.kotlin" },
@@ -328,22 +354,22 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        ["javascript"] = { "prettierd" },
-        ["javascriptreact"] = { "prettierd" },
-        ["typescript"] = { "prettierd" },
-        ["typescriptreact"] = { "prettierd" },
-        ["vue"] = { "prettierd" },
-        ["css"] = { "prettierd" },
-        ["scss"] = { "prettierd" },
-        ["less"] = { "prettierd" },
-        ["html"] = { "prettierd" },
-        ["json"] = { "prettierd" },
-        ["jsonc"] = { "prettierd" },
-        ["yaml"] = { "prettierd" },
-        ["markdown"] = { "prettierd" },
-        ["markdown.mdx"] = { "prettierd" },
-        ["graphql"] = { "prettierd" },
-        ["handlebars"] = { "prettierd" },
+        ["javascript"] = { "prettierd", "prettier" },
+        ["javascriptreact"] = { "prettierd", "prettier" },
+        ["typescript"] = { "prettierd", "prettier" },
+        ["typescriptreact"] = { "prettierd", "prettier" },
+        ["vue"] = { "prettierd", "prettier" },
+        ["css"] = { "prettierd", "prettier" },
+        ["scss"] = { "prettierd", "prettier" },
+        ["less"] = { "prettierd", "prettier" },
+        ["html"] = { "prettierd", "prettier" },
+        ["json"] = { "prettierd", "prettier" },
+        ["jsonc"] = { "prettierd", "prettier" },
+        ["yaml"] = { "prettierd", "prettier" },
+        ["markdown"] = { "prettierd", "prettier" },
+        ["markdown.mdx"] = { "prettierd", "prettier" },
+        ["graphql"] = { "prettierd", "prettier" },
+        ["handlebars"] = { "prettierd", "prettier" },
       },
     },
   },
@@ -374,6 +400,7 @@ return {
       current_line_blame = true,
     },
   },
+  { "nvim-neotest/neotest-plenary" },
   {
     "nvim-neotest/neotest",
     dependencies = {
@@ -381,6 +408,7 @@ return {
     },
     opts = {
       adapters = {
+        "neotest-plenary",
         "neotest-vitest",
       },
     },
@@ -450,10 +478,29 @@ return {
             },
           },
         },
+
+        vtsls = {
+          -- explicitly add default filetypes, so that we can extend
+          -- them in related extras
+          settings = {
+            typescript = {
+              inlayHints = {
+                enumMemberValues = { enabled = true },
+                functionLikeReturnTypes = { enabled = false },
+                parameterNames = { enabled = "literals" },
+                parameterTypes = { enabled = false },
+                propertyDeclarationTypes = { enabled = true },
+                variableTypes = { enabled = false },
+              },
+            },
+          },
+        },
       },
     },
   },
 
+  -- Copilot
+  { import = "lazyvim.plugins.extras.coding.copilot" },
   -- Disable copilot in cmp and use the default cmp completion
   -- NOTE: The copilot was to slow and would appear after the LSP completion
   {
