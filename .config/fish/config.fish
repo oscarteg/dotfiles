@@ -93,3 +93,8 @@ fish_add_path $HOME/.mix/escripts
 
 ## Postgres App
 fish_add_path /Applications/Postgres.app/Contents/Versions/latest/bin
+
+
+# 
+set -gx AWS_CA_BUNDLE /opt/homebrew/etc/ca-certificates/cert.pem
+set -gx NODE_EXTRA_CA_CERTS /Users/oscar/.zcli/zscaler_root.pem

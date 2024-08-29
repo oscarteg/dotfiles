@@ -20,6 +20,15 @@ return {
     "folke/tokyonight.nvim",
     enabled = false,
   },
+  {
+
+    "zenbones-theme/zenbones.nvim",
+    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
+    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
+    -- In Vim, compat mode is turned on as Lush only works in Neovim.
+    dependencies = "rktjmp/lush.nvim",
+    priority = 1000,
+  },
   { "catppuccin/nvim", enabled = false },
   {
     "marko-cerovac/material.nvim",
@@ -40,13 +49,13 @@ return {
         "telescope",
         "which-key",
       },
-      lualine_style = "stealth",
+      -- lualine_style = "stealth",
     },
   },
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "material",
+      colorscheme = "rosebones",
     },
   },
 
@@ -81,7 +90,8 @@ return {
     opts = function()
       local open_with_trouble = require("trouble.sources.telescope").open
       return {
-        defaults = {
+        -- Open all pickers with the ivy theme
+        defaults = vim.tbl_extend("force", require("telescope.themes").get_ivy(), {
           mappings = {
             n = {
               ["<M-q>"] = open_with_trouble,
@@ -90,7 +100,8 @@ return {
               ["<M-q>"] = open_with_trouble,
             },
           },
-        },
+        }),
+
         pickers = {
           find_files = {
             hidden = true,
@@ -122,8 +133,7 @@ return {
   -- { import = "lazyvim.plugins.extras.lang.haskell" },
   { import = "lazyvim.plugins.extras.lang.java" },
   { import = "lazyvim.plugins.extras.lang.json" },
-  { import = "lazyvim.plugins.extras.lang.kotlin" },
-  { import = "lazyvim.plugins.extras.lang.markdown" },
+
   { import = "lazyvim.plugins.extras.lang.nix" },
   { import = "lazyvim.plugins.extras.lang.rust" },
   { import = "lazyvim.plugins.extras.lang.scala" },
@@ -340,7 +350,22 @@ return {
       "nvim-lua/plenary.nvim",
     },
     keys = {
-      { "<leader>vf", ":DiffviewFileHistory %<CR>", { desc = "[V]ersion [F]ile" } },
+      {
+        "<leader>vdf",
+        "<CMD>DiffviewFileHistory %<CR>",
+        { desc = "[V]ersion [D]iff [F]ile" },
+      },
+
+      {
+        "<leader>vdc",
+        "<CMD>DiffviewClose<CR>",
+        { desc = "[V]ersion [D]iff [C]lose" },
+      },
+      {
+        "<leader>vdo",
+        "<CMD>DiffviewOpen<CR>",
+        { desc = "[V]ersion [D]iff [F]ile" },
+      },
     },
     cmd = {
       "DiffviewOpen",
@@ -348,6 +373,13 @@ return {
       "DiffviewToggleFiles",
       "DiffviewFocusFiles",
       "DiffviewFileHistory",
+    },
+  },
+  {
+    "LintaoAmons/scratch.nvim",
+    event = "VeryLazy",
+    keys = {
+      { "<leader>fs", "<CMD>Scratch<CR>", { desc = "[F]ile [S]cratch" } },
     },
   },
   {
@@ -435,9 +467,9 @@ return {
       { [[<C-\>]] },
       { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
       {
-        "<leader>td",
+        "<leader>tk",
         "<cmd>ToggleTerm size=40 dir=~/Desktop direction=horizontal<cr>",
-        desc = "Open a horizontal terminal at the Desktop directory",
+        desc = "[T]erminal [K] Horizontal",
       },
     },
   },
@@ -499,28 +531,41 @@ return {
     },
   },
 
-  -- Copilot
-  { import = "lazyvim.plugins.extras.coding.copilot" },
-  -- Disable copilot in cmp and use the default cmp completion
-  -- NOTE: The copilot was to slow and would appear after the LSP completion
   {
-    "zbirenbaum/copilot.lua",
-    event = "InsertEnter",
-    opts = {
-      suggestion = {
-        enabled = true,
-        auto_trigger = true,
-        keymap = {
-          accept = "<A-l>",
+    "supermaven-inc/supermaven-nvim",
+    config = function()
+      require("supermaven-nvim").setup({
+        keymaps = {
+          accept_suggestion = "<A-l>",
+          clear_suggestion = "<C-]>",
+          accept_word = "<C-j>",
         },
-      },
-      panel = { enabled = false },
-    },
+      })
+    end,
   },
-  {
-    "zbirenbaum/copilot-cmp",
-    enabled = false,
-  },
+
+  -- Copilot
+  -- { import = "lazyvim.plugins.extras.coding.copilot" },
+  -- -- Disable copilot in cmp and use the default cmp completion
+  -- -- NOTE: The copilot was to slow and would appear after the LSP completion
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   event = "InsertEnter",
+  --   opts = {
+  --     suggestion = {
+  --       enabled = true,
+  --       auto_trigger = true,
+  --       keymap = {
+  --         accept = "<A-l>",
+  --       },
+  --     },
+  --     panel = { enabled = false },
+  --   },
+  -- },
+  -- {
+  --   "zbirenbaum/copilot-cmp",
+  --   enabled = false,
+  -- },
   {
     "echasnovski/mini.starter",
     opts = function()
