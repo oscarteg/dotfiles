@@ -560,28 +560,6 @@ return {
     end,
   },
 
-  -- Copilot
-  -- { import = "lazyvim.plugins.extras.coding.copilot" },
-  -- -- Disable copilot in cmp and use the default cmp completion
-  -- -- NOTE: The copilot was to slow and would appear after the LSP completion
-  -- {
-  --   "zbirenbaum/copilot.lua",
-  --   event = "InsertEnter",
-  --   opts = {
-  --     suggestion = {
-  --       enabled = true,
-  --       auto_trigger = true,
-  --       keymap = {
-  --         accept = "<A-l>",
-  --       },
-  --     },
-  --     panel = { enabled = false },
-  --   },
-  -- },
-  -- {
-  --   "zbirenbaum/copilot-cmp",
-  --   enabled = false,
-  -- },
   {
     "echasnovski/mini.starter",
     opts = function()
