@@ -84,3 +84,45 @@ end
 --     )
 --   end,
 -- })
+
+-- Function to remove comments
+local function remove_comments()
+  -- Ensure we have a parser for the current buffer
+  local parser = vim.treesitter.get_parser(0)
+  if not parser then
+    print("No treesitter parser available for this buffer")
+    return
+  end
+
+  -- Parse the buffer
+  local tree = parser:parse()[1]
+  local root = tree:root()
+
+  -- Get all comment nodes
+  local query = vim.treesitter.query.parse(
+    vim.bo.filetype,
+    [[
+    (comment) @comment
+  ]]
+  )
+
+  -- Collect all comment ranges
+  local ranges = {}
+  for id, node in query:iter_captures(root, 0, 0, -1) do
+    local start_row, start_col, end_row, end_col = node:range()
+    table.insert(ranges, { start_row, start_col, end_row, end_col })
+  end
+
+  -- Sort ranges in reverse order (to avoid shifting issues when deleting)
+  table.sort(ranges, function(a, b)
+    return a[1] > b[1] or (a[1] == b[1] and a[2] > b[2])
+  end)
+
+  -- Delete the ranges
+  for _, range in ipairs(ranges) do
+    vim.api.nvim_buf_set_text(0, range[1], range[2], range[3], range[4], {})
+  end
+end
+
+-- Create the command
+vim.api.nvim_create_user_command("RemoveComments", remove_comments, {})

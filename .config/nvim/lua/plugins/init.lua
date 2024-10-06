@@ -4,6 +4,63 @@
 -- * add extra plugins
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
+--
+local formatters = { "biome", "prettierd", "prettier" }
+
+local function find_config(bufnr, config_files)
+  return vim.fs.find(config_files, {
+    upward = true,
+    stop = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
+    path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
+  })[1]
+end
+
+local function biome_or_prettier(bufnr)
+  local has_biome_config = find_config(bufnr, { "biome.json", "biome.jsonc" })
+
+  print(has_biome_config)
+  if has_biome_config then
+    return { "biome", stop_after_first = true }
+  end
+
+  local has_prettier_config = find_config(bufnr, {
+    ".prettierrc",
+    ".prettierrc.json",
+    ".prettierrc.yml",
+    ".prettierrc.yaml",
+    ".prettierrc.json5",
+    ".prettierrc.js",
+    ".prettierrc.cjs",
+    ".prettierrc.toml",
+    "prettier.config.js",
+    "prettier.config.cjs",
+  })
+  if has_prettier_config then
+    return { "prettier", stop_after_first = true }
+  end
+
+  -- Default to Prettier if no config is found
+  return { "prettier", stop_after_first = true }
+end
+
+local filetypes_with_dynamic_formatter = {
+  "javascript",
+  "javascriptreact",
+  "typescript",
+  "typescriptreact",
+  "vue",
+  "css",
+  "scss",
+  "less",
+  "html",
+  "json",
+  "jsonc",
+  "yaml",
+  "markdown",
+  "markdown.mdx",
+  "graphql",
+  "handlebars",
+}
 return {
   -- colorschemes
   { "nyoom-engineering/oxocarbon.nvim" },
@@ -122,7 +179,7 @@ return {
   { import = "lazyvim.plugins.extras.editor.dial" },
   { import = "lazyvim.plugins.extras.editor.harpoon2" },
   { import = "lazyvim.plugins.extras.editor.inc-rename" },
-  { import = "lazyvim.plugins.extras.formatting.prettier" },
+  -- { import = "lazyvim.plugins.extras.formatting.prettier" },
   { import = "lazyvim.plugins.extras.lang.astro" },
   { import = "lazyvim.plugins.extras.lang.clangd" },
   { import = "lazyvim.plugins.extras.lang.cmake" },
@@ -264,6 +321,18 @@ return {
       { "<leader>uu", "<cmd>UndotreeToggle<cr>", { desc = "Toggle Undo Tree" } },
     },
   },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = (function()
+        local result = {}
+        for _, ft in ipairs(filetypes_with_dynamic_formatter) do
+          result[ft] = biome_or_prettier
+        end
+        return result
+      end)(),
+    },
+  },
 
   {
     "nvim-neo-tree/neo-tree.nvim", -- File explorer
@@ -383,29 +452,6 @@ return {
     },
   },
   {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        ["javascript"] = { "prettierd", "prettier" },
-        ["javascriptreact"] = { "prettierd", "prettier" },
-        ["typescript"] = { "prettierd", "prettier" },
-        ["typescriptreact"] = { "prettierd", "prettier" },
-        ["vue"] = { "prettierd", "prettier" },
-        ["css"] = { "prettierd", "prettier" },
-        ["scss"] = { "prettierd", "prettier" },
-        ["less"] = { "prettierd", "prettier" },
-        ["html"] = { "prettierd", "prettier" },
-        ["json"] = { "prettierd", "prettier" },
-        ["jsonc"] = { "prettierd", "prettier" },
-        ["yaml"] = { "prettierd", "prettier" },
-        ["markdown"] = { "prettierd", "prettier" },
-        ["markdown.mdx"] = { "prettierd", "prettier" },
-        ["graphql"] = { "prettierd", "prettier" },
-        ["handlebars"] = { "prettierd", "prettier" },
-      },
-    },
-  },
-  {
     "tpope/vim-fugitive",
     cmd = {
       "Git",
@@ -512,11 +558,7 @@ return {
       },
       servers = {
         eslint = {},
-        tsserver = {
-          on_attach = function(client, bufnr)
-            require("twoslash-queries").attach(client, bufnr)
-          end,
-        },
+        tsserver = {},
         gopls = {
           settings = {
             gopls = {
@@ -530,6 +572,9 @@ return {
         vtsls = {
           -- explicitly add default filetypes, so that we can extend
           -- them in related extras
+          on_attach = function(client, bufnr)
+            require("twoslash-queries").attach(client, bufnr)
+          end,
           settings = {
             typescript = {
               inlayHints = {

@@ -60,9 +60,6 @@ set -gx PNPM_HOME /Users/oscar/Library/pnpm
 fish_add_path $PNPM_HOME
 # pnpm end
 
-set -q GHCUP_INSTALL_BASE_PREFIX[1]; or set GHCUP_INSTALL_BASE_PREFIX $HOME
-set -gx PATH $HOME/.cabal/bin $PATH /Users/oscar/.ghcup/bin # ghcup-env
-
 # Volta
 set -gx VOLTA_HOME "$HOME/.volta"
 fish_add_path $VOLTA_HOME/bin
