@@ -306,4 +306,7 @@ Cargo.lock
 neoconf.json
 
 
+# Devbox
+.devbox
+
 

@@ -60,11 +60,6 @@ set -gx PNPM_HOME /Users/oscar/Library/pnpm
 fish_add_path $PNPM_HOME
 # pnpm end
 
-# Volta
-set -gx VOLTA_HOME "$HOME/.volta"
-fish_add_path $VOLTA_HOME/bin
-set -gx VOLTA_FEATURE_PNPM 1
-
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/fish/__tabtab.fish ]; and . ~/.config/tabtab/fish/__tabtab.fish; or true
@@ -92,6 +87,19 @@ fish_add_path $HOME/.mix/escripts
 fish_add_path /Applications/Postgres.app/Contents/Versions/latest/bin
 
 
-# 
+# Zcli
 set -gx AWS_CA_BUNDLE /opt/homebrew/etc/ca-certificates/cert.pem
 set -gx NODE_EXTRA_CA_CERTS /Users/oscar/.zcli/zscaler_root.pem
+
+
+# Devbox
+eval "$(devbox global shellenv)"
+
+
+# BEGIN opam configuration
+# This is useful if you're using opam as it adds:
+#   - the correct directories to the PATH
+#   - auto-completion for the opam binary
+# This section can be safely removed at any time if needed.
+test -r '/Users/oscar/.opam/opam-init/init.fish' && source '/Users/oscar/.opam/opam-init/init.fish' >/dev/null 2>/dev/null; or true
+# END opam configuration

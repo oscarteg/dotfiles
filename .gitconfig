@@ -233,5 +233,5 @@
 [checkout]
   defaultRemote = origin
 
-[http]
-	sslCAInfo = /Users/oscar/.zcli/zscaler_root.pem
+[includeIf "gitdir:~/Projects/Work/dpg/"]
+    path = ~/Projects/Work/dpg/.gitconfig

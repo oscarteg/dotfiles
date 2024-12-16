@@ -1,12 +1,3 @@
--- since this is just an example spec, don't actually load anything here and return an empty spec
---
--- In your plugin files, you can:
--- * add extra plugins
--- * disable/enabled LazyVim plugins
--- * override the configuration of LazyVim plugins
---
-local formatters = { "biome", "prettierd", "prettier" }
-
 local function find_config(bufnr, config_files)
   return vim.fs.find(config_files, {
     upward = true,
@@ -17,8 +8,6 @@ end
 
 local function biome_or_prettier(bufnr)
   local has_biome_config = find_config(bufnr, { "biome.json", "biome.jsonc" })
-
-  print(has_biome_config)
   if has_biome_config then
     return { "biome", stop_after_first = true }
   end
@@ -61,9 +50,17 @@ local filetypes_with_dynamic_formatter = {
   "graphql",
   "handlebars",
 }
+
 return {
   -- colorschemes
   { "nyoom-engineering/oxocarbon.nvim" },
+  { "bettervim/yugen.nvim" },
+  {
+    "ccxnu/rosebones",
+    lazy = false,
+    priority = 1000,
+    opts = {},
+  },
   { "ellisonleao/gruvbox.nvim" },
   {
     "loctvl842/monokai-pro.nvim",
@@ -80,9 +77,6 @@ return {
   {
 
     "zenbones-theme/zenbones.nvim",
-    -- Optionally install Lush. Allows for more configuration or extending the colorscheme
-    -- If you don't want to install lush, make sure to set g:zenbones_compat = 1
-    -- In Vim, compat mode is turned on as Lush only works in Neovim.
     dependencies = "rktjmp/lush.nvim",
     priority = 1000,
   },
@@ -112,7 +106,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "rosebones",
+      colorscheme = "yugen",
     },
   },
 
@@ -179,7 +173,7 @@ return {
   { import = "lazyvim.plugins.extras.editor.dial" },
   { import = "lazyvim.plugins.extras.editor.harpoon2" },
   { import = "lazyvim.plugins.extras.editor.inc-rename" },
-  -- { import = "lazyvim.plugins.extras.formatting.prettier" },
+  { import = "lazyvim.plugins.extras.formatting.prettier" },
   { import = "lazyvim.plugins.extras.lang.astro" },
   { import = "lazyvim.plugins.extras.lang.clangd" },
   { import = "lazyvim.plugins.extras.lang.cmake" },
@@ -187,10 +181,10 @@ return {
   { import = "lazyvim.plugins.extras.lang.elixir" },
   { import = "lazyvim.plugins.extras.lang.gleam" },
   { import = "lazyvim.plugins.extras.lang.go" },
+  { import = "lazyvim.plugins.extras.lang.ocaml" },
   -- { import = "lazyvim.plugins.extras.lang.haskell" },
   { import = "lazyvim.plugins.extras.lang.java" },
   { import = "lazyvim.plugins.extras.lang.json" },
-
   { import = "lazyvim.plugins.extras.lang.nix" },
   { import = "lazyvim.plugins.extras.lang.rust" },
   { import = "lazyvim.plugins.extras.lang.scala" },
@@ -204,7 +198,6 @@ return {
   { import = "lazyvim.plugins.extras.linting.eslint" },
   { import = "lazyvim.plugins.extras.lsp.neoconf" },
   { import = "lazyvim.plugins.extras.test.core" },
-  { import = "lazyvim.plugins.extras.ui.mini-starter" },
   { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
   {
     "nvim-treesitter/nvim-treesitter",
@@ -253,7 +246,19 @@ return {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "biome",
+        "dockerfile-language-server",
+        "elixir-ls",
+        "emmet-ls",
+        "gradle",
+        "prettier",
+        "prettierd",
         "stylua",
+        "svelte-language-server",
+        "tailwindcss-language-server",
+        "templ",
+        "vtls",
+        "zls",
       },
     },
   },
@@ -322,6 +327,15 @@ return {
     },
   },
   {
+    "nvimtools/none-ls.nvim",
+    optional = true,
+    opts = function(_, opts)
+      local nls = require("null-ls")
+      opts.sources = opts.sources or {}
+      table.insert(opts.sources, nls.builtins.formatting.biome)
+    end,
+  },
+  {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = (function()
@@ -333,7 +347,6 @@ return {
       end)(),
     },
   },
-
   {
     "nvim-neo-tree/neo-tree.nvim", -- File explorer
     opts = {
@@ -514,7 +527,7 @@ return {
       { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
       {
         "<leader>tk",
-        "<cmd>ToggleTerm size=40 dir=~/Desktop direction=horizontal<cr>",
+        "<cmd>ToggleTerm direction=horizontal<cr>",
         desc = "[T]erminal [K] Horizontal",
       },
     },
@@ -557,6 +570,15 @@ return {
         end,
       },
       servers = {
+        tailwindCSS = {
+          experimental = {
+            -- Needed for https://cva.style/docs
+            classRegex = {
+              { "cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]" },
+              { "cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)" },
+            },
+          },
+        },
         eslint = {},
         tsserver = {},
         gopls = {
@@ -591,7 +613,6 @@ return {
       },
     },
   },
-
   {
     "supermaven-inc/supermaven-nvim",
     config = function()
@@ -606,31 +627,18 @@ return {
   },
 
   {
-    "echasnovski/mini.starter",
-    opts = function()
-      local pad = string.rep(" ", 22)
-      local new_section = function(name, action, section)
-        return { name = name, action = action, section = pad .. section }
-      end
-      local starter = require("mini.starter")
-      return {
-        evaluate_single = true,
-        header = "",
-        items = {
-          new_section("Find file", "Telescope git_files", "Telescope"),
-          new_section("Recent files", "Telescope oldfiles", "Telescope"),
-          new_section("Grep text", "Telescope live_grep", "Telescope"),
-          new_section("Config", LazyVim.pick.config_files(), "Config"),
-          new_section("Lazy", "Lazy", "Config"),
-          new_section("New file", "ene | startinsert", "Built-in"),
-          new_section("Quit", "qa", "Built-in"),
-          new_section("Session restore", [[lua require("persistence").load()]], "Session"),
+    "folke/noice.nvim",
+    opts = function(_, opts)
+      -- Remove the "deleted lines" notifications
+      table.insert(opts.routes, {
+        filter = {
+          event = "msg_show",
+          kind = "", -- or `kind = ""`
         },
-        content_hooks = {
-          starter.gen_hook.adding_bullet(pad .. "░ ", false),
-          starter.gen_hook.aligning("center", "center"),
+        opts = {
+          skip = true,
         },
-      }
+      })
     end,
   },
 }
