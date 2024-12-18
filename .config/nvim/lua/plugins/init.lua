@@ -59,7 +59,6 @@ return {
     "ccxnu/rosebones",
     lazy = false,
     priority = 1000,
-    opts = {},
   },
   { "ellisonleao/gruvbox.nvim" },
   {
@@ -250,14 +249,13 @@ return {
         "dockerfile-language-server",
         "elixir-ls",
         "emmet-ls",
-        "gradle",
         "prettier",
         "prettierd",
         "stylua",
         "svelte-language-server",
         "tailwindcss-language-server",
         "templ",
-        "vtls",
+        "vtsls",
         "zls",
       },
     },
@@ -410,21 +408,14 @@ return {
     },
   },
   {
-    "hrsh7th/nvim-cmp",
-    opts = function(_, opts)
-      local cmp = require("cmp")
-      -- Navigate between completion items
-      opts.mapping["<C-j>"] = cmp.mapping.select_next_item()
-      opts.mapping["<C-k>"] = cmp.mapping.select_prev_item()
-
-      -- Trigger completion menu
-      opts.mapping["<C-Space>"] = cmp.mapping.complete()
-
-      opts.mapping["<CR>"] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Insert,
-        select = true,
-      })
-    end,
+    "saghen/blink.cmp",
+    opts = {
+      keymap = {
+        preset = "default",
+        ["<C-k>"] = { "select_prev", "fallback" },
+        ["<C-j>"] = { "select_next", "fallback" },
+      },
+    },
   },
   {
     "sindrets/diffview.nvim",

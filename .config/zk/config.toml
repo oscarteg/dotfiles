@@ -1,2 +1,0 @@
-[alias]
-rm = "zk list --interactive --quiet --format path --delimiter0 $argv | xargs -0 rm -vf --"

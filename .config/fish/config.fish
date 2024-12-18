@@ -7,7 +7,6 @@ set -gx FZF_DEFAULT_COMMAND "$RG_PREFIX '$INITIAL_QUERY'" \
     --ansi --disabled --query "$INITIAL_QUERY" \
     --height=50% --layout=reverse
 
-
 fish_add_path /opt/homebrew/opt/pnpm@8/bin
 
 # Homebrew
@@ -25,9 +24,6 @@ fish_add_path $HOME/Projects/libraries/flutter/bin
 
 # Java
 fish_add_path /opt/homebrew/opt/openjdk/bin
-
-# Emacs
-fish_add_path $HOME/.emacs.d/bin
 
 # Remove greeting
 set -e fish_greeting
@@ -52,9 +48,6 @@ set -gx LIBRARY_PATH /opt/homebrew/lib
 
 set -gx KERL_CONFIGURE_OPTIONS "--without-javac --without-jinterface --without-odbc --without-hipe"
 
-# Odin
-fish_add_path $HOME/Projects/libraries/Odin
-
 # pnpm
 set -gx PNPM_HOME /Users/oscar/Library/pnpm
 fish_add_path $PNPM_HOME
@@ -67,15 +60,6 @@ fish_add_path $PNPM_HOME
 # Added by zoxide installer
 zoxide init fish | source
 
-# >>> coursier install directory >>>
-set -gx PATH "$PATH:/Users/oscar/Library/Application Support/Coursier/bin"
-# <<< coursier install directory <<<
-
-# Onyx config
-set -gx ONYX_PATH "/Users/oscar/.onyx"
-fish_add_path $ONYX_PATH/bin
-
-
 ######
 # DPG - Entertainment
 ###### 
@@ -83,18 +67,12 @@ fish_add_path $ONYX_PATH/bin
 direnv hook fish | source
 fish_add_path $HOME/.mix/escripts
 
-## Postgres App
-fish_add_path /Applications/Postgres.app/Contents/Versions/latest/bin
-
-
 # Zcli
 set -gx AWS_CA_BUNDLE /opt/homebrew/etc/ca-certificates/cert.pem
-set -gx NODE_EXTRA_CA_CERTS /Users/oscar/.zcli/zscaler_root.pem
-
+#set -gx NODE_EXTRA_CA_CERTS /Users/oscar/.zcli/zscaler_root.pem
 
 # Devbox
 eval "$(devbox global shellenv)"
-
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
