@@ -99,7 +99,6 @@ return {
         "telescope",
         "which-key",
       },
-      -- lualine_style = "stealth",
     },
   },
   {
@@ -133,34 +132,6 @@ return {
         symbols.get,
         cond = symbols.has,
       })
-    end,
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    opts = function()
-      local open_with_trouble = require("trouble.sources.telescope").open
-      return {
-        -- Open all pickers with the ivy theme
-        defaults = vim.tbl_extend("force", require("telescope.themes").get_ivy(), {
-          mappings = {
-            n = {
-              ["<M-q>"] = open_with_trouble,
-            },
-            i = {
-              ["<M-q>"] = open_with_trouble,
-            },
-          },
-        }),
-
-        pickers = {
-          find_files = {
-            hidden = true,
-          },
-          live_grep = {
-            additional_args = { "--hidden" },
-          },
-        },
-      }
     end,
   },
 
@@ -414,6 +385,7 @@ return {
         preset = "default",
         ["<C-k>"] = { "select_prev", "fallback" },
         ["<C-j>"] = { "select_next", "fallback" },
+        ["<CR>"] = { "accept", "fallback" },
       },
     },
   },
