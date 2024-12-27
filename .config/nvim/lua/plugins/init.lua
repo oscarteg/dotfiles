@@ -56,6 +56,14 @@ return {
   { "nyoom-engineering/oxocarbon.nvim" },
   { "bettervim/yugen.nvim" },
   {
+    "Mofiqul/adwaita.nvim",
+    lazy = false,
+    priority = 1000,
+    init = function()
+      vim.g.adwaita_darker = true
+    end,
+  },
+  {
     "ccxnu/rosebones",
     lazy = false,
     priority = 1000,
@@ -104,7 +112,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "yugen",
+      colorscheme = "adwaita",
     },
   },
 
@@ -132,6 +140,8 @@ return {
         symbols.get,
         cond = symbols.has,
       })
+
+      opts.theme = "adwaita"
     end,
   },
 
@@ -152,6 +162,7 @@ return {
   { import = "lazyvim.plugins.extras.lang.gleam" },
   { import = "lazyvim.plugins.extras.lang.go" },
   { import = "lazyvim.plugins.extras.lang.ocaml" },
+  { import = "lazyvim.plugins.extras.ai.supermaven" },
   -- { import = "lazyvim.plugins.extras.lang.haskell" },
   { import = "lazyvim.plugins.extras.lang.java" },
   { import = "lazyvim.plugins.extras.lang.json" },

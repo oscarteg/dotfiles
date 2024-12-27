@@ -133,6 +133,7 @@
   untrackedCache = true
 	editor = /opt/homebrew/bin/nvim
 	editor = /opt/homebrew/bin/nvim
+	pager = delta
 
 [color]
 
@@ -185,6 +186,7 @@
   # Include summaries of merged commits in newly created merge commit messages
   log = true
 	tool = nvimdiff
+	conflictStyle = zdiff3
 
 [push]
 
@@ -233,5 +235,9 @@
 [checkout]
   defaultRemote = origin
 
-[includeIf "gitdir:~/Projects/Work/dpg/"]
-    path = ~/Projects/Work/dpg/.gitconfig
+[includeIf "gitdir:~/Developer/Work/dpg/"]
+    path = ~/Developer/Work/dpg/.gitconfig
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true

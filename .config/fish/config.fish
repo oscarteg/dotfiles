@@ -20,7 +20,11 @@ fish_add_path $HOME/.cargo/composer/bin
 # source $HOME/.cargo/env
 
 # Flutter
-fish_add_path $HOME/Projects/libraries/flutter/bin
+fish_add_path $HOME/Developer/libraries/flutter/bin
+
+
+fish_add_path $HOME/.orbstack/bin
+
 
 # Java
 fish_add_path /opt/homebrew/opt/openjdk/bin
@@ -68,7 +72,7 @@ direnv hook fish | source
 fish_add_path $HOME/.mix/escripts
 
 # Zcli
-set -gx AWS_CA_BUNDLE /opt/homebrew/etc/ca-certificates/cert.pem
+#set -gx AWS_CA_BUNDLE /opt/homebrew/etc/ca-certificates/cert.pem
 #set -gx NODE_EXTRA_CA_CERTS /Users/oscar/.zcli/zscaler_root.pem
 
 # Devbox
@@ -81,3 +85,18 @@ eval "$(devbox global shellenv)"
 # This section can be safely removed at any time if needed.
 test -r '/Users/oscar/.opam/opam-init/init.fish' && source '/Users/oscar/.opam/opam-init/init.fish' >/dev/null 2>/dev/null; or true
 # END opam configuration
+# Ghostty configuration
+# 
+# 
+# Set cursor style based on vi mode
+#
+function fish_vi_cursor --on-variable fish_bind_mode
+    switch $fish_bind_mode
+        case default
+            echo -en "\e[2 q" # block cursor
+        case insert
+            echo -en "\e[6 q" # line cursor
+        case visual
+            echo -en "\e[2 q" # block cursor
+    end
+end
