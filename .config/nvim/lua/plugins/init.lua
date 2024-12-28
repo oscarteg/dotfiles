@@ -1,56 +1,3 @@
-local function find_config(bufnr, config_files)
-  return vim.fs.find(config_files, {
-    upward = true,
-    stop = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
-    path = vim.fs.dirname(vim.api.nvim_buf_get_name(bufnr)),
-  })[1]
-end
-
-local function biome_or_prettier(bufnr)
-  local has_biome_config = find_config(bufnr, { "biome.json", "biome.jsonc" })
-  if has_biome_config then
-    return { "biome", stop_after_first = true }
-  end
-
-  local has_prettier_config = find_config(bufnr, {
-    ".prettierrc",
-    ".prettierrc.json",
-    ".prettierrc.yml",
-    ".prettierrc.yaml",
-    ".prettierrc.json5",
-    ".prettierrc.js",
-    ".prettierrc.cjs",
-    ".prettierrc.toml",
-    "prettier.config.js",
-    "prettier.config.cjs",
-  })
-  if has_prettier_config then
-    return { "prettier", stop_after_first = true }
-  end
-
-  -- Default to Prettier if no config is found
-  return { "prettier", stop_after_first = true }
-end
-
-local filetypes_with_dynamic_formatter = {
-  "javascript",
-  "javascriptreact",
-  "typescript",
-  "typescriptreact",
-  "vue",
-  "css",
-  "scss",
-  "less",
-  "html",
-  "json",
-  "jsonc",
-  "yaml",
-  "markdown",
-  "markdown.mdx",
-  "graphql",
-  "handlebars",
-}
-
 return {
   -- colorschemes
   { "nyoom-engineering/oxocarbon.nvim" },
@@ -68,12 +15,15 @@ return {
     lazy = false,
     priority = 1000,
   },
-  { "ellisonleao/gruvbox.nvim" },
   {
-    "loctvl842/monokai-pro.nvim",
+    "ellisonleao/gruvbox.nvim",
     config = function()
-      require("monokai-pro").setup({
-        filter = "spectrum",
+      require("gruvbox").setup({
+        dim_inactive = false,
+        transparent_mode = false,
+        palette_overrides = {
+          dark0 = "#1b1b1b",
+        },
       })
     end,
   },
@@ -112,7 +62,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "adwaita",
+      colorscheme = "gruvbox",
     },
   },
 
@@ -124,27 +74,18 @@ return {
 
   {
     "nvim-lualine/lualine.nvim",
-    opts = function(_, opts)
-      local trouble = require("trouble")
-      local symbols = trouble.statusline({
-        mode = "lsp_document_symbols",
-        groups = {},
-        title = false,
-        filter = { range = true },
-        format = "{kind_icon}{symbol.name:Normal}",
-        -- The following line is needed to fix the background color
-        -- Set it to the lualine section you want to use
-        hl_group = "lualine_c_normal",
-      })
-      table.insert(opts.sections.lualine_c, {
-        symbols.get,
-        cond = symbols.has,
-      })
-
-      opts.theme = "adwaita"
-    end,
+    opts = {
+      theme = "gruvbox-material",
+      options = {
+        component_separators = { left = " ", right = " " },
+        section_separators = { left = " ", right = " " },
+      },
+    },
   },
 
+  -- { import = "lazyvim.plugins.extras.lang.haskell" },
+  { import = "lazyvim.plugins.extras.formatting.biome" },
+  { import = "lazyvim.plugins.extras.ai.supermaven" },
   { import = "lazyvim.plugins.extras.coding.luasnip" },
   { import = "lazyvim.plugins.extras.coding.mini-surround" },
   { import = "lazyvim.plugins.extras.coding.neogen" },
@@ -153,6 +94,7 @@ return {
   { import = "lazyvim.plugins.extras.editor.dial" },
   { import = "lazyvim.plugins.extras.editor.harpoon2" },
   { import = "lazyvim.plugins.extras.editor.inc-rename" },
+  { import = "lazyvim.plugins.extras.editor.refactoring" },
   { import = "lazyvim.plugins.extras.formatting.prettier" },
   { import = "lazyvim.plugins.extras.lang.astro" },
   { import = "lazyvim.plugins.extras.lang.clangd" },
@@ -161,12 +103,11 @@ return {
   { import = "lazyvim.plugins.extras.lang.elixir" },
   { import = "lazyvim.plugins.extras.lang.gleam" },
   { import = "lazyvim.plugins.extras.lang.go" },
-  { import = "lazyvim.plugins.extras.lang.ocaml" },
-  { import = "lazyvim.plugins.extras.ai.supermaven" },
-  -- { import = "lazyvim.plugins.extras.lang.haskell" },
   { import = "lazyvim.plugins.extras.lang.java" },
   { import = "lazyvim.plugins.extras.lang.json" },
+  { import = "lazyvim.plugins.extras.lang.markdown" },
   { import = "lazyvim.plugins.extras.lang.nix" },
+  { import = "lazyvim.plugins.extras.lang.ocaml" },
   { import = "lazyvim.plugins.extras.lang.rust" },
   { import = "lazyvim.plugins.extras.lang.scala" },
   { import = "lazyvim.plugins.extras.lang.svelte" },
@@ -257,74 +198,10 @@ return {
     opts = { use_default_keymaps = false, max_join_length = 150 },
   },
   {
-    "ThePrimeagen/refactoring.nvim",
-    config = true,
-    keys = {
-      {
-        "<leader>re",
-        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function')<CR>]],
-        { noremap = true, silent = true, expr = false, mode = "v" },
-      },
-      {
-        "<leader>rf",
-        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Function To File')<CR>]],
-        { noremap = true, silent = true, expr = false, mode = "v" },
-      },
-      {
-        "<leader>rv",
-        [[ <Esc><Cmd>lua require('refactoring').refactor('Extract Variable')<CR>]],
-        { noremap = true, silent = true, expr = false, mode = "v" },
-      },
-      {
-        "<leader>ri",
-        [[ <Esc><Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
-        { noremap = true, silent = true, expr = false, "v" },
-      },
-
-      {
-        "<leader>rb",
-        [[ <Cmd>lua require('refactoring').refactor('Extract Block')<CR>]],
-        { noremap = true, silent = true, expr = false, mode = "n" },
-      },
-      {
-        "<leader>rbf",
-        [[ <Cmd>lua require('refactoring').refactor('Extract Block To File')<CR>]],
-        { noremap = true, silent = true, expr = false, mode = "n" },
-      },
-
-      {
-        "<leader>ri",
-        [[ <Cmd>lua require('refactoring').refactor('Inline Variable')<CR>]],
-        { noremap = true, silent = true, expr = false, mode = "n" },
-      },
-    },
-  },
-  {
     "mbbill/undotree",
     cmd = "UndotreeToggle",
     keys = {
       { "<leader>uu", "<cmd>UndotreeToggle<cr>", { desc = "Toggle Undo Tree" } },
-    },
-  },
-  {
-    "nvimtools/none-ls.nvim",
-    optional = true,
-    opts = function(_, opts)
-      local nls = require("null-ls")
-      opts.sources = opts.sources or {}
-      table.insert(opts.sources, nls.builtins.formatting.biome)
-    end,
-  },
-  {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = (function()
-        local result = {}
-        for _, ft in ipairs(filetypes_with_dynamic_formatter) do
-          result[ft] = biome_or_prettier
-        end
-        return result
-      end)(),
     },
   },
   {
