@@ -1,0 +1,12 @@
+theme = GruvboxDarkHard
+font-family = TX-02
+font-size = 14
+mouse-hide-while-typing = true
+macos-titlebar-style = hidden
+window-padding-balance = true
+window-save-state = always
+
+cursor-style=block
+shell-integration=fish
+shell-integration-features=no-cursor
+
