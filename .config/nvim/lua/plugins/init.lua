@@ -396,4 +396,16 @@ return {
       })
     end,
   },
+  {
+
+    "saghen/blink.cmp",
+    opts = {
+      completion = {
+        -- https://github.com/LazyVim/LazyVim/discussions/5041
+        ghost_text = {
+          enabled = false,
+        },
+      },
+    },
+  },
 }
