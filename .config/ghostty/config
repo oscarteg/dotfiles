@@ -10,5 +10,9 @@ cursor-style=block
 shell-integration=fish
 shell-integration-features=no-cursor
 window-colorspace = display-p3
+
 # Use Option as Alt instead of Meta
 macos-option-as-alt = true
+
+confirm-close-surface = false
+
