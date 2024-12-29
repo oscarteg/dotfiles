@@ -1,72 +1,10 @@
 return {
-  -- colorschemes
-  { "nyoom-engineering/oxocarbon.nvim" },
-  { "bettervim/yugen.nvim" },
-  {
-    "Mofiqul/adwaita.nvim",
-    lazy = false,
-    priority = 1000,
-    init = function()
-      vim.g.adwaita_darker = true
-    end,
-  },
-  {
-    "ccxnu/rosebones",
-    lazy = false,
-    priority = 1000,
-  },
-  {
-    "ellisonleao/gruvbox.nvim",
-    config = function()
-      require("gruvbox").setup({
-        dim_inactive = false,
-        transparent_mode = false,
-        palette_overrides = {
-          dark0 = "#1b1b1b",
-        },
-      })
-    end,
-  },
-  {
-    "folke/tokyonight.nvim",
-    enabled = false,
-  },
-  {
-
-    "zenbones-theme/zenbones.nvim",
-    dependencies = "rktjmp/lush.nvim",
-    priority = 1000,
-  },
-  { "catppuccin/nvim", enabled = false },
-  {
-    "marko-cerovac/material.nvim",
-    init = function()
-      vim.g.material_style = "deep ocean"
-    end,
-    opts = {
-      plugins = {
-        "dap",
-        "flash",
-        "gitsigns",
-        "mini",
-        "neo-tree",
-        "nvim-notify",
-        "nvim-tree",
-        "neotest",
-        "trouble",
-        "telescope",
-        "which-key",
-      },
-    },
-  },
   {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "gruvbox",
     },
   },
-
-  -- change trouble configinit
   {
     "folke/trouble.nvim",
     opts = { use_diagnostic_signs = true },
@@ -162,23 +100,54 @@ return {
       },
     },
   },
-
-  -- add any tools you want to have installed below
   {
     "williamboman/mason.nvim",
     opts = {
       ensure_installed = {
+        "astro-language-server",
         "biome",
+        "clangd",
+        "cmakelang",
+        "cmakelint",
+        "codelldb",
+        "delve",
+        "docker-compose-language-service",
         "dockerfile-language-server",
         "elixir-ls",
+        "elixir-ls",
         "emmet-ls",
+        "emmet-ls",
+        "eslint-lsp",
+        "gofumpt",
+        "goimports",
+        "gopls",
+        "hadolint",
+        "java-debug-adapter",
+        "java-test",
+        "jdtls",
+        "js-debug-adapter",
+        "json-lsp",
+        "lua-language-server",
+        "markdown-toc",
+        "markdownlint-cli2",
+        "marksman",
+        "neocmakelsp",
+        "nil",
+        "ocaml-lsp",
         "prettier",
         "prettierd",
+        "rust-analyzer",
+        "shfmt",
         "stylua",
         "svelte-language-server",
         "tailwindcss-language-server",
+        "taplo",
         "templ",
+        "terraform-ls",
+        "tflint",
         "vtsls",
+        "vue-language-server",
+        "yaml-language-server",
         "zls",
       },
     },
@@ -205,75 +174,13 @@ return {
     },
   },
   {
-    "nvim-neo-tree/neo-tree.nvim", -- File explorer
-    opts = {
-      enable_diagnostics = true,
-      default_component_configs = {
-        git_status = {
-          symbols = {
-            renamed = "󰁕",
-            unstaged = "󰄱",
-          },
-        },
-      },
-      window = {
-        mappings = {
-          ["x"] = "open_split",
-          ["v"] = "open_vsplit",
-        },
-      },
-      document_symbols = {
-        kinds = {
-          File = { icon = "󰈙", hl = "Tag" },
-          Namespace = { icon = "󰌗", hl = "Include" },
-          Package = { icon = "󰏖", hl = "Label" },
-          Class = { icon = "󰌗", hl = "Include" },
-          Property = { icon = "󰆧", hl = "@property" },
-          Enum = { icon = "󰒻", hl = "@number" },
-          Function = { icon = "󰊕", hl = "Function" },
-          String = { icon = "󰀬", hl = "String" },
-          Number = { icon = "󰎠", hl = "Number" },
-          Array = { icon = "󰅪", hl = "Type" },
-          Object = { icon = "󰅩", hl = "Type" },
-          Key = { icon = "󰌋", hl = "" },
-          Struct = { icon = "󰌗", hl = "Type" },
-          Operator = { icon = "󰆕", hl = "Operator" },
-          TypeParameter = { icon = "󰊄", hl = "Type" },
-          StaticMethod = { icon = "󰠄 ", hl = "Function" },
-        },
-      },
-      -- Add this section only if you've configured source selector.
-      source_selector = {
-        winbar = false,
-        statusline = true,
-        sources = {
-          { source = "filesystem", display_name = " 󰉓 Files " },
-          { source = "git_status", display_name = " 󰊢 Git " },
-        },
-      },
-      filesystem = {
-        enabled = true,
-        follow_current_file = {},
-        hijack_netrw_behavior = "open_current",
-        filtered_items = {
-          visible = false,
-          hide_dotfiles = false,
-          hide_gitignored = true,
-          hide_by_name = {
-            ".git",
-          },
-        },
-      },
-    },
-  },
-  {
     "saghen/blink.cmp",
     opts = {
       keymap = {
         preset = "default",
-        ["<C-k>"] = { "select_prev", "fallback" },
-        ["<C-j>"] = { "select_next", "fallback" },
-        ["<CR>"] = { "accept", "fallback" },
+        ["<C-k>"] = { "select_prev", "fallback", desc = "Select previous item" },
+        ["<C-j>"] = { "select_next", "fallback", desc = "Select next item" },
+        ["<CR>"] = { "accept", "fallback", desc = "Accept selected item" },
       },
     },
   },
@@ -297,7 +204,7 @@ return {
       {
         "<leader>vdo",
         "<CMD>DiffviewOpen<CR>",
-        { desc = "[V]ersion [D]iff [F]ile" },
+        { desc = "[V]ersion [D]iff [O]pen" },
       },
     },
     cmd = {
@@ -374,12 +281,11 @@ return {
       })
     end,
     keys = {
-      { [[<C-\>]] },
-      { "<leader>0", "<Cmd>2ToggleTerm<Cr>", desc = "Terminal #2" },
+      { [[<C-\>]], { desc = "Toggle Terminal" } },
       {
-        "<leader>tk",
+        "<leader>th",
         "<cmd>ToggleTerm direction=horizontal<cr>",
-        desc = "[T]erminal [K] Horizontal",
+        desc = "[T]erminal [H]orizontal",
       },
     },
   },
@@ -430,8 +336,6 @@ return {
             },
           },
         },
-        eslint = {},
-        tsserver = {},
         gopls = {
           settings = {
             gopls = {
