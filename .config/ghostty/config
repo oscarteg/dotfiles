@@ -1,6 +1,6 @@
 theme = GruvboxDarkHard
 font-family = TX-02
-font-size = 14
+font-size = 18
 mouse-hide-while-typing = true
 macos-titlebar-style = hidden
 window-padding-balance = true
@@ -15,4 +15,3 @@ window-colorspace = display-p3
 macos-option-as-alt = true
 
 confirm-close-surface = false
-

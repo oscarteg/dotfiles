@@ -20,45 +20,6 @@ return {
       },
     },
   },
-
-  -- { import = "lazyvim.plugins.extras.lang.haskell" },
-  { import = "lazyvim.plugins.extras.formatting.biome" },
-  { import = "lazyvim.plugins.extras.ai.supermaven" },
-  { import = "lazyvim.plugins.extras.coding.luasnip" },
-  { import = "lazyvim.plugins.extras.coding.mini-surround" },
-  { import = "lazyvim.plugins.extras.coding.neogen" },
-  { import = "lazyvim.plugins.extras.coding.yanky" },
-  { import = "lazyvim.plugins.extras.dap.core" },
-  { import = "lazyvim.plugins.extras.editor.dial" },
-  { import = "lazyvim.plugins.extras.editor.harpoon2" },
-  { import = "lazyvim.plugins.extras.editor.inc-rename" },
-  { import = "lazyvim.plugins.extras.editor.refactoring" },
-  { import = "lazyvim.plugins.extras.formatting.prettier" },
-  { import = "lazyvim.plugins.extras.lang.astro" },
-  { import = "lazyvim.plugins.extras.lang.clangd" },
-  { import = "lazyvim.plugins.extras.lang.cmake" },
-  { import = "lazyvim.plugins.extras.lang.docker" },
-  { import = "lazyvim.plugins.extras.lang.elixir" },
-  { import = "lazyvim.plugins.extras.lang.gleam" },
-  { import = "lazyvim.plugins.extras.lang.go" },
-  { import = "lazyvim.plugins.extras.lang.java" },
-  { import = "lazyvim.plugins.extras.lang.json" },
-  { import = "lazyvim.plugins.extras.lang.markdown" },
-  { import = "lazyvim.plugins.extras.lang.nix" },
-  { import = "lazyvim.plugins.extras.lang.ocaml" },
-  { import = "lazyvim.plugins.extras.lang.rust" },
-  { import = "lazyvim.plugins.extras.lang.scala" },
-  { import = "lazyvim.plugins.extras.lang.svelte" },
-  { import = "lazyvim.plugins.extras.lang.tailwind" },
-  { import = "lazyvim.plugins.extras.lang.terraform" },
-  { import = "lazyvim.plugins.extras.lang.toml" },
-  { import = "lazyvim.plugins.extras.lang.typescript" },
-  { import = "lazyvim.plugins.extras.lang.vue" },
-  { import = "lazyvim.plugins.extras.lang.yaml" },
-  { import = "lazyvim.plugins.extras.linting.eslint" },
-  { import = "lazyvim.plugins.extras.lsp.neoconf" },
-  { import = "lazyvim.plugins.extras.test.core" },
-  { import = "lazyvim.plugins.extras.util.mini-hipatterns" },
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
@@ -157,10 +118,25 @@ return {
     "Wansmer/treesj",
     keys = {
       {
-        "<leader>j",
+        "<leader>js",
+        function()
+          require("treesj").split()
+        end,
+        desc = "Split code block",
+      },
+      {
+        "<leader>jj",
+        function()
+          require("treesj").join()
+        end,
+        desc = "Join code block",
+      },
+      {
+        "<leader>jt",
         function()
           require("treesj").toggle()
         end,
+        desc = "Toggle split/join",
       },
     },
     dependencies = { "nvim-treesitter/nvim-treesitter" },
@@ -176,11 +152,15 @@ return {
   {
     "saghen/blink.cmp",
     opts = {
+      completion = {
+        -- https://github.com/LazyVim/LazyVim/discussions/5041
+        ghost_text = {
+          enabled = false,
+        },
+      },
       keymap = {
         preset = "default",
-        ["<C-k>"] = { "select_prev", "fallback", desc = "Select previous item" },
-        ["<C-j>"] = { "select_next", "fallback", desc = "Select next item" },
-        ["<CR>"] = { "accept", "fallback", desc = "Accept selected item" },
+        -- ["<CR>"] = { "accept", "fallback", desc = "Accept selected item" },
       },
     },
   },
@@ -213,13 +193,6 @@ return {
       "DiffviewToggleFiles",
       "DiffviewFocusFiles",
       "DiffviewFileHistory",
-    },
-  },
-  {
-    "LintaoAmons/scratch.nvim",
-    event = "VeryLazy",
-    keys = {
-      { "<leader>fs", "<CMD>Scratch<CR>", { desc = "[F]ile [S]cratch" } },
     },
   },
   {
@@ -380,7 +353,6 @@ return {
       })
     end,
   },
-
   {
     "folke/noice.nvim",
     opts = function(_, opts)
@@ -395,17 +367,5 @@ return {
         },
       })
     end,
-  },
-  {
-
-    "saghen/blink.cmp",
-    opts = {
-      completion = {
-        -- https://github.com/LazyVim/LazyVim/discussions/5041
-        ghost_text = {
-          enabled = false,
-        },
-      },
-    },
   },
 }

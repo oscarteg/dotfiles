@@ -1,5 +1,4 @@
 set -gx EDITOR nvim
-set -gx BROWSER none
 set -gx INITIAL_QUERY ""
 set -gx RG_PREFIX "rg --column --line-number --no-heading --color=always --smart-case "
 set -gx FZF_DEFAULT_COMMAND "$RG_PREFIX '$INITIAL_QUERY'" \
@@ -8,6 +7,10 @@ set -gx FZF_DEFAULT_COMMAND "$RG_PREFIX '$INITIAL_QUERY'" \
     --height=50% --layout=reverse
 
 fish_add_path /opt/homebrew/opt/pnpm@8/bin
+
+# Ruby
+fish_add_path /opt/homebrew/opt/ruby/bin
+
 
 # Homebrew
 fish_add_path /opt/homebrew/bin
@@ -21,6 +24,7 @@ fish_add_path $HOME/.cargo/composer/bin
 
 # Flutter
 fish_add_path $HOME/Developer/libraries/flutter/bin
+fish_add_path $HOME/.pub-cache/bin
 
 
 fish_add_path $HOME/.orbstack/bin
@@ -76,7 +80,7 @@ fish_add_path $HOME/.mix/escripts
 #set -gx NODE_EXTRA_CA_CERTS /Users/oscar/.zcli/zscaler_root.pem
 
 # Devbox
-eval "$(devbox global shellenv)"
+devbox global shellenv --init-hook | source
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
