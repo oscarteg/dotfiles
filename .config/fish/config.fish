@@ -6,11 +6,8 @@ set -gx FZF_DEFAULT_COMMAND "$RG_PREFIX '$INITIAL_QUERY'" \
     --ansi --disabled --query "$INITIAL_QUERY" \
     --height=50% --layout=reverse
 
-fish_add_path /opt/homebrew/opt/pnpm@8/bin
-
 # Ruby
 fish_add_path /opt/homebrew/opt/ruby/bin
-
 
 # Homebrew
 fish_add_path /opt/homebrew/bin
@@ -26,9 +23,8 @@ fish_add_path $HOME/.cargo/composer/bin
 fish_add_path $HOME/Developer/libraries/flutter/bin
 fish_add_path $HOME/.pub-cache/bin
 
-
+# Orbstack
 fish_add_path $HOME/.orbstack/bin
-
 
 # Java
 fish_add_path /opt/homebrew/opt/openjdk/bin
@@ -68,16 +64,15 @@ fish_add_path $PNPM_HOME
 # Added by zoxide installer
 zoxide init fish | source
 
+# Set up fzf key bindings
+fzf --fish | source
+
 ######
 # DPG - Entertainment
 ###### 
 # Direnv
 direnv hook fish | source
 fish_add_path $HOME/.mix/escripts
-
-# Zcli
-#set -gx AWS_CA_BUNDLE /opt/homebrew/etc/ca-certificates/cert.pem
-#set -gx NODE_EXTRA_CA_CERTS /Users/oscar/.zcli/zscaler_root.pem
 
 # Devbox
 devbox global shellenv --init-hook | source

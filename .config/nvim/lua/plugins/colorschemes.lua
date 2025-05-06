@@ -18,10 +18,11 @@ return {
     "ellisonleao/gruvbox.nvim",
     config = function()
       require("gruvbox").setup({
+        terminal_colors = true,
         dim_inactive = false,
         transparent_mode = false,
         palette_overrides = {
-          dark0 = "#1b1b1b",
+          dark0 = "#1C2021",
         },
       })
     end,
@@ -31,7 +32,6 @@ return {
     enabled = false,
   },
   {
-
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim",
     priority = 1000,

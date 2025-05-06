@@ -9,7 +9,25 @@ return {
     "folke/trouble.nvim",
     opts = { use_diagnostic_signs = true },
   },
-
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {
+      current_line_blame = true,
+    },
+  },
+  {
+    "f-person/auto-dark-mode.nvim",
+    opts = {
+      set_dark_mode = function()
+        vim.api.nvim_set_option_value("background", "dark", {})
+      end,
+      set_light_mode = function()
+        vim.api.nvim_set_option_value("background", "light", {})
+      end,
+      update_interval = 3000,
+      fallback = "dark",
+    },
+  },
   {
     "nvim-lualine/lualine.nvim",
     opts = {
@@ -94,7 +112,6 @@ return {
         "marksman",
         "neocmakelsp",
         "nil",
-        "ocaml-lsp",
         "prettier",
         "prettierd",
         "rust-analyzer",
@@ -158,10 +175,6 @@ return {
           enabled = false,
         },
       },
-      keymap = {
-        preset = "default",
-        -- ["<CR>"] = { "accept", "fallback", desc = "Accept selected item" },
-      },
     },
   },
   {
@@ -214,12 +227,6 @@ return {
       "Gsplit",
       "Gvsplit",
       "Gtabedit",
-    },
-  },
-  {
-    "lewis6991/gitsigns.nvim",
-    opts = {
-      current_line_blame = true,
     },
   },
   { "nvim-neotest/neotest-plenary" },

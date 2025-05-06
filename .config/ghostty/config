@@ -1,4 +1,8 @@
-theme = GruvboxDarkHard
+theme = dark:gruvbox-material,light:GruvboxLight
+# Same background as Gruvbox dark in Neovim
+# background = #0E0E0E
+# foreground = #C9CCD0
+
 font-family = TX-02
 font-size = 18
 mouse-hide-while-typing = true
