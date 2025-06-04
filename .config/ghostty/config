@@ -4,7 +4,7 @@ theme = dark:gruvbox-material,light:GruvboxLight
 # foreground = #C9CCD0
 
 font-family = TX-02
-font-size = 18
+font-size = 16
 mouse-hide-while-typing = true
 macos-titlebar-style = hidden
 window-padding-balance = true

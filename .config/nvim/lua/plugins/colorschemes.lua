@@ -1,4 +1,5 @@
 return {
+  { "kdheepak/monochrome.nvim" },
   { "nyoom-engineering/oxocarbon.nvim" },
   { "bettervim/yugen.nvim" },
   {

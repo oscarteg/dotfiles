@@ -5,6 +5,9 @@ return {
       colorscheme = "gruvbox",
     },
   },
+  -- https://github.com/LazyVim/LazyVim/issues/6039#issuecomment-2856227817
+  { "mason-org/mason.nvim", version = "^1.0.0" },
+  { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
   {
     "folke/trouble.nvim",
     opts = { use_diagnostic_signs = true },
@@ -349,18 +352,6 @@ return {
     },
   },
   {
-    "supermaven-inc/supermaven-nvim",
-    config = function()
-      require("supermaven-nvim").setup({
-        keymaps = {
-          accept_suggestion = "<A-l>",
-          clear_suggestion = "<C-]>",
-          accept_word = "<C-j>",
-        },
-      })
-    end,
-  },
-  {
     "folke/noice.nvim",
     opts = function(_, opts)
       -- Remove the "deleted lines" notifications
@@ -374,5 +365,65 @@ return {
         },
       })
     end,
+  },
+  {
+    "otavioschwanck/arrow.nvim",
+    dependencies = {
+      { "nvim-tree/nvim-web-devicons" },
+      -- or if using `mini.icons`
+      -- { "echasnovski/mini.icons" },
+    },
+    keys = {
+      {
+        ";",
+        function()
+          require("arrow").toggle_quick_menu()
+        end,
+        desc = "Open Arrow",
+      },
+    },
+    opts = {
+      show_icons = true,
+      leader_key = ";", -- Recommended to be a single key
+      buffer_leader_key = "m", -- Per Buffer Mappings
+      separate_by_branch = true,
+    },
+  },
+  {
+    "MagicDuck/grug-far.nvim",
+    keys = {
+      {
+        "<leader>sf",
+        function()
+          local grug = require("grug-far")
+          grug.open({
+            prefills = { paths = vim.fn.expand("%") },
+          })
+        end,
+        mode = { "n", "v" },
+        desc = "Search and Replace current file",
+      },
+    },
+  },
+  {
+    "stevearc/overseer.nvim",
+    opts = {
+      templates = {
+        "builtin",
+        "user.run_script",
+        "user.cpp_build",
+      },
+    },
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    opts = {
+      suggestion = {
+        enabled = true,
+        keymap = {
+          accept = "<A-l>",
+        },
+      },
+    },
   },
 }
