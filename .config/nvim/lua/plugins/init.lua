@@ -2,7 +2,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "gruvbox",
+      colorscheme = "lackluster-mint",
     },
   },
   -- https://github.com/LazyVim/LazyVim/issues/6039#issuecomment-2856227817
@@ -34,7 +34,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = {
-      theme = "gruvbox-material",
+      theme = "lackluster",
       options = {
         component_separators = { left = " ", right = " " },
         section_separators = { left = " ", right = " " },
@@ -422,6 +422,43 @@ return {
         enabled = true,
         keymap = {
           accept = "<A-l>",
+        },
+      },
+    },
+  },
+  {
+    "olimorris/codecompanion.nvim",
+    config = function(_, opts)
+      require("codecompanion").setup({
+        extensions = {
+          mcphub = {
+            callback = "mcphub.extensions.codecompanion",
+            opts = {
+              make_vars = true,
+              make_slash_commands = true,
+              show_result_in_chat = true,
+            },
+          },
+        },
+      })
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "ravitemer/mcphub.nvim",
+    },
+  },
+  {
+    "azorng/goose.nvim",
+    config = function()
+      require("goose").setup({})
+    end,
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          anti_conceal = { enabled = false },
         },
       },
     },
