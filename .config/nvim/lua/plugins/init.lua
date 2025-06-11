@@ -6,8 +6,8 @@ return {
     },
   },
   -- https://github.com/LazyVim/LazyVim/issues/6039#issuecomment-2856227817
-  { "mason-org/mason.nvim", version = "^1.0.0" },
-  { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
+  -- { "mason-org/mason.nvim", version = "^1.0.0" },
+  -- { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
   {
     "folke/trouble.nvim",
     opts = { use_diagnostic_signs = true },
@@ -370,8 +370,6 @@ return {
     "otavioschwanck/arrow.nvim",
     dependencies = {
       { "nvim-tree/nvim-web-devicons" },
-      -- or if using `mini.icons`
-      -- { "echasnovski/mini.icons" },
     },
     keys = {
       {
@@ -450,9 +448,9 @@ return {
   },
   {
     "azorng/goose.nvim",
-    config = function()
-      require("goose").setup({})
-    end,
+    opts = {
+      default_global_keymaps = false,
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
       {
