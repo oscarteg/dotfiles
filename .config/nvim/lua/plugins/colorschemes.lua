@@ -3,6 +3,7 @@ return {
   { "kdheepak/monochrome.nvim" },
   { "nyoom-engineering/oxocarbon.nvim" },
   { "bettervim/yugen.nvim" },
+  { "rose-pine/neovim" },
   {
     "Mofiqul/adwaita.nvim",
     lazy = false,
@@ -11,10 +12,23 @@ return {
       vim.g.adwaita_darker = true
     end,
   },
+
   {
-    "ccxnu/rosebones",
-    lazy = false,
+    "zenbones-theme/zenbones.nvim",
+    dependencies = "rktjmp/lush.nvim",
     priority = 1000,
+    config = function()
+      local lush = require("lush")
+      local rosebones = require("zenbones")
+
+      local spec = lush.extends({ rosebones }).with(function()
+        return {
+          Normal({ bg = "#111111" }),
+        }
+      end)
+
+      lush(spec)
+    end,
   },
   {
     "ellisonleao/gruvbox.nvim",
@@ -32,11 +46,6 @@ return {
   {
     "folke/tokyonight.nvim",
     enabled = false,
-  },
-  {
-    "zenbones-theme/zenbones.nvim",
-    dependencies = "rktjmp/lush.nvim",
-    priority = 1000,
   },
   { "catppuccin/nvim", enabled = false },
   {
@@ -58,6 +67,13 @@ return {
         "telescope",
         "which-key",
       },
+    },
+  },
+
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "lackluster-mint",
     },
   },
 }

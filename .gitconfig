@@ -99,9 +99,9 @@
     fi \
   }; f"
 
-	pushall = !git remote | xargs -L1 git push --all
-	staash = stash
-	fco = "!f() { branch=$(git branch --all | grep -v \"\\*\" | grep -v \"remotes/origin/HEAD\" | sed \"s/^[* ]*//\" | fzf); if [[ $branch == remotes/* ]]; then git checkout --track $branch; else git checkout $branch; fi; }; f"
+ pushall = !git remote | xargs -L1 git push --all
+ staash = stash
+ fco = "!f() { branch=$(git branch --all | grep -v \"\\*\" | grep -v \"remotes/origin/HEAD\" | sed \"s/^[* ]*//\" | fzf); if [[ $branch == remotes/* ]]; then git checkout --track $branch; else git checkout $branch; fi; }; f"
 
 
 [apply]

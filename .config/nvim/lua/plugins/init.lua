@@ -1,10 +1,5 @@
 return {
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "lackluster-mint",
-    },
-  },
+
   -- https://github.com/LazyVim/LazyVim/issues/6039#issuecomment-2856227817
   -- { "mason-org/mason.nvim", version = "^1.0.0" },
   -- { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
@@ -34,7 +29,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = {
-      theme = "lackluster",
+      -- theme = "ros",
       options = {
         component_separators = { left = " ", right = " " },
         section_separators = { left = " ", right = " " },
@@ -174,6 +169,8 @@ return {
     opts = {
       completion = {
         trigger = {
+          -- show_on_blocked_trigger_characters = { " ", "\n", "\t", "{" },
+          -- show_on_x_blocked_trigger_characters = { "'", '"', "(", ".", "{" },
           show_on_insert_on_trigger_character = false,
         },
         -- https://github.com/LazyVim/LazyVim/discussions/5041
@@ -279,9 +276,9 @@ return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-
-      { "<leader>o", "<CMD>Oil<CR>", { desc = "Open parent directory in Oil" } },
+      { "<leader>oe", "<CMD>Oil<CR>", { desc = "Open parent directory in Oil" } },
     },
+    cmd = "Oil",
     config = function()
       require("oil").setup({
         columns = { "icon" },
