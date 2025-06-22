@@ -1,6 +1,20 @@
 return {
   { "slugbyte/lackluster.nvim" },
   { "kdheepak/monochrome.nvim" },
+  {
+    "rose-pine/neovim",
+    name = "rose-pine",
+    config = function()
+      require("rose-pine").setup({
+        palette = {
+          base = {
+            base = "#ffffff",
+            overlay = "#363738",
+          },
+        },
+      })
+    end,
+  },
   { "nyoom-engineering/oxocarbon.nvim" },
   { "bettervim/yugen.nvim" },
   { "rose-pine/neovim" },
@@ -73,7 +87,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "lackluster-mint",
+      colorscheme = "rose-pine",
     },
   },
 }

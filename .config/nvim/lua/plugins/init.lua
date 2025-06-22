@@ -29,7 +29,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = {
-      -- theme = "ros",
+      theme = "rose-pine-main",
       options = {
         component_separators = { left = " ", right = " " },
         section_separators = { left = " ", right = " " },

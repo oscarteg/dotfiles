@@ -2,14 +2,6 @@
 -- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
 -- Add any additional autocmds here
 
--- Set the compiler to bun when it's a typescript file
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "typescript",
-  callback = function()
-    vim.cmd("compiler bun")
-  end,
-})
-
 -- Create a user command to run a script with overseer
 vim.api.nvim_create_user_command("WatchRun", function()
   local overseer = require("overseer")
@@ -36,3 +28,14 @@ vim.api.nvim_create_user_command("WatchRun", function()
     end
   end)
 end, {})
+
+-- Automatically organize imports on save for JavaScript and TypeScript files
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--   pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+--   callback = function()
+--     vim.lsp.buf.code_action({
+--       context = { only = { "source.organizeImports" } },
+--       apply = true,
+--     })
+--   end,
+-- })

@@ -1,9 +1,14 @@
+# Gruvbox
 # theme = dark:gruvbox-material,light:GruvboxLight
 # Same background as Gruvbox dark in Neovim
 # background = #0E0E0E
 # foreground = #C9CCD0
 
-theme = Framer
+# Rosepine
+theme = dark:rose-pine,light:rose-pine-dawn
+# background = #111111
+
+# theme = Framer
 
 font-family = TX-02
 font-size = 16
