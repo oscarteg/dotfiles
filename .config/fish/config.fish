@@ -6,6 +6,9 @@ set -gx FZF_DEFAULT_COMMAND "$RG_PREFIX '$INITIAL_QUERY'" \
     --ansi --disabled --query "$INITIAL_QUERY" \
     --height=50% --layout=reverse
 
+# User scripts
+fish_add_path $HOME/.local/bin
+
 # Ruby
 fish_add_path /opt/homebrew/opt/ruby/bin
 
@@ -82,7 +85,7 @@ devbox global shellenv --init-hook | source
 #   - the correct directories to the PATH
 #   - auto-completion for the opam binary
 # This section can be safely removed at any time if needed.
-test -r '/Users/oscar/.opam/opam-init/init.fish' && source '/Users/oscar/.opam/opam-init/init.fish' >/dev/null 2>/dev/null; or true
+# test -r '/Users/oscar/.opam/opam-init/init.fish' && source '/Users/oscar/.opam/opam-init/init.fish' >/dev/null 2>/dev/null; or true
 # END opam configuration
 # Ghostty configuration
 # 
