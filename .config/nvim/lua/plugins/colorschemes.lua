@@ -4,6 +4,7 @@ return {
   {
     "rose-pine/neovim",
     name = "rose-pine",
+    priority = 1000,
     config = function()
       require("rose-pine").setup({
         palette = {
@@ -17,7 +18,6 @@ return {
   },
   { "nyoom-engineering/oxocarbon.nvim" },
   { "bettervim/yugen.nvim" },
-  { "rose-pine/neovim" },
   {
     "Mofiqul/adwaita.nvim",
     lazy = false,
@@ -27,23 +27,22 @@ return {
     end,
   },
 
-  {
-    "zenbones-theme/zenbones.nvim",
-    dependencies = "rktjmp/lush.nvim",
-    priority = 1000,
-    config = function()
-      local lush = require("lush")
-      local rosebones = require("zenbones")
-
-      local spec = lush.extends({ rosebones }).with(function()
-        return {
-          Normal({ bg = "#111111" }),
-        }
-      end)
-
-      lush(spec)
-    end,
-  },
+  -- {
+  --   "zenbones-theme/zenbones.nvim",
+  --   dependencies = "rktjmp/lush.nvim",
+  --   config = function()
+  --     local lush = require("lush")
+  --     local rosebones = require("zenbones")
+  --
+  --     local spec = lush.extends({ rosebones }).with(function()
+  --       return {
+  --         Normal({ bg = "#111111" }),
+  --       }
+  --     end)
+  --
+  --     lush(spec)
+  --   end,
+  -- },
   {
     "ellisonleao/gruvbox.nvim",
     config = function()

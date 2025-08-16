@@ -276,7 +276,7 @@ return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
-      { "<leader>oe", "<CMD>Oil<CR>", { desc = "Open parent directory in Oil" } },
+      { "<leader>oe", "<CMD>Oil<CR>", { desc = "Open oil" } },
     },
     cmd = "Oil",
     config = function()
@@ -310,6 +310,13 @@ return {
         end,
       },
       servers = {
+        eslint = {
+          settings = {
+            experimental = {
+              useFlatConfig = true,
+            },
+          },
+        },
         tailwindCSS = {
           experimental = {
             -- Needed for https://cva.style/docs
@@ -457,6 +464,42 @@ return {
         "MeanderingProgrammer/render-markdown.nvim",
         opts = {
           anti_conceal = { enabled = false },
+        },
+      },
+    },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    opts = {
+
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            -- Extend LazyVim's existing mappings
+            ["aa"] = "@attribute.outer",
+            ["ia"] = "@attribute.inner",
+            -- LazyVim already has these, but shown for completeness:
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+            ["ac"] = "@class.outer",
+            ["ic"] = "@class.inner",
+          },
+        },
+        move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+            ["]f"] = "@function.outer",
+            ["]c"] = "@class.outer",
+            ["]a"] = "@attribute.outer", -- Add this
+          },
+          goto_previous_start = {
+            ["[f"] = "@function.outer",
+            ["[c"] = "@class.outer",
+            ["[a"] = "@attribute.outer", -- Add this
+          },
         },
       },
     },

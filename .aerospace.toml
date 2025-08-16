@@ -43,6 +43,20 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
 
+
+# See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
+[workspace-to-monitor-force-assignment]
+1 = 'main'
+2 = 'main'
+3 = 'main'
+4 = 'main'
+5 = 'main'
+A = ['secondary', 'main']
+B = ['secondary', 'main']
+C = ['secondary', 'main']
+D = ['secondary', 'main']
+E = ['secondary', 'main']
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -57,18 +71,21 @@ preset = 'qwerty'
 #                 See:
 #                 https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 [gaps]
-inner.horizontal = 0
-inner.vertical = 0
-outer.left = 0
-outer.bottom = 0
-outer.top = 0
-outer.right = 0
+inner.horizontal = 10
+inner.vertical = 10
+outer.left = 10
+outer.bottom = 10
+outer.top = 10
+outer.right = 10
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 # 'main' binding mode must be always presented
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
+
+# Tell AeroSpace to ignore alt-tab completely
+alt-tab = 'nop'
 
 # All possible keys:
 # - Letters.        a, b, c, ..., z
@@ -107,8 +124,6 @@ alt-ctrl-j = 'focus down'
 alt-ctrl-k = 'focus up'
 alt-ctrl-l = 'focus right'
 
-alt-ctrl-shift-right = 'move-node-to-monitor --wrap-around right'
-alt-ctrl-shift-left = 'move-node-to-monitor --wrap-around left'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-ctrl-shift-h = 'move left'
@@ -130,18 +145,21 @@ alt-ctrl-6 = 'workspace 6'
 alt-ctrl-7 = 'workspace 7'
 alt-ctrl-8 = 'workspace 8'
 alt-ctrl-9 = 'workspace 9'
-alt-ctrl-a = 'workspace A' # In your config, you can drop workspace bindings that you don't need
-alt-ctrl-b = 'workspace B'
-alt-ctrl-c = 'workspace C'
-alt-ctrl-d = 'workspace D'
-alt-ctrl-e = 'workspace E'
+alt-ctrl-q = 'workspace A' # In your config, you can drop workspace bindings that you don't need
+alt-ctrl-w = 'workspace B'
+alt-ctrl-e = 'workspace C'
+alt-ctrl-r = 'workspace D'
+alt-ctrl-t = 'workspace E'
 
 # Focus monitor
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus-monitor
 alt-ctrl-right = 'focus-monitor --wrap-around right'
 alt-ctrl-left = 'focus-monitor --wrap-around left'
-alt-ctrl-up = 'focus-monitor up'
-alt-ctrl-down = 'focus-monitor down'
+
+# Move node to monitor
+# See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-monitor
+alt-ctrl-shift-right = 'move-node-to-monitor --wrap-around right'
+alt-ctrl-shift-left = 'move-node-to-monitor --wrap-around left'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-ctrl-shift-1 = 'move-node-to-workspace 1'
@@ -153,11 +171,11 @@ alt-ctrl-shift-6 = 'move-node-to-workspace 6'
 alt-ctrl-shift-7 = 'move-node-to-workspace 7'
 alt-ctrl-shift-8 = 'move-node-to-workspace 8'
 alt-ctrl-shift-9 = 'move-node-to-workspace 9'
-alt-ctrl-shift-a = 'move-node-to-workspace A'
-alt-ctrl-shift-b = 'move-node-to-workspace B'
-alt-ctrl-shift-c = 'move-node-to-workspace C'
-alt-ctrl-shift-d = 'move-node-to-workspace D'
-alt-ctrl-shift-e = 'move-node-to-workspace E'
+alt-ctrl-shift-q = 'move-node-to-workspace A'
+alt-ctrl-shift-w = 'move-node-to-workspace B'
+alt-ctrl-shift-e = 'move-node-to-workspace C'
+alt-ctrl-shift-r = 'move-node-to-workspace D'
+alt-ctrl-shift-t = 'move-node-to-workspace E'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
 alt-ctrl-tab = 'workspace-back-and-forth'
@@ -221,4 +239,12 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-name-regex-substring = "things"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "facetime"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "inkdrop"
 run = 'layout floating'
