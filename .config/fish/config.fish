@@ -56,8 +56,8 @@ set -gx LIBRARY_PATH /opt/homebrew/lib
 set -gx KERL_CONFIGURE_OPTIONS "--without-javac --without-jinterface --without-odbc --without-hipe"
 
 # pnpm
-set -gx PNPM_HOME /Users/oscar/Library/pnpm
-fish_add_path $PNPM_HOME
+# set -gx PNPM_HOME /Users/oscar/Library/pnpm
+# fish_add_path $PNPM_HOME
 # pnpm end
 
 # tabtab source for packages

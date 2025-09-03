@@ -84,9 +84,6 @@ outer.right = 10
 # Fallback value (if you omit the key): mode.main.binding = {}
 [mode.main.binding]
 
-# Tell AeroSpace to ignore alt-tab completely
-alt-tab = 'nop'
-
 # All possible keys:
 # - Letters.        a, b, c, ..., z
 # - Numbers.        0, 1, 2, ..., 9

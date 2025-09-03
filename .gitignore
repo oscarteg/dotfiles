@@ -309,7 +309,5 @@ neoconf.json
 # Devbox
 .devbox
 
-# Claude
-.claude
-
-CLAUDE.md
+# Claude coding
+CLAUDE.local.md
