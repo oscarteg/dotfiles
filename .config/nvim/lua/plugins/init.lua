@@ -78,7 +78,7 @@ return {
     },
   },
   {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     opts = {
       ensure_installed = {
         "astro-language-server",
@@ -310,13 +310,6 @@ return {
         end,
       },
       servers = {
-        eslint = {
-          settings = {
-            experimental = {
-              useFlatConfig = true,
-            },
-          },
-        },
         tailwindCSS = {
           experimental = {
             -- Needed for https://cva.style/docs

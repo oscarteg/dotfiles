@@ -155,8 +155,8 @@ alt-ctrl-left = 'focus-monitor --wrap-around left'
 
 # Move node to monitor
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-monitor
-alt-ctrl-shift-right = 'move-node-to-monitor --wrap-around right'
-alt-ctrl-shift-left = 'move-node-to-monitor --wrap-around left'
+alt-ctrl-shift-right = 'move-node-to-monitor --wrap-around right --focus-follows-window'
+alt-ctrl-shift-left = 'move-node-to-monitor --wrap-around left --focus-follows-window'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-ctrl-shift-1 = 'move-node-to-workspace 1'
@@ -244,4 +244,8 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-name-regex-substring = "inkdrop"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "iina"
 run = 'layout floating'

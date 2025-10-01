@@ -233,7 +233,7 @@
 	enabled = true
 	autoupdate = true
 [branch]
-	sort = -committerdate
+	sort = committerdate
 [column]
 	ui = auto
 [checkout]

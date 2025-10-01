@@ -5,10 +5,10 @@
 # foreground = #C9CCD0
 
 # Rosepine
-theme = dark:rose-pine,light:rose-pine-dawn
+# theme = dark:Rose Pine,light:Rose Pine Dawn
 # background = #111111
 
-# theme = Framer
+theme = yugen-theme
 
 font-family = TX-02
 font-size = 16

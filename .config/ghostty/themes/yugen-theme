@@ -1,0 +1,61 @@
+# Yugen theme for Ghostty
+# Based on yugen.nvim by bettervim
+# https://github.com/bettervim/yugen.nvim
+
+# Color palette from yugen:
+# color100 = #FAFAFA (brightest)
+# color200 = #D4D4D4 (foreground)
+# color300 = #A9A9A9 (muted)
+# color400 = #696969 (keywords/operators)
+# color500 = #505050 (comments)
+# color600 = #303030 (selection)
+# color700 = #151515 (darker bg)
+# color800 = #000000 (background)
+# primary  = #FFBE89 (orange accent)
+# success  = #7EAB8E (green)
+# warning  = #FFF2AF (yellow)
+# error    = #F57A7A (red)
+
+# Background and foreground
+background = #000000
+foreground = #D4D4D4
+
+# Cursor
+cursor-color = #D4D4D4
+cursor-text = #000000
+
+# Selection
+selection-background = #303030
+selection-foreground = #D4D4D4
+
+# Black
+palette = 0=#000000
+palette = 8=#A9A9A9
+
+# Red
+palette = 1=#FFBE89
+palette = 9=#A9A9A9
+
+# Green
+palette = 2=#696969
+palette = 10=#505050
+
+# Yellow
+palette = 3=#FFF2AF
+palette = 11=#A9A9A9
+
+# Blue
+palette = 4=#696969
+palette = 12=#FFBE89
+
+# Magenta
+palette = 5=#FFBE89
+palette = 13=#FFFF00
+
+# Cyan
+palette = 6=#D4D4D4
+palette = 14=#D4D4D4
+
+# White
+palette = 7=#FAFAFA
+palette = 15=#FAFAFA
