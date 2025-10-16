@@ -8,9 +8,12 @@
 # theme = dark:Rose Pine,light:Rose Pine Dawn
 # background = #111111
 
-theme = dark:Kanagawabones,light:yugen-theme
+# theme = dark:Kanagawabones,light:yugen-theme
 
-background = #16161E
+theme = dark:Duckbones,light:Gruvbox Material Light
+
+
+# background = #16161E
 
 font-family = TX-02
 font-size = 16

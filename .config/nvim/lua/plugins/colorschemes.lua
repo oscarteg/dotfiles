@@ -32,31 +32,21 @@ return {
     config = function()
       require("kanagawa").setup({
         theme = "wave",
+        dimInactive = true, -- dim inactive window `:h hl-NormalNC`
         colors = {
           palette = {
-            sumiInk1 = "#16161E",
-            sumiInk0 = "#16161E", -- Used for statusline and floating windows
+            sumiInk1 = "#0D101B",
+            sumiInk0 = "#0D101B", -- Used for statusline and floating windows
           },
           theme = {
             wave = {
               ui = {
-                bg = "#16161E",
-                bg_gutter = "#16161E",
+                bg = "#0D101B",
+                bg_gutter = "#0D101B",
               },
             },
           },
         },
-        overrides = function(colors)
-          return {
-            Normal = { bg = "#16161E" },
-            NormalNC = { bg = "#16161E" },
-            SignColumn = { bg = "#16161E" },
-            LineNr = { bg = "#16161E" },
-            CursorLineNr = { bg = "#16161E" },
-            StatusLine = { bg = "#16161E" },
-            StatusLineNC = { bg = "#16161E" },
-          }
-        end,
       })
     end,
   },
@@ -123,7 +113,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa-wave",
+      colorscheme = "kanagawa",
     },
   },
 }

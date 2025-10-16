@@ -214,20 +214,24 @@ alt-ctrl-f = 'layout floating tiling'
 
 # Which applications should be opened in floating layout
 [[on-window-detected]]
-if.app-name-regex-substring = "telegram"
-run = "layout floating"
+if.app-id = "ru.keepcoder.Telegram"
+run = ['layout floating', 'move-node-to-workspace A']
 
 [[on-window-detected]]
-if.app-name-regex-substring = "whatsapp"
-run = "layout floating"
+if.app-id = "net.whatsapp.WhatsApp"
+run = ['layout floating', 'move-node-to-workspace A']
 
 [[on-window-detected]]
-if.app-name-regex-substring = "messages"
-run = "layout floating"
+if.app-id = "com.apple.MobileSMS"
+run = ['layout floating', 'move-node-to-workspace A']
 
 [[on-window-detected]]
-if.app-name-regex-substring = "spotify"
-run = "layout floating"
+if.app-id = "com.spotify.client"
+run = ['layout floating', "move-node-to-workspace A"]
+
+[[on-window-detected]]
+if.app-id = "com.bloombuilt.dayone-mac"
+run = ['layout floating', 'move-node-to-workspace A']
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'slack'
@@ -235,7 +239,7 @@ if.window-title-regex-substring = 'huddle'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-name-regex-substring = "things"
+if.app-id = "com.culturedcode.ThingsMac"
 run = 'layout floating'
 
 [[on-window-detected]]
