@@ -8,7 +8,9 @@
 # theme = dark:Rose Pine,light:Rose Pine Dawn
 # background = #111111
 
-theme = yugen-theme
+theme = dark:Kanagawabones,light:yugen-theme
+
+background = #16161E
 
 font-family = TX-02
 font-size = 16
@@ -26,3 +28,4 @@ window-colorspace = display-p3
 macos-option-as-alt = true
 
 confirm-close-surface = false
+keybind = shift+enter=text:\x1b\r

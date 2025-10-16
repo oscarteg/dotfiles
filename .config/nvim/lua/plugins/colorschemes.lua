@@ -30,7 +30,34 @@ return {
     lazy = false,
     priority = 1000,
     config = function()
-      -- require("kanagawa").load("dragon")
+      require("kanagawa").setup({
+        theme = "wave",
+        colors = {
+          palette = {
+            sumiInk1 = "#16161E",
+            sumiInk0 = "#16161E", -- Used for statusline and floating windows
+          },
+          theme = {
+            wave = {
+              ui = {
+                bg = "#16161E",
+                bg_gutter = "#16161E",
+              },
+            },
+          },
+        },
+        overrides = function(colors)
+          return {
+            Normal = { bg = "#16161E" },
+            NormalNC = { bg = "#16161E" },
+            SignColumn = { bg = "#16161E" },
+            LineNr = { bg = "#16161E" },
+            CursorLineNr = { bg = "#16161E" },
+            StatusLine = { bg = "#16161E" },
+            StatusLineNC = { bg = "#16161E" },
+          }
+        end,
+      })
     end,
   },
   {
@@ -44,18 +71,6 @@ return {
   {
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim",
-    config = function()
-      -- local lush = require("lush")
-      -- local rosebones = require("zenbones")
-      --
-      -- local spec = lush.extends({ rosebones }).with(function()
-      --   return {
-      --     Normal({ bg = "#111111" }),
-      --   }
-      -- end)
-      --
-      -- lush(spec)
-    end,
   },
   {
     "sainnhe/gruvbox-material",
@@ -66,19 +81,6 @@ return {
       vim.g.gruvbox_material_foreground = "original"
     end,
   },
-  -- {
-  --   "ellisonleao/gruvbox.nvim",
-  --   config = function()
-  --     require("gruvbox").setup({
-  --       terminal_colors = true,
-  --       dim_inactive = false,
-  --       transparent_mode = false,
-  --       palette_overrides = {
-  --         dark0 = "#1C2021",
-  --       },
-  --     })
-  --   end,
-  -- },
   {
     "folke/tokyonight.nvim",
     enabled = false,
@@ -121,7 +123,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "yugen",
+      colorscheme = "kanagawa-wave",
     },
   },
 }
