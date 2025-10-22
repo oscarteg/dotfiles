@@ -309,9 +309,5 @@ neoconf.json
 # Devbox
 .devbox
 
-# Claude coding
-.claude
-CLAUDE.local.md
-
 # Java development neovim 
 .settings
