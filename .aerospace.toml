@@ -250,18 +250,46 @@ run = 'layout floating'
 if.app-name-regex-substring = "iina"
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
+if.window-title-regex-substring = 'Picture-in-Picture'
+run = 'layout floating'
+
 #  Obsidian
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
 if.window-title-regex-substring = '.*Journal*'
+run = ['move-node-to-workspace A']
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+if.window-title-regex-substring = '.*Createch*'
 run = ['move-node-to-workspace B']
+
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+if.window-title-regex-substring = '.*DPG.*'
+run = ['move-node-to-workspace C']
 
 [[on-window-detected]]
 if.app-id = 'md.obsidian'
 if.window-title-regex-substring = '.*Pixcelium.*'
 run = ['move-node-to-workspace D']
 
+
+# Ghostty
+
 [[on-window-detected]]
-if.app-id = 'md.obsidian'
-if.window-title-regex-substring = '.*DPG.*'
+if.app-id = 'com.mitchellh.ghostty'
+if.window-title-regex-substring = '.*personal*'
+run = ['move-node-to-workspace B']
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+if.window-title-regex-substring = '.*dpg*'
 run = ['move-node-to-workspace C']
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+if.window-title-regex-substring = '.*pixcelium*'
+run = ['move-node-to-workspace D']
