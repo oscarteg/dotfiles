@@ -1,5 +1,6 @@
 return {
   { "slugbyte/lackluster.nvim" },
+  { "datsfilipe/vesper.nvim" },
   {
     "rose-pine/neovim",
     name = "rose-pine",
@@ -47,6 +48,14 @@ return {
             },
           },
         },
+      })
+    end,
+  },
+  {
+    "akinsho/bufferline.nvim",
+    config = function()
+      require("bufferline").setup({
+        highlights = require("vesper").bufferline.highlights,
       })
     end,
   },
@@ -113,7 +122,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "kanagawa",
+      colorscheme = "vesper",
     },
   },
 }

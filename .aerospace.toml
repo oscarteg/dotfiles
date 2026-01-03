@@ -211,8 +211,6 @@ alt-ctrl-shift-f = 'fullscreen'
 # See: https://nikitabobko.github.io/AeroSpace/commands#floating
 alt-ctrl-f = 'layout floating tiling'
 
-
-# Which applications should be opened in floating layout
 [[on-window-detected]]
 if.app-id = "ru.keepcoder.Telegram"
 run = ['move-node-to-workspace A']
@@ -236,6 +234,10 @@ run = ['move-node-to-workspace A']
 [[on-window-detected]]
 if.app-id = "com.culturedcode.ThingsMac"
 run = ["move-node-to-workspace A"]
+
+[[on-window-detected]]
+if.app-id = "com.hnc.Discord"
+run = ['move-node-to-workspace A']
 
 [[on-window-detected]]
 if.app-id = "com.tinyspeck.slackmacgap"

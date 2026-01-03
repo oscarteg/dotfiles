@@ -85,6 +85,14 @@ function dns-show
     networksetup -getdnsservers "$service"
 end
 
+# Flush DNS cache
+function dns-flush
+    echo "Flushing DNS cache..."
+    sudo dscacheutil -flushcache
+    sudo killall -HUP mDNSResponder
+    echo "DNS cache cleared successfully"
+end
+
 # Apply to ALL interfaces
 function dns-cloudflare-all
     echo "Switching ALL network services to Cloudflare DNS..."
@@ -124,6 +132,8 @@ function dns
                 end
             case show current
                 dns-show
+            case flush clear
+                dns-flush
             case list
                 echo "Available network services:"
                 networksetup -listallnetworkservices | tail -n +2
@@ -139,6 +149,7 @@ function dns
                 echo "  opendns           Switch to OpenDNS"
                 echo "  auto, router      Switch to automatic DNS (DHCP)"
                 echo "  show, current     Show current DNS settings"
+                echo "  flush, clear      Flush DNS cache"
                 echo "  list              List all network services"
                 echo "  help              Show this help message"
                 echo ""

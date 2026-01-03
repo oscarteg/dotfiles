@@ -10,7 +10,7 @@
 
 # theme = dark:Kanagawabones,light:yugen-theme
 
-theme = dark:Duckbones,light:Gruvbox Material Light
+theme = dark:vesper,light:Gruvbox Material Light
 
 
 # background = #16161E
@@ -32,3 +32,6 @@ macos-option-as-alt = true
 
 confirm-close-surface = false
 keybind = shift+enter=text:\x1b\r
+
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+

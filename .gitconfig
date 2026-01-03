@@ -35,6 +35,12 @@
   # Pull in remote changes for the current repository and all its submodules
   p = git pull --recurse-submodules
 
+  # Stash changes in the working directory
+  unstage = reset HEAD --
+
+  # Unstage and restore changes (discard completely)
+  discard = "!f() { git restore --staged \"$@\" && git restore \"$@\"; }; f"
+
   # Clone a repository including all submodules
   c = clone --recursive
 
@@ -249,3 +255,6 @@
 	sslCAInfo = /Users/oscar/.zcli/zscaler_root.pem
 [tag]
 	gpgSign = true
+
+; [remote "origin"]
+;   fetch = +refs/heads/*:refs/remotes/origin/*
