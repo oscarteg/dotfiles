@@ -102,3 +102,6 @@ function fish_vi_cursor --on-variable fish_bind_mode
             echo -en "\e[2 q" # block cursor
     end
 end
+
+# jj VSC
+jj util completion fish | source

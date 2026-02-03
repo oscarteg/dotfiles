@@ -16,6 +16,7 @@ theme = dark:vesper,light:Gruvbox Material Light
 # background = #16161E
 
 font-family = TX-02
+font-thicken = true
 font-size = 16
 mouse-hide-while-typing = true
 macos-titlebar-style = hidden

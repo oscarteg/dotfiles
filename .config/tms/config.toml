@@ -1,8 +1,12 @@
 
 [[search_dirs]]
-path = "/Users/oscar/Developer/Work/dpg/entertainment-web"
+path = "/Users/oscar/Developer/Work/dpg/"
 depth = 10
 
 [[search_dirs]]
 path = "/Users/oscar/Developer/Personal"
+depth = 10
+
+[[search_dirs]]
+path = "/Users/oscar/Developer/Work/pixcelium"
 depth = 10

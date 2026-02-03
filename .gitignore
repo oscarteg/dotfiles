@@ -311,3 +311,5 @@ neoconf.json
 
 # Java development neovim 
 .settings
+
+/Users/oscar/Developer/Work/pixcelium/**/CLAUDE.md
