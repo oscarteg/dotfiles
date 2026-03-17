@@ -5,11 +5,14 @@ cd "$(dirname "${BASH_SOURCE}")"
 git pull origin main
 
 # Generic function to symlink subdirectories or files within a directory
+# Usage: symlink_directory_contents <source_dir> <target_base> <dotfiles_dir> <symlink_files> [exclude1 exclude2 ...]
 function symlink_directory_contents() {
 	local source_dir="$1"
 	local target_base="$2"
 	local dotfiles_dir="$3"
 	local symlink_files="$4"  # true for files, false for directories
+	shift 4
+	local excludes=("$@")
 
 	if [[ ! -d "$source_dir" ]]; then
 		return
@@ -22,6 +25,19 @@ function symlink_directory_contents() {
 		for item in "$source_dir"/*; do
 			if [[ -f "$item" ]]; then
 				local item_name=$(basename "$item")
+
+				# Check excludes
+				local should_exclude=false
+				for exc in "${excludes[@]}"; do
+					if [[ "$item_name" == "$exc" ]]; then
+						should_exclude=true
+						break
+					fi
+				done
+				if [[ "$should_exclude" == true ]]; then
+					continue
+				fi
+
 				local target="$target_base/$item_name"
 
 				if [[ -L "$target" ]]; then
@@ -41,6 +57,19 @@ function symlink_directory_contents() {
 		for item in "$source_dir"/*/; do
 			if [[ -d "$item" ]]; then
 				local item_name=$(basename "$item")
+
+				# Check excludes
+				local should_exclude=false
+				for exc in "${excludes[@]}"; do
+					if [[ "$item_name" == "$exc" ]]; then
+						should_exclude=true
+						break
+					fi
+				done
+				if [[ "$should_exclude" == true ]]; then
+					continue
+				fi
+
 				local target="$target_base/$item_name"
 
 				if [[ -L "$target" ]]; then
@@ -60,7 +89,7 @@ function symlink_directory_contents() {
 
 function doIt() {
 	local dotfiles_dir=$(pwd)
-	local skip_files=(".git" ".DS_Store" ".config" ".claude" ".ssh")
+	local skip_files=(".git" ".DS_Store" ".config" ".ssh")
 
 	# Symlink top-level dotfiles (excluding directories and special files)
 	for file in .[^.]*; do
@@ -94,11 +123,17 @@ function doIt() {
 		ln -s "$dotfiles_dir/$file" "$target"
 	done
 
-	# Handle .config subdirectories individually
-	symlink_directory_contents ".config" "$HOME/.config" "$dotfiles_dir" "false"
+	# Handle .config subdirectories individually (exclude opencode — has runtime files)
+	symlink_directory_contents ".config" "$HOME/.config" "$dotfiles_dir" "false" "opencode"
 
 	# Handle .ssh config files individually
 	symlink_directory_contents ".ssh" "$HOME/.ssh" "$dotfiles_dir" "true"
+
+	# Handle .config/opencode subdirectories (skills, commands, agents, docs)
+	symlink_directory_contents ".config/opencode" "$HOME/.config/opencode" "$dotfiles_dir" "false"
+
+	# Handle .config/opencode files (AGENTS.md)
+	symlink_directory_contents ".config/opencode" "$HOME/.config/opencode" "$dotfiles_dir" "true"
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then

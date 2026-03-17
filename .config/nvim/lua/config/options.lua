@@ -40,3 +40,5 @@ vim.g.lazyvim_prettier_needs_config = true
 
 -- Disable AI completion in blink.cmp
 vim.g.ai_cmp = false
+
+vim.o.background = "dark"
