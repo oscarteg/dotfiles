@@ -1,4 +1,11 @@
 return {
+  -- LazyVim's core ui.lua registers snacks.dashboard with the default 9-button
+  -- layout. Disable it so dashboard-nvim below takes over (matches what
+  -- lazyvim.plugins.extras.ui.dashboard-nvim does internally).
+  {
+    "folke/snacks.nvim",
+    opts = { dashboard = { enabled = false } },
+  },
   {
     "nvimdev/dashboard-nvim",
     lazy = false, -- As https://github.com/nvimdev/dashboard-nvim/pull/450, dashboard-nvim shouldn't be lazy-loaded to properly handle stdin.
