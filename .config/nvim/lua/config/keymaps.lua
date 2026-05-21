@@ -2,6 +2,18 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
+-- fff.nvim: register here (last on VeryLazy) to beat LazyVim's snacks/fzf-lua
+-- bindings that otherwise win the race for <leader><leader>, <leader>ff etc.
+local fff_set = function(lhs, fn, desc)
+  vim.keymap.set("n", lhs, fn, { desc = desc, silent = true })
+end
+fff_set("<leader>ff", function() require("fff").find_files() end, "FFFind files")
+fff_set("<leader><leader>", function() require("fff").find_files() end, "FFFind files")
+fff_set("<leader>fg", function() require("fff").live_grep() end, "LiFFFe grep")
+fff_set("<leader>/", function() require("fff").live_grep() end, "LiFFFe grep")
+fff_set("<leader>sg", function() require("fff").live_grep({ cwd = LazyVim.root() }) end, "LiFFFe grep (Root Dir)")
+fff_set("<leader>sG", function() require("fff").live_grep({ cwd = vim.fn.getcwd() }) end, "LiFFFe grep (cwd)")
+
 -- use 'mm' to run :make
 vim.api.nvim_set_keymap("n", "mm", ":make<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "mm", ":make<CR>", { noremap = true, silent = true })

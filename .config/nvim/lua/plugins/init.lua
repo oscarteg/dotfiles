@@ -39,9 +39,7 @@ return {
       -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
       -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
       -- refer to `:h file-pattern` for more examples
-      "BufReadPre "
-        .. vim.fn.expand("~")
-        .. "/Documents/Apps/Obsidian/*.md",
+      "BufReadPre " .. vim.fn.expand("~") .. "/Documents/Apps/Obsidian/*.md",
     },
     dependencies = {
       -- Required.
@@ -463,5 +461,107 @@ return {
         },
       },
     },
+  },
+  {
+    "folke/snacks.nvim",
+    keys = {
+      { "<leader>ff", false },
+      { "<leader><leader>", false },
+      { "<leader>/", false },
+      { "<leader>fg", false },
+      { "<leader>sg", false },
+      { "<leader>sG", false },
+    },
+  },
+  {
+    "dmtrKovalenko/fff.nvim",
+    build = function()
+      -- downloads a prebuilt binary or falls back to cargo build
+      require("fff.download").download_or_build_binary()
+    end,
+    -- for nixos:
+    -- build = "nix run .#release",
+    opts = {
+      debug = {
+        enabled = true,
+        show_scores = true,
+      },
+    },
+    lazy = true, -- the plugin lazy-initialises itself
+    keys = {
+      {
+        "<leader>ff",
+        function()
+          require("fff").find_files()
+        end,
+        desc = "FFFind files",
+      },
+
+      {
+        "<space><space>",
+        function()
+          require("fff").find_files()
+        end,
+        desc = "FFFind files",
+      },
+      {
+        "<leader><leader>",
+        function()
+          require("fff").find_files()
+        end,
+        desc = "FFFind files",
+      },
+      {
+        "<leader>fg",
+        function()
+          require("fff").live_grep()
+        end,
+        desc = "LiFFFe grep",
+      },
+
+      {
+        "<leader>/",
+        function()
+          require("fff").live_grep()
+        end,
+        desc = "LiFFFe grep",
+      },
+      {
+        "<leader>sg",
+        function()
+          require("fff").live_grep({ cwd = LazyVim.root() })
+        end,
+        desc = "LiFFFe grep (Root Dir)",
+      },
+      {
+        "<leader>sG",
+        function()
+          require("fff").live_grep({ cwd = vim.fn.getcwd() })
+        end,
+        desc = "LiFFFe grep (cwd)",
+      },
+      {
+        "<leader>fz",
+        function()
+          require("fff").live_grep({ grep = { modes = { "fuzzy", "plain" } } })
+        end,
+        desc = "Live fffuzy grep",
+      },
+      {
+        "<leader>fc",
+        function()
+          require("fff").live_grep({ query = vim.fn.expand("<cword>") })
+        end,
+        desc = "Search current word",
+      },
+    },
+  },
+  {
+    "sQVe/sort.nvim",
+    config = function()
+      require("sort").setup({
+        -- Optional configuration overrides.
+      })
+    end,
   },
 }

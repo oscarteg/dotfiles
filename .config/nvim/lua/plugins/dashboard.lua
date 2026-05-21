@@ -1,72 +1,85 @@
+-- Read git branch from .git/HEAD (no subprocess, works for jj-colocated repos).
+-- Returns nil for pure-jj or non-git directories.
+local function get_branch()
+  local f = io.open(vim.fn.getcwd() .. "/.git/HEAD", "r")
+  if not f then return nil end
+  local head = f:read("*l")
+  f:close()
+  if not head then return nil end
+  return head:match("^ref: refs/heads/(.+)") or head:sub(1, 7)
+end
+
+-- Read the latest commit's short hash + summary.
+local function get_commit()
+  local out = vim.fn.systemlist({ "git", "-C", vim.fn.getcwd(), "log", "-1", "--pretty=format:%h %s" })
+  if vim.v.shell_error ~= 0 or not out or not out[1] then return nil end
+  return out[1]
+end
+
 return {
-  -- LazyVim's core ui.lua registers snacks.dashboard with the default 9-button
-  -- layout. Disable it so dashboard-nvim below takes over (matches what
-  -- lazyvim.plugins.extras.ui.dashboard-nvim does internally).
   {
     "folke/snacks.nvim",
-    opts = { dashboard = { enabled = false } },
-  },
-  {
-    "nvimdev/dashboard-nvim",
-    lazy = false, -- As https://github.com/nvimdev/dashboard-nvim/pull/450, dashboard-nvim shouldn't be lazy-loaded to properly handle stdin.
-    opts = function()
-      local logo = [[
-         ██╗      █████╗ ███████╗██╗   ██╗██╗   ██╗██╗███╗   ███╗          Z
-         ██║     ██╔══██╗╚══███╔╝╚██╗ ██╔╝██║   ██║██║████╗ ████║      Z
-         ██║     ███████║  ███╔╝  ╚████╔╝ ██║   ██║██║██╔████╔██║   z
-         ██║     ██╔══██║ ███╔╝    ╚██╔╝  ╚██╗ ██╔╝██║██║╚██╔╝██║ z
-         ███████╗██║  ██║███████╗   ██║    ╚████╔╝ ██║██║ ╚═╝ ██║
-         ╚══════╝╚═╝  ╚═╝╚══════╝   ╚═╝     ╚═══╝  ╚═╝╚═╝     ╚═╝
-      ]]
-
-      logo = string.rep("\n", 8) .. logo .. "\n\n"
-
-      local opts = {
-        theme = "doom",
-        hide = {
-          -- this is taken care of by lualine
-          -- enabling this messes up the actual laststatus setting after loading a file
-          statusline = false,
-        },
-        config = {
-          header = vim.split(logo, "\n"),
-          -- stylua: ignore
-          center = {
-            { action = function() require("fff").find_files() end,        desc = " Find File",       icon = " ", key = "f" },
-            { action = "ene | startinsert",                               desc = " New File",        icon = " ", key = "n" },
-            { action = function() require("fff").live_grep() end,         desc = " Find Text",       icon = " ", key = "g" },
-            { action = function() require("persistence").load() end,      desc = " Restore Session", icon = " ", key = "s" },
-            { action = "LazyExtras",                                      desc = " Lazy Extras",     icon = " ", key = "x" },
-            { action = "Lazy",                                            desc = " Lazy",            icon = "󰒲 ", key = "l" },
-            { action = function() vim.api.nvim_input("<cmd>qa<cr>") end,  desc = " Quit",            icon = " ", key = "q" },
+    opts = {
+      dashboard = {
+        preset = {
+          header = "",
+          keys = {
+            { icon = " ", key = "f", desc = "Find File", action = function() require("fff").find_files() end },
+            { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+            { icon = " ", key = "g", desc = "Find Text", action = function() require("fff").live_grep() end },
+            { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+            { icon = " ", key = "x", desc = "Lazy Extras", action = ":LazyExtras" },
+            { icon = "󰒲 ", key = "l", desc = "Lazy", action = ":Lazy" },
+            { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
-          footer = function()
-            local stats = require("lazy").stats()
-            local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-            return { "⚡ Neovim loaded " .. stats.loaded .. "/" .. stats.count .. " plugins in " .. ms .. "ms" }
+        },
+        formats = {
+          -- Highlight the first letter of each desc with the key color
+          -- (matches the shortcut letter on the right). Mimics LazyVim's default.
+          desc = function(item)
+            if not item.desc then
+              return { "", hl = "SnacksDashboardDesc" }
+            end
+            return {
+              { item.desc:sub(1, 1), hl = "SnacksDashboardKey" },
+              { item.desc:sub(2),    hl = "SnacksDashboardDesc" },
+            }
           end,
         },
-      }
-
-      for _, button in ipairs(opts.config.center) do
-        button.desc = button.desc .. string.rep(" ", 43 - #button.desc)
-        button.key_format = "  %s"
-      end
-
-      -- open dashboard after closing lazy
-      if vim.o.filetype == "lazy" then
-        vim.api.nvim_create_autocmd("WinClosed", {
-          pattern = tostring(vim.api.nvim_get_current_win()),
-          once = true,
-          callback = function()
-            vim.schedule(function()
-              vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
-            end)
+        sections = {
+          { section = "keys", gap = 1, padding = 1 },
+          -- right pane: live git status, cached 5min, hidden outside git repos
+          {
+            pane = 2,
+            icon = " ",
+            title = "Git Status",
+            section = "terminal",
+            enabled = function()
+              return Snacks.git.get_root() ~= nil
+            end,
+            cmd = "git status --short --branch --renames",
+            height = 10,
+            padding = 1,
+            ttl = 5 * 60,
+            indent = 3,
+          },
+          -- bottom: branch + last commit (replaces the startup-time line)
+          function()
+            local branch = get_branch()
+            if not branch then return nil end
+            local commit = get_commit()
+            local text = " " .. branch
+            if commit then
+              text = text .. "  " .. commit
+            end
+            return {
+              text = { { text, hl = "SnacksDashboardFooter" } },
+              align = "center",
+              padding = 1,
+            }
           end,
-        })
-      end
-
-      return opts
-    end,
+        },
+      },
+    },
   },
 }
