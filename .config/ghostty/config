@@ -9,8 +9,9 @@
 # background = #111111
 
 # theme = dark:Kanagawabones,light:yugen-theme
+# theme = dark:vesper,light:Gruvbox Material Light
 
-theme = dark:vesper,light:Gruvbox Material Light
+theme = dark:koda-dark,light:koda-light
 
 
 # background = #16161E
