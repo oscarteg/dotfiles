@@ -317,3 +317,5 @@ neoconf.json
 .wrangler/
 
 .fallow/
+
+**/.claude/settings.local.json

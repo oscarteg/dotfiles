@@ -62,7 +62,7 @@
 - Run linting and tests locally before pushing
 - Never push with `--no-verify`
 - Write meaningful PR descriptions with context and how to test
-- PR title format: `type(JIRA-TICKET): concise title`
+- PR title format: `type(CRT-123): concise title` — reference the Linear issue id
 
 ## Debugging Approach
 
@@ -86,6 +86,60 @@
 - **Read the error message** - before debugging, read the full error including the stack trace
 - **Reproduce before fixing** - confirm the bug exists before writing a fix
 - **Run linting and tests before pushing** - catch issues locally before CI
+
+---
+
+# Workflow: spec-driven development in Linear
+
+**This is the way of working for every repo under `~/Developer/Personal/`.** It
+applies automatically — no per-repo `AGENTS.md`/`CLAUDE.md` section is required.
+
+Linear is the single source of truth. **The spec lives in the Linear issue** —
+never in the repo (no `docs/specs/`, plan files, or scratch specs) and never in
+the Obsidian vault. Obsidian stays for personal notes and journalling only.
+
+- **Workspace:** createch. **Team:** Createch (`CRT`).
+- **Repo → Linear project** (create a project on the same team for any repo not
+  listed):
+
+  | Repo                  | Linear project        |
+  | --------------------- | --------------------- |
+  | citadel               | Citadel               |
+  | alfred                | Alfred                |
+  | oscartegiffel.com     | Homepage              |
+  | village-map           | Village Map           |
+  | blackjack-learner     | Blackjack             |
+  | pellikaan_companion   | Pellikaan Companion   |
+  | scan-bonnetje         | Bonnetje              |
+  | workflowy             | Workflowy             |
+  | family-table          | Family Table          |
+
+## The loop — one story = one change = one PR
+
+0. **Capture** — idea → Linear issue in the repo's project (Backlog): title +
+   the "why".
+1. **Brainstorm** (superpowers:brainstorming) — sharpen intent, scope, and
+   design. Write the **spec into the issue description**: what, why, design
+   decisions, and acceptance criteria as a checklist. Move → Todo.
+2. **Plan** — break the work into a task checklist (or sub-issues) on the story.
+   This is the spec-review gate: agree the plan before writing code.
+3. **Implement** — move → In Progress. Branch = Linear's generated name
+   (`oscar/crt-123-…`). Work the checklist with TDD
+   (superpowers:test-driven-development); fan independent tasks out to subagents.
+   Conventional commits referencing `CRT-123`.
+4. **Verify** (superpowers:verification-before-completion) — lint + tests +
+   build; evidence before claiming done.
+5. **PR** — title `type(CRT-123): concise title`. Linear auto-links → In Review.
+6. **Done** — on merge, issue → Done; tick off the acceptance checklist.
+
+**Fast lane:** trivial, no-design changes (typo, dep bump, config tweak) skip
+steps 1–2 — just an issue + PR.
+
+## Creating a spec / planning a feature
+
+- The spec IS the Linear issue. Put the plan in its **description**; never create
+  spec or plan files in the repo or the vault.
+- To review or continue work on a story, read it from Linear first.
 
 ---
 
@@ -127,15 +181,17 @@ DPG/
 
 ## Specs and design docs
 
-- **All specs, design docs, and implementation plans live in the Obsidian vault — never in the repo.** Do not create `docs/specs/`, `docs/superpowers/`, or similar inside any project directory.
-- **Vault is selected by the routing table above** (working directory → vault). DPG work goes to `work/DPG`; everything else to `personal/Journal of Everything`. Both vaults use the same PARA layout, so the location rules below are vault-relative.
-- **Read specs from the selected vault.** When asked to review, reference, or continue work on a spec, look in the project's vault folder (e.g. `1-projects/<project-name>/` inside the routed vault) before searching the repo.
-- **Naming:** `<topic>-<type>-<YYYY-MM-DD>.md` where `<type>` is one of `design`, `spec`, `plan`, `architecture`, `review`. Example: `playground-debug-bar-redesign-design-2026-05-11.md`.
-- **Frontmatter** required: `date`, `status` (`draft` / `approved` / `in-progress` / `done`), `type`, `project`, optional `package` and `tags`.
-- **Location by type (vault-relative):**
-  - Project-scoped specs/designs/plans → `1-projects/<project-name>/`
-  - Cross-project architecture → `2-areas/architecture/`
-  - Reference material → `3-resources/`
+- **Specs, design docs, and implementation plans live in Linear — never in the
+  Obsidian vault and never in the repo.** See the `# Workflow: spec-driven
+  development in Linear` section above. Do
+  not create `docs/specs/`, `docs/superpowers/`, or similar inside any project
+  directory, and do not create spec files under `1-projects/<project-name>/`.
+- **When asked to "create a spec" or "plan" a feature**, create or refine a
+  Linear issue with the plan in its description. When asked to review or
+  continue work on a spec, read the Linear issue first.
+- **The vault is for notes only** — reflections, journalling, meeting notes,
+  reference material. Not specs. The routing table and PARA layout above still
+  apply to those.
 
 ## Writing tone of voice
 
