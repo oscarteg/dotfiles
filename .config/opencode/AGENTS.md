@@ -33,27 +33,16 @@
 
 ## Code Quality Standards
 
-- TypeScript strict mode, never use `any` or enums
-- Named exports only, no default exports
-- Named functions for components, no arrow function components
-- Type aliases over interfaces
-- Integration tests over unit tests - test user behavior, not implementation
-- Self-documenting code - inline comments only for complex logic
-- TSDoc for all public APIs
-- WCAG 2.1 Level AA accessibility compliance
+The concrete, enforceable standards — TypeScript strict (no `any`/enums), named
+exports only, named-function components, type aliases, integration-over-unit
+tests, self-documenting code + TSDoc, WCAG 2.1 AA — live in the **`code-quality`**
+skill (the single source of truth), pulled in by the **`coding`** orchestrator.
 
 ## Tooling Preferences
 
-- **pnpm** as package manager
-- **Vitest** as test runner
-- **Biome** for formatting and import organization
-- **MSW** (Mock Service Worker) for API mocking in tests
-- **TanStack Query** for server state
-- **Zustand** for global client state
-- **Valibot** for runtime validation (not Zod)
-- **Wretch** for HTTP client (not Axios/fetch)
-- **Changesets** for versioning and changelogs
-- **Obsidian** for notes and documentation (PARA method)
+The fixed stack (pnpm, Vitest, Biome, MSW, TanStack Query, Zustand, Valibot,
+Wretch, Changesets, Obsidian) lives in the **`code-quality`** skill →
+`references/tooling.md`.
 
 ## PR Workflow
 
@@ -113,6 +102,24 @@ the Obsidian vault. Obsidian stays for personal notes and journalling only.
   | scan-bonnetje         | Bonnetje              |
   | workflowy             | Workflowy             |
   | family-table          | Family Table          |
+
+## Infrastructure & deployment live in citadel
+
+**All Terraform, infrastructure, and deployment config for every personal repo
+lives in the `citadel` repo — never in the individual project repo.** Cloudflare
+resources (Pages projects, DNS, Workers, etc.) are managed as Terraform in
+citadel. When a task calls for Terraform or deployment changes, make them in
+citadel (its own `CRT`-tracked Linear story), not in the app repo.
+
+Consequences for app repos:
+
+- App repos should not contain `.tf` files or hand-rolled deploy workflows that
+  duplicate what citadel manages.
+- Prefer **Git-connected** Cloudflare Pages (build + deploy driven by Cloudflare,
+  configured via Terraform in citadel) over in-repo `wrangler`/upload workflows
+  and per-repo API-token secrets.
+- Keep app-repo CI (tests, lint, typecheck, build) — Git-connected Pages only
+  runs the build command, never your test suite.
 
 ## The loop — one story = one change = one PR
 
