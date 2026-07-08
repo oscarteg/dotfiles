@@ -1,13 +1,14 @@
 ---
-name: react-declarative
+name: react
 description: Use when writing, reviewing, or refactoring React components. Enforces declarative, state-flow-first React — model UI as a function of state, derive instead of sync, and reach for imperative escapes (useRef, useEffect, manual DOM) only as a last resort. Self-improving: when Oscar diverges from what this skill produced, it asks whether to codify the divergence as a rule.
 ---
 
-# Declarative React
+# React
 
-Model the UI as a **function of state**. Before writing imperative code, find the
-solution in the state flow. Match Oscar's stack: TypeScript strict, named exports,
-named function components, type aliases (see global `AGENTS.md`).
+Model the UI as a **function of state** — the declarative approach is the core of
+this skill. Before writing imperative code, find the solution in the state flow.
+Match Oscar's stack: TypeScript strict, named exports, named function components,
+type aliases (see the [`code-quality`](../code-quality/SKILL.md) skill).
 
 ## Core rules
 
@@ -46,7 +47,7 @@ This skill is meant to evolve with Oscar's taste.
 
 - **When Oscar changes your React output in a different direction** than what this
   skill recommended (e.g. prefers a specific pattern, library, or structure),
-  **pause and ask**: *"Should I make this a rule in `react-declarative`?"*
+  **pause and ask**: *"Should I make this a rule in `react`?"*
 - If yes, **append it** to the `## Learned rules` section below (edit this file),
   phrased as a concrete, testable rule, and note the date + one-line why.
 - If it contradicts an existing rule, propose updating that rule rather than adding

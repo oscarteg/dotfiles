@@ -38,8 +38,9 @@ issue in the current repo's project, using the mapping table in `AGENTS.md`).
    - Bug/fix → [`superpowers:systematic-debugging`](https://github.com/obra/superpowers)
      (reproduce → failing test → fix).
    - Fan independent tasks out to subagents ([`superpowers:subagent-driven-development`](https://github.com/obra/superpowers)).
-   - Apply the [`clean-code`](../clean-code/SKILL.md) skill throughout; for React
-     work, the [`react-declarative`](../react-declarative/SKILL.md) skill.
+   - Apply the [`coding`](../coding/SKILL.md) skill throughout — it pulls in
+     [`code-quality`](../code-quality/SKILL.md), [`clean-code`](../clean-code/SKILL.md),
+     and [`react`](../react/SKILL.md) for React work.
    - Conventional commits referencing `CRT-123`.
 
 5. **Verify** with [`superpowers:verification-before-completion`](https://github.com/obra/superpowers):

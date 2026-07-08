@@ -5,65 +5,26 @@ description: Use when writing or refactoring any code — the baseline craft rul
 
 # Clean Code
 
-Baseline craft for all code. This encodes Oscar's `AGENTS.md` philosophy
-(simplicity first, YAGNI, DRY with judgment, explicit over clever, composition
-over inheritance, surgical changes) with the reasoning from the canonical books.
-When a rule here conflicts with the surrounding code's established style, match
-the code and mention the discrepancy — don't silently reformat.
+Baseline craft for all code — the timeless *reasoning* from the canonical books.
+For Oscar's concrete, enforceable rules (typing, exports, tooling) see the
+[`code-quality`](../code-quality/SKILL.md) skill; both are pulled in by the
+[`coding`](../coding/SKILL.md) orchestrator. When a rule here conflicts with the
+surrounding code's established style, match the code and mention the discrepancy —
+don't silently reformat.
 
-## Naming (Clean Code)
+## Quick reference
 
-- Intention-revealing names; the name answers *why it exists and how it's used*.
-- No encodings/abbreviations; searchable names over single letters.
-- Verbs for functions, nouns for things; consistent vocabulary per concept.
-- One word per concept — don't mix `fetch`/`get`/`retrieve` for the same idea.
+Each row is the essence; open the reference for the reasoning and detail.
 
-## Functions (Clean Code)
-
-- Small; do **one thing** at one level of abstraction.
-- Few arguments (0-2 ideal); avoid boolean/flag args — split the function.
-- No side effects the name doesn't advertise. Command-query separation.
-- Prefer exceptions/Result over error codes; don't return null, don't pass null.
-
-## Comments & formatting
-
-- Prefer self-documenting code; comments explain *why*, never *what*.
-- Delete commented-out/dead code (git remembers). No TODOs left as litter.
-
-## Design (A Philosophy of Software Design)
-
-- **Deep modules**: simple interface hiding real complexity. Distrust shallow
-  wrappers that add surface without hiding anything.
-- **Reduce cognitive load**; make the common path obvious.
-- Pull complexity **downward** — the module absorbs it so callers stay simple.
-- Design for the reader, not the writer. Comments capture *design intent* that
-  isn't obvious from code.
-
-## Architecture (Clean Architecture / DDD)
-
-- **Dependencies point inward**, toward abstractions/policy; details (DB, UI,
-  frameworks) depend on the domain, not the reverse.
-- Keep business rules free of framework/IO concerns; push those to the edges
-  (ports & adapters). Match the repo's bounded contexts / feature isolation.
-- Stable things shouldn't depend on volatile things.
-
-## Pragmatic Programmer
-
-- **DRY**: one authoritative representation of each piece of knowledge — but
-  duplication is cheaper than the *wrong* abstraction (rule of three).
-- **Orthogonality**: decoupled components; a change in one shouldn't ripple.
-- **Tracer bullets / prototypes**: get an end-to-end thin slice working, then grow.
-- **Don't live with broken windows**: fix small rot early (Boy Scout Rule, within reason).
-- **Design by contract**; fail fast; crash early rather than corrupt state.
-- Program deliberately — don't rely on coincidence; know *why* it works.
-
-## Refactoring (Fowler)
-
-- Refactor in small, behaviour-preserving steps behind green tests.
-- Watch for smells: long function, large class, feature envy, primitive
-  obsession, shotgun surgery, divergent change, data clumps.
-- Prefer extract-function/-module and replace-conditional-with-polymorphism over
-  sprawling conditionals.
+| Area | Essence | Detail |
+| --- | --- | --- |
+| **Naming** | Intention-revealing, one word per concept, searchable — no encodings | [references/naming-and-functions.md](references/naming-and-functions.md) |
+| **Functions** | Small; do one thing at one level; 0–2 args; no hidden side effects | [references/naming-and-functions.md](references/naming-and-functions.md) |
+| **Comments** | Self-documenting code; comments explain *why*; delete dead code | [references/naming-and-functions.md](references/naming-and-functions.md) |
+| **Design** | Deep modules: simple interface hiding complexity; pull complexity down | [references/design-and-architecture.md](references/design-and-architecture.md) |
+| **Architecture** | Dependencies point inward at abstractions; business rules free of IO | [references/design-and-architecture.md](references/design-and-architecture.md) |
+| **Pragmatic** | DRY with judgment (rule of three); orthogonality; fail fast | [references/pragmatic-and-refactoring.md](references/pragmatic-and-refactoring.md) |
+| **Refactoring** | Small behaviour-preserving steps behind green tests; watch the smells | [references/pragmatic-and-refactoring.md](references/pragmatic-and-refactoring.md) |
 
 ## The test (before finishing)
 

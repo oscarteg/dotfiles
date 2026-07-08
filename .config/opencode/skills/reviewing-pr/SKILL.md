@@ -27,7 +27,7 @@ Put on each hat in turn; only report what genuinely applies (skip a role if the
 diff doesn't touch its concern):
 
 - **Architect** — boundaries, dependency direction, coupling, where logic lives, layering (see [`clean-code`](../clean-code/SKILL.md) › Architecture).
-- **React** — declarative/state-flow correctness, hooks misuse, needless `useRef`/`useEffect` (see [`react-declarative`](../react-declarative/SKILL.md)).
+- **React** — declarative/state-flow correctness, hooks misuse, needless `useRef`/`useEffect` (see [`react`](../react/SKILL.md)).
 - **Testing** — coverage of new behaviour, integration-over-unit, missing edge/negative cases, brittle tests.
 - **Bug hunter** — logic errors, off-by-one, null/undefined, race conditions, error handling, boundary conditions.
 - **Clean code** — naming, function size, duplication, dead code, complexity (see [`clean-code`](../clean-code/SKILL.md)).

@@ -43,8 +43,10 @@ Superpowers (https://github.com/obra/superpowers) — invoke whenever they apply
 - `requesting-code-review` — before merging.
 
 Craft:
-- [`clean-code`](../skills/clean-code/SKILL.md) — always.
-- [`react-declarative`](../skills/react-declarative/SKILL.md) — for React work.
+- [`coding`](../skills/coding/SKILL.md) — entry point for any code change; pulls in the others.
+- [`code-quality`](../skills/code-quality/SKILL.md) — concrete standards + tooling.
+- [`clean-code`](../skills/clean-code/SKILL.md) — craft principles.
+- [`react`](../skills/react/SKILL.md) — for React work.
 
 ## Who you delegate to (subagents via the Task tool)
 
