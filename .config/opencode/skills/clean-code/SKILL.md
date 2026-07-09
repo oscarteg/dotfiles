@@ -25,6 +25,7 @@ Each row is the essence; open the reference for the reasoning and detail.
 | **Architecture** | Dependencies point inward at abstractions; business rules free of IO | [references/design-and-architecture.md](references/design-and-architecture.md) |
 | **Pragmatic** | DRY with judgment (rule of three); orthogonality; fail fast | [references/pragmatic-and-refactoring.md](references/pragmatic-and-refactoring.md) |
 | **Refactoring** | Small behaviour-preserving steps behind green tests; watch the smells | [references/pragmatic-and-refactoring.md](references/pragmatic-and-refactoring.md) |
+| **TigerStyle** | Assert everything (2×/fn, positive + negative space), bound everything, fail-fast, ~70-line functions | [references/tiger-style.md](references/tiger-style.md) |
 
 ## The test (before finishing)
 
