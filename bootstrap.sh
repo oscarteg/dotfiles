@@ -129,11 +129,27 @@ function doIt() {
 	# Handle .ssh config files individually
 	symlink_directory_contents ".ssh" "$HOME/.ssh" "$dotfiles_dir" "true"
 
-	# Handle .config/opencode subdirectories (skills, commands, agents, docs)
-	symlink_directory_contents ".config/opencode" "$HOME/.config/opencode" "$dotfiles_dir" "false"
+	# Handle .config/opencode subdirectories (commands, agents, docs).
+	# Skills now live in .agents/skills and are symlinked separately below.
+	symlink_directory_contents ".config/opencode" "$HOME/.config/opencode" "$dotfiles_dir" "false" "skills"
 
 	# Handle .config/opencode files (AGENTS.md)
 	symlink_directory_contents ".config/opencode" "$HOME/.config/opencode" "$dotfiles_dir" "true"
+
+	# Shared agent skills: one source dir (.agents/skills) linked into both the
+	# general ~/.agents location and ~/.claude so Claude Code picks them up.
+	for target in "$HOME/.agents/skills" "$HOME/.claude/skills"; do
+		mkdir -p "$(dirname "$target")"
+		if [[ -L "$target" ]]; then
+			echo "Removing existing symlink: $target"
+			rm "$target"
+		elif [[ -d "$target" ]]; then
+			echo "Backing up existing directory: $target -> $target.backup"
+			mv "$target" "$target.backup"
+		fi
+		echo "Creating symlink: $target -> $dotfiles_dir/.agents/skills"
+		ln -s "$dotfiles_dir/.agents/skills" "$target"
+	done
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
