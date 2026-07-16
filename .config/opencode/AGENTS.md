@@ -55,6 +55,7 @@ Wretch, Changesets, Obsidian) lives in the **`code-quality`** skill →
 
 ## Debugging Approach
 
+- **Recall past work first** - before debugging or re-implementing something, run `deja "<query>"` (or the MCP recall tool) to search past agent sessions across Claude Code, Codex, and opencode, indexed locally. Cite what you reuse.
 - Read the full error message including stack trace before debugging
 - Reproduce the bug before writing a fix
 - Write a test that reproduces the bug, then make it pass
@@ -102,6 +103,14 @@ the Obsidian vault. Obsidian stays for personal notes and journalling only.
   | scan-bonnetje         | Bonnetje              |
   | workflowy             | Workflowy             |
   | family-table          | Family Table          |
+  | template              | Template              |
+
+- **New web apps start from the template repo.** For any new personal web
+  application, clone/degit the template (`oscarteg/tanstarter-monorepo`,
+  `~/Developer/Personal/template` → Linear project **Template**) instead of
+  scaffolding a fresh stack. It ships the house standard: TanStack Start +
+  React, pnpm + Vite+, Drizzle, Better Auth, shadcn/ui, Valibot — plus a
+  static Astro marketing app (`apps/marketing`).
 
 ## Infrastructure & deployment live in citadel
 
