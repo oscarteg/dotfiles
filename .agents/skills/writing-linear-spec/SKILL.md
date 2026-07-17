@@ -36,6 +36,22 @@ development in Linear` section in the global `AGENTS.md`.
 4. **Report** the issue URL and the Linear branch name. Create **no files** in
    the repo or the vault.
 
+## Requirement keywords
+
+Write requirements with [RFC 2119](https://datatracker.ietf.org/doc/html/rfc2119)
+keywords so the obligation level is unambiguous:
+
+- **MUST** / **MUST NOT** — absolute requirement.
+- **SHOULD** / **SHOULD NOT** — recommended; deviating needs a stated reason.
+- **MAY** — genuinely optional.
+
+Capitalise them, and only where the normative sense is intended. Prefer them over
+"needs to", "has to", or a lowercase "should" in `## Design` and
+`## Acceptance criteria`.
+
+This does not apply to `## Tasks` — that is a plan, not a contract. Keep it as
+plain imperative steps.
+
 ## Fast lane
 
 For a trivial, no-design change, skip the brainstorm — just create a short issue
