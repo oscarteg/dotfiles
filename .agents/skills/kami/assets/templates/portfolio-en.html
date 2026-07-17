@@ -34,7 +34,6 @@
     --olive:     #504e49;
     --stone:     #6b6a64;
     --brand:     #1B365D;
-    --brand-deep:#a64f33;
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
     --tag-bg:    #E4ECF5;
@@ -42,6 +41,9 @@
     --serif: Charter, Georgia,
              Palatino, "Times New Roman", serif;
     --sans: var(--serif);
+
+    --rhythm-module:  14pt;
+    --rhythm-section: 18pt;
   }
 
   html, body { background: var(--parchment); }
@@ -55,6 +57,8 @@
     font-family: var(--serif);
     font-size: 10pt;
     line-height: 1.45;
+    widows: 3;
+    orphans: 3;
   }
 
   .serif { font-family: var(--serif); }
@@ -77,6 +81,15 @@
     text-transform: uppercase;
     font-weight: 500;
   }
+  /* Brand logo slot (optional, from brand profile; styles apply only once uncommented). */
+  .brand-logo {
+    display: block;
+    height: 72px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    margin-bottom: 16pt;
+  }
   .cover-center {
     display: flex;
     flex-direction: column;
@@ -86,7 +99,7 @@
     font-family: var(--serif);
     font-size: 64pt;
     font-weight: 500;
-    line-height: 1.02;
+    line-height: 1.1;
     color: var(--near-black);
     letter-spacing: -1pt;
   }
@@ -173,7 +186,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 14pt;
+    margin-bottom: var(--rhythm-module);
     border-left: 2.5pt solid var(--brand);
     border-radius: 1.5pt;
     padding-left: 8pt;
@@ -216,6 +229,7 @@
     font-size: 9pt;
     color: var(--stone);
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
     min-width: 80pt;
     padding-top: 10pt;
   }
@@ -225,7 +239,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 4pt;
-    margin-bottom: 14pt;
+    margin-bottom: var(--rhythm-module);
   }
   .tag {
     background: var(--tag-bg);
@@ -244,9 +258,8 @@
     width: 100%;
     height: 110mm;
     background: var(--ivory);
-    border: 0.5pt solid var(--border-soft);
     border-radius: 6pt;
-    margin-bottom: 14pt;
+    margin-bottom: var(--rhythm-module);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -281,7 +294,7 @@
   .project-results {
     display: flex;
     gap: 14pt;
-    margin-top: 14pt;
+    margin-top: var(--rhythm-module);
     padding-top: 10pt;
     border-top: 0.5pt dotted var(--border);
   }
@@ -306,7 +319,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10pt;
-    margin-bottom: 14pt;
+    margin-bottom: var(--rhythm-module);
   }
   .project-visuals-2col .project-hero {
     height: 80mm;
@@ -336,11 +349,13 @@
     border-bottom: 0.3pt dotted var(--border);
     align-items: baseline;
   }
+  .work-item:last-of-type { border-bottom: none; }
   .work-year {
     font-family: var(--serif);
     color: var(--brand);
     font-size: 11pt;
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }
   .work-title-block .title {
     font-family: var(--serif);
@@ -453,7 +468,12 @@
 
 <!-- COVER -->
 <div class="cover">
-  <div class="cover-top">{{YEAR_RANGE - e.g. Selected Works 2023–2026}}</div>
+  <div class="cover-head">
+    <!-- Brand logo slot (optional, from the brand profile logo field). Leave commented when there is no logo; do not insert a broken image.
+         To use, uncomment and set src to an expanded local absolute path:
+    <img class="brand-logo" src="/absolute/path/to/logo.svg" alt=""> -->
+    <div class="cover-top">{{YEAR_RANGE - e.g. Selected Works 2023–2026}}</div>
+  </div>
 
   <div class="cover-center">
     <div class="cover-name">{{NAME}}<br>Portfolio</div>
@@ -551,11 +571,11 @@
   <div class="project-header">
     <div class="project-num">02</div>
     <div class="project-title-block">
-      <div class="project-type">{{PROJECT_TYPE}}</div>
+      <div class="project-type">{{PROJECT_TYPE - e.g. Product Design / Open Source}}</div>
       <div class="project-title">{{PROJECT_NAME}}</div>
       <div class="project-subtitle">{{One-line description.}}</div>
     </div>
-    <div class="project-date">{{DATE}}</div>
+    <div class="project-date">{{DATE - e.g. 2025.04 - 2026.02}}</div>
   </div>
 
   <div class="project-tags">
@@ -571,15 +591,15 @@
   <div class="project-body">
     <div class="project-block">
       <h3>Context</h3>
-      <p>{{Context.}}</p>
+      <p>{{Why this project? What problem does it solve? Who is the user?}}</p>
     </div>
     <div class="project-block">
       <h3>Approach</h3>
-      <p>{{Approach.}}</p>
+      <p>{{How it was done - key decisions, design rationale, technical approach.}}</p>
     </div>
     <div class="project-block">
       <h3>Outcome</h3>
-      <p>{{Outcome.}}</p>
+      <p>{{Results - <span class="hl">figures</span>, feedback, impact.}}</p>
     </div>
   </div>
 </section>

@@ -20,13 +20,16 @@
     --stone:        #6b6a64;
     --brand:        #1B365D;
     --brand-tint:   #EEF2F7;
-    --grid:         #e8e7e1;
     --border:       #e8e6dc;
 
     --serif: Charter, Georgia, Palatino, serif;
     --sans: var(--serif);
     --mono:  "JetBrains Mono", "SF Mono", Consolas, "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", monospace;
   }
+
+  /* Poster-size page so WeasyPrint exports the full diagram without
+     A4 clipping; browsers ignore @page. */
+  @page { size: 1000px 960px; margin: 0; }
 
   body {
     font-family: var(--sans);
@@ -63,7 +66,6 @@
 
   .caption {
     font-family: var(--serif);
-    font-style: italic;
     font-size: 0.95rem;
     color: var(--olive);
     margin-top: 1rem;
@@ -169,7 +171,7 @@
       <circle cx="620" cy="168" r="3.5" fill="#f5f4ed" stroke="#504e49" stroke-width="1.5"/>
 
       <!-- End-of-line value labels -->
-      <text x="628" y="132" fill="#1B365D" font-size="11" font-family="inherit" font-weight="600">96</text>
+      <text x="628" y="132" fill="#1B365D" font-size="11" font-family="inherit" font-weight="500">96</text>
       <text x="628" y="172" fill="#504e49" font-size="10" font-family="inherit">76</text>
 
       <!-- X-axis labels -->

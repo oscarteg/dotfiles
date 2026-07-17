@@ -18,10 +18,8 @@
     --near-black:   #141413;
     --olive:        #504e49;
     --stone:        #6b6a64;
-    --light-stone:  #b8b7b0;
     --brand:        #1B365D;
     --brand-tint:   #EEF2F7;
-    --grid:         #e8e7e1;
     --border:       #e8e6dc;
     --positive:     #1B365D;
     --negative:     #6b6a64;
@@ -31,6 +29,10 @@
     --sans: var(--serif);
     --mono:  "JetBrains Mono", "SF Mono", Consolas, "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", monospace;
   }
+
+  /* Poster-size page so WeasyPrint exports the full diagram without
+     A4 clipping; browsers ignore @page. */
+  @page { size: 1000px 940px; margin: 0; }
 
   body {
     font-family: var(--sans);
@@ -67,7 +69,6 @@
 
   .caption {
     font-family: var(--serif);
-    font-style: italic;
     font-size: 0.95rem;
     color: var(--olive);
     margin-top: 1rem;

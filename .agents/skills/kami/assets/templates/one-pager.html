@@ -42,7 +42,6 @@
   :root {
     --parchment: #f5f4ed;
     --ivory:     #faf9f5;
-    --sand:      #e8e6dc;
     --near-black:#141413;
     --dark-warm: #3d3d3a;
     --olive:     #504e49;
@@ -75,10 +74,9 @@
 
   /* ========== HEADER ========== */
   .header {
-    border-left: 2.5pt solid var(--brand);
-    border-radius: 1.5pt;
-    padding-left: 8pt;
-    margin-bottom: 14pt;
+    margin-bottom: 16pt;
+    padding-bottom: 12pt;
+    border-bottom: 0.5pt solid var(--border);
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
@@ -88,12 +86,27 @@
     flex: 1;
   }
   .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7pt;
     font-size: 9pt;
     color: var(--brand);
-    letter-spacing: 1pt;
+    letter-spacing: 1.5pt;
     text-transform: uppercase;
-    margin-bottom: 4pt;
+    margin-bottom: 7pt;
+    font-weight: 500;
   }
+  .eyebrow::before {
+    content: "";
+    width: 8pt;
+    height: 1.5pt;
+    border-radius: 0.75pt;
+    background: var(--brand);
+    flex-shrink: 0;
+  }
+  /* CN locale tuning: TsangerJinKai glyphs are wider per character, so H1 sits
+     slightly smaller (24pt vs EN 26pt) with looser leading (1.15 vs EN 1.12)
+     to keep optical density aligned across the two locales. */
   h1 {
     font-family: var(--serif);
     font-size: 24pt;
@@ -113,6 +126,14 @@
     text-align: right;
     line-height: 1.45;
     white-space: nowrap;
+  }
+  /* 品牌 logo 槽(可选,来自 brand profile;默认无 logo,样式仅在取消注释后生效)。 */
+  .brand-logo {
+    height: 44px;
+    width: auto;
+    max-width: 160px;
+    object-fit: contain;
+    align-self: flex-start;
   }
 
   /* ========== METRICS ========== */
@@ -141,15 +162,37 @@
     color: var(--brand);
     line-height: 1;
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
     letter-spacing: -0.2pt;
   }
   .metric-label {
     font-size: 9pt;
     color: var(--olive);
     line-height: 1.3;
+    white-space: nowrap;
   }
 
   /* ========== SECTIONS ========== */
+  /* PRODUCT SHOT (optional) - one real screenshot as the page's visual anchor.
+     Uncomment the <figure> in the body, point src at a local image, and tune
+     .frame height to fill the page. object-fit trims dead margin, not the window. */
+  .product-shot { margin-bottom: 16pt; break-inside: avoid; }
+  .product-shot .frame {
+    height: 110mm;
+    overflow: hidden;
+    border-radius: 5pt;
+    box-shadow: 0 1.5pt 6pt rgba(20, 20, 19, 0.16);
+  }
+  .product-shot .frame img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center; display: block;
+  }
+  .product-shot figcaption {
+    margin-top: 7pt; font-size: 8.5pt;
+    color: var(--stone); line-height: 1.45; text-align: center;
+  }
+  .product-shot figcaption .hl { color: var(--brand); font-weight: 500; }
+
   section { margin-bottom: 18pt; break-inside: avoid; }
   section:last-of-type { margin-bottom: 0; }
 
@@ -188,22 +231,15 @@
 
   /* ========== 短横线 list（代替默认 bullet） ========== */
   ul.dash {
-    list-style: none;
     margin: 0;
-    padding: 0;
+    padding-left: 16pt;
   }
   ul.dash li {
-    position: relative;
-    padding-left: 14pt;
-    margin-bottom: 4pt;
+    margin-bottom: 5pt;
     line-height: 1.45;
   }
-  ul.dash li::before {
-    content: "\2013";
-    position: absolute;
-    left: 0;
-    color: var(--brand);
-  }
+  ul.dash li:last-child { margin-bottom: 0; }
+  ul.dash li::marker { color: var(--brand); }
 
   /* ========== Timeline (横向进度点) ========== */
   .timeline {
@@ -323,6 +359,9 @@
     {{日期 YYYY.MM.DD}}<br>
     {{版本号 / 状态}}
   </div>
+  <!-- 品牌 logo 槽(可选,来自 brand profile 的 logo 字段)。无 logo 时保持注释,勿插破图。
+       有 logo 时取消注释,把 src 换成已展开的本地绝对路径:
+  <img class="brand-logo" src="/absolute/path/to/logo.svg" alt=""> -->
 </div>
 
 <!-- ========== METRICS（可选，3-4 卡最佳） ========== -->
@@ -351,6 +390,14 @@
 </p>
 
 <!-- ========== 核心内容（两栏） ========== -->
+<!-- Optional hero product shot. Uncomment, point src at a local screenshot, and
+     tune .frame height (in the CSS) so the page fills without overflowing.
+<figure class="product-shot">
+  <div class="frame"><img src="{{SCREENSHOT_PATH}}" alt="{{ALT_TEXT}}"></div>
+  <figcaption>{{One-line caption that adds a fact, not a restatement.}}</figcaption>
+</figure>
+-->
+
 <div class="two-col">
   <section>
     <h2>{{section 标题 1}}</h2>
@@ -358,17 +405,17 @@
     <ul class="dash">
       <li>{{短 bullet：数据/观察/判断}}</li>
       <li>{{短 bullet：带 <span class="hl">关键数字</span> 的论据}}</li>
-      <li>{{短 bullet}}</li>
+      <li>{{短 bullet：一句一个论点}}</li>
     </ul>
   </section>
 
   <section>
     <h2>{{section 标题 2}}</h2>
-    <p>{{1-2 句段落。}}</p>
+    <p>{{这里写 1-2 句段落，展开论点。}}</p>
     <ul class="dash">
-      <li>{{短 bullet}}</li>
-      <li>{{短 bullet}}</li>
-      <li>{{短 bullet}}</li>
+      <li>{{短 bullet：数据/观察/判断}}</li>
+      <li>{{短 bullet：带 <span class="hl">关键数字</span> 的论据}}</li>
+      <li>{{短 bullet：一句一个论点}}</li>
     </ul>
   </section>
 </div>

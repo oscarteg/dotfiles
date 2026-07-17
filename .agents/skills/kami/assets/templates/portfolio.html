@@ -52,12 +52,14 @@
     --olive:     #504e49;
     --stone:     #6b6a64;
     --brand:     #1B365D;
-    --brand-deep:#a64f33;
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
     --tag-bg:    #E4ECF5;
     --serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", Georgia, serif;
     --sans: var(--serif);
+
+    --rhythm-module:  14pt;
+    --rhythm-section: 18pt;
   }
 
   html, body { background: var(--parchment); }
@@ -72,6 +74,8 @@
     font-size: 10pt;
     line-height: 1.45;
     letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
   }
 
   .serif {
@@ -94,6 +98,15 @@
     color: var(--brand);
     letter-spacing: 2pt;
     text-transform: uppercase;
+  }
+  /* 品牌 logo 槽(可选,来自 brand profile);默认无 logo,样式仅在取消注释后生效。 */
+  .brand-logo {
+    display: block;
+    height: 72px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    margin-bottom: 16pt;
   }
   .cover-center {
     display: flex;
@@ -190,7 +203,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    margin-bottom: 14pt;
+    margin-bottom: var(--rhythm-module);
     border-left: 2.5pt solid var(--brand);
     border-radius: 1.5pt;
     padding-left: 8pt;
@@ -232,6 +245,7 @@
     font-size: 9pt;
     color: var(--stone);
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
     min-width: 80pt;
     padding-top: 10pt;
   }
@@ -241,7 +255,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 4pt;
-    margin-bottom: 14pt;
+    margin-bottom: var(--rhythm-module);
   }
   .tag {
     background: var(--tag-bg);
@@ -257,9 +271,8 @@
     width: 100%;
     height: 110mm;
     background: var(--ivory);
-    border: 0.5pt solid var(--border-soft);
     border-radius: 6pt;
-    margin-bottom: 14pt;
+    margin-bottom: var(--rhythm-module);
     overflow: hidden;
     display: flex;
     align-items: center;
@@ -301,7 +314,7 @@
   .project-results {
     display: flex;
     gap: 14pt;
-    margin-top: 14pt;
+    margin-top: var(--rhythm-module);
     padding-top: 10pt;
     border-top: 0.5pt dotted var(--border);
   }
@@ -328,7 +341,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10pt;
-    margin-bottom: 14pt;
+    margin-bottom: var(--rhythm-module);
   }
   .project-visuals-2col .project-hero {
     height: 80mm;
@@ -357,10 +370,12 @@
     border-bottom: 0.3pt dotted var(--border);
     align-items: baseline;
   }
+  .work-item:last-of-type { border-bottom: none; }
   .work-year {
     font-family: var(--serif);
     color: var(--brand);
     font-size: 11pt;
+    white-space: nowrap;
   }
   .work-title-block .title {
     font-family: var(--serif);
@@ -468,7 +483,12 @@
 
 <!-- ════════════ COVER ════════════ -->
 <div class="cover">
-  <div class="cover-top">{{年份 或 领域标签 · 如 "Selected Works 2023–2026"}}</div>
+  <div class="cover-head">
+    <!-- 品牌 logo 槽(可选,来自 brand profile 的 logo 字段)。无 logo 时保持注释,勿插破图。
+         有 logo 时取消注释,把 src 换成已展开的本地绝对路径:
+    <img class="brand-logo" src="/absolute/path/to/logo.svg" alt=""> -->
+    <div class="cover-top">{{年份 或 领域标签 · 如 "Selected Works 2023–2026"}}</div>
+  </div>
 
   <div class="cover-center">
     <div class="cover-name">{{名字<br>作品集}}</div>
@@ -527,9 +547,51 @@
   </div>
 
   <!-- 主图 -->
-  <div class="project-hero">
-    <!-- 替换为：<img src="project-01-hero.png" alt=""> -->
-    [项目主图占位 · 替换为 &lt;img src="xxx.png"&gt;]
+  <div class="project-hero" style="background:#f5f4ed;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" width="540" height="360" style="background:#f5f4ed">
+        <style>
+          text { font-family: Charter, Georgia, "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", serif; }
+        </style>
+        <defs>
+          <marker id="seq-arrow" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+            <polygon points="0 0, 8 2.5, 0 5" fill="#1b365d" />
+          </marker>
+          <marker id="seq-arrow-open" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+            <polyline points="0 0, 8 2.5, 0 5" fill="none" stroke="#1b365d" stroke-width="1" />
+          </marker>
+        </defs>
+        <line class="lifeline" data-actor="U" x1="70" y1="70" x2="70" y2="250" stroke="#504e49" stroke-width="0.75" stroke-dasharray="6 4" />
+        <line class="lifeline" data-actor="A" x1="210" y1="70" x2="210" y2="250" stroke="#504e49" stroke-width="0.75" stroke-dasharray="6 4" />
+        <line class="lifeline" data-actor="D" x1="350" y1="70" x2="350" y2="250" stroke="#504e49" stroke-width="0.75" stroke-dasharray="6 4" />
+        <g class="message" data-from="U" data-to="A" data-label="提交请求" data-line-style="solid" data-arrow-head="filled" data-self="false">
+          <line x1="70" y1="90" x2="210" y2="90" stroke="#504e49" stroke-width="1" marker-end="url(#seq-arrow)" />
+          <text x="140" y="80" font-size="11" text-anchor="middle" font-weight="400" fill="#6b6a64" dy="3.8499999999999996">提交请求</text>
+        </g>
+        <g class="message" data-from="A" data-to="D" data-label="查询记录" data-line-style="solid" data-arrow-head="filled" data-self="false">
+          <line x1="210" y1="130" x2="350" y2="130" stroke="#504e49" stroke-width="1" marker-end="url(#seq-arrow)" />
+          <text x="280" y="120" font-size="11" text-anchor="middle" font-weight="400" fill="#6b6a64" dy="3.8499999999999996">查询记录</text>
+        </g>
+        <g class="message" data-from="D" data-to="A" data-label="返回结果" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+          <line x1="350" y1="170" x2="210" y2="170" stroke="#504e49" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+          <text x="280" y="160" font-size="11" text-anchor="middle" font-weight="400" fill="#6b6a64" dy="3.8499999999999996">返回结果</text>
+        </g>
+        <g class="message" data-from="A" data-to="U" data-label="响应数据" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+          <line x1="210" y1="210" x2="70" y2="210" stroke="#504e49" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+          <text x="140" y="200" font-size="11" text-anchor="middle" font-weight="400" fill="#6b6a64" dy="3.8499999999999996">响应数据</text>
+        </g>
+        <g class="actor" data-id="U" data-label="用户" data-type="participant">
+          <rect x="30" y="30" width="80" height="40" rx="4" ry="4" fill="#faf9f5" stroke="#e8e6dc" stroke-width="1" />
+          <text x="70" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="#141413" dy="4.55">用户</text>
+        </g>
+        <g class="actor" data-id="A" data-label="API" data-type="participant">
+          <rect x="170" y="30" width="80" height="40" rx="4" ry="4" fill="#faf9f5" stroke="#e8e6dc" stroke-width="1" />
+          <text x="210" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="#141413" dy="4.55">API</text>
+        </g>
+        <g class="actor" data-id="D" data-label="数据库" data-type="participant">
+          <rect x="310" y="30" width="80" height="40" rx="4" ry="4" fill="#faf9f5" stroke="#e8e6dc" stroke-width="1" />
+          <text x="350" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="#141413" dy="4.55">数据库</text>
+        </g>
+        </svg>
   </div>
 
   <!-- 三段式正文 -->
@@ -570,11 +632,11 @@
   <div class="project-header">
     <div class="project-num">02</div>
     <div class="project-title-block">
-      <div class="project-type">{{项目类型}}</div>
+      <div class="project-type">{{项目类型 · 如 "Product Design" / "Open Source"}}</div>
       <div class="project-title">{{项目名称}}</div>
       <div class="project-subtitle">{{一句话描述}}</div>
     </div>
-    <div class="project-date">{{时间}}</div>
+    <div class="project-date">{{时间 · 如 "2025.04 - 2026.02"}}</div>
   </div>
 
   <div class="project-tags">
@@ -591,15 +653,15 @@
   <div class="project-body">
     <div class="project-block">
       <h3>Context</h3>
-      <p>{{背景}}</p>
+      <p>{{为什么做这个项目？要解决什么问题？谁是用户？}}</p>
     </div>
     <div class="project-block">
       <h3>Approach</h3>
-      <p>{{方法}}</p>
+      <p>{{怎么做的？关键决策、设计考量、技术方案。}}</p>
     </div>
     <div class="project-block">
       <h3>Outcome</h3>
-      <p>{{结果}}</p>
+      <p>{{结果是什么？<span class="hl">数据</span>、反馈、影响。}}</p>
     </div>
   </div>
 </section>

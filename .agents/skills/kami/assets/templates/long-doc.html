@@ -73,6 +73,9 @@
     --tag-bg:    #E4ECF5;
     --serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", Georgia, serif;
     --sans: var(--serif);
+
+    --rhythm-module:  14pt;
+    --rhythm-section: 18pt;
   }
 
   html, body { background: var(--parchment); }
@@ -87,6 +90,8 @@
     font-size: 10.5pt;
     line-height: 1.55;
     letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
   }
 
   .sans {
@@ -103,12 +108,24 @@
     break-after: page;
   }
   .cover-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8pt;
     font-family: var(--sans);
     font-size: 10pt;
     color: var(--brand);
-    letter-spacing: 1pt;
+    letter-spacing: 1.5pt;
     text-transform: uppercase;
+    font-weight: 500;
     margin-bottom: 18pt;
+  }
+  .cover-eyebrow::before {
+    content: "";
+    width: 9pt;
+    height: 1.5pt;
+    border-radius: 0.75pt;
+    background: var(--brand);
+    flex-shrink: 0;
   }
   .cover-title {
     font-size: 36pt;
@@ -142,7 +159,7 @@
   .toc h2 {
     font-size: 22pt;
     font-weight: 500;
-    margin-bottom: 14pt;
+    margin-bottom: var(--rhythm-module);
     border-left: 2.5pt solid var(--brand);
     border-radius: 1.5pt;
     padding-left: 8pt;
@@ -155,6 +172,7 @@
     border-bottom: 0.3pt dotted var(--border);
     font-size: 11pt;
   }
+  .toc-item:last-of-type { border-bottom: none; }
   .toc-num {
     color: var(--brand);
     font-weight: 500;
@@ -164,10 +182,16 @@
     flex: 1;
     color: var(--near-black);
     padding-left: 6pt;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    gap: 12pt;
   }
-  .toc-page {
+  .toc-title[href]::after {
+    content: target-counter(attr(href), page);
     color: var(--stone);
     font-variant-numeric: tabular-nums;
+    margin-left: auto;
   }
 
   /* ========== HEADINGS ========== */
@@ -181,23 +205,25 @@
     padding-left: 8pt;
     color: var(--near-black);
     break-after: avoid;
+    string-set: section-title content();
   }
+
+  .running-title { string-set: section-title content(); }
 
   h2 {
     font-size: 16pt;
     font-weight: 500;
     line-height: 1.25;
-    margin: 24pt 0 6pt 0;
+    margin: 24pt 0 8pt 0;
     color: var(--near-black);
     break-after: avoid;
-    string-set: section-title content();
   }
 
   h3 {
     font-size: 13pt;
     font-weight: 500;
     line-height: 1.3;
-    margin: 18pt 0 4pt 0;
+    margin: 18pt 0 6pt 0;
     color: var(--dark-warm);
     break-after: avoid;
   }
@@ -216,13 +242,15 @@
     margin: 0 0 10pt 0;
     line-height: 1.55;
     color: var(--near-black);
+    widows: 2;
+    orphans: 2;
   }
 
   .lead {
     font-size: 12pt;
     line-height: 1.55;
     color: var(--dark-warm);
-    margin-bottom: 14pt;
+    margin-bottom: var(--rhythm-module);
   }
 
   .hl { color: var(--brand); font-weight: 500; }
@@ -275,7 +303,6 @@
     font-size: 9pt;
     line-height: 1.5;
     background: var(--ivory);
-    border: 0.5pt solid var(--border-soft);
     border-radius: 4pt;
     padding: 10pt 14pt;
     margin: 10pt 0;
@@ -329,10 +356,20 @@
     line-height: 1.55;
     break-inside: avoid;
   }
+  .callout blockquote,
+  .callout .quote {
+    border-left: none;
+    padding-left: 0;
+    margin: 6pt 0;
+    color: var(--olive);
+  }
+  .callout blockquote:first-child,
+  .callout .quote:first-child { margin-top: 0; }
+  .callout blockquote:last-child,
+  .callout .quote:last-child  { margin-bottom: 0; }
 
   .takeaway {
     background: var(--ivory);
-    border: 0.5pt solid var(--border);
     border-radius: 4pt;
     padding: 10pt 14pt;
     margin: 14pt 0;
@@ -369,6 +406,14 @@
     max-width: 100%;
     border-radius: 4pt;
   }
+  /* Inline diagrams (e.g. a Mermaid-sourced SVG via scripts/mermaid_normalize.py):
+     center and cap width so the figure never bleeds past the text column. */
+  figure svg {
+    display: block;
+    margin: 0 auto;
+    max-width: 78%;
+    height: auto;
+  }
   figcaption {
     font-family: var(--sans);
     font-size: 9pt;
@@ -380,7 +425,7 @@
   /* ========== EXECUTIVE SUMMARY ========== */
   .exec-summary {
     background: var(--ivory);
-    border: 0.5pt solid var(--border);
+    border-left: 1.4pt solid var(--brand);
     border-radius: 6pt;
     padding: 16pt 20pt;
     margin: 14pt 0;
@@ -416,33 +461,28 @@
   <h2>目录</h2>
   <div class="toc-item">
     <span class="toc-num">01</span>
-    <span class="toc-title">执行摘要</span>
-    <span class="toc-page">03</span>
+    <a class="toc-title" href="#ch-executive-summary">执行摘要</a>
   </div>
   <div class="toc-item">
     <span class="toc-num">02</span>
-    <span class="toc-title">背景与问题定义</span>
-    <span class="toc-page">04</span>
+    <a class="toc-title" href="#ch-background">背景与问题定义</a>
   </div>
   <div class="toc-item">
     <span class="toc-num">03</span>
-    <span class="toc-title">方法与发现</span>
-    <span class="toc-page">06</span>
+    <a class="toc-title" href="#ch-methodology">方法与发现</a>
   </div>
   <div class="toc-item">
     <span class="toc-num">04</span>
-    <span class="toc-title">结论与建议</span>
-    <span class="toc-page">09</span>
+    <a class="toc-title" href="#ch-conclusions">结论与建议</a>
   </div>
   <div class="toc-item">
     <span class="toc-num">05</span>
-    <span class="toc-title">附录</span>
-    <span class="toc-page">11</span>
+    <a class="toc-title" href="#ch-appendix">附录</a>
   </div>
 </section>
 
 <!-- ═════════════ Chapter 01：执行摘要 ═════════════ -->
-<section>
+<section class="chapter" id="ch-executive-summary">
   <div class="chapter-num">01 · Executive Summary</div>
   <h1>执行摘要</h1>
 
@@ -465,7 +505,7 @@
 </section>
 
 <!-- ═════════════ Chapter 02：背景 ═════════════ -->
-<section class="chapter">
+<section class="chapter" id="ch-background">
   <div class="chapter-num">02 · Background</div>
   <h1>背景与问题定义</h1>
 
@@ -511,7 +551,7 @@
 </section>
 
 <!-- ═════════════ Chapter 03：方法 ═════════════ -->
-<section class="chapter">
+<section class="chapter" id="ch-methodology">
   <div class="chapter-num">03 · Methodology</div>
   <h1>方法与发现</h1>
 
@@ -520,9 +560,57 @@
   <h2>研究方法</h2>
   <p>{{描述方法论。可以用代码 / 公式示例：}}</p>
 
-  <pre><code>示例代码块
-def analyze(data):
+  <pre><code class="language-python">def analyze(data):
+    """Transform raw data."""
     return transform(data)</code></pre>
+
+  <figure>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 280" width="420" height="280" style="background:#f5f4ed">
+        <style>
+          text { font-family: Charter, Georgia, "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", serif; }
+        </style>
+        <defs>
+          <marker id="seq-arrow" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+            <polygon points="0 0, 8 2.5, 0 5" fill="#1b365d" />
+          </marker>
+          <marker id="seq-arrow-open" markerWidth="8" markerHeight="5" refX="8" refY="2.5" orient="auto-start-reverse">
+            <polyline points="0 0, 8 2.5, 0 5" fill="none" stroke="#1b365d" stroke-width="1" />
+          </marker>
+        </defs>
+        <line class="lifeline" data-actor="U" x1="70" y1="70" x2="70" y2="250" stroke="#504e49" stroke-width="0.75" stroke-dasharray="6 4" />
+        <line class="lifeline" data-actor="A" x1="210" y1="70" x2="210" y2="250" stroke="#504e49" stroke-width="0.75" stroke-dasharray="6 4" />
+        <line class="lifeline" data-actor="D" x1="350" y1="70" x2="350" y2="250" stroke="#504e49" stroke-width="0.75" stroke-dasharray="6 4" />
+        <g class="message" data-from="U" data-to="A" data-label="提交请求" data-line-style="solid" data-arrow-head="filled" data-self="false">
+          <line x1="70" y1="90" x2="210" y2="90" stroke="#504e49" stroke-width="1" marker-end="url(#seq-arrow)" />
+          <text x="140" y="80" font-size="11" text-anchor="middle" font-weight="400" fill="#6b6a64" dy="3.8499999999999996">提交请求</text>
+        </g>
+        <g class="message" data-from="A" data-to="D" data-label="查询记录" data-line-style="solid" data-arrow-head="filled" data-self="false">
+          <line x1="210" y1="130" x2="350" y2="130" stroke="#504e49" stroke-width="1" marker-end="url(#seq-arrow)" />
+          <text x="280" y="120" font-size="11" text-anchor="middle" font-weight="400" fill="#6b6a64" dy="3.8499999999999996">查询记录</text>
+        </g>
+        <g class="message" data-from="D" data-to="A" data-label="返回结果" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+          <line x1="350" y1="170" x2="210" y2="170" stroke="#504e49" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+          <text x="280" y="160" font-size="11" text-anchor="middle" font-weight="400" fill="#6b6a64" dy="3.8499999999999996">返回结果</text>
+        </g>
+        <g class="message" data-from="A" data-to="U" data-label="响应数据" data-line-style="dashed" data-arrow-head="filled" data-self="false">
+          <line x1="210" y1="210" x2="70" y2="210" stroke="#504e49" stroke-width="1" stroke-dasharray="6 4" marker-end="url(#seq-arrow)" />
+          <text x="140" y="200" font-size="11" text-anchor="middle" font-weight="400" fill="#6b6a64" dy="3.8499999999999996">响应数据</text>
+        </g>
+        <g class="actor" data-id="U" data-label="用户" data-type="participant">
+          <rect x="30" y="30" width="80" height="40" rx="4" ry="4" fill="#faf9f5" stroke="#e8e6dc" stroke-width="1" />
+          <text x="70" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="#141413" dy="4.55">用户</text>
+        </g>
+        <g class="actor" data-id="A" data-label="API" data-type="participant">
+          <rect x="170" y="30" width="80" height="40" rx="4" ry="4" fill="#faf9f5" stroke="#e8e6dc" stroke-width="1" />
+          <text x="210" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="#141413" dy="4.55">API</text>
+        </g>
+        <g class="actor" data-id="D" data-label="数据库" data-type="participant">
+          <rect x="310" y="30" width="80" height="40" rx="4" ry="4" fill="#faf9f5" stroke="#e8e6dc" stroke-width="1" />
+          <text x="350" y="50" font-size="13" text-anchor="middle" font-weight="500" fill="#141413" dy="4.55">数据库</text>
+        </g>
+        </svg>
+    <figcaption>图 1：用户请求的调用时序</figcaption>
+  </figure>
 
   <h2>关键发现</h2>
 
@@ -530,7 +618,7 @@ def analyze(data):
   <p>{{一段论述。包含数据：<span class="hl">具体数字 / 具体比例</span>。}}</p>
 
   <h3>发现 2：{{标题}}</h3>
-  <p>{{一段论述。}}</p>
+  <p>{{一段论述。包含数据：<span class="hl">具体数字 / 具体比例</span>。}}</p>
 
   <blockquote>
     {{一段引用，可以是用户访谈、专家观点、文献引用}}
@@ -539,7 +627,7 @@ def analyze(data):
 </section>
 
 <!-- ═════════════ Chapter 04：结论 ═════════════ -->
-<section class="chapter">
+<section class="chapter" id="ch-conclusions">
   <div class="chapter-num">04 · Conclusions</div>
   <h1>结论与建议</h1>
 
@@ -562,7 +650,7 @@ def analyze(data):
 </section>
 
 <!-- ═════════════ Chapter 05：附录 ═════════════ -->
-<section class="chapter">
+<section class="chapter" id="ch-appendix">
   <div class="chapter-num">05 · Appendix</div>
   <h1>附录</h1>
 

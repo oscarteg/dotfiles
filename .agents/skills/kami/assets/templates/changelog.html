@@ -51,8 +51,11 @@
     --border:    #e8e6dc;
     --border-soft:#e5e3d8;
     --tag-bg:    #E4ECF5;
+    --breaking-bg:#f0e0d8;
+    --breaking-fg:#8b4513;
     --serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", Georgia, serif;
     --sans: var(--serif);
+    --mono:  "JetBrains Mono", "SF Mono", "Fira Code", Consolas, Monaco, "TsangerJinKai02", "Source Han Serif SC", monospace;
   }
 
   html, body { background: var(--parchment); }
@@ -67,82 +70,93 @@
     font-size: 10.5pt;
     line-height: 1.55;
     letter-spacing: 0.3pt;
+    widows: 3;
+    orphans: 3;
   }
 
   strong { font-weight: 500; }
   .hl { color: var(--brand); font-weight: 500; }
 
-  /* ========== VERSION HEADER ========== */
-  .version-header {
-    text-align: center;
-    margin-bottom: 24pt;
-    padding-bottom: 16pt;
+  /* ========== HEADER (left-aligned editorial, matches one-pager) ========== */
+  .header {
+    margin-bottom: 20pt;
+    padding-bottom: 13pt;
     border-bottom: 0.5pt solid var(--border);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20pt;
   }
-  .version-logo {
-    font-family: var(--serif);
-    font-size: 14pt;
-    font-weight: 500;
+  .title-block { flex: 1; }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 7pt;
+    font-family: var(--sans);
+    font-size: 9pt;
     color: var(--brand);
-    letter-spacing: 1pt;
+    letter-spacing: 1.5pt;
+    font-weight: 500;
     margin-bottom: 8pt;
   }
-  .version-title {
+  .eyebrow::before {
+    content: "";
+    width: 8pt;
+    height: 1.5pt;
+    border-radius: 0.75pt;
+    background: var(--brand);
+    flex-shrink: 0;
+  }
+  h1 {
     font-family: var(--serif);
-    font-size: 28pt;
+    font-size: 26pt;
     font-weight: 500;
     color: var(--near-black);
-    line-height: 1.2;
-    margin-bottom: 6pt;
+    line-height: 1.15;
+    margin-bottom: 7pt;
   }
-  .version-tagline {
-    font-size: 12pt;
+  .subtitle {
+    font-size: 11.5pt;
     color: var(--olive);
     line-height: 1.5;
+    max-width: 150mm;
   }
-  .version-date {
+  .meta {
     font-size: 10pt;
     color: var(--stone);
-    margin-top: 6pt;
+    white-space: nowrap;
     font-variant-numeric: tabular-nums;
   }
 
-  /* ========== SECTIONS ========== */
+  /* ========== SECTION HEAD - brand left bar ========== */
   h2 {
     font-family: var(--serif);
-    font-size: 16pt;
+    font-size: 14pt;
     font-weight: 500;
     color: var(--near-black);
-    margin: 20pt 0 8pt 0;
+    margin: 20pt 0 10pt 0;
     border-left: 2.5pt solid var(--brand);
     border-radius: 1.5pt;
-    padding-left: 8pt;
+    padding-left: 9pt;
     break-after: avoid;
   }
+  h2:first-of-type { margin-top: 0; }
 
-  h3 {
-    font-size: 13pt;
-    font-weight: 500;
-    color: var(--dark-warm);
-    margin: 14pt 0 4pt 0;
-    break-after: avoid;
-  }
+  p { margin: 0 0 8pt 0; line-height: 1.55; widows: 2; orphans: 2; }
+  code { font-family: var(--mono); font-size: 0.92em; }
 
-  p { margin: 0 0 8pt 0; line-height: 1.55; }
-
-  /* ========== CHANGE LIST ========== */
-  ol.changes {
-    margin: 6pt 0 14pt 0;
-    padding-left: 24pt;
-    line-height: 1.55;
-  }
+  /* ========== CHANGE LIST - numbered, brand markers, bold lead-in ========== */
+  ol.changes { margin: 0; padding-left: 18pt; }
   ol.changes li {
-    margin-bottom: 4pt;
+    margin-bottom: 7pt;
+    padding-left: 3pt;
+    line-height: 1.55;
+    break-inside: avoid;
   }
-  ol.changes li::marker {
-    color: var(--brand);
-    font-weight: 500;
-  }
+  ol.changes li:last-child { margin-bottom: 0; }
+  ol.changes li::marker { color: var(--brand); font-weight: 500; }
+  ol.changes li strong { font-weight: 500; color: var(--near-black); }
+  ol.changes li .hl { color: var(--brand); font-weight: 500; }
 
   /* ========== TAG ========== */
   .tag {
@@ -156,32 +170,19 @@
     margin-right: 3pt;
   }
   .tag.breaking {
-    background: #f0e0d8;
-    color: #8b4513;
+    background: var(--breaking-bg);
+    color: var(--breaking-fg);
   }
 
-  /* ========== CALLOUT ========== */
-  .callout {
-    background: var(--ivory);
-    border-left: 2pt solid var(--brand);
-    padding: 8pt 14pt;
-    border-radius: 3pt;
-    margin: 12pt 0;
-    line-height: 1.55;
-    break-inside: avoid;
-  }
-
-  /* ========== THANKS ========== */
+  /* ========== ACKNOWLEDGEMENTS - quiet labelled note, not a filled card ========== */
   .thanks {
-    margin-top: 16pt;
-    padding: 10pt 14pt;
-    background: var(--ivory);
-    border: 0.5pt solid var(--border);
-    border-radius: 4pt;
-    font-size: 10pt;
+    margin-top: 18pt;
+    font-size: 9.5pt;
     line-height: 1.55;
+    color: var(--olive);
     break-inside: avoid;
   }
+  .thanks .hl { color: var(--brand); font-weight: 500; }
   .thanks-label {
     font-size: 9pt;
     color: var(--brand);
@@ -197,75 +198,56 @@
     border-top: 0.3pt dotted var(--border);
     font-size: 9pt;
     color: var(--stone);
-    text-align: center;
     line-height: 1.5;
+    display: flex;
+    justify-content: space-between;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.3pt;
   }
 </style>
 </head>
 <body>
 
-<!-- ========== VERSION HEADER ========== -->
-<div class="version-header">
-  <div class="version-logo">{{项目名}}</div>
-  <div class="version-title">{{版本号}} {{版本名称}}</div>
-  <div class="version-tagline">{{一句话版本亮点}}</div>
-  <div class="version-date">{{发布日期}}</div>
+<!-- HEADER -->
+<div class="header">
+  <div class="title-block">
+    <div class="eyebrow">更新日志</div>
+    <h1>{{项目名}} {{版本号}}</h1>
+    <div class="subtitle">{{一句话版本亮点}}</div>
+  </div>
+  <div class="meta">{{发布日期}}</div>
 </div>
 
-<!-- ========== CHANGELOG (英文) ========== -->
-<h2>Changelog</h2>
-
-<h3>Breaking Changes</h3>
+<!-- 每条：加粗引导词 + 全角冒号 + 描述。编号承担顺序，每节从 1 重新计数；不适用的节直接删掉。 -->
+<h2>破坏性变更</h2>
 <ol class="changes">
-  <li><span class="tag breaking">Breaking</span> {{破坏性变更描述}}</li>
+  <li><span class="tag breaking">Breaking</span> <strong>{{变更点}}</strong>：{{读者需要做的处理}}</li>
 </ol>
 
-<h3>Features</h3>
+<h2>新功能</h2>
 <ol class="changes">
-  <li>{{新功能 1：一句话描述}}</li>
-  <li>{{新功能 2：一句话描述}}</li>
-  <li>{{新功能 3：一句话描述}}</li>
+  <li><strong>{{功能}}</strong>：{{一句话描述}}</li>
+  <li><strong>{{功能}}</strong>：{{一句话描述}}</li>
+  <li><strong>{{功能}}</strong>：{{一句话描述}}</li>
 </ol>
 
-<h3>Fixes</h3>
+<h2>修复</h2>
 <ol class="changes">
-  <li>{{修复 1：一句话描述}}</li>
-  <li>{{修复 2：一句话描述}}</li>
-  <li>{{修复 3：一句话描述}}</li>
+  <li><strong>{{范围}}</strong>：{{修复了什么}}</li>
+  <li><strong>{{范围}}</strong>：{{修复了什么}}</li>
+  <li><strong>{{范围}}</strong>：{{修复了什么}}</li>
 </ol>
 
-<!-- ========== 更新日志 (中文) ========== -->
-<h2>更新日志</h2>
-
-<h3>破坏性变更</h3>
-<ol class="changes">
-  <li><span class="tag breaking">Breaking</span> {{同上对应的中文描述}}</li>
-</ol>
-
-<h3>新功能</h3>
-<ol class="changes">
-  <li>{{对应中文描述}}</li>
-  <li>{{对应中文描述}}</li>
-  <li>{{对应中文描述}}</li>
-</ol>
-
-<h3>修复</h3>
-<ol class="changes">
-  <li>{{对应中文描述}}</li>
-  <li>{{对应中文描述}}</li>
-  <li>{{对应中文描述}}</li>
-</ol>
-
-<!-- ========== THANKS (可选) ========== -->
+<!-- 致谢（可选） -->
 <div class="thanks">
   <div class="thanks-label">致谢</div>
-  {{感谢贡献者，格式如："感谢 @user1、@user2 的贡献。"}}
+  {{感谢贡献者，如 "感谢 @user1、@user2 的贡献。"}}
 </div>
 
-<!-- ========== FOOTER ========== -->
+<!-- FOOTER -->
 <div class="changelog-footer">
-  {{项目一句话描述}}<br>
-  {{项目 URL}}
+  <span>{{项目一句话描述}}</span>
+  <span>{{项目 URL}}</span>
 </div>
 
 </body>
