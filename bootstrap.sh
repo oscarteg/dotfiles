@@ -87,6 +87,21 @@ function symlink_directory_contents() {
 	fi
 }
 
+function install_oh_my_fish() {
+	if ! command -v fish >/dev/null 2>&1; then
+		echo "fish not found, skipping Oh My Fish install"
+		return
+	fi
+
+	if [[ -d "${XDG_DATA_HOME:-$HOME/.local/share}/omf" ]]; then
+		echo "Oh My Fish already installed, skipping"
+		return
+	fi
+
+	echo "Installing Oh My Fish"
+	curl -fsSL https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+}
+
 function doIt() {
 	local dotfiles_dir=$(pwd)
 	local skip_files=(".git" ".DS_Store" ".config" ".ssh")
@@ -150,6 +165,8 @@ function doIt() {
 		echo "Creating symlink: $target -> $dotfiles_dir/.agents/skills"
 		ln -s "$dotfiles_dir/.agents/skills" "$target"
 	done
+
+	install_oh_my_fish
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
