@@ -249,6 +249,10 @@ if.window-title-regex-substring = 'huddle'
 run = ['layout floating']
 
 [[on-window-detected]]
+if.app-id = "com.apple.ScreenSharing"
+run = ['layout floating']
+
+[[on-window-detected]]
 if.app-id = 'com.apple.FaceTime'
 run = ['layout floating']
 
@@ -303,3 +307,9 @@ run = ['move-node-to-workspace C']
 if.app-id = 'com.mitchellh.ghostty'
 if.window-title-regex-substring = '.*pixcelium*'
 run = ['move-node-to-workspace D']
+
+[[on-window-detected]]
+if.app-id="com.mitchellh.ghostty"
+run= [
+  "layout tiling",
+]

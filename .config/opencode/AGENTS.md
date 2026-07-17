@@ -99,7 +99,6 @@ the Obsidian vault. Obsidian stays for personal notes and journalling only.
   | oscartegiffel.com     | Homepage              |
   | village-map           | Village Map           |
   | blackjack-learner     | Blackjack             |
-  | pellikaan_companion   | Pellikaan Companion   |
   | scan-bonnetje         | Bonnetje              |
   | workflowy             | Workflowy             |
   | family-table          | Family Table          |

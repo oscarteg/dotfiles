@@ -319,3 +319,7 @@ neoconf.json
 .fallow/
 
 **/.claude/settings.local.json
+.playwright-mcp/
+.playwright-mcp/
+
+.omo

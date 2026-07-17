@@ -1,0 +1,15 @@
+onboarding = false
+
+[theme]
+name = "catppuccin-latte"
+auto_switch = false
+
+[ui]
+agent_panel_sort = "spaces"
+
+# Toggle the herdr-reviewr code-review pane. Uses the plugin id
+# (persiyanov.reviewr), not its display name.
+[[keys.command]]
+key = "alt+r"
+type = "plugin_action"
+command = "persiyanov.reviewr.toggle"

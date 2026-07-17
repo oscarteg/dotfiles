@@ -151,6 +151,11 @@ function doIt() {
 	# Handle .config/opencode files (AGENTS.md)
 	symlink_directory_contents ".config/opencode" "$HOME/.config/opencode" "$dotfiles_dir" "true"
 
+	# Handle .config/herdr files (config.toml only). herdr's dir also holds
+	# runtime state (logs, sockets, session, installed plugins), so link the
+	# individual config file rather than the whole directory.
+	symlink_directory_contents ".config/herdr" "$HOME/.config/herdr" "$dotfiles_dir" "true"
+
 	# Shared agent skills: one source dir (.agents/skills) linked into both the
 	# general ~/.agents location and ~/.claude so Claude Code picks them up.
 	for target in "$HOME/.agents/skills" "$HOME/.claude/skills"; do

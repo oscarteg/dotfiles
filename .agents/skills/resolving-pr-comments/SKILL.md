@@ -8,6 +8,12 @@ description: Use when working through review comments on a PR. Fetches the comme
 Work through reviewer comments on a PR systematically instead of ad-hoc. You
 triage and draft; Oscar decides.
 
+**Hard rule — never post to the repo.** This skill only reads the PR and drafts
+text. It must never publish a reply, comment, review, or resolve a thread
+(no `gh pr comment`, no `gh api ... POST/PATCH/PUT` against comments/reviews).
+Every reply is drafted for Oscar to copy-paste himself. Applying approved code
+changes locally is fine; posting anything to GitHub is not.
+
 ## Gather
 
 ```bash
@@ -36,12 +42,13 @@ For each, pick the right move and **use the `question` tool** to let Oscar choos
 2. **Better approach** — the comment has a point but there's a cleaner solution.
    Lay out the options with a recommendation, ask which to take.
 3. **Push back** — the comment is wrong or doesn't apply here. Draft a **short
-   reply in Oscar's voice** explaining why (see tone below), for him to post.
+   reply in Oscar's voice** explaining why (see tone below), for Oscar to
+   copy-paste. Never post it.
 4. **Clarify** — the comment is ambiguous. Draft a brief question back to the
-   reviewer.
+   reviewer, for Oscar to copy-paste. Never post it.
 
-Always ask before applying code changes or posting replies. Track progress with a
-todo list so nothing is dropped.
+Always ask before applying code changes. Never post replies or comments to the
+repo — only draft them. Track progress with a todo list so nothing is dropped.
 
 ## Tone of voice for replies (pushback / discussion)
 
@@ -59,4 +66,7 @@ Match how Oscar writes to another developer:
 
 - Summarize what was fixed, what was replied to (with drafts), and what's still
   open awaiting Oscar's call.
+- **Collect every drafted reply into one copy-paste block at the end**, each
+  labelled with its `file:line` / thread so Oscar can paste them into the review
+  himself. This is the deliverable — the skill never posts them.
 - If commits were made, use conventional messages referencing the issue/PR.
