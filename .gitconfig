@@ -252,10 +252,13 @@
 	diffFilter = delta --color-only
 [delta]
 	navigate = true
-[http]
-	sslCAInfo = /Users/oscar/.zcli/zscaler_root.pem
 [tag]
 	gpgSign = true
+
+; Machine-specific config (TLS proxy certs, work identities). Untracked, and
+; silently ignored by git when the file is absent.
+[include]
+	path = ~/.gitconfig.local
 
 ; [remote "origin"]
 ;   fetch = +refs/heads/*:refs/remotes/origin/*
