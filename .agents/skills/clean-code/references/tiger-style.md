@@ -41,6 +41,21 @@ goals, in order: **safety, performance, developer experience.**
   first, weighted by frequency.
 - **Batch** to amortise costs; separate control plane from data plane.
 
+### Macro design vs micro tuning (Pike's rules)
+
+The design-phase point above is about *macro* performance — algorithms, data
+layout, resource sketches. For *micro* tuning of already-written code, invert the
+instinct:
+
+- **Don't guess where the bottleneck is** — it's rarely where you think. Prove it
+  with a profiler before hand-optimising anything.
+- **Measure before you optimise**, and don't bother unless one part genuinely
+  dominates the rest.
+- **`N` is usually small.** Fancy algorithms have big constants and more bugs;
+  reach for the simple algorithm + simple data structure until a big `N` is
+  proven. Choosing the right data structure first usually makes the algorithm
+  obvious.
+
 ## Developer experience
 
 - **Naming.** Get the nouns and verbs right — names are a mental model. No

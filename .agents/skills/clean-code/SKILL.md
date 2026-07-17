@@ -23,6 +23,7 @@ Each row is the essence; open the reference for the reasoning and detail.
 | **Comments** | Self-documenting code; comments explain *why*; delete dead code | [references/naming-and-functions.md](references/naming-and-functions.md) |
 | **Design** | Deep modules: simple interface hiding complexity; pull complexity down | [references/design-and-architecture.md](references/design-and-architecture.md) |
 | **Architecture** | Dependencies point inward at abstractions; business rules free of IO | [references/design-and-architecture.md](references/design-and-architecture.md) |
+| **Modularity** | Separate policy from mechanism; inject deps (Hollywood/IoC); pass only what's needed; don't reach through objects (Demeter) | [references/design-and-architecture.md](references/design-and-architecture.md) |
 | **Pragmatic** | DRY with judgment (rule of three); orthogonality; fail fast | [references/pragmatic-and-refactoring.md](references/pragmatic-and-refactoring.md) |
 | **Refactoring** | Small behaviour-preserving steps behind green tests; watch the smells | [references/pragmatic-and-refactoring.md](references/pragmatic-and-refactoring.md) |
 | **TigerStyle** | Assert everything (2×/fn, positive + negative space), bound everything, fail-fast, ~70-line functions | [references/tiger-style.md](references/tiger-style.md) |
