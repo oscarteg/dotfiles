@@ -1,0 +1,49 @@
+# jj (Jujutsu) configuration
+# Installed to ~/.jjconfig.toml by bootstrap.sh
+
+[user]
+name = "Oscar te Giffel"
+email = "oscar@tegiffel.com"
+
+[ui]
+default-command = "log"
+diff-editor = ":builtin"
+paginate = "auto"
+
+[git]
+push-new-bookmarks = true
+
+[aliases]
+# Move all bookmarks that are ancestors of @- up to @-, so a plain
+# `jj git push` sends the parent of the current (empty) working copy.
+#   jj new main → edit → jj describe -m '...' → jj new → jj tug → jj git push
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+
+# Short forms
+b = ["bookmark"]
+d = ["describe"]
+n = ["new"]
+l = ["log"]
+s = ["status"]
+
+# Log views
+ll = ["log", "-r", "all()"]                  # everything, not just the default set
+lm = ["log", "-r", "trunk()..@"]             # my work since trunk
+lr = ["log", "-r", "remote_bookmarks()"]     # where remotes point
+
+# Sync with the remote and rebase current work on top of trunk
+sync = ["git", "fetch"]
+up = ["rebase", "-d", "trunk()"]
+
+# Push the bookmark(s) on the working copy's parent
+push = ["git", "push", "-r", "@-"]
+
+# Amend the parent commit with the working copy's changes
+amend = ["squash"]
+
+# Clean up empty/abandoned working copies
+tidy = ["abandon", "-r", "empty() & mine() & ~@ & ~trunk()"]
+
+[revset-aliases]
+# Uncomment/adjust if a repo's main branch isn't detected automatically
+# "trunk()" = "main@origin"

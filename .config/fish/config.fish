@@ -55,10 +55,6 @@ set -gx LIBRARY_PATH /opt/homebrew/lib
 
 set -gx KERL_CONFIGURE_OPTIONS "--without-javac --without-jinterface --without-odbc --without-hipe"
 
-# Setup https://github.com/rynfar/meridian 
-# set -Ux ANTHROPIC_API_KEY x
-# set -Ux ANTHROPIC_BASE_URL http://127.0.0.1:3456
-
 # pnpm
 # set -gx PNPM_HOME /Users/oscar/Library/pnpm
 # fish_add_path $PNPM_HOME
