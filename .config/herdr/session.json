@@ -1,0 +1,249 @@
+{
+  "version": 3,
+  "workspaces": [
+    {
+      "id": "w1J",
+      "custom_name": "entertainment-web",
+      "identity_cwd": "/Users/oscar/Developer/Work/dpg/entertainment-web/main",
+      "public_pane_numbers": {
+        "5": 52,
+        "6": 61,
+        "12": 78,
+        "14": 80,
+        "15": 81,
+        "2": 67,
+        "13": 79,
+        "3": 49,
+        "4": 50
+      },
+      "next_public_pane_number": 82,
+      "public_tab_numbers": [
+        1,
+        22,
+        28,
+        29,
+        33,
+        42
+      ],
+      "next_public_tab_number": 43,
+      "tabs": [
+        {
+          "custom_name": "main",
+          "layout": {
+            "Pane": 2
+          },
+          "panes": {
+            "2": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/entertainment-web/main"
+            }
+          },
+          "zoomed": false,
+          "focused": 2,
+          "root_pane": 2
+        },
+        {
+          "custom_name": "test coverage",
+          "layout": {
+            "Pane": 3
+          },
+          "panes": {
+            "3": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/entertainment-web/test-coverage"
+            }
+          },
+          "zoomed": false,
+          "focused": 3,
+          "root_pane": 3
+        },
+        {
+          "custom_name": "review",
+          "layout": {
+            "Split": {
+              "direction": "Vertical",
+              "ratio": 0.5,
+              "first": {
+                "Split": {
+                  "direction": "Horizontal",
+                  "ratio": 0.5,
+                  "first": {
+                    "Pane": 4
+                  },
+                  "second": {
+                    "Pane": 14
+                  }
+                }
+              },
+              "second": {
+                "Pane": 13
+              }
+            }
+          },
+          "panes": {
+            "14": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/entertainment-web/review"
+            },
+            "13": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/entertainment-web/review"
+            },
+            "4": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/entertainment-web/test-coverage"
+            }
+          },
+          "zoomed": false,
+          "focused": 13,
+          "root_pane": 4
+        },
+        {
+          "custom_name": "podcast-series",
+          "layout": {
+            "Pane": 5
+          },
+          "panes": {
+            "5": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/entertainment-web/podcast-series"
+            }
+          },
+          "zoomed": false,
+          "focused": 5,
+          "root_pane": 5
+        },
+        {
+          "custom_name": "destination-player",
+          "layout": {
+            "Split": {
+              "direction": "Vertical",
+              "ratio": 0.5,
+              "first": {
+                "Pane": 6
+              },
+              "second": {
+                "Pane": 12
+              }
+            }
+          },
+          "panes": {
+            "12": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/entertainment-web/audio-destination-player"
+            },
+            "6": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/entertainment-web/audio-destination-player"
+            }
+          },
+          "zoomed": false,
+          "focused": 6,
+          "root_pane": 6
+        },
+        {
+          "custom_name": null,
+          "layout": {
+            "Pane": 15
+          },
+          "panes": {
+            "15": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/entertainment-web/audio-destination-player"
+            }
+          },
+          "zoomed": false,
+          "focused": 15,
+          "root_pane": 15
+        }
+      ],
+      "active_tab": 0
+    },
+    {
+      "id": "w1S",
+      "custom_name": null,
+      "identity_cwd": "/Users/oscar/Developer/Personal/intercept",
+      "public_pane_numbers": {
+        "8": 1
+      },
+      "next_public_pane_number": 2,
+      "public_tab_numbers": [
+        1
+      ],
+      "next_public_tab_number": 2,
+      "tabs": [
+        {
+          "custom_name": null,
+          "layout": {
+            "Pane": 8
+          },
+          "panes": {
+            "8": {
+              "cwd": "/Users/oscar/Developer/Personal/intercept"
+            }
+          },
+          "zoomed": false,
+          "focused": 8,
+          "root_pane": 8
+        }
+      ],
+      "active_tab": 0
+    },
+    {
+      "id": "w1V",
+      "custom_name": null,
+      "identity_cwd": "/Users/oscar/Developer/Work/dpg/popular-web-next",
+      "public_pane_numbers": {
+        "9": 1
+      },
+      "next_public_pane_number": 2,
+      "public_tab_numbers": [
+        1
+      ],
+      "next_public_tab_number": 2,
+      "tabs": [
+        {
+          "custom_name": null,
+          "layout": {
+            "Pane": 9
+          },
+          "panes": {
+            "9": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/popular-web-next"
+            }
+          },
+          "zoomed": false,
+          "focused": 9,
+          "root_pane": 9
+        }
+      ],
+      "active_tab": 0
+    },
+    {
+      "id": "w1W",
+      "custom_name": null,
+      "identity_cwd": "/Users/oscar/Developer/Work/dpg/selectives-website",
+      "public_pane_numbers": {
+        "10": 1
+      },
+      "next_public_pane_number": 2,
+      "public_tab_numbers": [
+        1
+      ],
+      "next_public_tab_number": 2,
+      "tabs": [
+        {
+          "custom_name": null,
+          "layout": {
+            "Pane": 10
+          },
+          "panes": {
+            "10": {
+              "cwd": "/Users/oscar/Developer/Work/dpg/selectives-website"
+            }
+          },
+          "zoomed": false,
+          "focused": 10,
+          "root_pane": 10
+        }
+      ],
+      "active_tab": 0
+    }
+  ],
+  "active": 0,
+  "selected": 0,
+  "sidebar_width": 26,
+  "sidebar_section_split": 0.5,
+  "collapsed_space_keys": []
+}

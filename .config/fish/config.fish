@@ -78,7 +78,7 @@ direnv hook fish | source
 fish_add_path $HOME/.mix/escripts
 
 # Devbox
-devbox global shellenv --init-hook | source
+SHELL=(command -s fish) devbox global shellenv | source  # devbox formats for $SHELL, which is zsh on macOS
 
 # BEGIN opam configuration
 # This is useful if you're using opam as it adds:
