@@ -8,10 +8,17 @@ email = "oscar@tegiffel.com"
 [ui]
 default-command = "log"
 diff-editor = ":builtin"
+# Same inline diff viewer as git (core.pager = delta)
+pager = "delta"
+diff-formatter = ":git"
 paginate = "auto"
 
 [git]
 push-new-bookmarks = true
+
+[revsets]
+# `jj git push` with no args pushes everything not yet on origin, up to @-
+git-push = "remote_bookmarks(remote=origin)..@-"
 
 [aliases]
 # Move all bookmarks that are ancestors of @- up to @-, so a plain

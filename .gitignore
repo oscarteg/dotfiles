@@ -323,3 +323,6 @@ neoconf.json
 .playwright-mcp/
 
 .omo
+
+# fish universal-variable store (runtime state, may contain secrets)
+.config/fish/fish_variables

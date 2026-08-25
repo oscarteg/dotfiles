@@ -1,0 +1,154 @@
+{
+  "version": 3,
+  "workspaces": [
+    {
+      "id": "w1",
+      "custom_name": null,
+      "identity_cwd": "/Users/oscar/Developer/Personal/dotfiles",
+      "public_pane_numbers": {
+        "1": 1,
+        "10": 2
+      },
+      "next_public_pane_number": 3,
+      "public_tab_numbers": [
+        1
+      ],
+      "next_public_tab_number": 2,
+      "tabs": [
+        {
+          "custom_name": null,
+          "layout": {
+            "Split": {
+              "direction": "Vertical",
+              "ratio": 0.5,
+              "first": {
+                "Pane": 1
+              },
+              "second": {
+                "Pane": 10
+              }
+            }
+          },
+          "panes": {
+            "10": {
+              "cwd": "/Users/oscar/Developer/Personal/dotfiles"
+            },
+            "1": {
+              "cwd": "/Users/oscar/Developer/Personal/dotfiles"
+            }
+          },
+          "zoomed": false,
+          "focused": 1,
+          "root_pane": 1
+        }
+      ],
+      "active_tab": 0
+    },
+    {
+      "id": "w6",
+      "custom_name": null,
+      "identity_cwd": "/Users/oscar/Developer/Personal/oscartegiffel.com",
+      "public_pane_numbers": {
+        "3": 2,
+        "8": 7,
+        "5": 4,
+        "6": 5,
+        "9": 8,
+        "7": 6
+      },
+      "next_public_pane_number": 9,
+      "public_tab_numbers": [
+        1,
+        2,
+        3
+      ],
+      "next_public_tab_number": 4,
+      "tabs": [
+        {
+          "custom_name": null,
+          "layout": {
+            "Split": {
+              "direction": "Vertical",
+              "ratio": 0.5,
+              "first": {
+                "Pane": 3
+              },
+              "second": {
+                "Pane": 5
+              }
+            }
+          },
+          "panes": {
+            "5": {
+              "cwd": "/Users/oscar/Developer/Personal/oscartegiffel.com"
+            },
+            "3": {
+              "cwd": "/Users/oscar/Developer/Personal/oscartegiffel.com"
+            }
+          },
+          "zoomed": false,
+          "focused": 3,
+          "root_pane": 3
+        },
+        {
+          "custom_name": null,
+          "layout": {
+            "Pane": 6
+          },
+          "panes": {
+            "6": {
+              "cwd": "/Users/oscar/Developer/Personal/oscartegiffel.com"
+            }
+          },
+          "zoomed": false,
+          "focused": 6,
+          "root_pane": 6
+        },
+        {
+          "custom_name": null,
+          "layout": {
+            "Split": {
+              "direction": "Vertical",
+              "ratio": 0.5,
+              "first": {
+                "Pane": 7
+              },
+              "second": {
+                "Split": {
+                  "direction": "Vertical",
+                  "ratio": 0.5,
+                  "first": {
+                    "Pane": 8
+                  },
+                  "second": {
+                    "Pane": 9
+                  }
+                }
+              }
+            }
+          },
+          "panes": {
+            "8": {
+              "cwd": "/Users/oscar/Developer/Personal/citadel/terraform"
+            },
+            "9": {
+              "cwd": "/Users/oscar/Developer/Personal/citadel/terraform"
+            },
+            "7": {
+              "cwd": "/Users/oscar/Developer/Personal/citadel"
+            }
+          },
+          "zoomed": false,
+          "focused": 9,
+          "root_pane": 7
+        }
+      ],
+      "active_tab": 1
+    }
+  ],
+  "active": 0,
+  "selected": 0,
+  "sidebar_width": 26,
+  "sidebar_section_split": 0.5,
+  "collapsed_space_keys": []
+}
